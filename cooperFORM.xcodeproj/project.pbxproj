@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8AEAD86B19C8AAB400D87C59 /* KinectShapeObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AEAD86919C8AAB400D87C59 /* KinectShapeObject.cpp */; };
+		8AEAD87219D0D3C600D87C59 /* CameraTracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AEAD87019D0D3C600D87C59 /* CameraTracker.cpp */; };
+		8AEAD87519D0D92400D87C59 /* VideoGrabber.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AEAD87319D0D92400D87C59 /* VideoGrabber.cpp */; };
 		8AFAA95D19C89E9800EC475F /* ShapeIOManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFAA95B19C89E9800EC475F /* ShapeIOManager.cpp */; };
 		8AFAA96019C89EAA00EC475F /* ShapeSerial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFAA95E19C89EAA00EC475F /* ShapeSerial.cpp */; };
 		8AFAA96619C8A67A00EC475F /* KinectTracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFAA96519C8A67A00EC475F /* KinectTracker.cpp */; };
@@ -79,6 +81,10 @@
 /* Begin PBXFileReference section */
 		8AEAD86919C8AAB400D87C59 /* KinectShapeObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KinectShapeObject.cpp; sourceTree = "<group>"; };
 		8AEAD86A19C8AAB400D87C59 /* KinectShapeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KinectShapeObject.h; sourceTree = "<group>"; };
+		8AEAD87019D0D3C600D87C59 /* CameraTracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraTracker.cpp; sourceTree = "<group>"; };
+		8AEAD87119D0D3C600D87C59 /* CameraTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraTracker.h; sourceTree = "<group>"; };
+		8AEAD87319D0D92400D87C59 /* VideoGrabber.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VideoGrabber.cpp; sourceTree = "<group>"; };
+		8AEAD87419D0D92400D87C59 /* VideoGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoGrabber.h; sourceTree = "<group>"; };
 		8AFAA95B19C89E9800EC475F /* ShapeIOManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShapeIOManager.cpp; sourceTree = "<group>"; };
 		8AFAA95C19C89E9800EC475F /* ShapeIOManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShapeIOManager.h; sourceTree = "<group>"; };
 		8AFAA95E19C89EAA00EC475F /* ShapeSerial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShapeSerial.cpp; sourceTree = "<group>"; };
@@ -264,6 +270,17 @@
 				8AEAD86A19C8AAB400D87C59 /* KinectShapeObject.h */,
 			);
 			name = Kinect;
+			sourceTree = "<group>";
+		};
+		8AEAD86F19D0D37A00D87C59 /* CameraInterface */ = {
+			isa = PBXGroup;
+			children = (
+				8AEAD87019D0D3C600D87C59 /* CameraTracker.cpp */,
+				8AEAD87119D0D3C600D87C59 /* CameraTracker.h */,
+				8AEAD87319D0D92400D87C59 /* VideoGrabber.cpp */,
+				8AEAD87419D0D92400D87C59 /* VideoGrabber.h */,
+			);
+			name = CameraInterface;
 			sourceTree = "<group>";
 		};
 		8AFAA95A19C89E8700EC475F /* TableCore */ = {
@@ -717,6 +734,7 @@
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ReliefApplication.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ReliefApplication.h */,
+				8AEAD86F19D0D37A00D87C59 /* CameraInterface */,
 				8AFAA95A19C89E8700EC475F /* TableCore */,
 				8AFAAA6319C8A8A700EC475F /* ShapeObjects */,
 				8AFAA96319C8A66800EC475F /* KinectInterface */,
@@ -823,11 +841,13 @@
 				8AFAAA5D19C8A6CB00EC475F /* core.c in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				8AFAAA6019C8A6CB00EC475F /* usb_libusb10.c in Sources */,
+				8AEAD87219D0D3C600D87C59 /* CameraTracker.cpp in Sources */,
 				8AFAAA5E19C8A6CB00EC475F /* registration.c in Sources */,
 				8AFAA9E719C8A6B400EC475F /* ofxCvGrayscaleImage.cpp in Sources */,
 				8AFAAA5F19C8A6CB00EC475F /* tilt.c in Sources */,
 				8AFAA96619C8A67A00EC475F /* KinectTracker.cpp in Sources */,
 				8AEAD86B19C8AAB400D87C59 /* KinectShapeObject.cpp in Sources */,
+				8AEAD87519D0D92400D87C59 /* VideoGrabber.cpp in Sources */,
 				8AFAA9E919C8A6B400EC475F /* ofxCvImage.cpp in Sources */,
 				8AFAA9E419C8A6B400EC475F /* ofxCvColorImage.cpp in Sources */,
 				8AFAAA6219C8A6CB00EC475F /* ofxKinect.cpp in Sources */,

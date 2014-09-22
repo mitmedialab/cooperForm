@@ -19,6 +19,10 @@ void ReliefApplication::setup(){
     touchScreenDisplayImage.allocate(TOUCHSCREEN_SIZE_X, TOUCHSCREEN_SIZE_Y, GL_RGBA);
     verticalDisplayImage.allocate(VERTICAL_DISPLAY_SIZE_X, VERTICAL_DISPLAY_SIZE_Y, GL_RGBA);
 
+    // setup camera interface
+    cameraTracker.setup();
+    
+    
     // setup kinect if using
     // @todo we only want to setup if connected
     // @note currently if you change the kinect setting you must restart
@@ -79,10 +83,15 @@ void ReliefApplication::draw(){
     
     
     // draw our frame buffers
-    pinHeightMapImageSmall.draw(1, 1, 350, 350);
-    projectorOverlayImage.draw(1, 352, 350, 350);
-    touchScreenDisplayImage.draw(352, 1, 350, 350);
-    verticalDisplayImage.draw(352, 352, 350, 350);
+    pinHeightMapImageSmall.draw(  1,   1,   350, 350);
+    projectorOverlayImage.draw(   1,   352, 350, 350);
+    touchScreenDisplayImage.draw( 352, 1,   350, 350);
+    verticalDisplayImage.draw(    352, 352, 350, 350);
+    
+    cameraTracker.drawCameraFeed("USB Camera", 351+352, 352, 350, 350);
+    
+    cameraTracker.drawCameraFeed("HD Pro Webcam C920",    351+352, 1,   350, 350);
+
 }
 
 //--------------------------------------------------------------

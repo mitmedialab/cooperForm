@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ShapeIOManager.h"
 #include "ShapeObject.h"
+#include "CameraTracker.h"
 #include "KinectShapeObject.h"
 #include "KinectTracker.h"
 
@@ -28,6 +29,9 @@ class ReliefApplication : public ofBaseApp{
         ofFbo            verticalDisplayImage;
     
         ShapeObject      * currentShape;
+    
+        // our interface for the cameras
+        CameraTracker    cameraTracker;
     
         // The Kinect shape object
         KinectShapeObject  * kinectShapeObject;

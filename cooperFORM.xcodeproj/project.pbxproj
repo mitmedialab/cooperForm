@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		8AEAD86B19C8AAB400D87C59 /* KinectShapeObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AEAD86919C8AAB400D87C59 /* KinectShapeObject.cpp */; };
 		8AEAD87219D0D3C600D87C59 /* CameraTracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AEAD87019D0D3C600D87C59 /* CameraTracker.cpp */; };
-		8AEAD87519D0D92400D87C59 /* VideoGrabber.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AEAD87319D0D92400D87C59 /* VideoGrabber.cpp */; };
 		8AFAA95D19C89E9800EC475F /* ShapeIOManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFAA95B19C89E9800EC475F /* ShapeIOManager.cpp */; };
 		8AFAA96019C89EAA00EC475F /* ShapeSerial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFAA95E19C89EAA00EC475F /* ShapeSerial.cpp */; };
 		8AFAA96619C8A67A00EC475F /* KinectTracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFAA96519C8A67A00EC475F /* KinectTracker.cpp */; };
@@ -83,8 +82,6 @@
 		8AEAD86A19C8AAB400D87C59 /* KinectShapeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KinectShapeObject.h; sourceTree = "<group>"; };
 		8AEAD87019D0D3C600D87C59 /* CameraTracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraTracker.cpp; sourceTree = "<group>"; };
 		8AEAD87119D0D3C600D87C59 /* CameraTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraTracker.h; sourceTree = "<group>"; };
-		8AEAD87319D0D92400D87C59 /* VideoGrabber.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VideoGrabber.cpp; sourceTree = "<group>"; };
-		8AEAD87419D0D92400D87C59 /* VideoGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoGrabber.h; sourceTree = "<group>"; };
 		8AFAA95B19C89E9800EC475F /* ShapeIOManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShapeIOManager.cpp; sourceTree = "<group>"; };
 		8AFAA95C19C89E9800EC475F /* ShapeIOManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShapeIOManager.h; sourceTree = "<group>"; };
 		8AFAA95E19C89EAA00EC475F /* ShapeSerial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShapeSerial.cpp; sourceTree = "<group>"; };
@@ -277,8 +274,6 @@
 			children = (
 				8AEAD87019D0D3C600D87C59 /* CameraTracker.cpp */,
 				8AEAD87119D0D3C600D87C59 /* CameraTracker.h */,
-				8AEAD87319D0D92400D87C59 /* VideoGrabber.cpp */,
-				8AEAD87419D0D92400D87C59 /* VideoGrabber.h */,
 			);
 			name = CameraInterface;
 			sourceTree = "<group>";
@@ -847,7 +842,6 @@
 				8AFAAA5F19C8A6CB00EC475F /* tilt.c in Sources */,
 				8AFAA96619C8A67A00EC475F /* KinectTracker.cpp in Sources */,
 				8AEAD86B19C8AAB400D87C59 /* KinectShapeObject.cpp in Sources */,
-				8AEAD87519D0D92400D87C59 /* VideoGrabber.cpp in Sources */,
 				8AFAA9E919C8A6B400EC475F /* ofxCvImage.cpp in Sources */,
 				8AFAA9E419C8A6B400EC475F /* ofxCvColorImage.cpp in Sources */,
 				8AFAAA6219C8A6CB00EC475F /* ofxKinect.cpp in Sources */,

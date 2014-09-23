@@ -11,19 +11,16 @@
 
 #include <iostream>
 #include "ofMain.h"
-#include "VideoGrabber.h"
 
 class CameraTracker {
     
 public:
+    ~CameraTracker();
     void setup();
-    void drawCameraFeed(string name, int x, int y, int w, int h);
+    void drawCameraFeed(int id, int x, int y, int w, int h);
     
 private:
-    vector<VideoGrabber*> grabbers;
-    
-    // Returns the first grabber that matches this name
-    VideoGrabber* getGrabberByName(string name);
+    vector<ofVideoGrabber> grabbers;
     
 };
 

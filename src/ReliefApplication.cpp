@@ -53,44 +53,47 @@ void ReliefApplication::update(){
 void ReliefApplication::draw(){
     ofBackground(100);
     
-    // render the tangible display
-    pinHeightMapImageSmall.begin();
-    int w = pinHeightMapImageSmall.getWidth();
-    int h = pinHeightMapImageSmall.getHeight();
-    currentShape->renderTangibleShape(w, h);
-    pinHeightMapImageSmall.end();
+//    // render the tangible display
+//    pinHeightMapImageSmall.begin();
+//    int w = pinHeightMapImageSmall.getWidth();
+//    int h = pinHeightMapImageSmall.getHeight();
+//    currentShape->renderTangibleShape(w, h);
+//    pinHeightMapImageSmall.end();
+//    
+//    // render the projector overlay image
+//    projectorOverlayImage.begin();
+//    w = projectorOverlayImage.getWidth();
+//    h = projectorOverlayImage.getHeight();
+//    currentShape->renderProjectorOverlay(w, h);
+//    projectorOverlayImage.end();
+//    
+//    // render the touch screen display
+//    touchScreenDisplayImage.begin();
+//    w = touchScreenDisplayImage.getWidth();
+//    h = touchScreenDisplayImage.getHeight();
+//    currentShape->renderTouchScreenGraphics(w, h);
+//    touchScreenDisplayImage.end();
+//    
+//    // render the vertical back display
+//    verticalDisplayImage.begin();
+//    w = verticalDisplayImage.getWidth();
+//    h = verticalDisplayImage.getHeight();
+//    currentShape->renderVerticalScreenGraphics(w, h);
+//    verticalDisplayImage.end();
+//    
+//    
+//    // draw our frame buffers
+//    pinHeightMapImageSmall.draw(  1,   1,   350, 350);
+//    projectorOverlayImage.draw(   1,   352, 350, 350);
+//    touchScreenDisplayImage.draw( 352, 1,   350, 350);
+//    verticalDisplayImage.draw(    352, 352, 350, 350);
     
-    // render the projector overlay image
-    projectorOverlayImage.begin();
-    w = projectorOverlayImage.getWidth();
-    h = projectorOverlayImage.getHeight();
-    currentShape->renderProjectorOverlay(w, h);
-    projectorOverlayImage.end();
+    int w = ofGetWidth() * 0.5;
+    int h = ofGetHeight();
     
-    // render the touch screen display
-    touchScreenDisplayImage.begin();
-    w = touchScreenDisplayImage.getWidth();
-    h = touchScreenDisplayImage.getHeight();
-    currentShape->renderTouchScreenGraphics(w, h);
-    touchScreenDisplayImage.end();
+    cameraTracker.drawCameraFeed(0, 0, 1,   w, h);
     
-    // render the vertical back display
-    verticalDisplayImage.begin();
-    w = verticalDisplayImage.getWidth();
-    h = verticalDisplayImage.getHeight();
-    currentShape->renderVerticalScreenGraphics(w, h);
-    verticalDisplayImage.end();
-    
-    
-    // draw our frame buffers
-    pinHeightMapImageSmall.draw(  1,   1,   350, 350);
-    projectorOverlayImage.draw(   1,   352, 350, 350);
-    touchScreenDisplayImage.draw( 352, 1,   350, 350);
-    verticalDisplayImage.draw(    352, 352, 350, 350);
-    
-    cameraTracker.drawCameraFeed("USB Camera", 351+352, 352, 350, 350);
-    
-    cameraTracker.drawCameraFeed("HD Pro Webcam C920",    351+352, 1,   350, 350);
+    cameraTracker.drawCameraFeed(1, w+1, 1,   w, h);
 
 }
 

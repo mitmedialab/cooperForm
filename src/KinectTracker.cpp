@@ -79,7 +79,7 @@ void KinectTracker::update() {
         
 		// find contours which are between the size of 20 pixels and 1/3 the w*h pixels.
 		// if find holes is set to true, we will get interior contours as well.
-		contourFinder.findContours(depthImg, mContourMinimumSize, (kinect.width*kinect.height)/2, 10, false);
+		//contourFinder.findContours(depthImg, mContourMinimumSize, (kinect.width*kinect.height)/2, 10, false);
         
         depthThreshedDiff.absDiff(lastDepthThreshed, depthThreshed);
 	}

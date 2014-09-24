@@ -2,6 +2,9 @@
 
 //--------------------------------------------------------------
 void ReliefApplication::setup(){
+    // initialize the UI
+    setupUI();
+    
     // initialize communication with the pin display
 	mIOManager = new ShapeIOManager();
     
@@ -53,49 +56,101 @@ void ReliefApplication::update(){
 void ReliefApplication::draw(){
     ofBackground(100);
     
-//    // render the tangible display
-//    pinHeightMapImageSmall.begin();
-//    int w = pinHeightMapImageSmall.getWidth();
-//    int h = pinHeightMapImageSmall.getHeight();
-//    currentShape->renderTangibleShape(w, h);
-//    pinHeightMapImageSmall.end();
-//    
-//    // render the projector overlay image
-//    projectorOverlayImage.begin();
-//    w = projectorOverlayImage.getWidth();
-//    h = projectorOverlayImage.getHeight();
-//    currentShape->renderProjectorOverlay(w, h);
-//    projectorOverlayImage.end();
-//    
-//    // render the touch screen display
-//    touchScreenDisplayImage.begin();
-//    w = touchScreenDisplayImage.getWidth();
-//    h = touchScreenDisplayImage.getHeight();
-//    currentShape->renderTouchScreenGraphics(w, h);
-//    touchScreenDisplayImage.end();
-//    
-//    // render the vertical back display
-//    verticalDisplayImage.begin();
-//    w = verticalDisplayImage.getWidth();
-//    h = verticalDisplayImage.getHeight();
-//    currentShape->renderVerticalScreenGraphics(w, h);
-//    verticalDisplayImage.end();
-//    
-//    
-//    // draw our frame buffers
-//    pinHeightMapImageSmall.draw(  1,   1,   350, 350);
-//    projectorOverlayImage.draw(   1,   352, 350, 350);
-//    touchScreenDisplayImage.draw( 352, 1,   350, 350);
-//    verticalDisplayImage.draw(    352, 352, 350, 350);
+    // render the tangible display
+    pinHeightMapImageSmall.begin();
+    int w = pinHeightMapImageSmall.getWidth();
+    int h = pinHeightMapImageSmall.getHeight();
+    currentShape->renderTangibleShape(w, h);
+    pinHeightMapImageSmall.end();
     
-    int w = ofGetWidth() * 0.5;
-    int h = ofGetHeight();
+    // render the projector overlay image
+    projectorOverlayImage.begin();
+    w = projectorOverlayImage.getWidth();
+    h = projectorOverlayImage.getHeight();
+    currentShape->renderProjectorOverlay(w, h);
+    projectorOverlayImage.end();
     
-    cameraTracker.drawCameraFeed(0, 0, 1,   w, h);
     
-    cameraTracker.drawCameraFeed(1, w+1, 1,   w, h);
-
+    /* render the touch screen display */
+    touchScreenDisplayImage.begin();
+    
+    w = touchScreenDisplayImage.getWidth()-200;
+    h = touchScreenDisplayImage.getHeight();
+    
+    ofPushMatrix();
+    ofTranslate(200, 0);
+    currentShape->renderTangibleShape(w, h);
+    ofPopMatrix();
+    
+    // draw UI stuff
+    uiHandler.draw();
+    
+    
+    touchScreenDisplayImage.end();
+    
+    
+    
+    // render the vertical back display
+    verticalDisplayImage.begin();
+    w = verticalDisplayImage.getWidth();
+    h = verticalDisplayImage.getHeight();
+    currentShape->renderVerticalScreenGraphics(w, h);
+    verticalDisplayImage.end();
+    
+    
+    // draw our frame buffers
+    //pinHeightMapImageSmall.draw(  1,   1,   350, 350);
+    //projectorOverlayImage.draw(   1,   352, 350, 350);
+    touchScreenDisplayImage.draw(0, 0, ofGetWidth()/2, ofGetHeight());
+    //verticalDisplayImage.draw(    352, 352, 350, 350);
+    
+    // draw camera feeds
+    w = ofGetWidth() * 0.5;
+    h = ofGetHeight();
+    
+    cameraTracker.drawCameraFeed(0, w+1, 1,   w, h);
+    //cameraTracker.drawCameraFeed(1, 2*(w+1), 1,   w, h);
+    
 }
+
+
+void ReliefApplication::setupUI() {
+    uiHandler = UIHandler();
+    
+    const int modeButtonWidth  = 200;
+    const int modeButtonHeight = 150;
+    
+    // initialize the new buttons
+    // UIButton name = UIButton("name", x,y, w,h)
+    
+    telepresenceModeButton
+    = new UIButton("telepresence", 0,0,                      modeButtonWidth,modeButtonHeight);
+    
+    wavyModeButton
+    = new UIButton("wavy",         0,  (modeButtonHeight+1), modeButtonWidth,modeButtonHeight);
+    
+    threeDModeButton
+    = new UIButton("3D",           0,2*(modeButtonHeight+1), modeButtonWidth,modeButtonHeight);
+    
+    mathModeButton
+    = new UIButton("math",         0,3*(modeButtonHeight+1), modeButtonWidth,modeButtonHeight);
+    
+    // add buttons to the handler
+    uiHandler.addButton(telepresenceModeButton);
+    uiHandler.addButton(wavyModeButton);
+    uiHandler.addButton(threeDModeButton);
+    uiHandler.addButton(mathModeButton);
+}
+
+// change the relief application mode
+
+void ReliefApplication::setMode(string newMode) {
+    if (newMode == "telepresence" || newMode == "wavy" || newMode == "3D" || newMode == "math")
+        currentMode = newMode;
+    else
+        cout << "Invalid mode selected";
+}
+
 
 //--------------------------------------------------------------
 void ReliefApplication::keyPressed(int key){
@@ -114,17 +169,17 @@ void ReliefApplication::mouseMoved(int x, int y){
 
 //--------------------------------------------------------------
 void ReliefApplication::mouseDragged(int x, int y, int button){
-
+    uiHandler.mouseDragged(x,y);
 }
 
 //--------------------------------------------------------------
 void ReliefApplication::mousePressed(int x, int y, int button){
-
+    uiHandler.mousePressed(x,y);
 }
 
 //--------------------------------------------------------------
 void ReliefApplication::mouseReleased(int x, int y, int button){
-
+    uiHandler.mouseReleased(x,y);
 }
 
 //--------------------------------------------------------------

@@ -1,55 +1,74 @@
 #pragma once
 
 #include "ofMain.h"
+#include "UIHandler.h"
+#include "UIButton.h"
 #include "ShapeIOManager.h"
 #include "ShapeObject.h"
 #include "CameraTracker.h"
 #include "KinectShapeObject.h"
 #include "KinectTracker.h"
 
-class ReliefApplication : public ofBaseApp{
-	public:
-        // manages communication with the pin display
-        ShapeIOManager   * mIOManager;
+class ReliefApplication : public ofBaseApp {
+public:
+    UIHandler       uiHandler;
+    UIButton        * telepresenceModeButton;
+    UIButton        * wavyModeButton;
+    UIButton        * threeDModeButton;
+    UIButton        * mathModeButton;
+
+    // the table mode we're on
+    // "telepresence", "wavy", "3D", and "math"
+    string          currentMode;
     
-        // table config variables
-        float            gain_P;
-        float            gain_I;
-        int              max_I;
-        int              deadZone;
-        int              maxSpeed;
+    // manages communication with the pin display
+    ShapeIOManager   * mIOManager;
+
+    // table config variables
+    float            gain_P;
+    float            gain_I;
+    int              max_I;
+    int              deadZone;
+    int              maxSpeed;
+
+    // the heightmap data for the pins
+    ofFbo            pinHeightMapImageSmall;
+    // image to be projected on top of the pins
+    ofFbo            projectorOverlayImage;
+    // image to be displayed on the touch screen
+    ofFbo            touchScreenDisplayImage;
+    // image to be displayed on the vertical display
+    ofFbo            verticalDisplayImage;
+
+    ShapeObject      * currentShape;
+
+    // our interface for the cameras
+    CameraTracker    cameraTracker;
+
+    // The Kinect shape object
+    KinectShapeObject  * kinectShapeObject;
+
+    // our interface for the Kinect
+    KinectTracker    kinectTracker;
     
-        // the heightmap data for the pins
-        ofFbo            pinHeightMapImageSmall;
-        // image to be projected on top of the pins
-        ofFbo            projectorOverlayImage;
-        // image to be displayed on the touch screen
-        ofFbo            touchScreenDisplayImage;
-        // image to be displayed on the vertical display
-        ofFbo            verticalDisplayImage;
+    void setup();
+    void update();
+    void draw();
     
-        ShapeObject      * currentShape;
+    // initialize all the UI elements
+    void setupUI();
     
-        // our interface for the cameras
-        CameraTracker    cameraTracker;
+    void setMode(string newMode);
     
-        // The Kinect shape object
-        KinectShapeObject  * kinectShapeObject;
+    void keyPressed(int key);
+    void keyReleased(int key);
+    void mouseMoved(int x, int y);
+    void mouseDragged(int x, int y, int button);
+    void mousePressed(int x, int y, int button);
+    void mouseReleased(int x, int y, int button);
+    void windowResized(int w, int h);
+    void dragEvent(ofDragInfo dragInfo);
+    void gotMessage(ofMessage msg);
     
-        // our interface for the Kinect
-        KinectTracker    kinectTracker;
     
-		void setup();
-		void update();
-		void draw();
-		
-		void keyPressed(int key);
-		void keyReleased(int key);
-		void mouseMoved(int x, int y);
-		void mouseDragged(int x, int y, int button);
-		void mousePressed(int x, int y, int button);
-		void mouseReleased(int x, int y, int button);
-		void windowResized(int w, int h);
-		void dragEvent(ofDragInfo dragInfo);
-		void gotMessage(ofMessage msg);
 };

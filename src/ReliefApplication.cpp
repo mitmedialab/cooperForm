@@ -72,7 +72,7 @@ void ReliefApplication::draw(){
     
     
     /* render the touch screen display */
-    touchScreenDisplayImage.begin();
+    //touchScreenDisplayImage.begin();
     
     w = touchScreenDisplayImage.getWidth()-200;
     h = touchScreenDisplayImage.getHeight();
@@ -86,7 +86,7 @@ void ReliefApplication::draw(){
     uiHandler.draw();
     
     
-    touchScreenDisplayImage.end();
+    //touchScreenDisplayImage.end();
     
     
     
@@ -101,7 +101,7 @@ void ReliefApplication::draw(){
     // draw our frame buffers
     //pinHeightMapImageSmall.draw(  1,   1,   350, 350);
     //projectorOverlayImage.draw(   1,   352, 350, 350);
-    touchScreenDisplayImage.draw(0, 0, ofGetWidth()/2, ofGetHeight());
+    //touchScreenDisplayImage.draw(0, 0, ofGetWidth()/2, ofGetHeight());
     //verticalDisplayImage.draw(    352, 352, 350, 350);
     
     // draw camera feeds
@@ -122,18 +122,21 @@ void ReliefApplication::setupUI() {
     
     // initialize the new buttons
     // UIButton name = UIButton("name", x,y, w,h)
-    
     telepresenceModeButton
     = new UIButton("telepresence", 0,0,                      modeButtonWidth,modeButtonHeight);
+    telepresenceModeButton->setImage("tele.png");
     
     wavyModeButton
     = new UIButton("wavy",         0,  (modeButtonHeight+1), modeButtonWidth,modeButtonHeight);
+    wavyModeButton->setImage("waves.png");
     
     threeDModeButton
     = new UIButton("3D",           0,2*(modeButtonHeight+1), modeButtonWidth,modeButtonHeight);
+    threeDModeButton->setImage("3d.png");
     
     mathModeButton
     = new UIButton("math",         0,3*(modeButtonHeight+1), modeButtonWidth,modeButtonHeight);
+    mathModeButton->setImage("math.png");
     
     // add buttons to the handler
     uiHandler.addButton(telepresenceModeButton);

@@ -20,7 +20,7 @@ void CameraTracker::setup() {
         if( devices[i].bAvailable ){
             ofVideoGrabber grabberForDevice = ofVideoGrabber();
             grabberForDevice.setDeviceID(devices[i].id);
-            grabberForDevice.initGrabber(1920/6, 1080/6);
+            grabberForDevice.initGrabber(1024, 768);
             grabbers.push_back(grabberForDevice);
         }else{
             cout << " - unavailable " << endl;
@@ -33,6 +33,8 @@ void CameraTracker::setup() {
 
 void CameraTracker::drawCameraFeed(int id, int x, int y, int w, int h) {
     ofVideoGrabber grabber = grabbers[id];
+    
+    //cout << typeid(grabber.getGrabber()).name();
 
     if (!grabber.isInitialized())
         grabber.initGrabber(320,210);

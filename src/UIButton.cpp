@@ -8,7 +8,7 @@
 
 #include "UIButton.h"
 #include "UITriggers.h"
-#include "ofMain.h"
+//#include "ofMain.h"
 
 
 // temporary constructor
@@ -32,13 +32,34 @@ string UIButton::getName() {
     return name;
 }
 
-void UIButton::draw() {
-    if (isPressed())
-        ofSetColor(ofColor(255,0,0));
-    else
-        ofSetColor(ofColor(0,0,255));
+void UIButton::setImage(string imageName) {
+    buttonImage.loadImage(imageName);
     
-    ofRect(x,y, width, height);
+    int imageWidth  = buttonImage.getWidth();
+    int imageHeight = buttonImage.getHeight();
+    
+    buttonImageIdle.cropFrom(buttonImage, 0,0, imageWidth/2, imageHeight);
+    
+    buttonImageActive.cropFrom(buttonImage, imageWidth/2,0, imageWidth/2, imageHeight);
+}
+
+void UIButton::draw() {
+    if (buttonImageActive.isAllocated()) {
+        if (isPressed()) {
+            buttonImageActive.draw(x,y, width,height);
+        }
+        else {
+            buttonImageIdle.draw(x,y, width,height);
+        }
+    }
+    else {
+        if (isPressed())
+            ofSetColor(ofColor(255,0,0));
+        else
+            ofSetColor(ofColor(0,0,255));
+        
+        ofRect(x,y, width, height);
+    }
 }
 
 

@@ -10,6 +10,7 @@
 #define __cooperFORM__UIButton__
 
 #include <iostream>
+#include "ofImage.h"
 
 using namespace std;
 
@@ -20,6 +21,7 @@ public:
     
     string getName();
     
+    void setImage(string imageName);
     
     void draw();
     
@@ -40,8 +42,14 @@ public:
     
 private:
     string name;
+    
     int x, y, width, height;
+    
     bool pressed = false;
+    
+    ofImage buttonImage;
+    ofImage buttonImageActive;
+    ofImage buttonImageIdle;
 };
 
 #endif /* defined(__cooperFORM__UIButton__) */

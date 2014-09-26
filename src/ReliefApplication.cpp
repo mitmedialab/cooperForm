@@ -37,6 +37,9 @@ void ReliefApplication::setup(){
     // initialize our shape objects
     kinectShapeObject = new KinectShapeObject();
     kinectShapeObject->setKinectTracker(&kinectTracker);
+    wavyShapeObject   = new WavyShapeObject(24*2,24*2);
+    wavyShapeObject->setKinectTracker(&kinectTracker);
+    
     
     // set our current shape object to a default shape object
     currentShape = kinectShapeObject;
@@ -124,25 +127,35 @@ void ReliefApplication::setupUI() {
     // UIButton name = UIButton("name", x,y, w,h)
     telepresenceModeButton
     = new UIButton("telepresence", 0,0,                      modeButtonWidth,modeButtonHeight);
-    telepresenceModeButton->setImage("tele.png");
+    //telepresenceModeButton->setImage("tele.png");
     
     wavyModeButton
     = new UIButton("wavy",         0,  (modeButtonHeight+1), modeButtonWidth,modeButtonHeight);
-    wavyModeButton->setImage("waves.png");
+    //wavyModeButton->setImage("waves.png");
     
     threeDModeButton
     = new UIButton("3D",           0,2*(modeButtonHeight+1), modeButtonWidth,modeButtonHeight);
-    threeDModeButton->setImage("3d.png");
+    //threeDModeButton->setImage("3d.png");
     
     mathModeButton
     = new UIButton("math",         0,3*(modeButtonHeight+1), modeButtonWidth,modeButtonHeight);
-    mathModeButton->setImage("math.png");
+    //mathModeButton->setImage("math.png");
     
     // add buttons to the handler
     uiHandler.addButton(telepresenceModeButton);
     uiHandler.addButton(wavyModeButton);
     uiHandler.addButton(threeDModeButton);
     uiHandler.addButton(mathModeButton);
+    
+    // add these buttons to a group
+    // for the "select" and "unselect" functionality
+    vector<UIButton*> mainButtonGroup = vector<UIButton*>();
+    mainButtonGroup.push_back(telepresenceModeButton);
+    mainButtonGroup.push_back(wavyModeButton);
+    mainButtonGroup.push_back(threeDModeButton);
+    mainButtonGroup.push_back(mathModeButton);
+    uiHandler.addButtonGroup(mainButtonGroup);
+    
 }
 
 // change the relief application mode
@@ -152,6 +165,11 @@ void ReliefApplication::setMode(string newMode) {
         currentMode = newMode;
     else
         cout << "Invalid mode selected";
+    
+    if (currentMode == "telepresence")
+        currentShape = kinectShapeObject;
+    else if (currentMode == "wavy")
+        currentShape = wavyShapeObject;
 }
 
 

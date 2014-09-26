@@ -20,13 +20,19 @@ public:
     void draw();
     
     void addButton(UIButton *button);
+    void addButtonGroup(vector<UIButton*> group);
     
     void mousePressed(int x, int y);
     void mouseReleased(int x, int y);
     void mouseDragged(int x, int y);
     
+    void select(UIButton *button);
 private:
     vector<UIButton*> buttons;
+    
+    // groups of button
+    // for selection and unselection
+    vector< vector<UIButton*> > buttonGroups;
 };
 
 

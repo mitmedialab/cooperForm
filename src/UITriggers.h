@@ -10,13 +10,14 @@
 #define __cooperFORM__UITriggers__
 
 #include "ReliefApplication.h"
+#include "UIHandler.h"
 
 class UITriggers {
 public:
 
     
     // the button trigger event
-    static void buttonTrigger(string name);
+    static void buttonTrigger(UIButton *button);
     
     // be sure to register relief application
     // so we can do stuff with it after events are triggered
@@ -26,6 +27,9 @@ private:
     // reference to the relief application
     // so we can actually do stuff when triggered
     static ReliefApplication *reliefApplication;
+    
+    // reference to UI handler for UI-wide operations
+    static UIHandler *uiHandler;
 };
 
 #endif /* defined(__cooperFORM__UITriggers__) */

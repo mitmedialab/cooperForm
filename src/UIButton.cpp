@@ -55,6 +55,8 @@ void UIButton::draw() {
     else {
         if (isPressed())
             ofSetColor(ofColor(255,0,0));
+        else if (isSelected())
+            ofSetColor(ofColor(0,255,0));
         else
             ofSetColor(ofColor(0,0,255));
         
@@ -79,7 +81,7 @@ void UIButton::mousePressed() {
 }
 void UIButton::mouseReleased() {
     pressed = false;
-    UITriggers::buttonTrigger(name);
+    UITriggers::buttonTrigger(this);
 }
 
 // triggered when the mouse has left the button,
@@ -88,6 +90,15 @@ void UIButton::mouseLeft() {
     
     pressed = false;
 }
+void UIButton::select() {
+    selected = true;
+}
+void UIButton::unselect() {
+    selected = false;
+}
 bool UIButton::isPressed() {
     return pressed;
+}
+bool UIButton::isSelected() {
+    return selected;
 }

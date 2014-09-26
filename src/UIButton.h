@@ -37,19 +37,26 @@ public:
     // but didn't release
     void mouseLeft();
     
+    void select();
+    void unselect();
+    
+    
     // whether or not mouse is pressed on this button
     bool isPressed();
-    
+    bool isSelected();
+  
 private:
     string name;
     
     int x, y, width, height;
     
     bool pressed = false;
+    bool selected = false;
     
     ofImage buttonImage;
     ofImage buttonImageActive;
     ofImage buttonImageIdle;
+    ofImage buttonImageSelected;
 };
 
 #endif /* defined(__cooperFORM__UIButton__) */

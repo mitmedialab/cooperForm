@@ -10,6 +10,7 @@
 
 UIHandler::UIHandler() {
     buttons = vector<UIButton*>();
+    buttonGroups = vector< vector<UIButton*> >();
 }
 
 void UIHandler::draw() {
@@ -20,6 +21,10 @@ void UIHandler::draw() {
 
 void UIHandler::addButton(UIButton *button) {
     buttons.push_back(button);
+}
+
+void UIHandler::addButtonGroup(vector<UIButton*> group) {
+    buttonGroups.push_back(group);
 }
 
 void UIHandler::mousePressed(int x, int y) {
@@ -52,4 +57,26 @@ void UIHandler::mouseDragged(int x, int y) {
                 button->mouseLeft();
         }
     }
+}
+
+void UIHandler::select(UIButton *button) {
+    // find out which groups it's in
+    for (vector<UIButton*> buttonGroup : buttonGroups) {
+        std::vector<UIButton*>::iterator it;
+        it = find(buttonGroup.begin(), buttonGroup.end(), button);
+        if (it != buttonGroup.end()) {
+            
+            // found the button!
+            // now deselect every other button in this group
+            for (UIButton *other : buttonGroup) {
+                if (other != button)
+                    other->unselect();
+            }
+            
+        }
+        // look for more groups this button might belong in
+    }
+    
+    // finally select the button
+    button->select();
 }

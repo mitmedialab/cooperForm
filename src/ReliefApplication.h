@@ -7,6 +7,7 @@
 #include "ShapeObject.h"
 #include "CameraTracker.h"
 #include "KinectShapeObject.h"
+#include "WavyShapeObject.h"
 #include "KinectTracker.h"
 
 class ReliefApplication : public ofBaseApp {
@@ -45,8 +46,9 @@ public:
     // our interface for the cameras
     CameraTracker    cameraTracker;
 
-    // The Kinect shape object
+    // Shape objects
     KinectShapeObject  * kinectShapeObject;
+    WavyShapeObject    * wavyShapeObject;
 
     // our interface for the Kinect
     KinectTracker    kinectTracker;

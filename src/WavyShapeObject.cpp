@@ -92,7 +92,7 @@ void WavyShapeObject::init(int numCols, int numRows) {
     waveScalarSetTime = ofGetElapsedTimeMillis();
     destWaveScalar = 1;
     
-    idleWaveAmplitude = 60;
+    idleWaveAmplitude = 0; // 60
     idleWaveFrequency = 8;
     
     minX = 0;

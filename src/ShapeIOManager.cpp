@@ -65,6 +65,15 @@ void ShapeIOManager::disconnectFromTable() {
     closeSerialConnections();
 }
 
+void ShapeIOManager::disconnectFromTableWithoutPinReset(){
+    if(mUseSerial == false) return;
+    ofSleepMillis(1000);
+    sendValueToAllBoards(TERM_ID_MAXSPEED, (unsigned char) 0); // effectively "turns off" pins by setting speed to 0
+    mUseSerial = false; // stops commands to serial from writing, effectively stops app from overriding manager
+    ofSleepMillis(1000);
+    closeSerialConnections();
+}
+
 //--------------------------------------------------------------
 //
 // Opens serial connection and stores that connection in array
@@ -75,9 +84,6 @@ void ShapeIOManager::openSerialConnections() {
     mSerialConnections[0] = new ShapeSerial(SERIAL_PORT_0, SERIAL_BAUD_RATE);
     mSerialConnections[1] = new ShapeSerial(SERIAL_PORT_1, SERIAL_BAUD_RATE);
     mSerialConnections[2] = new ShapeSerial(SERIAL_PORT_2, SERIAL_BAUD_RATE);
-    mSerialConnections[3] = new ShapeSerial(SERIAL_PORT_3, SERIAL_BAUD_RATE);
-    mSerialConnections[4] = new ShapeSerial(SERIAL_PORT_4, SERIAL_BAUD_RATE);
-    mSerialConnections[5] = new ShapeSerial(SERIAL_PORT_5, SERIAL_BAUD_RATE);
 }
 
 //--------------------------------------------------------------
@@ -125,6 +131,15 @@ void ShapeIOManager::clipAllValuesToBeWithinRange() {
 			}
 		}
     }
+    
+    // print the values;
+    /*for (int j = 0; j < RELIEF_PHYSICAL_SIZE_Y; j ++) {
+        for (int i = 0; i < RELIEF_PHYSICAL_SIZE_X; i ++) {
+            cout << (int)(pinHeightToRelief[i][j]) << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;*/
 }
 
 
@@ -151,18 +166,13 @@ void ShapeIOManager::sendPinHeightToRelief() {
 void ShapeIOManager::sendAndReceivePinHeight() {
     
     if(mUseSerial == false) return;
+    
     clipAllValuesToBeWithinRange();
     prepDepthDataForArduino();
     for (unsigned char i = 0; i < NUM_ARDUINOS; i++) {
         sendHeightToBoardAndRequestFeedback(i + 1, reliefBoardValues[i].currentFramePinHeight, reliefBoardValues[i].serialConnection);
     }
     readPinHeightsFromBoards(); // gets actual pin heights from arduino boards
-    
-    // temp way to store these values
-    // since sendAndReceivePinHeight gets called in update method
-    // this will save the values locally
-    //memcpy(pinHeightToRelief, pinHeightToRelief, sizeof(unsigned char) * RELIEF_SIZE_X * RELIEF_SIZE_Y);
-    //memcpy(pinHeightFromRelief, pinHeightFromRelief, sizeof(unsigned char) * RELIEF_SIZE_X * RELIEF_SIZE_Y);
 }
 
 //-----------------------------------------------------------
@@ -181,37 +191,23 @@ void ShapeIOManager::update(ofFbo buffer){
     tempPixels.mirror(false, true);
     pixels = tempPixels.getPixels();
     
+//    for (int i = 0; i < RELIEF_PHYSICAL_SIZE_X; i ++) {
+//        for (int j = 0; j < RELIEF_PHYSICAL_SIZE_Y; j ++) {
+//            cout << (int)pixels[((i + (j * RELIEF_PHYSICAL_SIZE_X)) * 4)];
+//        }
+//        cout << endl;
+//    }
+//    cout << endl;
+    
     // it is necessary to remap the pin size from the physical area to the actual number of pins,
     // as the table has 3 separate blocks of actuators, which are spaced apart from each other
-    for (int j = 0; j < RELIEF_PHYSICAL_SIZE_Y; j ++) {
-        
-        // first block
-        for (int i = 0; i < PINBLOCK_0_WIDTH; i ++) {
-            int y = j;
-            int x = RELIEF_PHYSICAL_SIZE_X - 1 - i - PINBLOCK_0_X_OFFSET;
-            int heightMapValue = pixels[((x + (y * RELIEF_PHYSICAL_SIZE_X)) * 4)];
-            pinHeightToRelief[i][j] = heightMapValue;
-        }
-        
-        // second block
-        for (int i = 0; i < PINBLOCK_1_WIDTH; i ++) {
-            int y = j;
-            int x = RELIEF_PHYSICAL_SIZE_X - 1 - i - PINBLOCK_1_X_OFFSET;
-            int heightMapValue = pixels[((x + (y * RELIEF_PHYSICAL_SIZE_X)) * 4)];
-            pinHeightToRelief[i + PINBLOCK_0_WIDTH][j] = heightMapValue;
-        }
-        
-        // third block
-        for (int i = 0; i < PINBLOCK_2_WIDTH; i ++) {
-            int y = j;
-            int x = RELIEF_PHYSICAL_SIZE_X - 1 - i - PINBLOCK_2_X_OFFSET;
-            int heightMapValue = pixels[((x + (y * RELIEF_PHYSICAL_SIZE_X)) * 4)];
-            pinHeightToRelief[i + PINBLOCK_0_WIDTH + PINBLOCK_1_WIDTH][j] = heightMapValue;
+    for (int i = 0; i < RELIEF_PHYSICAL_SIZE_X; i ++) {
+        for (int j = 0; j < RELIEF_PHYSICAL_SIZE_Y; j ++) {
+            pinHeightToRelief[i][j] = pixels[((i + (j * RELIEF_PHYSICAL_SIZE_X)) * 4)];
         }
     }
     
     // send the height map to the hardware interface
-	//mIOManager->sendPinHeightToRelief(mPinHeightToRelief);
     sendAndReceivePinHeight();
     
     if(ofGetElapsedTimeMillis() >= startTime+resetInterval) {
@@ -240,7 +236,7 @@ void ShapeIOManager::prepDepthDataForArduino() {
         for (int j = 0; j < NUM_PINS_ARDUINO; j++) {
             
             // copy the height values from the current frame values to the arduino pins
-            reliefBoardValues[i].currentFramePinHeight[j] = pinHeightToRelief[reliefBoardValues[i].pinCoordinates[j][0]][reliefBoardValues[i].pinCoordinates[j][1]];
+            reliefBoardValues[i].currentFramePinHeight[j] =     pinHeightToRelief[reliefBoardValues[i].pinCoordinates[j][0]][reliefBoardValues[i].pinCoordinates[j][1]];
             
             // invert the values if needed (this affects boards mounted upside down)
             if (reliefBoardValues[i].invertHeight) reliefBoardValues[i].currentFramePinHeight[j] = 255 - reliefBoardValues[i].currentFramePinHeight[j];
@@ -407,27 +403,19 @@ void ShapeIOManager::snycValuesToTable() {
 //--------------------------------------------------------------
 void ShapeIOManager::setBoardConfiguration() {
     
+    int rowOrder[24] = {0, 2, 1, 3, 5, 4, 6, 8, 7, 9, 11, 10, 12, 14, 13, 15, 17, 16, 18, 20, 19, 21, 23, 22};
+    
     // set up coordinates for 
     for (int i = 0; i < NUM_ARDUINOS; i++) {
+        int currentRow = (int)(i/4);
+        currentRow = (rowOrder[currentRow]);
         
-        // determine which serial connection each board is on:
-        // every 3rd and 4th board is on the second
-        if(i < 64) {
-            reliefBoardValues[i].serialConnection = ((i/2)%2 == 0) ? 0 : 1;
-        }
-        else if(i < 128) {
-            reliefBoardValues[i].serialConnection = ((i/2)%2 == 0) ? 2 : 3;
-        }
-        else {
-            reliefBoardValues[i].serialConnection = ((i/2)%2 == 0) ? 4 : 5;
-        }
-        
-        // every 5th to 8th board is mounted upside down, so invert the height
-        reliefBoardValues[i].invertHeight = (((i/4)%2) == 0) ? false : true;
+        // one every module, the modules on the second row
+        // are mounted upside down, so invert the height
+        reliefBoardValues[i].invertHeight = ((currentRow%3) == 2)? true : false;
         
         for (int j = 0; j < NUM_PINS_ARDUINO; j++) {
-            int currentRow = (int)(i / 4);
-            int currentColumn = j + (i%4 * 6);
+            int currentColumn = ((i%4) * NUM_PINS_ARDUINO) + j;
             reliefBoardValues[i].lastFramePinHeight[j] = 0;
             reliefBoardValues[i].currentFramePinHeight[j] = 0;
             reliefBoardValues[i].rollingAverageHeight[j] = 0;
@@ -436,25 +424,30 @@ void ShapeIOManager::setBoardConfiguration() {
             reliefBoardValues[i].pinCoordinates[j][1] = currentColumn;
         }
         
-        if(((i/2)%2 == 0)) {
-            int pinCoordinateRows[NUM_PINS_ARDUINO];
-            
-            // invert pin order if the boards are mounted rotated
-            for (int count = 0; count < NUM_PINS_ARDUINO; count++){
+        if(i < 36) {
+            reliefBoardValues[i].serialConnection = 0;
+        }
+        else if (i < 60) {
+            reliefBoardValues[i].serialConnection = 1;
+        }
+        else {
+            reliefBoardValues[i].serialConnection = 2;
+        }
+        
+        int pinCoordinateRows[NUM_PINS_ARDUINO];
+        // invert pin order if the boards are mounted rotated
+        for (int count = 0; count < NUM_PINS_ARDUINO; count++){
                 pinCoordinateRows[NUM_PINS_ARDUINO - count - 1] = reliefBoardValues[i].pinCoordinates[count][1];
-            }
-            for (int count = 0; count < NUM_PINS_ARDUINO; count++){
-                reliefBoardValues[i].pinCoordinates[count][1] = pinCoordinateRows[count];
-            }
-            
-            // also invert the pin height again if they are:
-            reliefBoardValues[i].invertHeight = !reliefBoardValues[i].invertHeight;
+        }
+        for (int count = 0; count < NUM_PINS_ARDUINO; count++){
+            reliefBoardValues[i].pinCoordinates[count][1] = pinCoordinateRows[count];
         }
     }
     
     // print out the mapping
-    
     for (int i = 0; i < NUM_ARDUINOS; i++) {
+        
+        printf("board: %d: ", i);
         for (int j = 0; j < NUM_PINS_ARDUINO; j++) {
             printf("%d,%d(%d); ", reliefBoardValues[i].pinCoordinates[j][0], reliefBoardValues[i].pinCoordinates[j][1], reliefBoardValues[i].invertHeight);
         }

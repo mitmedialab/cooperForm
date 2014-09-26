@@ -25,7 +25,6 @@ public:
     
     void draw();
     
-    
     // will tell you whether
     // an x,y coordinate is inside the button
     bool overButton(int xPos, int yPos);

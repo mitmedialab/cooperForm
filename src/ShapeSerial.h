@@ -14,7 +14,6 @@
 #include "ofThread.h"
 #include "Constants.h"
 
-
 // there are three types of messages: One where we only send 8 bytes, to the boards to set a parameter onedirectionally (PID terms, target positions). And one where we send 10 bytes, to set a target position and receive back the current actuator position.
 #define MSGS_SIZE_SENDONLY 8
 #define MSGS_SIZE_REQU_FEEDBACK 10

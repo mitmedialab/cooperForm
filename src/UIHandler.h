@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include "UIButton.h"
+#include "UISlider.h"
 #include "ofMain.h"
 
 class UIHandler {
@@ -29,6 +30,7 @@ public:
     void select(UIButton *button);
 private:
     vector<UIButton*> buttons;
+    vector<UISlider*> sliders;
     
     // groups of button
     // for selection and unselection

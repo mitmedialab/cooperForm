@@ -69,7 +69,7 @@ void ShapeSerial::threadedFunction(){
             mSerial.writeBytes(longMessageContent, MSGS_SIZE_REQU_FEEDBACK);
         } else {
             // pause is dependent on the speed of the machine right now, so that is a problem.
-            sleep(500);
+            usleep(500);
         }
         
         // receive messages from the table if there are any

@@ -13,6 +13,7 @@
 #include "ofMain.h"
 #include "ShapeSerial.h"
 #include "Constants.h"
+//#include "ofxXmlSettings.h"
 
 class ReliefBoard{
 public:
@@ -78,6 +79,7 @@ public:
     ~ShapeIOManager();
     void connectToTable();
     void disconnectFromTable();
+    void disconnectFromTableWithoutPinReset();
     
     void update(ofFbo buffer);
     

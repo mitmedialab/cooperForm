@@ -10,10 +10,12 @@
 		8A09A64419D221AE00118C9E /* UIHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A09A64219D221AE00118C9E /* UIHandler.cpp */; };
 		8A09A64719D221DD00118C9E /* UIButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A09A64519D221DD00118C9E /* UIButton.cpp */; };
 		8A09A64A19D3712B00118C9E /* UITriggers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A09A64819D3712B00118C9E /* UITriggers.cpp */; };
+		8A09A65219D5F44000118C9E /* WavyShapeObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A09A65119D5F44000118C9E /* WavyShapeObject.cpp */; };
+		8A09A65519D606BF00118C9E /* UISlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A09A65319D606BF00118C9E /* UISlider.cpp */; };
+		8A09A6E819D60FCD00118C9E /* ShapeIOManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A09A6E419D60FCD00118C9E /* ShapeIOManager.cpp */; };
+		8A09A6E919D60FCD00118C9E /* ShapeSerial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A09A6E619D60FCD00118C9E /* ShapeSerial.cpp */; };
 		8AEAD86B19C8AAB400D87C59 /* KinectShapeObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AEAD86919C8AAB400D87C59 /* KinectShapeObject.cpp */; };
 		8AEAD87219D0D3C600D87C59 /* CameraTracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AEAD87019D0D3C600D87C59 /* CameraTracker.cpp */; };
-		8AFAA95D19C89E9800EC475F /* ShapeIOManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFAA95B19C89E9800EC475F /* ShapeIOManager.cpp */; };
-		8AFAA96019C89EAA00EC475F /* ShapeSerial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFAA95E19C89EAA00EC475F /* ShapeSerial.cpp */; };
 		8AFAA96619C8A67A00EC475F /* KinectTracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFAA96519C8A67A00EC475F /* KinectTracker.cpp */; };
 		8AFAA9E419C8A6B400EC475F /* ofxCvColorImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFAA9D219C8A6B400EC475F /* ofxCvColorImage.cpp */; };
 		8AFAA9E519C8A6B400EC475F /* ofxCvContourFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFAA9D519C8A6B400EC475F /* ofxCvContourFinder.cpp */; };
@@ -87,14 +89,18 @@
 		8A09A64619D221DD00118C9E /* UIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIButton.h; sourceTree = "<group>"; };
 		8A09A64819D3712B00118C9E /* UITriggers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UITriggers.cpp; sourceTree = "<group>"; };
 		8A09A64919D3712B00118C9E /* UITriggers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITriggers.h; sourceTree = "<group>"; };
+		8A09A65019D5F44000118C9E /* WavyShapeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WavyShapeObject.h; sourceTree = "<group>"; };
+		8A09A65119D5F44000118C9E /* WavyShapeObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WavyShapeObject.cpp; sourceTree = "<group>"; };
+		8A09A65319D606BF00118C9E /* UISlider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UISlider.cpp; sourceTree = "<group>"; };
+		8A09A65419D606BF00118C9E /* UISlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UISlider.h; sourceTree = "<group>"; };
+		8A09A6E419D60FCD00118C9E /* ShapeIOManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShapeIOManager.cpp; sourceTree = "<group>"; };
+		8A09A6E519D60FCD00118C9E /* ShapeIOManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShapeIOManager.h; sourceTree = "<group>"; };
+		8A09A6E619D60FCD00118C9E /* ShapeSerial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShapeSerial.cpp; sourceTree = "<group>"; };
+		8A09A6E719D60FCD00118C9E /* ShapeSerial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShapeSerial.h; sourceTree = "<group>"; };
 		8AEAD86919C8AAB400D87C59 /* KinectShapeObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KinectShapeObject.cpp; sourceTree = "<group>"; };
 		8AEAD86A19C8AAB400D87C59 /* KinectShapeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KinectShapeObject.h; sourceTree = "<group>"; };
 		8AEAD87019D0D3C600D87C59 /* CameraTracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraTracker.cpp; sourceTree = "<group>"; };
 		8AEAD87119D0D3C600D87C59 /* CameraTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraTracker.h; sourceTree = "<group>"; };
-		8AFAA95B19C89E9800EC475F /* ShapeIOManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShapeIOManager.cpp; sourceTree = "<group>"; };
-		8AFAA95C19C89E9800EC475F /* ShapeIOManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShapeIOManager.h; sourceTree = "<group>"; };
-		8AFAA95E19C89EAA00EC475F /* ShapeSerial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShapeSerial.cpp; sourceTree = "<group>"; };
-		8AFAA95F19C89EAA00EC475F /* ShapeSerial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShapeSerial.h; sourceTree = "<group>"; };
 		8AFAA96219C8A62300EC475F /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		8AFAA96419C8A67A00EC475F /* KinectTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KinectTracker.h; sourceTree = "<group>"; };
 		8AFAA96519C8A67A00EC475F /* KinectTracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KinectTracker.cpp; sourceTree = "<group>"; };
@@ -278,8 +284,19 @@
 				8A09A64319D221AE00118C9E /* UIHandler.h */,
 				8A09A64519D221DD00118C9E /* UIButton.cpp */,
 				8A09A64619D221DD00118C9E /* UIButton.h */,
+				8A09A65319D606BF00118C9E /* UISlider.cpp */,
+				8A09A65419D606BF00118C9E /* UISlider.h */,
 			);
 			name = UserInterface;
+			sourceTree = "<group>";
+		};
+		8A09A64F19D5F42400118C9E /* Waves */ = {
+			isa = PBXGroup;
+			children = (
+				8A09A65019D5F44000118C9E /* WavyShapeObject.h */,
+				8A09A65119D5F44000118C9E /* WavyShapeObject.cpp */,
+			);
+			name = Waves;
 			sourceTree = "<group>";
 		};
 		8AEAD86819C8AAA400D87C59 /* Kinect */ = {
@@ -303,10 +320,10 @@
 		8AFAA95A19C89E8700EC475F /* TableCore */ = {
 			isa = PBXGroup;
 			children = (
-				8AFAA95B19C89E9800EC475F /* ShapeIOManager.cpp */,
-				8AFAA95C19C89E9800EC475F /* ShapeIOManager.h */,
-				8AFAA95E19C89EAA00EC475F /* ShapeSerial.cpp */,
-				8AFAA95F19C89EAA00EC475F /* ShapeSerial.h */,
+				8A09A6E419D60FCD00118C9E /* ShapeIOManager.cpp */,
+				8A09A6E519D60FCD00118C9E /* ShapeIOManager.h */,
+				8A09A6E619D60FCD00118C9E /* ShapeSerial.cpp */,
+				8A09A6E719D60FCD00118C9E /* ShapeSerial.h */,
 			);
 			name = TableCore;
 			sourceTree = "<group>";
@@ -669,6 +686,7 @@
 		8AFAAA6319C8A8A700EC475F /* ShapeObjects */ = {
 			isa = PBXGroup;
 			children = (
+				8A09A64F19D5F42400118C9E /* Waves */,
 				8AEAD86819C8AAA400D87C59 /* Kinect */,
 				8AFAAA6419C8A8B700EC475F /* ShapeObject.h */,
 			);
@@ -856,9 +874,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A09A6E919D60FCD00118C9E /* ShapeSerial.cpp in Sources */,
 				8AFAAA5D19C8A6CB00EC475F /* core.c in Sources */,
 				8A09A64419D221AE00118C9E /* UIHandler.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
+				8A09A65219D5F44000118C9E /* WavyShapeObject.cpp in Sources */,
 				8AFAAA6019C8A6CB00EC475F /* usb_libusb10.c in Sources */,
 				8A09A64A19D3712B00118C9E /* UITriggers.cpp in Sources */,
 				8AEAD87219D0D3C600D87C59 /* CameraTracker.cpp in Sources */,
@@ -867,18 +887,18 @@
 				8AFAAA5F19C8A6CB00EC475F /* tilt.c in Sources */,
 				8AFAA96619C8A67A00EC475F /* KinectTracker.cpp in Sources */,
 				8AEAD86B19C8AAB400D87C59 /* KinectShapeObject.cpp in Sources */,
+				8A09A65519D606BF00118C9E /* UISlider.cpp in Sources */,
 				8AFAA9E919C8A6B400EC475F /* ofxCvImage.cpp in Sources */,
 				8AFAA9E419C8A6B400EC475F /* ofxCvColorImage.cpp in Sources */,
 				8AFAAA6219C8A6CB00EC475F /* ofxKinect.cpp in Sources */,
 				8A09A64719D221DD00118C9E /* UIButton.cpp in Sources */,
 				8AFAA9E619C8A6B400EC475F /* ofxCvFloatImage.cpp in Sources */,
 				8AFAAA5C19C8A6CB00EC475F /* cameras.c in Sources */,
-				8AFAA96019C89EAA00EC475F /* ShapeSerial.cpp in Sources */,
 				8AFAA9E519C8A6B400EC475F /* ofxCvContourFinder.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ReliefApplication.cpp in Sources */,
 				8AFAA9EA19C8A6B400EC475F /* ofxCvShortImage.cpp in Sources */,
 				8AFAA9E819C8A6B400EC475F /* ofxCvHaarFinder.cpp in Sources */,
-				8AFAA95D19C89E9800EC475F /* ShapeIOManager.cpp in Sources */,
+				8A09A6E819D60FCD00118C9E /* ShapeIOManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -898,6 +918,7 @@
 			baseConfigurationReference = E4EB6923138AFD0F00A09F29 /* Project.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH)";
+				CLANG_CXX_LIBRARY = "libstdc++";
 				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/bin/";
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
@@ -943,6 +964,7 @@
 			baseConfigurationReference = E4EB6923138AFD0F00A09F29 /* Project.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH)";
+				CLANG_CXX_LIBRARY = "libstdc++";
 				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/bin/";
 				COPY_PHASE_STRIP = YES;
 				DEAD_CODE_STRIPPING = YES;

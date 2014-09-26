@@ -124,16 +124,16 @@ void KinectTracker::loadAlphaMaskAndPrepForCvProcessing() {
 }
 
 void KinectTracker::calculateThresholdsAndModifyImages() {
-    depthImg.erode_3x3();
-    depthImg.dilate_3x3();
+//    depthImg.erode_3x3();
+//    depthImg.dilate_3x3();
     
     // we do two thresholds - one for the far plane and one for the near plane
     // we then do a cvAnd to get the pixels which are a union of the two thresholds
-    grayThreshNear = depthImg;
-    grayThreshFar = depthImg;
-    grayThreshNear.threshold(mNearThreshold, true);
-    grayThreshFar.threshold(mFarThreshold);
-    cvAnd(grayThreshNear.getCvImage(), grayThreshFar.getCvImage(), depthImg.getCvImage(), NULL);
+//    grayThreshNear = depthImg;
+//    grayThreshFar = depthImg;
+//    grayThreshNear.threshold(mNearThreshold, true);
+//    grayThreshFar.threshold(mFarThreshold);
+//    cvAnd(grayThreshNear.getCvImage(), grayThreshFar.getCvImage(), depthImg.getCvImage(), NULL);
     
     // find depth map excluding thresholded data
     // this causes the 10 finger effect and could be related to our discussion
@@ -145,14 +145,15 @@ void KinectTracker::calculateThresholdsAndModifyImages() {
     // however since their hands shadow is also black this will cause the 10 finger effect.
     //
     //cvAnd(grayThreshNear.getCvImage(), depthThreshed.getCvImage(), depthThreshed.getCvImage(), NULL);
-    cvAnd(grayThreshFar.getCvImage(), depthThreshed.getCvImage(), depthThreshed.getCvImage(), NULL);
+//    cvAnd(grayThreshFar.getCvImage(), depthThreshed.getCvImage(), depthThreshed.getCvImage(), NULL);
     
+    depthThreshed = depthImg;
     // remap pixels so they range from 0-255 after thresholding
     ofPixelsRef depthPixels = depthThreshed.getPixelsRef();
     for (int x = 0; x < depthPixels.getWidth(); x++) {
         for (int y = 0; y < depthPixels.getHeight(); y++) {
-//            float shade = ofClamp((depthPixels.getColor(x,y).getBrightness() - mFarThreshold) * 255.f / (mNearThreshold - mFarThreshold), 0, 255);
-            float shade = ofClamp((depthPixels.getColor(x,y).getBrightness() - mNearThreshold) * 255.f / (255.f - mNearThreshold), 0, 255);
+            float shade = ofClamp((depthPixels.getColor(x,y).getBrightness() - mFarThreshold) * 255.f / (mNearThreshold - mFarThreshold), 0, 255);
+//            float shade = ofClamp((depthPixels.getColor(x,y).getBrightness() - mNearThreshold) * 255.f / (255.f - mNearThreshold), 0, 255);
             depthPixels.setColor(x,y, shade);
         }
     }

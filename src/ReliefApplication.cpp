@@ -1,4 +1,5 @@
 #include "ReliefApplication.h"
+#include "UITriggers.h"
 
 //--------------------------------------------------------------
 void ReliefApplication::setup(){
@@ -7,6 +8,7 @@ void ReliefApplication::setup(){
     
     // initialize communication with the pin display
 	mIOManager = new ShapeIOManager();
+    mIOManager->connectToTable();
     
     // setup default valus for pins
     // @todo move to config file?
@@ -16,12 +18,21 @@ void ReliefApplication::setup(){
     deadZone = 0;
     maxSpeed = 220;
     
+    mIOManager->set_gain_p(gain_P);
+    mIOManager->set_gain_i(gain_I);
+    mIOManager->set_max_i(max_I);
+    mIOManager->set_deadzone(deadZone);
+    mIOManager->set_max_speed(maxSpeed);
+    
     // allocate all the necessary frame buffer objects
     projectorOverlayImage.allocate(RELIEF_PROJECTOR_SIZE_X, RELIEF_PROJECTOR_SIZE_Y, GL_RGB);
+    
     pinHeightMapImageSmall.allocate(RELIEF_PHYSICAL_SIZE_X, RELIEF_PHYSICAL_SIZE_Y, GL_RGB);
+    pinHeightMapImageSmall.getTextureReference().setTextureMinMagFilter(GL_NEAREST, GL_NEAREST);
+
     touchScreenDisplayImage.allocate(TOUCHSCREEN_SIZE_X, TOUCHSCREEN_SIZE_Y, GL_RGBA);
     verticalDisplayImage.allocate(VERTICAL_DISPLAY_SIZE_X, VERTICAL_DISPLAY_SIZE_Y, GL_RGBA);
-
+    
     // setup camera interface
     cameraTracker.setup();
     
@@ -29,8 +40,8 @@ void ReliefApplication::setup(){
     // setup kinect if using
     // @todo we only want to setup if connected
     // @note currently if you change the kinect setting you must restart
-    int kinectFarCutOffPlane = 100; // 0 = far, 255 = near
-    int kinectNearCutOffPlane = 225;
+    int kinectFarCutOffPlane = 230; // 0 = far, 255 = near
+    int kinectNearCutOffPlane = 255;
     int minContourSize = 10;
     kinectTracker.setup(kinectNearCutOffPlane, kinectFarCutOffPlane, minContourSize);
     
@@ -42,7 +53,9 @@ void ReliefApplication::setup(){
     
     
     // set our current shape object to a default shape object
-    currentShape = kinectShapeObject;
+//    setMode("telepresence");
+    UITriggers::buttonTrigger(telepresenceModeButton);
+    //currentShape = kinectShapeObject;
 }
 
 //--------------------------------------------------------------
@@ -53,6 +66,9 @@ void ReliefApplication::update(){
     
     // update the shape object
     currentShape->update();
+    
+    // send height map image to the tangible display
+    mIOManager->update(pinHeightMapImageSmall);
 }
 
 //--------------------------------------------------------------
@@ -75,21 +91,17 @@ void ReliefApplication::draw(){
     
     
     /* render the touch screen display */
-    //touchScreenDisplayImage.begin();
+    touchScreenDisplayImage.begin();
     
-    w = touchScreenDisplayImage.getWidth()-200;
+    w = touchScreenDisplayImage.getWidth();
     h = touchScreenDisplayImage.getHeight();
     
-    ofPushMatrix();
-    ofTranslate(200, 0);
+//    ofPushMatrix();
+//    ofTranslate(200, 0);
     currentShape->renderTangibleShape(w, h);
-    ofPopMatrix();
+//    ofPopMatrix();
     
-    // draw UI stuff
-    uiHandler.draw();
-    
-    
-    //touchScreenDisplayImage.end();
+    touchScreenDisplayImage.end();
     
     
     
@@ -104,7 +116,12 @@ void ReliefApplication::draw(){
     // draw our frame buffers
     //pinHeightMapImageSmall.draw(  1,   1,   350, 350);
     //projectorOverlayImage.draw(   1,   352, 350, 350);
-    //touchScreenDisplayImage.draw(0, 0, ofGetWidth()/2, ofGetHeight());
+    
+    touchScreenDisplayImage.draw(201, 0, ofGetWidth()/2-201, ofGetHeight());
+   
+    // draw UI stuff
+    uiHandler.draw();
+    
     //verticalDisplayImage.draw(    352, 352, 350, 350);
     
     // draw camera feeds
@@ -113,7 +130,7 @@ void ReliefApplication::draw(){
     
     cameraTracker.drawCameraFeed(0, w+1, 1,   w, h);
     //cameraTracker.drawCameraFeed(1, 2*(w+1), 1,   w, h);
-    
+    pinHeightMapImageSmall.draw(  200,   1,   350, 350);
 }
 
 

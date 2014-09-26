@@ -10,22 +10,25 @@
 #ifndef _CONSTANTS
 #define _CONSTANTS	
 
-#define	RELIEF_SIZE_X	  48
+#define	RELIEF_SIZE_X	  24
 #define	RELIEF_SIZE_Y	  24
 
 // clips values
-#define LOW_THRESHOLD 50
-#define HIGH_THRESHOLD 220
+#define LOW_THRESHOLD 0
+#define HIGH_THRESHOLD 245
 
 // surface "pixels"
-#define	RELIEF_PHYSICAL_SIZE_X	  102
+#define	RELIEF_PHYSICAL_SIZE_X	  24
 #define	RELIEF_PHYSICAL_SIZE_Y	  24
 
-#define RELIEF_SIZE 102 * 24
+#define RELIEF_SIZE 24 * 24
 
 // multiple of the physical size
-#define RELIEF_PROJECTOR_SIZE_X 1020
-#define RELIEF_PROJECTOR_SIZE_Y 240
+#define RELIEF_PROJECTOR_SIZE_X 480
+#define RELIEF_PROJECTOR_SIZE_Y 480
+
+#define KINECT_X 640
+#define KINECT_Y 480
 
 #define TOUCHSCREEN_SIZE_X      1920
 #define TOUCHSCREEN_SIZE_Y      1080
@@ -63,16 +66,13 @@
 #define TERM_ID_GRAVITYCOMP (unsigned char)251
 #define TERM_ID_MAXSPEED (unsigned char)252
 
-#define NUM_SERIAL_CONNECTIONS 6
-#define NUM_ARDUINOS 192
+#define NUM_SERIAL_CONNECTIONS 3
+#define NUM_ARDUINOS 96
 #define NUM_PINS_ARDUINO 6
 
-#define SERIAL_PORT_0 "/dev/tty.usbserial-A702YMNV"
-#define SERIAL_PORT_1 "/dev/tty.usbserial-A702YLM2"
-#define SERIAL_PORT_2 "/dev/tty.usbserial-A702YMNT"
-#define SERIAL_PORT_3 "/dev/tty.usbserial-A702YLM6"
-#define SERIAL_PORT_4 "/dev/tty.usbserial-A702YLM9"
-#define SERIAL_PORT_5 "/dev/tty.usbserial-A30011Hp"
+#define SERIAL_PORT_0 "/dev/tty.usbserial-A30010PW"
+#define SERIAL_PORT_1 "/dev/tty.usbserial-A702YLM3"
+#define SERIAL_PORT_2 "/dev/tty.usbserial-A702YMNY"
 #define SERIAL_BAUD_RATE 115200
 
 #define PID_RESET_INTERVALL 1500

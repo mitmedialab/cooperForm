@@ -47,8 +47,8 @@ void WavyShapeObject::init(int numCols, int numRows) {
     surface.allocate(cols, rows, OF_IMAGE_GRAYSCALE);
     
     
-    interpolate = 3;
-    int maxInterpolation = 12;
+    interpolate = 0;
+    int maxInterpolation = 0;
     density = new float*[cols];
     velocity = new float*[cols];
     
@@ -83,7 +83,7 @@ void WavyShapeObject::init(int numCols, int numRows) {
     }
     
     // setup time keeping
-    fixedDeltaMS = 50;
+    fixedDeltaMS = 25;
     leftOverMS = 0;
     
     seaLevel = 127;
@@ -92,8 +92,8 @@ void WavyShapeObject::init(int numCols, int numRows) {
     waveScalarSetTime = ofGetElapsedTimeMillis();
     destWaveScalar = 1;
     
-    idleWaveAmplitude = 75;
-    idleWaveFrequency = 10;
+    idleWaveAmplitude = 60;
+    idleWaveFrequency = 8;
     
     minX = 0;
     minY = 0;
@@ -200,7 +200,7 @@ void WavyShapeObject::setIdleWaveScalar(float scalar) {
 
 //--------------------------------------------------------------
 
-void WavyShapeObject::renderShape() {
+void WavyShapeObject::renderTangibleShape(int w, int h) {
     //cout << "wave rendering " << waveScalar << ", " << waveAmplitude;
     //if (interpolate > 0)
     interpolateSurface();
@@ -217,28 +217,23 @@ void WavyShapeObject::renderShape() {
     srcColorImage.allocate(KINECT_X, KINECT_Y);
     srcColorImage.setFromPixels(pixels);
     
-    ofxCvColorImage dstColorImage;
-    dstColorImage.allocate(RELIEF_PROJECTOR_SIZE_X, RELIEF_PROJECTOR_SIZE_Y);
-    
-    this->mImageWarper->warpIntoImage(srcColorImage, dstColorImage);
-    
-    ofxCvColorImage smallColorImage = dstColorImage;
-    smallColorImage.resize(RELIEF_PHYSICAL_SIZE_X, RELIEF_PHYSICAL_SIZE_Y);
+    ofxCvColorImage smallColorImage = srcColorImage;
+    smallColorImage.resize(w,h);
     
     
     //ofxCvGrayscaleImage grayDstImage;
     //smallColorImage.convertToGrayscalePlanarImage(grayDstImage, 1);
     //allPixels = grayDstImage.getPixels();
     
-    unsigned char* temp = new unsigned char[102*24*3];
-    temp = smallColorImage.getPixels();
-    if (temp != 0) {
-       for (int i = 1; i <= 102 * 24; i++) {
-            char val = (temp[i * 3 - 1] + temp[i * 3 - 2] + temp[i * 3 - 3]) / 3;
-            allPixels[i -1] = val;
-        }
-    }
-    dstColorImage.draw(0,0);
+//    unsigned char* temp = new unsigned char[102*24*3];
+//    temp = smallColorImage.getPixels();
+//    if (temp != 0) {
+//       for (int i = 1; i <= smallColorImage.getWidth() * smallColorImage.getHeight(); i++) {
+//            char val = (temp[i * 3 - 1] + temp[i * 3 - 2] + temp[i * 3 - 3]) / 3;
+//            allPixels[i -1] = val;
+//        }
+//    }
+    smallColorImage.draw(0,0);
 }
 
 //--------------------------------------------------------------
@@ -251,7 +246,7 @@ unsigned char * WavyShapeObject::getHeightMapPixels() {
 
 //--------------------------------------------------------------
 
-void WavyShapeObject::renderGraphics(int x, int y, int w, int h) {
+void WavyShapeObject::renderProjectorOverlay(int w, int h) {
     
     // interpolation should be done during height map drawing
     interpolateSurface();
@@ -259,28 +254,13 @@ void WavyShapeObject::renderGraphics(int x, int y, int w, int h) {
     //ofImage temp;
     //temp.allocate(w, h, OF_IMAGE_GRAYSCALE);
     //mImageWarper->warpIntoImage(surface, temp);
-    surface.draw(x, y, w, h);
+    surface.draw(w, h);
 }
 
 //--------------------------------------------------------------
 
-void WavyShapeObject::update(float dt) {
+void WavyShapeObject::update() {
     //cout << "wave updating";
-    float scalarX = (float)cols / (float) KINECT_X;
-    float scalarY = (float)rows / (float) KINECT_Y;
-    ofPoint * src = mImageWarper->getSrcPositions();
-    if (minX != (int)(scalarX * min(min(src[0].x, src[1].x), min(src[2].x, src[3].x)))) {
-        minX = (int)(scalarX * min(min(src[0].x, src[1].x), min(src[2].x, src[3].x))) - 2;
-        minY = (int)(scalarY * min(min(src[0].y, src[1].y), min(src[2].y, src[3].y))) - 9;
-        
-        maxX = (int)(scalarX * max(max(src[0].x, src[1].x), max(src[2].x, src[3].x))) + 2;
-        maxY = (int)(scalarY * max(max(src[0].y, src[1].y), max(src[2].y, src[3].y))) + 9;
-    
-        minX = ofClamp(minX, 0, cols);
-        minY = ofClamp(minY, 0, rows);
-        maxX = ofClamp(maxX, 0, cols);
-        maxY = ofClamp(maxY, 0, rows);
-    }
     
     getDepthMapKinect();
 
@@ -353,11 +333,11 @@ void WavyShapeObject::update(float dt) {
 
 //--------------------------------------------------------------
 
-void WavyShapeObject::drawGuiScreen(int x, int y, int w, int h)
+void WavyShapeObject::renderTouchScreenGraphics(int w, int h)
 {
     //ofPushMatrix();
     
-    renderGraphics(x,y,w,h);
+    renderProjectorOverlay(w,h);
     //mKinectTracker->drawDepthThreshedImage(0,0, ofGetWidth(), ofGetHeight());
     
     //ofTranslate(mImageWarper->getSrcPositions()[0].x, mImageWarper->getSrcPositions()[0].y);

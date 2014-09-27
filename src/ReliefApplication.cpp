@@ -45,8 +45,8 @@ void ReliefApplication::setup(){
     // setup kinect if using
     // @todo we only want to setup if connected
     // @note currently if you change the kinect setting you must restart
-    int kinectFarCutOffPlane = 235; // 0 = far, 255 = near
-    int kinectNearCutOffPlane = 255;
+    int kinectFarCutOffPlane = 225; // 0 = far, 255 = near
+    int kinectNearCutOffPlane = 235;
     int minContourSize = 10;
     kinectTracker.setup(kinectNearCutOffPlane, kinectFarCutOffPlane, minContourSize);
     kinectTracker.setCrop(320-120, 240-120, 240, 240);

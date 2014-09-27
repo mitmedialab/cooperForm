@@ -69,7 +69,14 @@ void ShapeSerial::threadedFunction(){
             mSerial.writeBytes(longMessageContent, MSGS_SIZE_REQU_FEEDBACK);
         } else {
             // pause is dependent on the speed of the machine right now, so that is a problem.
-            sleep(500);
+            
+            //            usleep(500);
+            // usleep symbol isn't found
+            // and according to http://stackoverflow.com/questions/14340485/getting-stuck-in-usleep1
+            // usleep is deprecated
+            // so instead use nanosleep
+            nanosleep((struct timespec[]){{0, 50000000}}, NULL);
+
         }
         
         // receive messages from the table if there are any

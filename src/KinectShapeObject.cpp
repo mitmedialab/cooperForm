@@ -9,16 +9,20 @@
 #include "KinectShapeObject.h"
 
 KinectShapeObject::KinectShapeObject() {
-    mKinectHeightImage.allocate(KINECT_X, KINECT_Y);
-    mOutputShapeImage.allocate(KINECT_X, KINECT_Y);
-    allPixels = new unsigned char[RELIEF_SIZE];
+    mKinectHeightImage.allocate(300,300); //KINECT_X, KINECT_Y);
+    mOutputShapeImage.allocate(300,300); //KINECT_X, KINECT_Y);
 };
 
 void KinectShapeObject::update(){
-    unsigned char * pixels;
-    pixels = mKinectTracker->depthThreshedPixels();
-    mKinectHeightImage.setFromPixels(pixels, KINECT_X, KINECT_Y);
-    mOutputShapeImage.setFromPixels(pixels, KINECT_X, KINECT_Y);
+
+    mKinectHeightImage.begin();
+    mKinectTracker->drawDepthThreshedImage(0,0, mKinectHeightImage.getWidth(), mKinectHeightImage.getHeight());
+    mKinectHeightImage.end();
+
+    mOutputShapeImage.begin();
+    mKinectTracker->drawColorImage(0,0, mOutputShapeImage.getWidth(), mOutputShapeImage.getHeight());
+    mOutputShapeImage.end();
+
 };
 
 void KinectShapeObject::renderVerticalScreenGraphics(int w, int h){
@@ -26,7 +30,7 @@ void KinectShapeObject::renderVerticalScreenGraphics(int w, int h){
 };
 
 void KinectShapeObject::renderTouchscreenGraphics(int w, int h){
-    mKinectHeightImage.draw(0,0, w, h);
+    mOutputShapeImage.draw(0,0, w, h);
     //mOutputShapeImage.draw(0,0, w, h);
 };
 

@@ -27,12 +27,15 @@ void KinectTracker::setup(int pNearThreshold, int pFarThreshold, int pContourMin
 	
 	colorImg.allocate(kinect.width, kinect.height);
     depthImg.allocate(kinect.width, kinect.height);
-	grayThreshNear.allocate(kinect.width, kinect.height);
-	grayThreshFar.allocate(kinect.width, kinect.height);
+    
+    colorImgCropped.allocate(kinect.width, kinect.height);
+    depthImgCropped.allocate(kinect.width, kinect.height);
+    
+//	grayThreshNear.allocate(kinect.width, kinect.height);
+//	grayThreshFar.allocate(kinect.width, kinect.height);
 	depthThreshed.allocate(kinect.width, kinect.height);
     lastDepthThreshed.allocate(kinect.width, kinect.height);
     depthThreshedDiff.allocate(kinect.width, kinect.height);
-    fbo.allocate(kinect.width*2, kinect.height, GL_RGB);
     recordingImage.allocate(kinect.width*2, kinect.height, OF_IMAGE_COLOR);
     playingImage.allocate(kinect.width*2, kinect.height, OF_IMAGE_COLOR);
     
@@ -42,6 +45,11 @@ void KinectTracker::setup(int pNearThreshold, int pFarThreshold, int pContourMin
 
     
     loadAlphaMaskAndPrepForCvProcessing();
+    
+    cropX = 0;
+    cropY = 0;
+    cropWidth = kinect.width;
+    cropHeight = kinect.height;
 }
 
 //--------------------------------------------------------------
@@ -66,10 +74,11 @@ void KinectTracker::update() {
         // update from kinect
         updateImagesFromKinect();
         
-        lastDepthThreshed.setFromPixels(depthThreshed.getPixels(), kinect.width, kinect.height);
-        // always update the depth image
-        depthThreshed.setFromPixels(depthImg.getPixels(), kinect.width, kinect.height);
+        cropImages();
         
+        lastDepthThreshed.setFromPixels(depthThreshed.getPixels(), depthThreshed.getWidth(), depthThreshed.getHeight());
+        // always update the depth image
+        depthThreshed.setFromPixels(depthImgCropped.getPixels(), depthImgCropped.getWidth(), depthImgCropped.getHeight());
         
         // subtract mask which is png alpha image called "mask.png"
         if(useMask) subtractMask();
@@ -100,6 +109,23 @@ void KinectTracker::flagImagesAsChanged() {
     colorImg.flagImageChanged();
     depthImg.flagImageChanged();
     depthThreshed.flagImageChanged();
+}
+
+void KinectTracker::cropImages() {
+//    if (cropX == 0 && cropY == 0 && cropWidth == colorImg.getWidth() && cropHeight == colorImg.getHeight())
+//        return;
+    
+    ofImage fullColor;
+    fullColor.allocate(colorImg.getWidth(), colorImg.getHeight(), OF_IMAGE_COLOR);
+    fullColor.setFromPixels(colorImg.getPixels(), colorImg.getWidth(), colorImg.getHeight(), OF_IMAGE_COLOR);
+    fullColor.crop(cropX, cropY, cropWidth, cropHeight);
+    colorImgCropped.setFromPixels(fullColor.getPixels(), fullColor.getWidth(), fullColor.getHeight());
+
+    ofImage fullDepth;
+    fullDepth.allocate(depthImg.getWidth(), depthImg.getHeight(), OF_IMAGE_GRAYSCALE);
+    fullDepth.setFromPixels(depthImg.getPixels(), fullDepth.getWidth(), fullDepth.getHeight(), OF_IMAGE_GRAYSCALE);
+    fullDepth.crop(cropX, cropY, cropWidth, cropHeight);
+    depthImgCropped.setFromPixels(fullDepth.getPixels(), fullDepth.getWidth(), fullDepth.getHeight());
 }
 
 void KinectTracker::subtractMask() {
@@ -147,7 +173,7 @@ void KinectTracker::calculateThresholdsAndModifyImages() {
     //cvAnd(grayThreshNear.getCvImage(), depthThreshed.getCvImage(), depthThreshed.getCvImage(), NULL);
 //    cvAnd(grayThreshFar.getCvImage(), depthThreshed.getCvImage(), depthThreshed.getCvImage(), NULL);
     
-    depthThreshed = depthImg;
+//    depthThreshed = depthImgCropped;
     // remap pixels so they range from 0-255 after thresholding
     ofPixelsRef depthPixels = depthThreshed.getPixelsRef();
     for (int x = 0; x < depthPixels.getWidth(); x++) {
@@ -157,6 +183,7 @@ void KinectTracker::calculateThresholdsAndModifyImages() {
             depthPixels.setColor(x,y, shade);
         }
     }
+    depthThreshed.flagImageChanged();
 }
 
 //--------------------------------------------------------------
@@ -174,8 +201,9 @@ void KinectTracker::drawColorImage(int x, int y, int width, int height) {
 // gray image with contour blobs drawn on top
 void KinectTracker::drawThresholdImage(int x, int y, int width, int height){
     ofSetColor(255);
-    depthImg.draw(x, y, width, height);
-    contourFinder.draw(x, y, width, height);
+    depthThreshed.draw(x,y,width,height);
+    //depthImg.draw(x, y, width, height);
+    //contourFinder.draw(x, y, width, height);
 }
 
 // draw from the live kinect
@@ -268,4 +296,17 @@ bool KinectTracker::isFrameNew() {
 
 bool KinectTracker::isConnected() {
     return kinect.isConnected();
+}
+
+void KinectTracker::setCrop(int x, int y, int width, int height) {
+    cropX = x;
+    cropY = y;
+    cropWidth = width;
+    cropHeight = height;
+    
+    colorImgCropped.allocate(cropWidth, cropHeight);
+    depthImgCropped.allocate(cropWidth, cropHeight);
+    depthThreshed.allocate(cropWidth, cropHeight);
+    lastDepthThreshed.allocate(cropWidth, cropHeight);
+    depthThreshedDiff.allocate(cropWidth, cropHeight);
 }

@@ -32,6 +32,8 @@ public:
     int              deadZone;
     int              maxSpeed;
 
+    // heightmap data for the pins 
+    ofFbo            pinHeightMapImage;
     // the heightmap data for the pins
     ofFbo            pinHeightMapImageSmall;
     // image to be projected on top of the pins
@@ -56,6 +58,7 @@ public:
     void setup();
     void update();
     void draw();
+    void exit();
     
     // initialize all the UI elements
     void setupUI();

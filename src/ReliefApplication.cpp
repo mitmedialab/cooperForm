@@ -3,6 +3,9 @@
 
 //--------------------------------------------------------------
 void ReliefApplication::setup(){
+    ofSetFrameRate(30);
+    
+    
     // initialize the UI
     setupUI();
     
@@ -12,10 +15,10 @@ void ReliefApplication::setup(){
     
     // setup default valus for pins
     // @todo move to config file?
-    gain_P = 0.5;
-    gain_I = 0;
+    gain_P = 1.5;
+    gain_I = 0.045;
     max_I = 60;
-    deadZone = 0;
+    deadZone = 2;
     maxSpeed = 220;
     
     mIOManager->set_gain_p(gain_P);
@@ -27,12 +30,14 @@ void ReliefApplication::setup(){
     // allocate all the necessary frame buffer objects
     projectorOverlayImage.allocate(RELIEF_PROJECTOR_SIZE_X, RELIEF_PROJECTOR_SIZE_Y, GL_RGB);
     
-    pinHeightMapImageSmall.allocate(RELIEF_PHYSICAL_SIZE_X, RELIEF_PHYSICAL_SIZE_Y, GL_RGB);
+    pinHeightMapImage.allocate(RELIEF_PROJECTOR_SIZE_X, RELIEF_PROJECTOR_SIZE_Y, GL_RGB);
+    
+    pinHeightMapImageSmall.allocate(RELIEF_PHYSICAL_SIZE_X, RELIEF_PHYSICAL_SIZE_Y, GL_RGBA);
     pinHeightMapImageSmall.getTextureReference().setTextureMinMagFilter(GL_NEAREST, GL_NEAREST);
 
     touchScreenDisplayImage.allocate(TOUCHSCREEN_SIZE_X, TOUCHSCREEN_SIZE_Y, GL_RGBA);
     verticalDisplayImage.allocate(VERTICAL_DISPLAY_SIZE_X, VERTICAL_DISPLAY_SIZE_Y, GL_RGBA);
-    
+
     // setup camera interface
     cameraTracker.setup();
     
@@ -40,10 +45,11 @@ void ReliefApplication::setup(){
     // setup kinect if using
     // @todo we only want to setup if connected
     // @note currently if you change the kinect setting you must restart
-    int kinectFarCutOffPlane = 230; // 0 = far, 255 = near
+    int kinectFarCutOffPlane = 235; // 0 = far, 255 = near
     int kinectNearCutOffPlane = 255;
     int minContourSize = 10;
     kinectTracker.setup(kinectNearCutOffPlane, kinectFarCutOffPlane, minContourSize);
+    kinectTracker.setCrop(320-120, 240-120, 240, 240);
     
     // initialize our shape objects
     kinectShapeObject = new KinectShapeObject();
@@ -67,6 +73,17 @@ void ReliefApplication::update(){
     // update the shape object
     currentShape->update();
     
+    
+    // draw the big heightmap image into a small heightmap image and send it off to the table
+    pinHeightMapImageSmall.begin();
+    
+    ofBackground(0);
+    ofSetColor(255);
+    pinHeightMapImage.draw(0, 0, RELIEF_PHYSICAL_SIZE_X, RELIEF_PHYSICAL_SIZE_Y);
+    
+    pinHeightMapImageSmall.end();
+    
+    
     // send height map image to the tangible display
     mIOManager->update(pinHeightMapImageSmall);
 }
@@ -75,12 +92,7 @@ void ReliefApplication::update(){
 void ReliefApplication::draw(){
     ofBackground(100);
     
-    // render the tangible display
-    pinHeightMapImageSmall.begin();
-    int w = pinHeightMapImageSmall.getWidth();
-    int h = pinHeightMapImageSmall.getHeight();
-    currentShape->renderTangibleShape(w, h);
-    pinHeightMapImageSmall.end();
+    int w,h;
     
     // render the projector overlay image
     projectorOverlayImage.begin();
@@ -88,6 +100,20 @@ void ReliefApplication::draw(){
     h = projectorOverlayImage.getHeight();
     currentShape->renderProjectorOverlay(w, h);
     projectorOverlayImage.end();
+    
+    // render the tangible display
+    ofPushStyle();
+    pinHeightMapImage.begin();
+    ofBackground(100);
+    ofSetColor(ofColor(200));
+    
+    w = pinHeightMapImage.getWidth();
+    h = pinHeightMapImage.getHeight();
+    //    double angle = ofGetElapsedTimeMillis() * 0.001;
+    //    ofCircle(w/2 + 75 * cos(angle), h/2 + 75 * sin(angle), 50, 50);
+    currentShape->renderTangibleShape(w, h);
+    pinHeightMapImage.end();
+    ofPopStyle();
     
     
     /* render the touch screen display */
@@ -130,7 +156,18 @@ void ReliefApplication::draw(){
     
     cameraTracker.drawCameraFeed(0, w+1, 1,   w, h);
     //cameraTracker.drawCameraFeed(1, 2*(w+1), 1,   w, h);
-    pinHeightMapImageSmall.draw(  200,   1,   350, 350);
+    
+    pinHeightMapImage.draw(      200,   1,   350, 350);
+    pinHeightMapImageSmall.draw( 550,   1,   350, 350);
+}
+
+void ReliefApplication::exit(){
+    
+    update();
+    draw();
+    
+    //mIOManager->disconnectFromTable();
+    mIOManager->disconnectFromTableWithoutPinReset();
 }
 
 

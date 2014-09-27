@@ -83,7 +83,7 @@ void WavyShapeObject::init(int numCols, int numRows) {
     }
     
     // setup time keeping
-    fixedDeltaMS = 25;
+    fixedDeltaMS = 17;
     leftOverMS = 0;
     
     seaLevel = 127;
@@ -264,7 +264,7 @@ void WavyShapeObject::update() {
     
     getDepthMapKinect();
 
-    idleWaves();
+//    idleWaves();
     
     currentMS = ofGetElapsedTimeMillis();
     long deltaMS = currentMS - previousMS;
@@ -308,7 +308,7 @@ void WavyShapeObject::update() {
                 if (val != val)
                     val = 0; // avoid NaNs
                 
-                density[x][y] -= val * 8.f;
+                density[x][y] -= val * 7.f;
             }
         }
         
@@ -404,7 +404,8 @@ void WavyShapeObject::getDepthMapKinect(){
     ofBackground(0);
     // kinect depthThresholdImage
     //depthImageInput.draw(0, 0, cols, rows);
-    mKinectTracker->drawDepthThreshedDiff(0, 0, cols, rows);
+//    mKinectTracker->drawDepthThreshedDiff(0, 0, cols, rows);
+    mKinectTracker->drawThresholdImage(0, 0, cols, rows);
     
     // show heartbeat
     //if (useHeartbeat) mHeartbeatShapeObject->getDepthMap(35, 21);

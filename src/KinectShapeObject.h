@@ -37,8 +37,6 @@ public:
     virtual void mouseMoved(int x, int y);
     virtual void mousePressed(int x, int y, int button);
     
-
-    
     void setKinectTracker(KinectTracker * pKinectTracker){mKinectTracker = pKinectTracker;};
     void setTableValuesForShape(ShapeIOManager *pIOManager);
 
@@ -46,9 +44,8 @@ public:
 private:
     KinectTracker * mKinectTracker;
     
-    ofxCvGrayscaleImage mKinectHeightImage, mOutputShapeImage;
+    ofFbo mKinectHeightImage, mOutputShapeImage;
     
-    unsigned char* allPixels;
 };
 
 #endif /* defined(__basicExample__KinectShapeObject__) */

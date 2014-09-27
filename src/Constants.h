@@ -14,7 +14,8 @@
 #define	RELIEF_SIZE_Y	  24
 
 // clips values
-#define LOW_THRESHOLD 0
+// we get weird behavior when LOW_THRESHOLD is set to 0...
+#define LOW_THRESHOLD 60
 #define HIGH_THRESHOLD 245
 
 // surface "pixels"

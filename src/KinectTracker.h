@@ -16,28 +16,36 @@
 
 class KinectTracker {
 private:
+    int cropX, cropY, cropWidth, cropHeight;
+    
 	ofxKinect               kinect;
 	
 	
 	ofxCvGrayscaleImage     depthImg; // grayscale depth image
-    ofxCvGrayscaleImage     grayThreshNear; // the near thresholded image
-	ofxCvGrayscaleImage     grayThreshFar; // the far thresholded image
+//    ofxCvGrayscaleImage     grayThreshNear; // the near thresholded image
+//	ofxCvGrayscaleImage     grayThreshFar; // the far thresholded image
+    
+    ofxCvGrayscaleImage     depthThreshed; // grayscale depth image
+    ofxCvGrayscaleImage     lastDepthThreshed;
+    ofxCvGrayscaleImage     depthThreshedDiff;
+    ofxCvColorImage         colorImg;
+    
+    ofxCvColorImage         colorImgCropped;
+    ofxCvGrayscaleImage     depthImgCropped;
     
 	
 	ofxCvContourFinder      contourFinder;
     
     void updateImagesFromKinect();
     void flagImagesAsChanged();
+    void cropImages();
     void calculateThresholdsAndModifyImages();
     void subtractMask();
     void loadAlphaMaskAndPrepForCvProcessing();
     
 public:
     
-    ofxCvGrayscaleImage     depthThreshed; // grayscale depth image
-    ofxCvGrayscaleImage     lastDepthThreshed;
-    ofxCvGrayscaleImage     depthThreshedDiff;
-    ofxCvColorImage         colorImg;
+
     
     int mNearThreshold; // the far threshold, closest possible value is 255, farthest possible value 0
 	int mFarThreshold; // the far threshold, closest possible value is 255, farthest possible value 0
@@ -80,8 +88,8 @@ public:
     bool    isFrameNew();
     bool    isConnected();
 
+    void setCrop(int x, int y, int width, int height);
     
-    ofFbo fbo;
     unsigned char * returnPixels;
     ofPixels ofPixels;
     ofImage recordingImage, playingImage;

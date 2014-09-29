@@ -103,15 +103,28 @@ void ReliefApplication::draw(){
     
     // render the tangible display
     ofPushStyle();
+    
+    
     pinHeightMapImage.begin();
-    ofBackground(255);
+    ofBackground(0);
     ofSetColor(ofColor(200));
     
     w = pinHeightMapImage.getWidth();
     h = pinHeightMapImage.getHeight();
     
-    currentShape->renderTangibleShape(w, h);
+    ofPushMatrix();
+    
+    ofRotate(90);
+    ofTranslate(w, -h);
+    currentShape->renderTangibleShape(-w, h);
+    
+    //ofTranslate(-w/2, -h/2);
+    
+    ofPopMatrix();
+    
     pinHeightMapImage.end();
+    
+    
     ofPopStyle();
     
     
@@ -132,11 +145,7 @@ void ReliefApplication::draw(){
     
     w = verticalDisplayImage.getWidth();
     h = verticalDisplayImage.getHeight();
-    ofPushMatrix();
-
     currentShape->renderVerticalScreenGraphics(w, h);
-    
-    ofPopMatrix();
     
     verticalDisplayImage.end();
     

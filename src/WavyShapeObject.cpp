@@ -228,6 +228,7 @@ void WavyShapeObject::renderTangibleShape(int w, int h) {
     ofBackground(0);
     ofFill();
     surface.draw(0,0, KINECT_X,KINECT_Y);
+    
     depthOutputFBO.end();
     
     ofPixels pixels;
@@ -237,8 +238,19 @@ void WavyShapeObject::renderTangibleShape(int w, int h) {
     srcColorImage.setFromPixels(pixels);
     
     ofxCvColorImage smallColorImage = srcColorImage;
-    smallColorImage.resize(w,h);
+    smallColorImage.resize(abs(w),abs(h));
     
+    int x = 0;
+    int y = 0;
+    // mirror the image if w or h is negative
+    if (w < 0) {
+        smallColorImage.mirror(false, true);
+        x = w;
+    }
+    if (h < 0) {
+        y = h;
+        smallColorImage.mirror(true, false);
+    }
     
     //ofxCvGrayscaleImage grayDstImage;
     //smallColorImage.convertToGrayscalePlanarImage(grayDstImage, 1);
@@ -252,7 +264,8 @@ void WavyShapeObject::renderTangibleShape(int w, int h) {
 //            allPixels[i -1] = val;
 //        }
 //    }
-    smallColorImage.draw(0,0);
+
+    smallColorImage.draw(x,y);
 }
 
 //--------------------------------------------------------------
@@ -293,7 +306,7 @@ void WavyShapeObject::update() {
     
     leftOverMS += (int)(deltaMS - (timestepCount * fixedDeltaMS));
     
-    timestepCount = ofClamp(timestepCount, 0, 5); // limit to 5 so nothing freezes
+    timestepCount = 3; //ofClamp(timestepCount, 0, 5); // limit to 5 so nothing freezes
     
     for (int t = 0; t < timestepCount; t++) {
         
@@ -355,13 +368,14 @@ void WavyShapeObject::update() {
 void WavyShapeObject::renderTouchScreenGraphics(int w, int h)
 {
     //ofPushMatrix();
-    
-    renderProjectorOverlay(w,h);
+    surface.draw(w, h);
+    //renderProjectorOverlay(w,h);
     //mKinectTracker->drawDepthThreshedImage(0,0, ofGetWidth(), ofGetHeight());
     
     //ofTranslate(mImageWarper->getSrcPositions()[0].x, mImageWarper->getSrcPositions()[0].y);
         
     //ofPopMatrix();
+    //renderTangibleShape(w,h);
 }
 
 //--------------------------------------------------------------

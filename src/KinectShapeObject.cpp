@@ -9,8 +9,8 @@
 #include "KinectShapeObject.h"
 
 KinectShapeObject::KinectShapeObject() {
-    mKinectHeightImage.allocate(300,300); //KINECT_X, KINECT_Y);
-    mOutputShapeImage.allocate(300,300); //KINECT_X, KINECT_Y);
+    mKinectHeightImage.allocate(KINECT_X, KINECT_Y);
+    mOutputShapeImage.allocate(KINECT_X, KINECT_Y);
 };
 
 void KinectShapeObject::update(){
@@ -30,8 +30,11 @@ void KinectShapeObject::renderVerticalScreenGraphics(int w, int h){
 };
 
 void KinectShapeObject::renderTouchscreenGraphics(int w, int h){
-    mOutputShapeImage.draw(0,0, w, h);
-    //mOutputShapeImage.draw(0,0, w, h);
+//    ofPushMatrix();
+//    ofRotate(90, 0, 1, 0);
+    mKinectHeightImage.draw(0,0, w, h);
+//    ofPopMatrix();
+//  mOutputShapeImage.draw(0,0, w, h);
 };
 
 void KinectShapeObject::renderTangibleShape(int w, int h){

@@ -46,6 +46,8 @@ private:
     
     ofFbo mKinectHeightImage, mOutputShapeImage;
     
+    ofImage * kinectHeightImage;
+    ofImage * outputShapeImage;
 };
 
 #endif /* defined(__basicExample__KinectShapeObject__) */

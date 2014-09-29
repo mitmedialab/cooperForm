@@ -28,7 +28,7 @@ void ReliefApplication::setup(){
     mIOManager->set_max_speed(maxSpeed);
     
     // allocate all the necessary frame buffer objects
-    projectorOverlayImage.allocate(RELIEF_PROJECTOR_SIZE_X, RELIEF_PROJECTOR_SIZE_Y, GL_RGB);
+    projectorOverlayImage.allocate(1920, 1080, GL_RGB);
     
     pinHeightMapImage.allocate(RELIEF_PROJECTOR_SIZE_X, RELIEF_PROJECTOR_SIZE_Y, GL_RGB);
     
@@ -90,7 +90,7 @@ void ReliefApplication::update(){
 
 //--------------------------------------------------------------
 void ReliefApplication::draw(){
-    ofBackground(100);
+    ofBackground(255);
     
     int w,h;
     
@@ -104,13 +104,12 @@ void ReliefApplication::draw(){
     // render the tangible display
     ofPushStyle();
     pinHeightMapImage.begin();
-    ofBackground(100);
+    ofBackground(255);
     ofSetColor(ofColor(200));
     
     w = pinHeightMapImage.getWidth();
     h = pinHeightMapImage.getHeight();
-    //    double angle = ofGetElapsedTimeMillis() * 0.001;
-    //    ofCircle(w/2 + 75 * cos(angle), h/2 + 75 * sin(angle), 50, 50);
+    
     currentShape->renderTangibleShape(w, h);
     pinHeightMapImage.end();
     ofPopStyle();
@@ -122,10 +121,7 @@ void ReliefApplication::draw(){
     w = touchScreenDisplayImage.getWidth();
     h = touchScreenDisplayImage.getHeight();
     
-//    ofPushMatrix();
-//    ofTranslate(200, 0);
     currentShape->renderTangibleShape(w, h);
-//    ofPopMatrix();
     
     touchScreenDisplayImage.end();
     
@@ -133,9 +129,15 @@ void ReliefApplication::draw(){
     
     // render the vertical back display
     verticalDisplayImage.begin();
+    
     w = verticalDisplayImage.getWidth();
     h = verticalDisplayImage.getHeight();
+    ofPushMatrix();
+
     currentShape->renderVerticalScreenGraphics(w, h);
+    
+    ofPopMatrix();
+    
     verticalDisplayImage.end();
     
     
@@ -143,7 +145,7 @@ void ReliefApplication::draw(){
     //pinHeightMapImageSmall.draw(  1,   1,   350, 350);
     //projectorOverlayImage.draw(   1,   352, 350, 350);
     
-    touchScreenDisplayImage.draw(201, 0, ofGetWidth()/2-201, ofGetHeight());
+    touchScreenDisplayImage.draw(420, 0, 1920 - 2*420, 1080);
    
     // draw UI stuff
     uiHandler.draw();
@@ -151,14 +153,13 @@ void ReliefApplication::draw(){
     //verticalDisplayImage.draw(    352, 352, 350, 350);
     
     // draw camera feeds
-    w = ofGetWidth() * 0.5;
-    h = ofGetHeight();
+    w = 1920;
+    h = 1080;
     
-    cameraTracker.drawCameraFeed(0, w+1, 1,   w, h);
-    //cameraTracker.drawCameraFeed(1, 2*(w+1), 1,   w, h);
+    cameraTracker.drawCameraFeed(0, w, 0, w, h);
     
-    pinHeightMapImage.draw(      200,   1,   350, 350);
-    pinHeightMapImageSmall.draw( 550,   1,   350, 350);
+//    pinHeightMapImage.draw(      200,   1,   350, 350);
+//    pinHeightMapImageSmall.draw( 550,   1,   350, 350);
 }
 
 void ReliefApplication::exit(){
@@ -174,32 +175,118 @@ void ReliefApplication::exit(){
 void ReliefApplication::setupUI() {
     uiHandler = UIHandler();
     
-    const int modeButtonWidth  = 200;
-    const int modeButtonHeight = 150;
+    
+    // Right sidebar stuff:
+    
+    const int modeButtonWidth  = 372;
+    const int modeButtonHeight = 222;
+    
+    const int sideBarRightSize = 420;
+    
+    const int modeButtonX = 1920 - sideBarRightSize + sideBarRightSize/2 - modeButtonWidth/2;
+    const int modeButtonVertSpaceBetween = 50;
+    const int modeButtonsTotalHeight = 4 * modeButtonHeight + 3 * modeButtonVertSpaceBetween;
+    const int modeButtonStartY = 1080 / 2 - modeButtonsTotalHeight / 2;
+    
+    ofImage* divider = new ofImage();
+    divider->loadImage("divider.png");
+    
+    const int dividerWidth = divider->getWidth();
+    const int dividerHeight = divider->getHeight();
+    const int dividerX = 1920 - sideBarRightSize + sideBarRightSize/2 - dividerWidth/2;
+    
     
     // initialize the new buttons
     // UIButton name = UIButton("name", x,y, w,h)
     telepresenceModeButton
-    = new UIButton("telepresence", 0,0,                      modeButtonWidth,modeButtonHeight);
-    //telepresenceModeButton->setImage("tele.png");
+    = new UIButton("telepresence",
+                   modeButtonX, modeButtonStartY,
+                   modeButtonWidth,modeButtonHeight);
+    telepresenceModeButton->setImageIdle("teleo.png");
+    telepresenceModeButton->setImageActive("teleo-active.png");
+    telepresenceModeButton->setImageSelected("teleo-selected.png");
+    
+    UIImage* divider1 = new UIImage(divider,
+                                    dividerX, modeButtonStartY + modeButtonHeight + 0.5*modeButtonVertSpaceBetween - dividerHeight/2);
     
     wavyModeButton
-    = new UIButton("wavy",         0,  (modeButtonHeight+1), modeButtonWidth,modeButtonHeight);
-    //wavyModeButton->setImage("waves.png");
+    = new UIButton("wavy",
+                   modeButtonX, modeButtonStartY + modeButtonVertSpaceBetween + modeButtonHeight,
+                   modeButtonWidth,modeButtonHeight);
+    wavyModeButton->setImageIdle("wave.png");
+    wavyModeButton->setImageActive("wave-active.png");
+    wavyModeButton->setImageSelected("wave-selected.png");
+    UIImage* divider2 = new UIImage(divider,
+                                    dividerX, modeButtonStartY + 2*modeButtonHeight + 1.5*modeButtonVertSpaceBetween - dividerHeight/2);
+    
     
     threeDModeButton
-    = new UIButton("3D",           0,2*(modeButtonHeight+1), modeButtonWidth,modeButtonHeight);
-    //threeDModeButton->setImage("3d.png");
+    = new UIButton("3D",
+                   modeButtonX, modeButtonStartY + 2*modeButtonVertSpaceBetween + 2*modeButtonHeight,
+                   modeButtonWidth,modeButtonHeight);
+    threeDModeButton->setImageIdle("3dm.png");
+    threeDModeButton->setImageActive("3dm-active.png");
+    threeDModeButton->setImageSelected("3dm-selected.png");
+    UIImage* divider3 = new UIImage(divider,
+                                    dividerX, modeButtonStartY + 3*modeButtonHeight + 2.5*modeButtonVertSpaceBetween - dividerHeight/2);
+    
     
     mathModeButton
-    = new UIButton("math",         0,3*(modeButtonHeight+1), modeButtonWidth,modeButtonHeight);
-    //mathModeButton->setImage("math.png");
+    = new UIButton("math",
+                   modeButtonX, modeButtonStartY + 3*modeButtonVertSpaceBetween + 3*modeButtonHeight,
+                   modeButtonWidth,modeButtonHeight);
+    mathModeButton->setImageIdle("math.png");
+    mathModeButton->setImageActive("math-active.png");
+    mathModeButton->setImageSelected("math-selected.png");
     
     // add buttons to the handler
     uiHandler.addButton(telepresenceModeButton);
+    uiHandler.addImage(divider1);
     uiHandler.addButton(wavyModeButton);
+    uiHandler.addImage(divider2);
     uiHandler.addButton(threeDModeButton);
+    uiHandler.addImage(divider3);
     uiHandler.addButton(mathModeButton);
+    
+    
+    // left sidebar stuff:
+    const int sideBarLeftSize = 420;
+    
+    ofImage* inFORMLogoImg = new ofImage();
+    inFORMLogoImg->loadImage("inform-logo.png");
+    
+    const int informLogoWidth = inFORMLogoImg->getWidth();
+    const int informLogoX = sideBarLeftSize/2 - informLogoWidth/2;
+    const int informLogoY = informLogoX;
+    
+    UIImage *inFORMLogo = new UIImage(inFORMLogoImg, informLogoX, informLogoY);
+    
+    ofImage* tmgLogImg = new ofImage();
+    tmgLogImg->loadImage("tmg-logo.png");
+    
+    const int tmgLogoWidth = tmgLogImg->getWidth();
+    const int tmgLogoHeight = tmgLogImg->getHeight();
+    const int tmgLogoX = sideBarLeftSize/2 - tmgLogoWidth/2;
+    const int tmgLogoY = 1080 - tmgLogoHeight - tmgLogoX;
+    
+    UIImage *tmgLogo = new UIImage(tmgLogImg, tmgLogoX, tmgLogoY);
+    
+    uiHandler.addImage(inFORMLogo);
+    uiHandler.addImage(tmgLogo);
+    
+    
+    // drop shadow for middle region
+    ofImage* centerDropShadowImg = new ofImage();
+    centerDropShadowImg->loadImage("pin-shadow.png");
+    
+    const int dropShadowX = sideBarLeftSize + 1;
+    const int dropShadowY = 1;
+    
+    UIImage *centerDropShadow = new UIImage(centerDropShadowImg, dropShadowX, dropShadowY);
+    
+    uiHandler.addImage(centerDropShadow);
+    
+    
     
     // add these buttons to a group
     // for the "select" and "unselect" functionality
@@ -215,6 +302,9 @@ void ReliefApplication::setupUI() {
 // change the relief application mode
 
 void ReliefApplication::setMode(string newMode) {
+    if (newMode == currentMode)
+        return;
+    
     if (newMode == "telepresence" || newMode == "wavy" || newMode == "3D" || newMode == "math")
         currentMode = newMode;
     else
@@ -222,8 +312,10 @@ void ReliefApplication::setMode(string newMode) {
     
     if (currentMode == "telepresence")
         currentShape = kinectShapeObject;
-    else if (currentMode == "wavy")
+    else if (currentMode == "wavy") {
+        wavyShapeObject->reset();
         currentShape = wavyShapeObject;
+    }
 }
 
 

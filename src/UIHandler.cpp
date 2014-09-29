@@ -11,11 +11,16 @@
 UIHandler::UIHandler() {
     buttons = vector<UIButton*>();
     buttonGroups = vector< vector<UIButton*> >();
+    images = vector<UIImage*>();
 }
 
 void UIHandler::draw() {
+    
     for (UIButton *button : buttons)
         button->draw();
+    for (UIImage *image : images)
+        image->draw();
+    
     ofSetColor(ofColor(255));
 }
 
@@ -25,6 +30,10 @@ void UIHandler::addButton(UIButton *button) {
 
 void UIHandler::addButtonGroup(vector<UIButton*> group) {
     buttonGroups.push_back(group);
+}
+
+void UIHandler::addImage(UIImage* image) {
+    images.push_back(image);
 }
 
 void UIHandler::mousePressed(int x, int y) {

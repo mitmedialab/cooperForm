@@ -12,6 +12,7 @@
 #include <iostream>
 #include "UIButton.h"
 #include "UISlider.h"
+#include "UIImage.h"
 #include "ofMain.h"
 
 class UIHandler {
@@ -23,6 +24,8 @@ public:
     void addButton(UIButton *button);
     void addButtonGroup(vector<UIButton*> group);
     
+    void addImage(UIImage *image);
+    
     void mousePressed(int x, int y);
     void mouseReleased(int x, int y);
     void mouseDragged(int x, int y);
@@ -31,6 +34,7 @@ public:
 private:
     vector<UIButton*> buttons;
     vector<UISlider*> sliders;
+    vector<UIImage*> images;
     
     // groups of button
     // for selection and unselection

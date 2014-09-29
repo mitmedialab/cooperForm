@@ -14,6 +14,7 @@
 		8A09A65519D606BF00118C9E /* UISlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A09A65319D606BF00118C9E /* UISlider.cpp */; };
 		8A09A6E819D60FCD00118C9E /* ShapeIOManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A09A6E419D60FCD00118C9E /* ShapeIOManager.cpp */; };
 		8A09A6E919D60FCD00118C9E /* ShapeSerial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A09A6E619D60FCD00118C9E /* ShapeSerial.cpp */; };
+		8A09A70719DA07A600118C9E /* UIImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A09A70519DA07A600118C9E /* UIImage.cpp */; };
 		8AEAD86B19C8AAB400D87C59 /* KinectShapeObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AEAD86919C8AAB400D87C59 /* KinectShapeObject.cpp */; };
 		8AEAD87219D0D3C600D87C59 /* CameraTracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AEAD87019D0D3C600D87C59 /* CameraTracker.cpp */; };
 		8AFAA96619C8A67A00EC475F /* KinectTracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFAA96519C8A67A00EC475F /* KinectTracker.cpp */; };
@@ -97,6 +98,8 @@
 		8A09A6E519D60FCD00118C9E /* ShapeIOManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShapeIOManager.h; sourceTree = "<group>"; };
 		8A09A6E619D60FCD00118C9E /* ShapeSerial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShapeSerial.cpp; sourceTree = "<group>"; };
 		8A09A6E719D60FCD00118C9E /* ShapeSerial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShapeSerial.h; sourceTree = "<group>"; };
+		8A09A70519DA07A600118C9E /* UIImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIImage.cpp; sourceTree = "<group>"; };
+		8A09A70619DA07A600118C9E /* UIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImage.h; sourceTree = "<group>"; };
 		8AEAD86919C8AAB400D87C59 /* KinectShapeObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KinectShapeObject.cpp; sourceTree = "<group>"; };
 		8AEAD86A19C8AAB400D87C59 /* KinectShapeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KinectShapeObject.h; sourceTree = "<group>"; };
 		8AEAD87019D0D3C600D87C59 /* CameraTracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraTracker.cpp; sourceTree = "<group>"; };
@@ -286,6 +289,8 @@
 				8A09A64619D221DD00118C9E /* UIButton.h */,
 				8A09A65319D606BF00118C9E /* UISlider.cpp */,
 				8A09A65419D606BF00118C9E /* UISlider.h */,
+				8A09A70519DA07A600118C9E /* UIImage.cpp */,
+				8A09A70619DA07A600118C9E /* UIImage.h */,
 			);
 			name = UserInterface;
 			sourceTree = "<group>";
@@ -889,6 +894,7 @@
 				8AEAD86B19C8AAB400D87C59 /* KinectShapeObject.cpp in Sources */,
 				8A09A65519D606BF00118C9E /* UISlider.cpp in Sources */,
 				8AFAA9E919C8A6B400EC475F /* ofxCvImage.cpp in Sources */,
+				8A09A70719DA07A600118C9E /* UIImage.cpp in Sources */,
 				8AFAA9E419C8A6B400EC475F /* ofxCvColorImage.cpp in Sources */,
 				8AFAAA6219C8A6CB00EC475F /* ofxKinect.cpp in Sources */,
 				8A09A64719D221DD00118C9E /* UIButton.cpp in Sources */,

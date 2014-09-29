@@ -32,25 +32,24 @@ string UIButton::getName() {
     return name;
 }
 
-void UIButton::setImage(string imageName) {
-    buttonImage.loadImage(imageName);
-    
-    int imageWidth  = buttonImage.getWidth();
-    int imageHeight = buttonImage.getHeight();
-    
-    buttonImageIdle.cropFrom(buttonImage, 0,0, imageWidth/2, imageHeight);
-    
-    buttonImageActive.cropFrom(buttonImage, imageWidth/2,0, imageWidth/2, imageHeight);
+void UIButton::setImageIdle(string imageName) {
+    buttonImageIdle.loadImage(imageName);
+}
+void UIButton::setImageActive(string imageName) {
+    buttonImageActive.loadImage(imageName);
+}
+void UIButton::setImageSelected(string imageName) {
+    buttonImageSelected.loadImage(imageName);
 }
 
 void UIButton::draw() {
     if (buttonImageActive.isAllocated()) {
-        if (isPressed()) {
+        if (isPressed())
             buttonImageActive.draw(x,y, width,height);
-        }
-        else {
+        else if (isSelected())
+            buttonImageSelected.draw(x,y, width,height);
+        else
             buttonImageIdle.draw(x,y, width,height);
-        }
     }
     else {
         if (isPressed())

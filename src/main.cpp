@@ -2,12 +2,15 @@
 #include "ReliefApplication.h"
 #include "UITriggers.h"
 
+#include "ofAppGLFWWindow.h"
+
 //========================================================================
 int main( ){
 
-    ofAppGlutWindow window;
-    ofSetupOpenGL(&window, 1024, 768, OF_FULLSCREEN);
-    
+    ofAppGLFWWindow window;
+    window.setMultiDisplayFullscreen(true);
+    ofSetupOpenGL(&window, 2*1920, 1080, OF_FULLSCREEN);
+
     
 	
     ReliefApplication *relief = new ReliefApplication();

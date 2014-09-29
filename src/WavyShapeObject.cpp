@@ -77,7 +77,7 @@ void WavyShapeObject::init(int numCols, int numRows) {
     // add initial "jump" to show the waves work
     for (int x = 0; x < cols; x++) {
         for (int y = 0; y < rows; y++) {
-            float val = ofRandom(-800,800);
+            float val = ofRandom(-50,50);
             velocity[x][y] = val;
         }
     }
@@ -99,7 +99,26 @@ void WavyShapeObject::init(int numCols, int numRows) {
     minY = 0;
     maxX = cols;
     maxY = rows;
+    
+    currentMS = ofGetElapsedTimeMillis();
+    previousMS = currentMS;
+    
+}
 
+// resets all the depth and velocity values
+// and all of the time keeping values
+void WavyShapeObject::reset() {
+    for (int x = 0; x < cols; x++) {
+        for (int y = 0; y < rows; y++) {
+            float val = ofRandom(-50,50);
+            velocity[x][y] = val;
+            density[x][y] = 0;
+        }
+    }
+    
+    currentMS = ofGetElapsedTimeMillis();
+    previousMS = currentMS;
+    
 }
 
 //--------------------------------------------------------------
@@ -308,7 +327,7 @@ void WavyShapeObject::update() {
                 if (val != val)
                     val = 0; // avoid NaNs
                 
-                density[x][y] -= val * 7.f;
+                density[x][y] -= val * 2.f;
             }
         }
         
@@ -349,7 +368,8 @@ void WavyShapeObject::renderTouchScreenGraphics(int w, int h)
 
 void WavyShapeObject::solveFluid() {
     for (int x = minX; x < maxX; x++) {
-        for (int y = minY; y < maxY; y++) {            velocity[x][y] = friction * velocity[x][y] + (getAdjacentDensitySum(x,y) - (density[x][y] * 4)) * 0.1f;
+        for (int y = minY; y < maxY; y++) {
+            velocity[x][y] = friction * velocity[x][y] + (getAdjacentDensitySum(x,y) - (density[x][y] * 4)) * 0.1f;
             
             // no matter what I use for dt, speed would be bwar adjusted so this quantity = 0.1:         // * dt * 0.5f * speed;
             density[x][y] = density[x][y] + velocity[x][y];

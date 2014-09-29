@@ -98,6 +98,9 @@ void KinectTracker::update() {
 void KinectTracker::updateImagesFromKinect() {
     colorImg.setFromPixels(kinect.getPixels(), kinect.width, kinect.height);
     depthImg.setFromPixels(kinect.getDepthPixels(), kinect.width, kinect.height);
+    
+    colorImg.mirror(true,true);
+    depthImg.mirror(true,true);
 }
 
 // used by the player class to set the current frame from now playing movie

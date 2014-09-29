@@ -21,7 +21,9 @@ public:
     
     string getName();
     
-    void setImage(string imageName);
+    void setImageIdle(string imageName);
+    void setImageActive(string imageName);
+    void setImageSelected(string imageName);
     
     void draw();
     
@@ -52,7 +54,6 @@ private:
     bool pressed = false;
     bool selected = false;
     
-    ofImage buttonImage;
     ofImage buttonImageActive;
     ofImage buttonImageIdle;
     ofImage buttonImageSelected;

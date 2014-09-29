@@ -17,7 +17,6 @@
 class WavyShapeObject : public ShapeObject {
 
 public:
-    
     void setKinectTracker(KinectTracker * pKinectTracker){ mKinectTracker = pKinectTracker; };
     
     int solveCount = 1;
@@ -29,6 +28,38 @@ public:
     
     int getCols();
     int getRows();
+    
+    ofImage depthImageInput;
+    ofPixels depthMap;
+    ofFbo depthData;
+    ofFbo depthOutputFBO;
+    
+    WavyShapeObject();
+    WavyShapeObject(float width, float height, float cellSize);
+    //WavyShapeObject(float width, float height, float cellSize);
+    WavyShapeObject(int numCols, int numRows);
+    
+    
+    void update();
+    void renderProjectorOverlay(int w, int h);
+    void renderTangibleShape(int w, int h);
+    void renderTouchScreenGraphics(int w, int h);
+    
+    void updateDepthMapFromPixels(unsigned char * pixels, int w, int h, ofImageType imageType);
+    
+    void solveFluid();
+    float getAdjacentDensitySum(int x, int y);
+    void getDepthMapKinect();
+    
+
+
+    string get_shape_name() {return shape_name; };
+    void setTableValuesForShape(ShapeIOManager *pIOManager);
+    
+    ofFbo editor;
+    void beginEdit();
+    void endEdit();
+    unsigned char* getPixels();
     
     float seaLevel; // Resting height for the liquid. 0 - 255
     float getSeaLevel();
@@ -44,53 +75,15 @@ public:
     
     float idleWaveAmplitude = 75;
     float idleWaveFrequency = 10;
-
+    
     long waveScalarSetTime;
     void setWaveScalar(float scalar);
     float getWaveScalar();
     
     float idleWaveScalar;
     void setIdleWaveScalar(float scalar);
-    
-    ofImage depthImageInput;
-    ofPixels depthMap;
-    ofFbo depthData;
-    ofFbo depthOutputFBO;
-    
-    WavyShapeObject();
-    WavyShapeObject(float width, float height, float cellSize);
-    //WavyShapeObject(float width, float height, float cellSize);
-    WavyShapeObject(int numCols, int numRows);
-    
-    void interpolateSurface();
-    //void drawHeightMap(int x, int y, int w, int h);
-    //void drawGraphics(int x, int y, int w, int h);
-    
-    void update();
-    void renderProjectorOverlay(int w, int h);
-    void renderTangibleShape(int w, int h);
-    void renderTouchScreenGraphics(int w, int h);
-    
-    void updateDepthMapFromPixels(unsigned char * pixels, int w, int h, ofImageType imageType);
-    
-    void solveFluid();
-    float getAdjacentDensitySum(int x, int y);
-    void getDepthMapKinect();
-    
-    long previousMS;
-    long currentMS; // in ms
-    int fixedDeltaMS;
-    int leftOverMS;
-    
 
-    string get_shape_name() {return shape_name; };
-    void setTableValuesForShape(ShapeIOManager *pIOManager);
-    
-    ofFbo editor;
-    void beginEdit();
-    void endEdit();
-    unsigned char* getPixels();
-    
+    void reset();
 private:
     
     void init(int numCols, int numRows);
@@ -99,12 +92,19 @@ private:
     float **velocity;
     float **density;
     
+    long previousMS;
+    long currentMS; // in ms
+    int fixedDeltaMS;
+    int leftOverMS;
+    
+    
     // array of velocity derivatives
     // allows for nth order approximation of the velocity field
     float ***taylorSeries;
     int interpolate;
     long lastInterp;
-    
+    void interpolateSurface();
+
     KinectTracker * mKinectTracker;
 
     void idleWaves();

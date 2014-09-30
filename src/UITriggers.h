@@ -19,6 +19,10 @@ public:
     // the button trigger event
     static void buttonTrigger(UIButton *button);
     
+    // slider trigger event
+    // triggered when the slider handle changes position
+    static void sliderTrigger(UISlider *slider);
+    
     // be sure to register relief application
     // so we can do stuff with it after events are triggered
     static void registerReliefApplication(ReliefApplication* relief);

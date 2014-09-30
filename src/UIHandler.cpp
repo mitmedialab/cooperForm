@@ -18,6 +18,8 @@ void UIHandler::draw() {
     
     for (UIButton *button : buttons)
         button->draw();
+    for (UISlider * slider : sliders)
+        slider->draw();
     for (UIImage *image : images)
         image->draw();
     
@@ -32,6 +34,10 @@ void UIHandler::addButtonGroup(vector<UIButton*> group) {
     buttonGroups.push_back(group);
 }
 
+void UIHandler::addSlider(UISlider *slider) {
+    sliders.push_back(slider);
+}
+
 void UIHandler::addImage(UIImage* image) {
     images.push_back(image);
 }
@@ -41,6 +47,12 @@ void UIHandler::mousePressed(int x, int y) {
     for (UIButton *button : buttons) {
         if (button->overButton(x, y))
             button->mousePressed();
+    }
+    for (UISlider *slider : sliders) {
+        if (slider->overHandle(x, y)) {
+            cout << "over slider!";
+            slider->mousePressed(x,y);
+        }
     }
 }
 
@@ -56,6 +68,10 @@ void UIHandler::mouseReleased(int x, int y) {
                 button->mouseLeft();
         }
     }
+    for (UISlider *slider : sliders) {
+        if (slider->isGrabbed())
+            slider->mouseReleased();
+    }
 }
 
 void UIHandler::mouseDragged(int x, int y) {
@@ -64,6 +80,11 @@ void UIHandler::mouseDragged(int x, int y) {
             // check to see if the mouse pressed a button but left
             if (!button->overButton(x,y))
                 button->mouseLeft();
+        }
+    }
+    for (UISlider *slider : sliders) {
+        if (slider->isGrabbed()) {
+            slider->mouseDragged(x,y);
         }
     }
 }

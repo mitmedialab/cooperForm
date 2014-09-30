@@ -43,23 +43,26 @@ void UIButton::setImageSelected(string imageName) {
 }
 
 void UIButton::draw() {
+    
     if (buttonImageActive.isAllocated()) {
-        if (isPressed())
-            buttonImageActive.draw(x,y, width,height);
-        else if (isSelected())
+        if (isSelected())
             buttonImageSelected.draw(x,y, width,height);
+        else if (isPressed())
+            buttonImageActive.draw(x,y, width,height);
         else
             buttonImageIdle.draw(x,y, width,height);
     }
     else {
-        if (isPressed())
-            ofSetColor(ofColor(255,0,0));
-        else if (isSelected())
+        ofPushStyle();
+        if (isSelected())
             ofSetColor(ofColor(0,255,0));
+        else if (isPressed())
+        ofSetColor(ofColor(255,0,0));
         else
             ofSetColor(ofColor(0,0,255));
         
         ofRect(x,y, width, height);
+        ofPopStyle();
     }
 }
 

@@ -32,6 +32,10 @@ void UITriggers::buttonTrigger(UIButton *button) {
     }
 }
 
+void UITriggers::sliderTrigger(UISlider *slider) {
+
+}
+
 // initialize relevant static variables
 ReliefApplication* UITriggers::reliefApplication;
 UIHandler* UITriggers::uiHandler;

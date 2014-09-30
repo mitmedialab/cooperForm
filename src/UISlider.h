@@ -25,6 +25,8 @@ public:
     UISlider();
     UISlider(string name, bool horizontal, int trackX, int trackY, int trackLength, int handleWidth, int handleHeight);
     
+    void draw();
+    
     int getHandleX();
     int getHandleY();
 
@@ -32,9 +34,11 @@ public:
     // an x,y coordinate is inside the button
     bool overHandle(int xPos, int yPos);
     
-    void mousePressed();
+    void mousePressed(int x, int y);
+    void mouseDragged(int x, int y);
     void mouseReleased();
 
+    bool isGrabbed();
 private:
     string name;
     
@@ -51,7 +55,8 @@ private:
     // false for vertical
     bool horizontal;
     
-    bool pressed = false;
+    bool grabbed = false;
+    int mouseOffsetX, mouseOffsetY;
 };
 
 #endif /* defined(__cooperFORM__UISlider__) */

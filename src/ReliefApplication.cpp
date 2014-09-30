@@ -259,6 +259,7 @@ void ReliefApplication::setupUI() {
     
     
     // left sidebar stuff:
+    // inFORM logo
     const int sideBarLeftSize = 420;
     
     ofImage* inFORMLogoImg = new ofImage();
@@ -270,6 +271,7 @@ void ReliefApplication::setupUI() {
     
     UIImage *inFORMLogo = new UIImage(inFORMLogoImg, informLogoX, informLogoY);
     
+    // tmg logo
     ofImage* tmgLogImg = new ofImage();
     tmgLogImg->loadImage("tmg-logo.png");
     
@@ -280,9 +282,17 @@ void ReliefApplication::setupUI() {
     
     UIImage *tmgLogo = new UIImage(tmgLogImg, tmgLogoX, tmgLogoY);
     
+    // test slider
+    const int sliderWidth = 300;
+    const int sliderX = sideBarLeftSize/2 - sliderWidth/2;
+    const int sliderY = 1080/2;
+    // name, bool horizontal, int trackX, int trackY, int trackLength, int handleWidth, int handleHeight
+    UISlider *slider = new UISlider("slider", true, sliderX, sliderY, sliderWidth, 50, 50);
+    
+    
     uiHandler.addImage(inFORMLogo);
     uiHandler.addImage(tmgLogo);
-    
+    uiHandler.addSlider(slider);
     
     // drop shadow for middle region
     ofImage* centerDropShadowImg = new ofImage();

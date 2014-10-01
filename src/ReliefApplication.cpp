@@ -54,7 +54,7 @@ void ReliefApplication::setup(){
     // initialize our shape objects
     kinectShapeObject = new KinectShapeObject();
     kinectShapeObject->setKinectTracker(&kinectTracker);
-    wavyShapeObject   = new WavyShapeObject(24*2,24*2);
+    wavyShapeObject   = new WavyShapeObject(24,24);
     wavyShapeObject->setKinectTracker(&kinectTracker);
     
     

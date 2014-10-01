@@ -83,7 +83,7 @@ void WavyShapeObject::init(int numCols, int numRows) {
     }
     
     // setup time keeping
-    fixedDeltaMS = 17;
+    fixedDeltaMS = 18;
     leftOverMS = 0;
     
     seaLevel = 127;
@@ -223,49 +223,51 @@ void WavyShapeObject::renderTangibleShape(int w, int h) {
     //cout << "wave rendering " << waveScalar << ", " << waveAmplitude;
     //if (interpolate > 0)
     interpolateSurface();
+    surface.draw(0,0, w,h);
     
-    depthOutputFBO.begin();
-    ofBackground(0);
-    ofFill();
-    surface.draw(0,0, KINECT_X,KINECT_Y);
-    
-    depthOutputFBO.end();
-    
-    ofPixels pixels;
-    depthOutputFBO.readToPixels(pixels);
-    ofxCvColorImage srcColorImage;
-    srcColorImage.allocate(KINECT_X, KINECT_Y);
-    srcColorImage.setFromPixels(pixels);
-    
-    ofxCvColorImage smallColorImage = srcColorImage;
-    smallColorImage.resize(abs(w),abs(h));
-    
-    int x = 0;
-    int y = 0;
-    // mirror the image if w or h is negative
-    if (w < 0) {
-        smallColorImage.mirror(false, true);
-        x = w;
-    }
-    if (h < 0) {
-        y = h;
-        smallColorImage.mirror(true, false);
-    }
-    
-    //ofxCvGrayscaleImage grayDstImage;
-    //smallColorImage.convertToGrayscalePlanarImage(grayDstImage, 1);
-    //allPixels = grayDstImage.getPixels();
-    
-//    unsigned char* temp = new unsigned char[102*24*3];
-//    temp = smallColorImage.getPixels();
-//    if (temp != 0) {
-//       for (int i = 1; i <= smallColorImage.getWidth() * smallColorImage.getHeight(); i++) {
-//            char val = (temp[i * 3 - 1] + temp[i * 3 - 2] + temp[i * 3 - 3]) / 3;
-//            allPixels[i -1] = val;
-//        }
+    // not sure what the point of all this code below was...
+//    depthOutputFBO.begin();
+//    ofBackground(0);
+//    ofFill();
+//    surface.draw(0,0, KINECT_X,KINECT_Y);
+//    
+//    depthOutputFBO.end();
+//
+//    
+//    ofPixels pixels;
+//    depthOutputFBO.readToPixels(pixels);
+//    ofxCvColorImage srcColorImage;
+//    srcColorImage.allocate(KINECT_X, KINECT_Y);
+//    srcColorImage.setFromPixels(pixels);
+//
+//    ofxCvColorImage smallColorImage = srcColorImage;
+//    smallColorImage.resize(abs(w),abs(h));
+//    
+//    int x = 0;
+//    int y = 0;
+//    // mirror the image if w or h is negative
+//    if (w < 0) {
+//        smallColorImage.mirror(false, true);
+//        x = w;
 //    }
-
-    smallColorImage.draw(x,y);
+//    if (h < 0) {
+//        y = h;
+//        smallColorImage.mirror(true, false);
+//    }
+//    //ofxCvGrayscaleImage grayDstImage;
+//    //smallColorImage.convertToGrayscalePlanarImage(grayDstImage, 1);
+//    //allPixels = grayDstImage.getPixels();
+//    
+////    unsigned char* temp = new unsigned char[102*24*3];
+////    temp = smallColorImage.getPixels();
+////    if (temp != 0) {
+////       for (int i = 1; i <= smallColorImage.getWidth() * smallColorImage.getHeight(); i++) {
+////            char val = (temp[i * 3 - 1] + temp[i * 3 - 2] + temp[i * 3 - 3]) / 3;
+////            allPixels[i -1] = val;
+////        }
+////    }
+//
+//    smallColorImage.draw(x,y);
 }
 
 //--------------------------------------------------------------
@@ -306,7 +308,7 @@ void WavyShapeObject::update() {
     
     leftOverMS += (int)(deltaMS - (timestepCount * fixedDeltaMS));
     
-    timestepCount = 3; //ofClamp(timestepCount, 0, 5); // limit to 5 so nothing freezes
+    timestepCount = 1; //ofClamp(timestepCount, 0, 5); // limit to 5 so nothing freezes
     
     for (int t = 0; t < timestepCount; t++) {
         
@@ -381,6 +383,8 @@ void WavyShapeObject::renderTouchScreenGraphics(int w, int h)
 //--------------------------------------------------------------
 
 void WavyShapeObject::solveFluid() {
+    double densityAvg = 0;
+    
     for (int x = minX; x < maxX; x++) {
         for (int y = minY; y < maxY; y++) {
             velocity[x][y] = friction * velocity[x][y] + (getAdjacentDensitySum(x,y) - (density[x][y] * 4)) * 0.1f;
@@ -395,9 +399,20 @@ void WavyShapeObject::solveFluid() {
         for (int y = maxY-1; y >= minY; y--) {
             velocity[x][y] = friction * velocity[x][y] + (getAdjacentDensitySum(x,y) - (density[x][y] * 4)) * 0.1f; // * dt * 0.5f * speed;
             density[x][y] = density[x][y] + velocity[x][y];
+            
+            densityAvg += density[x][y];
         }
     }
     
+    densityAvg /= (maxX-minX) * (maxY-minY);
+    
+    // we "center" the density of every cell
+    // so that no out-of-range values occur after long intervals of execution
+    for (int x = minX; x < maxX; x++) {
+        for (int y = minY; y < maxY; y++) {
+            density[x][y] -= densityAvg;
+        }
+    }
 }
 
 //--------------------------------------------------------------

@@ -7,7 +7,6 @@
 //
 
 #include "UISlider.h"
-#include "ofMain.h"
 #include "UITriggers.h"
 
 UISlider::UISlider() { }
@@ -25,8 +24,21 @@ UISlider::UISlider(string name, bool horizontal, int trackX, int trackY, int tra
     
     this->handleWidth = handleWidth;
     this->handleHeight = handleHeight;
+    
+    trackImage = new ofImage();
+    handleImageIdle = new ofImage();
+    handleImageActive = new ofImage();
 }
+
+string UISlider::getName() {
+    return name;
+}
+
 void UISlider::draw() {
+    if (!visible)
+        return;
+    
+    
     ofPushStyle();
     
     int endTrackX = 0;
@@ -40,18 +52,57 @@ void UISlider::draw() {
         endTrackY = trackY + trackLength;
     }
     
-    ofSetLineWidth(5);
-    ofSetColor(200);
-    ofLine(trackX, trackY, endTrackX, endTrackY);
+    if (trackImage->isAllocated()) {
+        trackImage->draw(trackX, trackY - trackImage->getHeight()/2);
+    }
+    else {
+        ofSetLineWidth(5);
+        ofSetColor(200);
+        ofLine(trackX, trackY, endTrackX, endTrackY);
+    }
     
-    if (isGrabbed())
-        ofSetColor(ofColor(255,0,0));
-    else
-        ofSetColor(ofColor(0,0,255));
-    ofRect(getHandleX(), getHandleY(), handleWidth, handleHeight);
     
+    if (handleImageIdle->isAllocated() and handleImageActive->isAllocated()) {
+        if (isGrabbed())
+            handleImageActive->draw(getHandleX(), getHandleY(), handleWidth, handleHeight);
+        else
+            handleImageIdle->draw(getHandleX(), getHandleY(), handleWidth, handleHeight);
+    }
+    else {
+        if (isGrabbed())
+            ofSetColor(ofColor(255,0,0));
+        else
+            ofSetColor(ofColor(0,0,255));
+        ofRect(getHandleX(), getHandleY(), handleWidth, handleHeight);
+    }
     ofPopStyle();
 }
+void UISlider::enable() {
+    enabled = true;
+}
+void UISlider::disable() {
+    enabled = false;
+}
+
+void UISlider::show() {
+    visible = true;
+}
+void UISlider::hide() {
+    visible = false;
+}
+
+
+void UISlider::setImageTrack(string imageName) {
+    trackImage->loadImage(imageName);
+}
+void UISlider::setImageHandleIdle(string imageName) {
+    handleImageIdle->loadImage(imageName);
+}
+void UISlider::setImageHandleActive(string imageName) {
+    handleImageActive->loadImage(imageName);
+}
+
+
 int UISlider::getHandleX() {
     if (horizontal)
         return (int)(trackX + trackLength * handlePos);
@@ -65,6 +116,9 @@ int UISlider::getHandleY() {
         return (int)(trackY + trackLength * handlePos);
 }
 bool UISlider::overHandle(int xPos, int yPos) {
+    if (!enabled)
+        return false;
+    
     float handleX = getHandleX();
     float handleY = getHandleY();
     
@@ -78,6 +132,9 @@ bool UISlider::overHandle(int xPos, int yPos) {
 }
 
 void UISlider::mousePressed(int x, int y) {
+    if (!enabled)
+        return;
+    
     grabbed = true;
     
     mouseOffsetX = x - getHandleX();
@@ -85,6 +142,11 @@ void UISlider::mousePressed(int x, int y) {
 }
 
 void UISlider::mouseDragged(int x, int y) {
+    if (!enabled) {
+        grabbed = false;
+        return;
+    }
+    
     if (!grabbed)
         return;
     

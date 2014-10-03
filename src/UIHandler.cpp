@@ -2,7 +2,7 @@
 //  UIHandler.cpp
 //  cooperFORM
 //
-//  Created by Tangible Media Group on 9/23/14.
+//  Created by Jared Counts on 9/23/14.
 //
 //
 
@@ -15,7 +15,6 @@ UIHandler::UIHandler() {
 }
 
 void UIHandler::draw() {
-    
     for (UIButton *button : buttons)
         button->draw();
     for (UISlider * slider : sliders)
@@ -40,6 +39,33 @@ void UIHandler::addSlider(UISlider *slider) {
 
 void UIHandler::addImage(UIImage* image) {
     images.push_back(image);
+}
+
+void UIHandler::addUIGroup(vector<UIElement*> uiGroup, string name) {
+    uiGroups[name] = uiGroup;
+}
+
+void UIHandler::showUIGroup(string groupName) {
+    map< string, vector<UIElement*> >::iterator groupIt = uiGroups.find(groupName);
+    if (groupIt == uiGroups.end())
+        return;
+    
+    vector<UIElement*> group = groupIt->second;
+    for (UIElement* element : group) {
+        element->enable();
+        element->show();
+    }
+}
+void UIHandler::hideUIGroup(string groupName) {
+    map< string, vector<UIElement*> >::iterator groupIt = uiGroups.find(groupName);
+    if (groupIt == uiGroups.end())
+        return;
+    
+    vector<UIElement*> group = groupIt->second;
+    for (UIElement* element : group) {
+        element->disable();
+        element->hide();
+    }
 }
 
 void UIHandler::mousePressed(int x, int y) {

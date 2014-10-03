@@ -11,7 +11,6 @@
 UIImage::UIImage(string imagePath, int x, int y) {
     image = new ofImage();
     image->loadImage(imagePath);
-    
     this->x = x;
     this->y = y;
 }
@@ -23,5 +22,16 @@ UIImage::UIImage(ofImage *image, int x, int y) {
 }
 
 void UIImage::draw() {
-    image->draw(x,y, image->getWidth(), image->getHeight());
+    if (visible)
+        image->draw(x,y, image->getWidth(), image->getHeight());
+}
+string UIImage::getName() {
+    return name;
+}
+
+void UIImage::show() {
+    visible = true;
+}
+void UIImage::hide() {
+    visible = false;
 }

@@ -104,7 +104,6 @@ void ReliefApplication::draw(){
     // render the tangible display
     ofPushStyle();
     
-    
     pinHeightMapImage.begin();
     ofBackground(0);
     ofSetColor(ofColor(200));
@@ -118,12 +117,10 @@ void ReliefApplication::draw(){
     ofTranslate(w, -h);
     currentShape->renderTangibleShape(-w, h);
     
-    //ofTranslate(-w/2, -h/2);
-    
     ofPopMatrix();
     
     pinHeightMapImage.end();
-    
+
     
     ofPopStyle();
     
@@ -137,7 +134,7 @@ void ReliefApplication::draw(){
     currentShape->renderTangibleShape(w, h);
     
     touchScreenDisplayImage.end();
-    
+ 
     
     
     // render the vertical back display
@@ -148,25 +145,25 @@ void ReliefApplication::draw(){
     currentShape->renderVerticalScreenGraphics(w, h);
     
     verticalDisplayImage.end();
-    
+
     
     // draw our frame buffers
     //pinHeightMapImageSmall.draw(  1,   1,   350, 350);
     //projectorOverlayImage.draw(   1,   352, 350, 350);
-    
+
     touchScreenDisplayImage.draw(420, 0, 1920 - 2*420, 1080);
-   
+    
     // draw UI stuff
     uiHandler.draw();
     
     //verticalDisplayImage.draw(    352, 352, 350, 350);
-    
+
     // draw camera feeds
     w = 1920;
     h = 1080;
     
     cameraTracker.drawCameraFeed(0, w, 0, w, h);
-    
+
 //    pinHeightMapImage.draw(      200,   1,   350, 350);
 //    pinHeightMapImageSmall.draw( 550,   1,   350, 350);
 }
@@ -257,6 +254,16 @@ void ReliefApplication::setupUI() {
     uiHandler.addImage(divider3);
     uiHandler.addButton(mathModeButton);
     
+    // add these buttons to a group
+    // for the "select" and "unselect" functionality
+    vector<UIButton*> mainButtonGroup = vector<UIButton*>();
+    mainButtonGroup.push_back(telepresenceModeButton);
+    mainButtonGroup.push_back(wavyModeButton);
+    mainButtonGroup.push_back(threeDModeButton);
+    mainButtonGroup.push_back(mathModeButton);
+    uiHandler.addButtonGroup(mainButtonGroup);
+    
+    
     
     // left sidebar stuff:
     // inFORM logo
@@ -266,6 +273,7 @@ void ReliefApplication::setupUI() {
     inFORMLogoImg->loadImage("inform-logo.png");
     
     const int informLogoWidth = inFORMLogoImg->getWidth();
+    const int informLogoHeight = inFORMLogoImg->getHeight();
     const int informLogoX = sideBarLeftSize/2 - informLogoWidth/2;
     const int informLogoY = informLogoX;
     
@@ -285,14 +293,48 @@ void ReliefApplication::setupUI() {
     // test slider
     const int sliderWidth = 300;
     const int sliderX = sideBarLeftSize/2 - sliderWidth/2;
-    const int sliderY = 1080/2;
+    const int sliderY = 1080 * 3/4;
     // name, bool horizontal, int trackX, int trackY, int trackLength, int handleWidth, int handleHeight
-    UISlider *slider = new UISlider("slider", true, sliderX, sliderY, sliderWidth, 50, 50);
+    UISlider *slider = new UISlider("slider", true, sliderX, sliderY, sliderWidth, 46, 50);
+    slider->setImageHandleActive("3D Models/assets/knob.png");
+    slider->setImageHandleIdle("3D Models/assets/knob.png");
+    slider->setImageTrack("3D Models/assets/slider.png");
     
+    // telepresence stuff
+    ofImage* teleBatImage = new ofImage();
+    teleBatImage->loadImage("Teleoperation/assets/bat.png");
     
+    const int teleBatWidth = teleBatImage->getWidth();
+    const int teleBatX = sideBarLeftSize/2 - teleBatWidth/2;
+    const int teleBatY = informLogoY + informLogoHeight + 50;
+    
+    UIImage *teleBat = new UIImage(teleBatImage, teleBatX, teleBatY);
+    
+    ofImage* telePushImage = new ofImage();
+    telePushImage->loadImage("Teleoperation/assets/push.png");
+    
+    const int telePushY = teleBatY + 175;
+    
+    UIImage *telePush = new UIImage(telePushImage, teleBatX, telePushY);
+    
+    ofImage* teleScoopImage = new ofImage();
+    teleScoopImage->loadImage("Teleoperation/assets/scoop.png");
+    const int teleScoopY = teleBatY + 2*175;
+    UIImage *teleScoop = new UIImage(teleScoopImage, teleBatX, teleScoopY);
+
+    uiHandler.addImage(teleBat);
+    uiHandler.addImage(telePush);
+    uiHandler.addImage(teleScoop);
     uiHandler.addImage(inFORMLogo);
     uiHandler.addImage(tmgLogo);
-    uiHandler.addSlider(slider);
+    //uiHandler.addSlider(slider);
+    
+    vector<UIElement*> telepresenceGroup = vector<UIElement*>();
+    telepresenceGroup.push_back(teleBat);
+    telepresenceGroup.push_back(telePush);
+    telepresenceGroup.push_back(teleScoop);
+    uiHandler.addUIGroup(telepresenceGroup, "telepresence");
+
     
     // drop shadow for middle region
     ofImage* centerDropShadowImg = new ofImage();
@@ -306,15 +348,6 @@ void ReliefApplication::setupUI() {
     uiHandler.addImage(centerDropShadow);
     
     
-    
-    // add these buttons to a group
-    // for the "select" and "unselect" functionality
-    vector<UIButton*> mainButtonGroup = vector<UIButton*>();
-    mainButtonGroup.push_back(telepresenceModeButton);
-    mainButtonGroup.push_back(wavyModeButton);
-    mainButtonGroup.push_back(threeDModeButton);
-    mainButtonGroup.push_back(mathModeButton);
-    uiHandler.addButtonGroup(mainButtonGroup);
     
 }
 

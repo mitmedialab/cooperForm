@@ -10,6 +10,7 @@
 #define __cooperFORM__UIHandler__
 
 #include <iostream>
+#include "UIElement.h"
 #include "UIButton.h"
 #include "UISlider.h"
 #include "UIImage.h"
@@ -28,6 +29,10 @@ public:
     
     void addImage(UIImage *image);
     
+    void addUIGroup(vector<UIElement*> uiGroup, string name);
+    
+    void showUIGroup(string groupName);
+    void hideUIGroup(string groupName);
     
     void mousePressed(int x, int y);
     void mouseReleased(int x, int y);
@@ -42,6 +47,8 @@ private:
     // groups of button
     // for selection and unselection
     vector< vector<UIButton*> > buttonGroups;
+    
+    map< string, vector<UIElement*> > uiGroups;
 };
 
 

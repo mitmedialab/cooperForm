@@ -9,23 +9,29 @@
 #ifndef __cooperFORM__UIButton__
 #define __cooperFORM__UIButton__
 
-#include <iostream>
+#include "UIElement.h"
 #include "ofImage.h"
 
 using namespace std;
 
-class UIButton {
+class UIButton : public UIElement {
 public:
     UIButton();
     UIButton(string name, int xPos, int yPos, int w, int h);
     
     string getName();
+    void draw();
+    
+    void enable();
+    void disable();
+    
+    void show();
+    void hide();
     
     void setImageIdle(string imageName);
     void setImageActive(string imageName);
     void setImageSelected(string imageName);
     
-    void draw();
     
     // will tell you whether
     // an x,y coordinate is inside the button
@@ -49,14 +55,18 @@ public:
 private:
     string name;
     
+    bool enabled = true;
+    
     int x, y, width, height;
     
     bool pressed = false;
     bool selected = false;
     
-    ofImage buttonImageActive;
-    ofImage buttonImageIdle;
-    ofImage buttonImageSelected;
+    ofImage *buttonImageActive;
+    ofImage *buttonImageIdle;
+    ofImage *buttonImageSelected;
+    
+    bool visible = true;
 };
 
 #endif /* defined(__cooperFORM__UIButton__) */

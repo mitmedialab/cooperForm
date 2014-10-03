@@ -9,7 +9,8 @@
 #ifndef __cooperFORM__UISlider__
 #define __cooperFORM__UISlider__
 
-#include <iostream>
+#include "UIElement.h"
+#include "ofMain.h"
 
 using namespace std;
 
@@ -20,12 +21,23 @@ using namespace std;
 // ---------| |--
 //          ---
 
-class UISlider {
+class UISlider : public UIElement {
 public:
     UISlider();
     UISlider(string name, bool horizontal, int trackX, int trackY, int trackLength, int handleWidth, int handleHeight);
     
+    string getName();
     void draw();
+    
+    void enable();
+    void disable();
+    
+    void show();
+    void hide();
+    
+    void setImageTrack(string imageName);
+    void setImageHandleIdle(string imageName);
+    void setImageHandleActive(string imageName);
     
     int getHandleX();
     int getHandleY();
@@ -39,8 +51,15 @@ public:
     void mouseReleased();
 
     bool isGrabbed();
+    
 private:
     string name;
+    
+    ofImage *trackImage;
+    ofImage *handleImageIdle;
+    ofImage *handleImageActive;
+    
+    bool enabled = true;
     
     int trackX, trackY;
     
@@ -57,6 +76,8 @@ private:
     
     bool grabbed = false;
     int mouseOffsetX, mouseOffsetY;
+    
+    bool visible = true;
 };
 
 #endif /* defined(__cooperFORM__UISlider__) */

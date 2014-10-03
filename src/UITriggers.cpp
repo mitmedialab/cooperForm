@@ -17,18 +17,34 @@ void UITriggers::buttonTrigger(UIButton *button) {
     if (name == "telepresence") {
         reliefApplication->setMode("telepresence");
         uiHandler->select(button);
+        uiHandler->showUIGroup("telepresence");
+        uiHandler->hideUIGroup("wavy");
+        uiHandler->hideUIGroup("3D");
+        uiHandler->hideUIGroup("math");
     }
     else if (name == "wavy") {
         reliefApplication->setMode("wavy");
         uiHandler->select(button);
+        uiHandler->hideUIGroup("telepresence");
+        uiHandler->showUIGroup("wavy");
+        uiHandler->hideUIGroup("3D");
+        uiHandler->hideUIGroup("math");
     }
     else if (name == "3D") {
         reliefApplication->setMode("3D");
         uiHandler->select(button);
+        uiHandler->hideUIGroup("telepresence");
+        uiHandler->hideUIGroup("wavy");
+        uiHandler->showUIGroup("3D");
+        uiHandler->hideUIGroup("math");
     }
     else if (name == "math") {
         reliefApplication->setMode("math");
         uiHandler->select(button);
+        uiHandler->hideUIGroup("telepresence");
+        uiHandler->hideUIGroup("wavy");
+        uiHandler->showUIGroup("3D");
+        uiHandler->hideUIGroup("math");
     }
 }
 

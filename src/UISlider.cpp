@@ -166,6 +166,7 @@ void UISlider::mouseDragged(int x, int y) {
         
         handlePos = (double)(newHandleY - trackY) / trackLength;
     }
+    
     UITriggers::sliderTrigger(this);
 }
 

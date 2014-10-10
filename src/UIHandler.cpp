@@ -10,8 +10,10 @@
 
 UIHandler::UIHandler() {
     buttons = vector<UIButton*>();
-    buttonGroups = vector< vector<UIButton*> >();
+    sliders = vector<UISlider*>();
+    texts = vector<UIText*>();
     images = vector<UIImage*>();
+    buttonGroups = vector< vector<UIButton*> >();
 }
 
 void UIHandler::draw() {
@@ -21,6 +23,8 @@ void UIHandler::draw() {
         slider->draw();
     for (UIImage *image : images)
         image->draw();
+    for (UIText *text : texts)
+        text->draw();
     
     ofSetColor(ofColor(255));
 }
@@ -40,6 +44,11 @@ void UIHandler::addSlider(UISlider *slider) {
 void UIHandler::addImage(UIImage* image) {
     images.push_back(image);
 }
+
+void UIHandler::addText(UIText* text) {
+    texts.push_back(text);
+}
+
 
 void UIHandler::addUIGroup(vector<UIElement*> uiGroup, string name) {
     uiGroups[name] = uiGroup;
@@ -76,7 +85,6 @@ void UIHandler::mousePressed(int x, int y) {
     }
     for (UISlider *slider : sliders) {
         if (slider->overHandle(x, y)) {
-            cout << "over slider!";
             slider->mousePressed(x,y);
         }
     }

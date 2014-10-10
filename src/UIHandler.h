@@ -12,6 +12,7 @@
 #include <iostream>
 #include "UIElement.h"
 #include "UIButton.h"
+#include "UIText.h"
 #include "UISlider.h"
 #include "UIImage.h"
 #include "ofMain.h"
@@ -29,6 +30,8 @@ public:
     
     void addImage(UIImage *image);
     
+    void addText(UIText *text);
+    
     void addUIGroup(vector<UIElement*> uiGroup, string name);
     
     void showUIGroup(string groupName);
@@ -43,6 +46,7 @@ private:
     vector<UIButton*> buttons;
     vector<UISlider*> sliders;
     vector<UIImage*> images;
+    vector<UIText*> texts;
     
     // groups of button
     // for selection and unselection

@@ -1,5 +1,6 @@
 #include "ReliefApplication.h"
 #include "UITriggers.h"
+//#include "GUI.h"
 
 //--------------------------------------------------------------
 void ReliefApplication::setup(){
@@ -59,9 +60,9 @@ void ReliefApplication::setup(){
     
     
     // set our current shape object to a default shape object
-//    setMode("telepresence");
-    UITriggers::buttonTrigger(telepresenceModeButton);
-    //currentShape = kinectShapeObject;
+    setMode("telepresence");
+    
+    currentShape = kinectShapeObject;
 }
 
 //--------------------------------------------------------------
@@ -180,9 +181,8 @@ void ReliefApplication::exit(){
 
 void ReliefApplication::setupUI() {
     uiHandler = UIHandler();
-    
-    
-    // Right sidebar stuff:
+//    GUI::setupUI(uiHandler);
+// Right sidebar stuff:
     
     const int modeButtonWidth  = 372;
     const int modeButtonHeight = 222;
@@ -293,7 +293,7 @@ void ReliefApplication::setupUI() {
     // test slider
     const int sliderWidth = 300;
     const int sliderX = sideBarLeftSize/2 - sliderWidth/2;
-    const int sliderY = 1080 * 3/4;
+    const int sliderY = 1080 * 2/4;
     // name, bool horizontal, int trackX, int trackY, int trackLength, int handleWidth, int handleHeight
     UISlider *slider = new UISlider("slider", true, sliderX, sliderY, sliderWidth, 46, 50);
     slider->setImageHandleActive("3D Models/assets/knob.png");
@@ -321,20 +321,32 @@ void ReliefApplication::setupUI() {
     teleScoopImage->loadImage("Teleoperation/assets/scoop.png");
     const int teleScoopY = teleBatY + 2*175;
     UIImage *teleScoop = new UIImage(teleScoopImage, teleBatX, teleScoopY);
-
-    uiHandler.addImage(teleBat);
-    uiHandler.addImage(telePush);
-    uiHandler.addImage(teleScoop);
+    
+    
+    const int textWidth = 300;
+    const int textX = sideBarLeftSize/2 - textWidth/2;
+    const int textY = informLogoY + informLogoHeight + 50;
+    const int textSize = 10;
+    string text = "The inFORM is a Dynamic Shape Display that can render 3D content physically, so users can interact with digital information in a tangible way while also interacting with the physical world around it.";
+    UIText* inFORMText = new UIText(text, "inFORM description", textSize, textX, textY);
+    inFORMText->setAlignment("left");
+    inFORMText->setWidth(textWidth);
+    inFORMText->setColor(ofColor(0,0,0));
+    
+    //uiHandler.addImage(teleBat);
+    //uiHandler.addImage(telePush);
+    //uiHandler.addImage(teleScoop);
     uiHandler.addImage(inFORMLogo);
     uiHandler.addImage(tmgLogo);
-    //uiHandler.addSlider(slider);
+    uiHandler.addText(inFORMText);
+    uiHandler.addSlider(slider);
     
     vector<UIElement*> telepresenceGroup = vector<UIElement*>();
     telepresenceGroup.push_back(teleBat);
     telepresenceGroup.push_back(telePush);
     telepresenceGroup.push_back(teleScoop);
     uiHandler.addUIGroup(telepresenceGroup, "telepresence");
-
+    
     
     // drop shadow for middle region
     ofImage* centerDropShadowImg = new ofImage();
@@ -347,8 +359,8 @@ void ReliefApplication::setupUI() {
     
     uiHandler.addImage(centerDropShadow);
     
-    
-    
+    currentMode = "telepresence";
+    UITriggers::buttonTrigger(telepresenceModeButton);
 }
 
 // change the relief application mode

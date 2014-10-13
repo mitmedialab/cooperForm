@@ -220,50 +220,7 @@ void WavyShapeObject::renderTangibleShape(int w, int h) {
     //if (interpolate > 0)
     interpolateSurface();
     surface.draw(0,0, w,h);
-    
-    // not sure what the point of all this code below was...
-//    depthOutputFBO.begin();
-//    ofBackground(0);
-//    ofFill();
-//    surface.draw(0,0, KINECT_X,KINECT_Y);
-//    
-//    depthOutputFBO.end();
-//
-//    
-//    ofPixels pixels;
-//    depthOutputFBO.readToPixels(pixels);
-//    ofxCvColorImage srcColorImage;
-//    srcColorImage.allocate(KINECT_X, KINECT_Y);
-//    srcColorImage.setFromPixels(pixels);
-//
-//    ofxCvColorImage smallColorImage = srcColorImage;
-//    smallColorImage.resize(abs(w),abs(h));
-//    
-//    int x = 0;
-//    int y = 0;
-//    // mirror the image if w or h is negative
-//    if (w < 0) {
-//        smallColorImage.mirror(false, true);
-//        x = w;
-//    }
-//    if (h < 0) {
-//        y = h;
-//        smallColorImage.mirror(true, false);
-//    }
-//    //ofxCvGrayscaleImage grayDstImage;
-//    //smallColorImage.convertToGrayscalePlanarImage(grayDstImage, 1);
-//    //allPixels = grayDstImage.getPixels();
-//    
-////    unsigned char* temp = new unsigned char[102*24*3];
-////    temp = smallColorImage.getPixels();
-////    if (temp != 0) {
-////       for (int i = 1; i <= smallColorImage.getWidth() * smallColorImage.getHeight(); i++) {
-////            char val = (temp[i * 3 - 1] + temp[i * 3 - 2] + temp[i * 3 - 3]) / 3;
-////            allPixels[i -1] = val;
-////        }
-////    }
-//
-//    smallColorImage.draw(x,y);
+
 }
 
 //--------------------------------------------------------------

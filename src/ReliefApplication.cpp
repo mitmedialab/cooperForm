@@ -58,6 +58,7 @@ void ReliefApplication::setup(){
     wavyShapeObject   = new WavyShapeObject(24,24);
     wavyShapeObject->setKinectTracker(&kinectTracker);
     
+    ballMoverShapeObject = new MoveBallShapeObject();
     
     // set our current shape object to a default shape object
     setMode("telepresence");
@@ -149,24 +150,17 @@ void ReliefApplication::draw(){
 
     
     // draw our frame buffers
-    //pinHeightMapImageSmall.draw(  1,   1,   350, 350);
-    //projectorOverlayImage.draw(   1,   352, 350, 350);
 
     touchScreenDisplayImage.draw(420, 0, 1920 - 2*420, 1080);
     
     // draw UI stuff
     uiHandler->draw();
     
-    //verticalDisplayImage.draw(    352, 352, 350, 350);
-
+    
     // draw camera feeds
     w = 1920;
     h = 1080;
-    
     cameraTracker.drawCameraFeed(0, w, 0, w, h);
-
-//    pinHeightMapImage.draw(      200,   1,   350, 350);
-//    pinHeightMapImageSmall.draw( 550,   1,   350, 350);
 }
 
 void ReliefApplication::exit(){
@@ -194,7 +188,7 @@ void ReliefApplication::setMode(string newMode) {
     if (newMode == "telepresence" || newMode == "wavy" || newMode == "3D" || newMode == "math")
         currentMode = newMode;
     else
-        cout << "Invalid mode selected";
+        cout << "Invalid mode selected" << endl;
     
     if (currentMode == "telepresence")
         currentShape = kinectShapeObject;
@@ -202,6 +196,11 @@ void ReliefApplication::setMode(string newMode) {
         wavyShapeObject->reset();
         currentShape = wavyShapeObject;
     }
+    else if (currentMode == "3D") {
+        currentShape = ballMoverShapeObject;
+        ballMoverShapeObject->moveBallToCenter();
+    }
+
 }
 
 

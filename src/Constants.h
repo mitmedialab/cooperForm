@@ -94,6 +94,4 @@
 
 #define SEAN_SCREEN 1
 
-#define MODE_SWITCH_TIME_LIMIT = 300
-
 #endif

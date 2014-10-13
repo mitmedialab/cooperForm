@@ -7,15 +7,12 @@
 #include "CameraTracker.h"
 #include "KinectShapeObject.h"
 #include "WavyShapeObject.h"
+#include "MoveBallShapeObject.h"
 #include "KinectTracker.h"
 
 class ReliefApplication : public ofBaseApp {
 public:
     UIHandler       * uiHandler;
-//    UIButton        * telepresenceModeButton;
-//    UIButton        * wavyModeButton;
-//    UIButton        * threeDModeButton;
-//    UIButton        * mathModeButton;
 
     // the table mode we're on
     // "telepresence", "wavy", "3D", and "math"
@@ -48,8 +45,9 @@ public:
     CameraTracker    cameraTracker;
 
     // Shape objects
-    KinectShapeObject  * kinectShapeObject;
-    WavyShapeObject    * wavyShapeObject;
+    KinectShapeObject   * kinectShapeObject;
+    WavyShapeObject     * wavyShapeObject;
+    MoveBallShapeObject * ballMoverShapeObject;
 
     // our interface for the Kinect
     KinectTracker    kinectTracker;

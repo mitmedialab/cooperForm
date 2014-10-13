@@ -13,11 +13,7 @@ int main( ){
 
     
 	
-    ReliefApplication *relief = new ReliefApplication();
-    
-    // register
-    UITriggers::registerReliefApplication(relief);
-    
+    ReliefApplication *relief = new ReliefApplication();    
     
     // this kicks off the running of my app
 	// can be OF_WINDOW or OF_FULLSCREEN

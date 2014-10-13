@@ -9,8 +9,9 @@
 #ifndef __cooperFORM__UITriggers__
 #define __cooperFORM__UITriggers__
 
-#include "ReliefApplication.h"
 #include "UIHandler.h"
+#include "UIButton.h"
+#include "ReliefApplication.h"
 
 class UITriggers {
 public:
@@ -34,6 +35,12 @@ private:
     
     // reference to UI handler for UI-wide operations
     static UIHandler *uiHandler;
+    
+    // mode switching can be done at this much time apart
+    // (to prevent rapid mode switching);
+    static int modeSwitchTimeLimit;
+    
+    static long lastModeSwitched;
 };
 
 #endif /* defined(__cooperFORM__UITriggers__) */

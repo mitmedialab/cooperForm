@@ -84,11 +84,11 @@ void GUI::setupUI(UIHandler* uiHandler) {
     
     // add these buttons to a group
     // for the "select" and "unselect" functionality
-    vector<UIButton*> mainButtonGroup = vector<UIButton*>();
-    mainButtonGroup.push_back(telepresenceModeButton);
-    mainButtonGroup.push_back(wavyModeButton);
-    mainButtonGroup.push_back(threeDModeButton);
-    mainButtonGroup.push_back(mathModeButton);
+    vector<UIButton*>* mainButtonGroup = new vector<UIButton*>();
+    mainButtonGroup->push_back(telepresenceModeButton);
+    mainButtonGroup->push_back(wavyModeButton);
+    mainButtonGroup->push_back(threeDModeButton);
+    mainButtonGroup->push_back(mathModeButton);
     uiHandler->addButtonGroup(mainButtonGroup);
     
     
@@ -188,5 +188,5 @@ void GUI::setupUI(UIHandler* uiHandler) {
     uiHandler->addImage(centerDropShadow);
     
     
-    //UITriggers::buttonTrigger(telepresenceModeButton);
+    UITriggers::buttonTrigger(telepresenceModeButton);
 }

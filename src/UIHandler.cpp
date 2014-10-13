@@ -13,7 +13,7 @@ UIHandler::UIHandler() {
     sliders = vector<UISlider*>();
     texts = vector<UIText*>();
     images = vector<UIImage*>();
-    buttonGroups = vector< vector<UIButton*> >();
+    buttonGroups = vector< vector<UIButton*>* >();
 }
 
 void UIHandler::draw() {
@@ -33,7 +33,7 @@ void UIHandler::addButton(UIButton *button) {
     buttons.push_back(button);
 }
 
-void UIHandler::addButtonGroup(vector<UIButton*> group) {
+void UIHandler::addButtonGroup(vector<UIButton*>* group) {
     buttonGroups.push_back(group);
 }
 
@@ -124,15 +124,17 @@ void UIHandler::mouseDragged(int x, int y) {
 }
 
 void UIHandler::select(UIButton *button) {
+
     // find out which groups it's in
-    for (vector<UIButton*> buttonGroup : buttonGroups) {
+    for (vector<UIButton*>* buttonGroup : buttonGroups) {
+        
         std::vector<UIButton*>::iterator it;
-        it = find(buttonGroup.begin(), buttonGroup.end(), button);
-        if (it != buttonGroup.end()) {
+        it = find(buttonGroup->begin(), buttonGroup->end(), button);
+        if (it != buttonGroup->end()) {
             
             // found the button!
             // now deselect every other button in this group
-            for (UIButton *other : buttonGroup) {
+            for (UIButton *other : *buttonGroup) {
                 if (other != button)
                     other->unselect();
             }

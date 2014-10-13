@@ -24,7 +24,7 @@ public:
     void draw();
     
     void addButton(UIButton *button);
-    void addButtonGroup(vector<UIButton*> group);
+    void addButtonGroup(vector<UIButton*>* group);
     
     void addSlider(UISlider *slider);
     
@@ -50,7 +50,7 @@ private:
     
     // groups of button
     // for selection and unselection
-    vector< vector<UIButton*> > buttonGroups;
+    vector< vector<UIButton*>* > buttonGroups;
     
     map< string, vector<UIElement*> > uiGroups;
 };

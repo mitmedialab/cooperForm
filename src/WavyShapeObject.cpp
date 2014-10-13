@@ -74,14 +74,6 @@ void WavyShapeObject::init(int numCols, int numRows) {
         }
     }
     
-    // add initial "jump" to show the waves work
-    for (int x = 0; x < cols; x++) {
-        for (int y = 0; y < rows; y++) {
-            float val = ofRandom(-50,50);
-            velocity[x][y] = val;
-        }
-    }
-    
     // setup time keeping
     fixedDeltaMS = 18;
     leftOverMS = 0;
@@ -100,19 +92,23 @@ void WavyShapeObject::init(int numCols, int numRows) {
     maxX = cols;
     maxY = rows;
     
-    currentMS = ofGetElapsedTimeMillis();
-    previousMS = currentMS;
-    
+    reset();
 }
 
 // resets all the depth and velocity values
 // and all of the time keeping values
 void WavyShapeObject::reset() {
+    // add initial "jump" to show the waves work
     for (int x = 0; x < cols; x++) {
         for (int y = 0; y < rows; y++) {
-            float val = ofRandom(-50,50);
-            velocity[x][y] = val;
+            float val = 0;
+            if (x == cols/4 || x == cols*3/4)
+                val = 500 * sin(1.5 * y * 2 * PI / rows);
+            if (y == rows/4  || y == rows*3/4)
+                val = 500 * sin(1.5 * x * 2 * PI / cols);
+            
             density[x][y] = 0;
+            velocity[x][y] = val;
         }
     }
     

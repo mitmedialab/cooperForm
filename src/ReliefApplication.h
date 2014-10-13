@@ -11,11 +11,11 @@
 
 class ReliefApplication : public ofBaseApp {
 public:
-    UIHandler       uiHandler;
-    UIButton        * telepresenceModeButton;
-    UIButton        * wavyModeButton;
-    UIButton        * threeDModeButton;
-    UIButton        * mathModeButton;
+    UIHandler       * uiHandler;
+//    UIButton        * telepresenceModeButton;
+//    UIButton        * wavyModeButton;
+//    UIButton        * threeDModeButton;
+//    UIButton        * mathModeButton;
 
     // the table mode we're on
     // "telepresence", "wavy", "3D", and "math"

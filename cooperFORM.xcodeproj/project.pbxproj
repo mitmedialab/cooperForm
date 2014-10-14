@@ -26,6 +26,8 @@
 		8A0B32C219E85C02009196FE /* ofxFTGLFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A0B32AB19E85C02009196FE /* ofxFTGLFont.cpp */; };
 		8A0B32C319E85C02009196FE /* ofxFTGLSimpleLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A0B32AD19E85C02009196FE /* ofxFTGLSimpleLayout.cpp */; };
 		8A0B32D219E8701A009196FE /* GUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A0B32D019E8701A009196FE /* GUI.cpp */; };
+		8A0B32D619EC6B1C009196FE /* MoveBallShapeObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A0B32D419EC6B1C009196FE /* MoveBallShapeObject.cpp */; };
+		8A0B32DF19ED9333009196FE /* OSCInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A0B32DD19ED9333009196FE /* OSCInterface.cpp */; };
 		8AEAD86B19C8AAB400D87C59 /* KinectShapeObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AEAD86919C8AAB400D87C59 /* KinectShapeObject.cpp */; };
 		8AEAD87219D0D3C600D87C59 /* CameraTracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AEAD87019D0D3C600D87C59 /* CameraTracker.cpp */; };
 		8AFAA96619C8A67A00EC475F /* KinectTracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFAA96519C8A67A00EC475F /* KinectTracker.cpp */; };
@@ -151,6 +153,10 @@
 		8A0B32AE19E85C02009196FE /* ofxFTGLSimpleLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxFTGLSimpleLayout.h; sourceTree = "<group>"; };
 		8A0B32D019E8701A009196FE /* GUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUI.cpp; sourceTree = "<group>"; };
 		8A0B32D119E8701A009196FE /* GUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUI.h; sourceTree = "<group>"; };
+		8A0B32D419EC6B1C009196FE /* MoveBallShapeObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MoveBallShapeObject.cpp; sourceTree = "<group>"; };
+		8A0B32D519EC6B1C009196FE /* MoveBallShapeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoveBallShapeObject.h; sourceTree = "<group>"; };
+		8A0B32DD19ED9333009196FE /* OSCInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OSCInterface.cpp; sourceTree = "<group>"; };
+		8A0B32DE19ED9333009196FE /* OSCInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSCInterface.h; sourceTree = "<group>"; };
 		8AEAD86919C8AAB400D87C59 /* KinectShapeObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KinectShapeObject.cpp; sourceTree = "<group>"; };
 		8AEAD86A19C8AAB400D87C59 /* KinectShapeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KinectShapeObject.h; sourceTree = "<group>"; };
 		8AEAD87019D0D3C600D87C59 /* CameraTracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraTracker.cpp; sourceTree = "<group>"; };
@@ -494,6 +500,15 @@
 				8A0B32AE19E85C02009196FE /* ofxFTGLSimpleLayout.h */,
 			);
 			path = src;
+			sourceTree = "<group>";
+		};
+		8A0B32D319EC6B02009196FE /* MoveBallShapeObject */ = {
+			isa = PBXGroup;
+			children = (
+				8A0B32D419EC6B1C009196FE /* MoveBallShapeObject.cpp */,
+				8A0B32D519EC6B1C009196FE /* MoveBallShapeObject.h */,
+			);
+			name = MoveBallShapeObject;
 			sourceTree = "<group>";
 		};
 		8AEAD86819C8AAA400D87C59 /* Kinect */ = {
@@ -883,6 +898,7 @@
 		8AFAAA6319C8A8A700EC475F /* ShapeObjects */ = {
 			isa = PBXGroup;
 			children = (
+				8A0B32D319EC6B02009196FE /* MoveBallShapeObject */,
 				8A09A64F19D5F42400118C9E /* Waves */,
 				8AEAD86819C8AAA400D87C59 /* Kinect */,
 				8AFAAA6419C8A8B700EC475F /* ShapeObject.h */,
@@ -974,6 +990,8 @@
 				8A09A64119D2218600118C9E /* UserInterface */,
 				8AEAD86F19D0D37A00D87C59 /* CameraInterface */,
 				8AFAA96319C8A66800EC475F /* KinectInterface */,
+				8A0B32DD19ED9333009196FE /* OSCInterface.cpp */,
+				8A0B32DE19ED9333009196FE /* OSCInterface.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -1087,6 +1105,7 @@
 				8AFAA9E719C8A6B400EC475F /* ofxCvGrayscaleImage.cpp in Sources */,
 				8AFAAA5F19C8A6CB00EC475F /* tilt.c in Sources */,
 				8AFAA96619C8A67A00EC475F /* KinectTracker.cpp in Sources */,
+				8A0B32D619EC6B1C009196FE /* MoveBallShapeObject.cpp in Sources */,
 				8AEAD86B19C8AAB400D87C59 /* KinectShapeObject.cpp in Sources */,
 				8A09A65519D606BF00118C9E /* UISlider.cpp in Sources */,
 				8AFAA9E919C8A6B400EC475F /* ofxCvImage.cpp in Sources */,
@@ -1096,6 +1115,7 @@
 				8A09A70B19E6FBAD00118C9E /* UIText.cpp in Sources */,
 				8A09A64719D221DD00118C9E /* UIButton.cpp in Sources */,
 				8AFAA9E619C8A6B400EC475F /* ofxCvFloatImage.cpp in Sources */,
+				8A0B32DF19ED9333009196FE /* OSCInterface.cpp in Sources */,
 				8AFAAA5C19C8A6CB00EC475F /* cameras.c in Sources */,
 				8A0B32C319E85C02009196FE /* ofxFTGLSimpleLayout.cpp in Sources */,
 				8AFAA9E519C8A6B400EC475F /* ofxCvContourFinder.cpp in Sources */,
@@ -1141,7 +1161,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(OF_CORE_HEADERS)",
-					src,
 					../../../addons/ofxOpenCv/libs,
 					../../../addons/ofxOpenCv/src,
 					../../../addons/ofxOpenCv/libs/opencv,
@@ -1154,6 +1173,15 @@
 					../../../addons/ofxFTGL/libs/FTGL/lib,
 					../../../addons/ofxFTGL/libs/FTGL/lib/osx,
 					../../../addons/ofxFTGL/src,
+					../../../addons/ofxOsc/libs,
+					../../../addons/ofxOsc/libs/oscpack,
+					../../../addons/ofxOsc/libs/oscpack/src,
+					../../../addons/ofxOsc/libs/oscpack/src/ip,
+					../../../addons/ofxOsc/libs/oscpack/src/ip/posix,
+					../../../addons/ofxOsc/libs/oscpack/src/ip/win32,
+					../../../addons/ofxOsc/libs/oscpack/src/osc,
+					../../../addons/ofxOsc/src,
+					src,
 				);
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../../../addons/ofxFTGL/libs/FTGL/lib/osx\"";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
@@ -1196,7 +1224,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(OF_CORE_HEADERS)",
-					src,
 					../../../addons/ofxOpenCv/libs,
 					../../../addons/ofxOpenCv/src,
 					../../../addons/ofxOpenCv/libs/opencv,
@@ -1209,6 +1236,15 @@
 					../../../addons/ofxFTGL/libs/FTGL/lib,
 					../../../addons/ofxFTGL/libs/FTGL/lib/osx,
 					../../../addons/ofxFTGL/src,
+					../../../addons/ofxOsc/libs,
+					../../../addons/ofxOsc/libs/oscpack,
+					../../../addons/ofxOsc/libs/oscpack/src,
+					../../../addons/ofxOsc/libs/oscpack/src/ip,
+					../../../addons/ofxOsc/libs/oscpack/src/ip/posix,
+					../../../addons/ofxOsc/libs/oscpack/src/ip/win32,
+					../../../addons/ofxOsc/libs/oscpack/src/osc,
+					../../../addons/ofxOsc/src,
+					src,
 				);
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../../../addons/ofxFTGL/libs/FTGL/lib/osx\"";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
@@ -1251,6 +1287,14 @@
 					../../../addons/ofxFTGL/libs/FTGL/include,
 					../../../addons/ofxFTGL/libs/FTGL/lib,
 					../../../addons/ofxFTGL/libs/FTGL/lib/osx,
+					../../../addons/ofxOsc/libs,
+					../../../addons/ofxOsc/libs/oscpack,
+					../../../addons/ofxOsc/libs/oscpack/src,
+					../../../addons/ofxOsc/libs/oscpack/src/ip,
+					../../../addons/ofxOsc/libs/oscpack/src/ip/posix,
+					../../../addons/ofxOsc/libs/oscpack/src/ip/win32,
+					../../../addons/ofxOsc/libs/oscpack/src/osc,
+					../../../addons/ofxOsc/src,
 					src,
 				);
 				ICON = "$(ICON_NAME_DEBUG)";
@@ -1298,6 +1342,14 @@
 					../../../addons/ofxFTGL/libs/FTGL/include,
 					../../../addons/ofxFTGL/libs/FTGL/lib,
 					../../../addons/ofxFTGL/libs/FTGL/lib/osx,
+					../../../addons/ofxOsc/libs,
+					../../../addons/ofxOsc/libs/oscpack,
+					../../../addons/ofxOsc/libs/oscpack/src,
+					../../../addons/ofxOsc/libs/oscpack/src/ip,
+					../../../addons/ofxOsc/libs/oscpack/src/ip/posix,
+					../../../addons/ofxOsc/libs/oscpack/src/ip/win32,
+					../../../addons/ofxOsc/libs/oscpack/src/osc,
+					../../../addons/ofxOsc/src,
 					src,
 				);
 				ICON = "$(ICON_NAME_RELEASE)";

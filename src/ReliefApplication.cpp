@@ -6,6 +6,9 @@
 void ReliefApplication::setup(){
     ofSetFrameRate(30);
     
+    // set up OSCInterface
+    // needs to be setup before UI
+    backDisplayComputer = new OSCInterface("localhost", 12345);
     
     // initialize the UI
     setupUI();
@@ -60,10 +63,9 @@ void ReliefApplication::setup(){
     
     ballMoverShapeObject = new MoveBallShapeObject();
     
-    // set our current shape object to a default shape object
-    setMode("telepresence");
     
-    currentShape = kinectShapeObject;
+    // set our current shape object to a default shape object
+    UITriggers::buttonTrigger(uiHandler->getButton("telepresence"));
 }
 
 //--------------------------------------------------------------
@@ -185,8 +187,10 @@ void ReliefApplication::setMode(string newMode) {
     if (newMode == currentMode)
         return;
     
-    if (newMode == "telepresence" || newMode == "wavy" || newMode == "3D" || newMode == "math")
+    if (newMode == "telepresence" || newMode == "wavy" || newMode == "3D" || newMode == "math") {
         currentMode = newMode;
+        backDisplayComputer->sendModeChange(newMode);
+    }
     else
         cout << "Invalid mode selected" << endl;
     
@@ -198,7 +202,7 @@ void ReliefApplication::setMode(string newMode) {
     }
     else if (currentMode == "3D") {
         currentShape = ballMoverShapeObject;
-        ballMoverShapeObject->moveBallToCenter();
+        ballMoverShapeObject->moveBallToCorner();
     }
 
 }

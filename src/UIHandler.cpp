@@ -124,7 +124,7 @@ void UIHandler::mouseDragged(int x, int y) {
 }
 
 void UIHandler::select(UIButton *button) {
-
+    cout << "selected " << button->getName() << endl;
     // find out which groups it's in
     for (vector<UIButton*>* buttonGroup : buttonGroups) {
         
@@ -145,4 +145,12 @@ void UIHandler::select(UIButton *button) {
     
     // finally select the button
     button->select();
+}
+
+UIButton* UIHandler::getButton(string name) {
+    for (UIButton *button : buttons) {
+        if (button->getName() == name)
+            return button;
+    }
+    return NULL;
 }

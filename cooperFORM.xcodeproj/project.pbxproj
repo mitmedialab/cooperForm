@@ -553,13 +553,13 @@
 			path = src;
 			sourceTree = "<group>";
 		};
-		8A0B32D319EC6B02009196FE /* MoveBallShapeObject */ = {
+		8A0B32D319EC6B02009196FE /* Ball Mover */ = {
 			isa = PBXGroup;
 			children = (
 				8A0B32D419EC6B1C009196FE /* MoveBallShapeObject.cpp */,
 				8A0B32D519EC6B1C009196FE /* MoveBallShapeObject.h */,
 			);
-			name = MoveBallShapeObject;
+			name = "Ball Mover";
 			sourceTree = "<group>";
 		};
 		8AC3487E19EF0F1300845B01 /* ofxOsc */ = {
@@ -771,6 +771,15 @@
 				8AC3492619EF12C600845B01 /* ofxKinect.h */,
 			);
 			path = src;
+			sourceTree = "<group>";
+		};
+		8AC3493019EF14ED00845B01 /* OSCInterface */ = {
+			isa = PBXGroup;
+			children = (
+				8A0B32DD19ED9333009196FE /* OSCInterface.cpp */,
+				8A0B32DE19ED9333009196FE /* OSCInterface.h */,
+			);
+			name = OSCInterface;
 			sourceTree = "<group>";
 		};
 		8AEAD86819C8AAA400D87C59 /* Kinect */ = {
@@ -1073,7 +1082,7 @@
 		8AFAAA6319C8A8A700EC475F /* ShapeObjects */ = {
 			isa = PBXGroup;
 			children = (
-				8A0B32D319EC6B02009196FE /* MoveBallShapeObject */,
+				8A0B32D319EC6B02009196FE /* Ball Mover */,
 				8A09A64F19D5F42400118C9E /* Waves */,
 				8AEAD86819C8AAA400D87C59 /* Kinect */,
 				8AFAAA6419C8A8B700EC475F /* ShapeObject.h */,
@@ -1166,8 +1175,7 @@
 				8A09A64119D2218600118C9E /* UserInterface */,
 				8AEAD86F19D0D37A00D87C59 /* CameraInterface */,
 				8AFAA96319C8A66800EC475F /* KinectInterface */,
-				8A0B32DD19ED9333009196FE /* OSCInterface.cpp */,
-				8A0B32DE19ED9333009196FE /* OSCInterface.h */,
+				8AC3493019EF14ED00845B01 /* OSCInterface */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;

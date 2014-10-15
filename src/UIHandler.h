@@ -42,6 +42,8 @@ public:
     void mouseDragged(int x, int y);
     
     void select(UIButton *button);
+    
+    UIButton* getButton(string name);
 private:
     vector<UIButton*> buttons;
     vector<UISlider*> sliders;

@@ -9,6 +9,7 @@
 #include "WavyShapeObject.h"
 #include "MoveBallShapeObject.h"
 #include "KinectTracker.h"
+#include "OSCInterface.h"
 
 class ReliefApplication : public ofBaseApp {
 public:
@@ -51,6 +52,9 @@ public:
 
     // our interface for the Kinect
     KinectTracker    kinectTracker;
+    
+    // our interface for communicating with the computer for the vertical display
+    OSCInterface    * backDisplayComputer;
     
     void setup();
     void update();

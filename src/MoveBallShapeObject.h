@@ -43,7 +43,7 @@ private:
     // buffer to modify
     ofFbo depthBuffer;
     long startAnimationTime;
-    long animationTime = 3000;
+    long animationTime = 4500;
     
     // true if moving ball to center
     // false if moving ball to corner

@@ -10,7 +10,7 @@
 #define __cooperFORM__OSCInterface__
 
 #include <iostream>
-//#include "ofxOSC.h"
+#include "ofxOSC.h"
 
 // our interface for communicating with the
 // mac connected to the back display

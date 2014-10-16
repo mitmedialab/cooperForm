@@ -162,7 +162,7 @@ void ReliefApplication::draw(){
     // draw camera feeds
     w = 1920;
     h = 1080;
-    cameraTracker.drawCameraFeed(0, w, 0, w, h);
+    cameraTracker.drawCameraFeed(0, 0, 0, w, h);
 }
 
 void ReliefApplication::exit(){
@@ -206,7 +206,6 @@ void ReliefApplication::setMode(string newMode) {
     }
 
 }
-
 
 //--------------------------------------------------------------
 void ReliefApplication::keyPressed(int key){

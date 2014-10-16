@@ -41,6 +41,7 @@ public:
     void mouseReleased(int x, int y);
     void mouseDragged(int x, int y);
     
+    void unselect(UIButton *button);
     void select(UIButton *button);
     
     UIButton* getButton(string name);

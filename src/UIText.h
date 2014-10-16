@@ -18,6 +18,7 @@ using namespace std;
 
 class UIText  : public UIElement {
 public:
+    UIText() { };
     UIText(string text, string name, int size, int xPos, int yPos);
     
     void draw();

@@ -22,7 +22,9 @@ void UITriggers::buttonTrigger(UIButton *button) {
             uiHandler->hideUIGroup("wavy");
             uiHandler->hideUIGroup("3D");
             uiHandler->hideUIGroup("math");
+            uiHandler->hideUIGroup("info");
             UITriggers::lastModeSwitched = ofGetElapsedTimeMillis();
+            reliefApplication->showInfo = false;
         }
         else if (name == "wavy") {
             reliefApplication->setMode("wavy");
@@ -31,7 +33,9 @@ void UITriggers::buttonTrigger(UIButton *button) {
             uiHandler->showUIGroup("wavy");
             uiHandler->hideUIGroup("3D");
             uiHandler->hideUIGroup("math");
+            uiHandler->hideUIGroup("info");
             UITriggers::lastModeSwitched = ofGetElapsedTimeMillis();
+            reliefApplication->showInfo = false;
         }
         else if (name == "3D") {
             reliefApplication->setMode("3D");
@@ -40,7 +44,9 @@ void UITriggers::buttonTrigger(UIButton *button) {
             uiHandler->hideUIGroup("wavy");
             uiHandler->showUIGroup("3D");
             uiHandler->hideUIGroup("math");
+            uiHandler->hideUIGroup("info");
             UITriggers::lastModeSwitched = ofGetElapsedTimeMillis();
+            reliefApplication->showInfo = false;
         }
         else if (name == "math") {
             reliefApplication->setMode("math");
@@ -49,8 +55,18 @@ void UITriggers::buttonTrigger(UIButton *button) {
             uiHandler->hideUIGroup("wavy");
             uiHandler->showUIGroup("3D");
             uiHandler->hideUIGroup("math");
+            uiHandler->hideUIGroup("info");
             UITriggers::lastModeSwitched = ofGetElapsedTimeMillis();
+            reliefApplication->showInfo = false;
         }
+    }
+}
+void UITriggers::buttonUnselect(UIButton *button) {
+    string name = button->getName();
+    if (name == "telepresence"  || name == "wavy" || name == "3D" || name == "math") {
+        uiHandler->unselect(button);
+        uiHandler->hideUIGroup(name);
+        uiHandler->showUIGroup("info");
     }
 }
 

@@ -11,6 +11,7 @@
 
 #include "UIElement.h"
 #include "ofMain.h"
+#include "UIText.h"
 
 class UIImage : public UIElement {
 public:
@@ -27,11 +28,15 @@ public:
     
     void show();
     void hide();
+    
+    void setCaption(string text, int size, int width);
 private:
     string name;
     ofImage *image;
+    UIText captionText;
     int x, y;
     bool visible = true;
+    bool hasCaption = false;
 };
 
 #endif /* defined(__cooperFORM__UIImage__) */

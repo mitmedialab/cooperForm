@@ -111,7 +111,10 @@ void UIButton::mouseReleased() {
     if (!enabled)
         return;
     
-    UITriggers::buttonTrigger(this);
+    if (!selected)
+        UITriggers::buttonTrigger(this);
+    else
+        UITriggers::buttonUnselect(this);
 }
 
 // triggered when the mouse has left the button,

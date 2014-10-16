@@ -16,8 +16,8 @@ UIText::UIText(string text, string name, int size, int xPos, int yPos) {
     this->color = ofColor(0);
     
     layout.loadFont("helvetica-neue-medium-1361522099.ttf", size);
-//    layout.loadFont("mplus-1c-regular.tff", 12);
-
+    layout.setLineSpacing(1.2);
+    
     x = xPos;
     y = yPos;
 }

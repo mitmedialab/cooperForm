@@ -20,6 +20,9 @@ public:
     // the button trigger event
     static void buttonTrigger(UIButton *button);
     
+    // the button trigger event for unselecting a button
+    static void buttonUnselect(UIButton *button);
+    
     // slider trigger event
     // triggered when the slider handle changes position
     static void sliderTrigger(UISlider *slider);

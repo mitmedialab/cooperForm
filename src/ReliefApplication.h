@@ -56,6 +56,9 @@ public:
     // our interface for communicating with the computer for the vertical display
     OSCInterface    * backDisplayComputer;
     
+    // whether or not we're on the info screen
+    bool showInfo = true;
+    
     void setup();
     void update();
     void draw();

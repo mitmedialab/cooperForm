@@ -138,36 +138,58 @@ void GUI::setupUI(UIHandler* uiHandler) {
     
     UIImage *teleBat = new UIImage(teleBatImage, teleBatX, teleBatY);
     
+    
+    const int telePushY = teleBatY + 175;
     ofImage* telePushImage = new ofImage();
     telePushImage->loadImage("Teleoperation/assets/push.png");
     
-    const int telePushY = teleBatY + 175;
+    teleBat->setCaption("Bat the ball left and right", 10, 300);
     
     UIImage *telePush = new UIImage(telePushImage, teleBatX, telePushY);
+
+    telePush->setCaption("Cup your hand and push", 10, 300);
+
     
     ofImage* teleScoopImage = new ofImage();
     teleScoopImage->loadImage("Teleoperation/assets/scoop.png");
     const int teleScoopY = teleBatY + 2*175;
     UIImage *teleScoop = new UIImage(teleScoopImage, teleBatX, teleScoopY);
     
+    teleScoop->setCaption("Start low and scoop it", 10, 300);
     
-    const int textWidth = 300;
-    const int textX = sideBarLeftSize/2 - textWidth/2;
-    const int textY = informLogoY + informLogoHeight + 50;
-    const int textSize = 10;
-    string text = "The inFORM is a Dynamic Shape Display that can render 3D content physically, so users can interact with digital information in a tangible way while also interacting with the physical world around it.";
-    UIText* inFORMText = new UIText(text, "inFORM description", textSize, textX, textY);
+    const int tmgTextWidth = 300;
+    const int tmgTextX = sideBarLeftSize/2 - tmgTextWidth/2;
+    const int tmgTextY = informLogoY + informLogoHeight + 50;
+    const int tmgTextSize = 10;
+
+    string creatorTextStr = "Daniel Leithinger, Sean Follmer, Alex Olwal, Akimitsu Hogge, Hiroshi Ishii";
+    UIText* creatorText = new UIText(creatorTextStr, "creators", 9, tmgTextX, tmgTextY);
+    creatorText->setAlignment("left");
+    creatorText->setWidth(tmgTextWidth);
+    creatorText->setColor(ofColor(175,175,175));
+    
+    string descText = "The inFORM is a Dynamic Shape Display that can render 3D content physically, so users can interact with digital information in a tangible way while also interacting with the physical world around it.";
+    UIText* inFORMText = new UIText(descText, "inFORM description", 10, tmgTextX, tmgTextY+100);
     inFORMText->setAlignment("left");
-    inFORMText->setWidth(textWidth);
-    inFORMText->setColor(ofColor(0,0,0));
+    inFORMText->setWidth(tmgTextWidth);
+    inFORMText->setColor(ofColor(45,45,45));
     
-    //uiHandler.addImage(teleBat);
-    //uiHandler.addImage(telePush);
-    //uiHandler.addImage(teleScoop);
+    uiHandler->addImage(teleBat);
+    uiHandler->addImage(telePush);
+    uiHandler->addImage(teleScoop);
     uiHandler->addImage(inFORMLogo);
     uiHandler->addImage(tmgLogo);
+    uiHandler->addText(creatorText);
     uiHandler->addText(inFORMText);
-    uiHandler->addSlider(slider);
+    
+    //uiHandler->addSlider(slider);
+    
+    vector<UIElement*> infoScreenGroup = vector<UIElement*>();
+    infoScreenGroup.push_back(inFORMLogo);
+    infoScreenGroup.push_back(creatorText);
+    infoScreenGroup.push_back(inFORMText);
+    infoScreenGroup.push_back(tmgLogo);
+    uiHandler->addUIGroup(infoScreenGroup, "info");
     
     vector<UIElement*> telepresenceGroup = vector<UIElement*>();
     telepresenceGroup.push_back(teleBat);

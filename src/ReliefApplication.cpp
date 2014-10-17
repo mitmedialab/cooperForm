@@ -8,7 +8,7 @@ void ReliefApplication::setup(){
     
     // set up OSCInterface
     // needs to be setup before UI
-    backDisplayComputer = new OSCInterface("localhost", 12345);
+    backDisplayComputer = new OSCInterface("169.254.113.42", 86753);
     
     // initialize the UI
     setupUI();
@@ -43,7 +43,7 @@ void ReliefApplication::setup(){
     verticalDisplayImage.allocate(VERTICAL_DISPLAY_SIZE_X, VERTICAL_DISPLAY_SIZE_Y, GL_RGBA);
 
     // setup camera interface
-    cameraTracker.setup();
+    //cameraTracker.setup();
     
     
     // setup kinect if using
@@ -162,7 +162,8 @@ void ReliefApplication::draw(){
     // draw camera feeds
     w = 1920;
     h = 1080;
-    cameraTracker.drawCameraFeed(0, w, 0, w, h);
+    projectorOverlayImage.draw(w, 0, w, h);
+    //cameraTracker.drawCameraFeed(0, w, 0, w, h);
 }
 
 void ReliefApplication::exit(){

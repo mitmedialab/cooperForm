@@ -28,7 +28,9 @@ private:
     ofxCvGrayscaleImage     depthThreshed; // grayscale depth image
     ofxCvGrayscaleImage     lastDepthThreshed;
     ofxCvGrayscaleImage     depthThreshedDiff;
+    
     ofxCvColorImage         colorImg;
+    ofxCvColorImage         colorImgThreshed;
     
     ofxCvColorImage         colorImgCropped;
     ofxCvGrayscaleImage     depthImgCropped;
@@ -62,6 +64,7 @@ public:
     
     // draw various images coordinates and size
     void drawColorImage(int x, int y, int width, int height);
+    void drawColorThresholdImage(int x, int y, int width, int height);
     void drawDepthImage(int x, int y, int width, int height);
     
     void drawThresholdImage(int x, int y, int width, int height);

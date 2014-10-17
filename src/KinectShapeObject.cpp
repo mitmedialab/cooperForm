@@ -20,7 +20,7 @@ void KinectShapeObject::update(){
     mKinectHeightImage.end();
 
     mOutputShapeImage.begin();
-    mKinectTracker->drawColorImage(0,0, mOutputShapeImage.getWidth(), mOutputShapeImage.getHeight());
+    mKinectTracker->drawColorThresholdImage(0,0, mOutputShapeImage.getWidth(), mOutputShapeImage.getHeight());
     mOutputShapeImage.end();
 
 };
@@ -30,17 +30,15 @@ void KinectShapeObject::renderVerticalScreenGraphics(int w, int h){
 };
 
 void KinectShapeObject::renderTouchscreenGraphics(int w, int h){
-//    ofPushMatrix();
-//    ofRotate(90, 0, 1, 0);
     mKinectHeightImage.draw(0,0, w, h);
-//    ofPopMatrix();
-//  mOutputShapeImage.draw(0,0, w, h);
 };
 
 void KinectShapeObject::renderTangibleShape(int w, int h){
     mKinectHeightImage.draw(0,0, w, h);
 };
-
+void KinectShapeObject::renderProjectorOverlay(int w, int h){
+    mOutputShapeImage.draw(0,0, w, h);
+};
 
 void KinectShapeObject::mouseMoved(int x, int y){
 

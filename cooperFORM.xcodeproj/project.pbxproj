@@ -1382,9 +1382,13 @@
 					../../../addons/ofxKinect/libs/libfreenect/include,
 					../../../addons/ofxKinect/libs/libfreenect/src,
 					../../../addons/ofxKinect/src,
+					../../../addons/ofxVideoGrabberPtgrey/libs/dc1394/include,
 					src,
 				);
-				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../../../addons/ofxFTGL/libs/FTGL/lib/osx\"";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../addons/ofxFTGL/libs/FTGL/lib/osx\"",
+					"\"$(SRCROOT)/../../../addons/ofxVideoGrabberPtgrey/libs/dc1394/lib/osx\"",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_CPLUSPLUSFLAGS = (
 					"-D__MACOSX_CORE__",
@@ -1448,9 +1452,13 @@
 					../../../addons/ofxKinect/libs/libfreenect/include,
 					../../../addons/ofxKinect/libs/libfreenect/src,
 					../../../addons/ofxKinect/src,
+					../../../addons/ofxVideoGrabberPtgrey/libs/dc1394/include,
 					src,
 				);
-				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../../../addons/ofxFTGL/libs/FTGL/lib/osx\"";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../addons/ofxFTGL/libs/FTGL/lib/osx\"",
+					"\"$(SRCROOT)/../../../addons/ofxVideoGrabberPtgrey/libs/dc1394/lib/osx\"",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_CPLUSPLUSFLAGS = (
 					"-D__MACOSX_CORE__",
@@ -1502,6 +1510,7 @@
 					../../../addons/ofxKinect/libs/libfreenect,
 					../../../addons/ofxKinect/libs/libfreenect/src,
 					../../../addons/ofxKinect/libs/libfreenect/include,
+					../../../addons/ofxVideoGrabberPtgrey/libs/dc1394/include,
 					src,
 				);
 				ICON = "$(ICON_NAME_DEBUG)";
@@ -1516,6 +1525,10 @@
 					/Users/tmg/Documents/of_v0.8.0_osx_release/addons/ofxFTGL/libs/FTGL/lib/vs,
 					/Users/tmg/Documents/of_v0.8.0_osx_release/addons/ofxFTGL/libs/FTGL/lib/vs64,
 					"/Users/tmg/Documents/of_v0.8.0_osx_release/addons/ofxKinect/libs/libusb-1.0/lib/osx",
+					/Users/tmg/Documents/of_v0.8.0_osx_release/addons/ofxVideoGrabberPtgrey/libs/dc1394/lib/linux,
+					/Users/tmg/Documents/of_v0.8.0_osx_release/addons/ofxVideoGrabberPtgrey/libs/dc1394/lib/osx,
+					/Users/tmg/Documents/of_v0.8.0_osx_release/addons/ofxVideoGrabberPtgrey/libs/FlyCapture/lib/win32,
+					"\"$(SRCROOT)/../../../addons/ofxVideoGrabberPtgrey/libs/dc1394/lib/osx\"",
 				);
 				OTHER_LDFLAGS = (
 					"$(OF_CORE_LIBS)",
@@ -1561,6 +1574,7 @@
 					../../../addons/ofxKinect/libs/libfreenect,
 					../../../addons/ofxKinect/libs/libfreenect/src,
 					../../../addons/ofxKinect/libs/libfreenect/include,
+					../../../addons/ofxVideoGrabberPtgrey/libs/dc1394/include,
 					src,
 				);
 				ICON = "$(ICON_NAME_RELEASE)";
@@ -1575,6 +1589,10 @@
 					/Users/tmg/Documents/of_v0.8.0_osx_release/addons/ofxFTGL/libs/FTGL/lib/vs,
 					/Users/tmg/Documents/of_v0.8.0_osx_release/addons/ofxFTGL/libs/FTGL/lib/vs64,
 					"/Users/tmg/Documents/of_v0.8.0_osx_release/addons/ofxKinect/libs/libusb-1.0/lib/osx",
+					/Users/tmg/Documents/of_v0.8.0_osx_release/addons/ofxVideoGrabberPtgrey/libs/dc1394/lib/linux,
+					/Users/tmg/Documents/of_v0.8.0_osx_release/addons/ofxVideoGrabberPtgrey/libs/dc1394/lib/osx,
+					/Users/tmg/Documents/of_v0.8.0_osx_release/addons/ofxVideoGrabberPtgrey/libs/FlyCapture/lib/win32,
+					"\"$(SRCROOT)/../../../addons/ofxVideoGrabberPtgrey/libs/dc1394/lib/osx\"",
 				);
 				OTHER_LDFLAGS = (
 					"$(OF_CORE_LIBS)",

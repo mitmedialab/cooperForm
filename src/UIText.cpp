@@ -59,3 +59,11 @@ void UIText::show() {
 void UIText::hide() {
     visible = false;
 }
+
+float UIText::getHeight() {
+    
+    ofRectangle box = layout.getStringBoundingBox(text, 0, 0);
+    
+    return box.getHeight();
+    
+}

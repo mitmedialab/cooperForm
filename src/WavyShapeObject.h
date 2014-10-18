@@ -40,10 +40,11 @@ public:
     WavyShapeObject(int numCols, int numRows);
     
     
-    void update();
     void renderProjectorOverlay(int w, int h);
     void renderTangibleShape(int w, int h);
-    void renderTouchScreenGraphics(int w, int h);
+    void renderTouchscreenGraphics(int w, int h);
+    
+    void update();
     
     void updateDepthMapFromPixels(unsigned char * pixels, int w, int h, ofImageType imageType);
     
@@ -97,6 +98,7 @@ private:
     int fixedDeltaMS;
     int leftOverMS;
     
+    long lastInterpolatedMS = 0;
     
     // array of velocity derivatives
     // allows for nth order approximation of the velocity field

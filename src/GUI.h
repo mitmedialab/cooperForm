@@ -16,6 +16,11 @@
 class GUI {
 public:
     static void setupUI(UIHandler* uiHandler);
+private:
+    static void setupRightSidebar(UIHandler* uiHandler,  const int rightSidebarWidth);
+    static void setupLeftSidebar(UIHandler* uiHandler, const int leftSidebarWidth);
+    static void setupInfoBar(UIHandler* uiHandler, const int leftSidebarWidth);
+    static void setupTeleBar(UIHandler* uiHandler, const int leftSidebarWidth);
 };
 
 #endif /* defined(__cooperFORM__GUI__) */

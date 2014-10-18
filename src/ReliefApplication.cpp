@@ -40,8 +40,7 @@ void ReliefApplication::setup(){
     pinHeightMapImageSmall.getTextureReference().setTextureMinMagFilter(GL_NEAREST, GL_NEAREST);
 
     touchScreenDisplayImage.allocate(TOUCHSCREEN_SIZE_X, TOUCHSCREEN_SIZE_Y, GL_RGBA);
-    verticalDisplayImage.allocate(VERTICAL_DISPLAY_SIZE_X, VERTICAL_DISPLAY_SIZE_Y, GL_RGBA);
-
+    
     // setup camera interface
     //cameraTracker.setup();
     
@@ -100,10 +99,12 @@ void ReliefApplication::draw(){
     
     // render the projector overlay image
     projectorOverlayImage.begin();
+    ofBackground(0);
     w = projectorOverlayImage.getWidth();
     h = projectorOverlayImage.getHeight();
     currentShape->renderProjectorOverlay(w, h);
     projectorOverlayImage.end();
+    
     
     // render the tangible display
     ofPushStyle();
@@ -116,7 +117,8 @@ void ReliefApplication::draw(){
     h = pinHeightMapImage.getHeight();
     
     ofPushMatrix();
-    
+    // do some transformations so the tangible display is at the right orientation
+    // (mirroring the user)
     ofRotate(90);
     ofTranslate(w, -h);
     currentShape->renderTangibleShape(-w, h);
@@ -124,34 +126,20 @@ void ReliefApplication::draw(){
     ofPopMatrix();
     
     pinHeightMapImage.end();
-
     
     ofPopStyle();
     
     
-    /* render the touch screen display */
+    // render the touch screen display
     touchScreenDisplayImage.begin();
     
     w = touchScreenDisplayImage.getWidth();
     h = touchScreenDisplayImage.getHeight();
     
-    currentShape->renderTangibleShape(w, h);
+    currentShape->renderTouchscreenGraphics(w, h);
     
     touchScreenDisplayImage.end();
- 
-    
-    
-    // render the vertical back display
-    verticalDisplayImage.begin();
-    
-    w = verticalDisplayImage.getWidth();
-    h = verticalDisplayImage.getHeight();
-    currentShape->renderVerticalScreenGraphics(w, h);
-    
-    verticalDisplayImage.end();
 
-    
-    // draw our frame buffers
 
     touchScreenDisplayImage.draw(420, 0, 1920 - 2*420, 1080);
     
@@ -159,11 +147,10 @@ void ReliefApplication::draw(){
     uiHandler->draw();
     
     
-    // draw camera feeds
+    // draw the projector image
     w = 1920;
     h = 1080;
     projectorOverlayImage.draw(w, 0, w, h);
-    //cameraTracker.drawCameraFeed(0, w, 0, w, h);
 }
 
 void ReliefApplication::exit(){

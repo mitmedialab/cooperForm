@@ -34,7 +34,9 @@ public:
     
     void show();
     void hide();
-
+    
+    // since there's no other way to get a UIText's height
+    float getHeight();
 private:
     string text;
     string name;

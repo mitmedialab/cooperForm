@@ -37,8 +37,6 @@ public:
     ofFbo            projectorOverlayImage;
     // image to be displayed on the touch screen
     ofFbo            touchScreenDisplayImage;
-    // image to be displayed on the vertical display
-    ofFbo            verticalDisplayImage;
 
     ShapeObject      * currentShape;
 

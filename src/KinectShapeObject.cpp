@@ -25,14 +25,9 @@ void KinectShapeObject::update(){
 
 };
 
-void KinectShapeObject::renderVerticalScreenGraphics(int w, int h){
-    mOutputShapeImage.draw(0,0, w, h);
-};
-
 void KinectShapeObject::renderTouchscreenGraphics(int w, int h){
     mKinectHeightImage.draw(0,0, w, h);
 };
-
 void KinectShapeObject::renderTangibleShape(int w, int h){
     mKinectHeightImage.draw(0,0, w, h);
 };

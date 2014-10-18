@@ -71,7 +71,6 @@ void UITriggers::buttonUnselect(UIButton *button) {
 }
 
 void UITriggers::sliderTrigger(UISlider *slider) {
-
 }
 
 // initialize relevant static variables

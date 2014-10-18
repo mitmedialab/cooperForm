@@ -26,6 +26,7 @@ public:
     
     void setMouseDragInfo(int x, int y, int button);
     void setMousePressedInfo(int x, int y);
+    void setScale(float uniformScaleVal);
     void reset();
     
     ofxAssimpModelLoader model;
@@ -52,6 +53,7 @@ public:
     
 private:
     string shape_name = "3D";
+    float scale;
 
 };
 

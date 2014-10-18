@@ -13,13 +13,7 @@ ThreeDShapeObject::ThreeDShapeObject() {
     
     model.loadModel("models/beetle3.3ds");
     bgImg.loadImage("test.jpg");
-    
     ofEnableBlendMode(OF_BLENDMODE_ALPHA);
-    ofEnableDepthTest();
-    glShadeModel(GL_SMOOTH);
-    light.enable();
-    ofEnableSeparateSpecularLight();
-    
     fbo.allocate(TOUCHSCREEN_VISIBLE_SIZE_X, TOUCHSCREEN_SIZE_Y, GL_RGBA);
     
     shader.load("shaders/heightMapShader.vert", "shaders/heightMapShader.frag");
@@ -30,21 +24,9 @@ ThreeDShapeObject::ThreeDShapeObject() {
 //--------------------------------------------------------------
 
 void ThreeDShapeObject::update() {
-    fbo.begin();
-        ofClear(255,255,255);
-        //bgImg.draw(0, 0);
-        //cam.begin();
-
-        //glEnable(GL_DEPTH_TEST);
-        shader.begin();
-            model.setPosition((1920 - 840) / 2, (1080)/2, 0);
-            model.setRotation(1, 90, 1, 0, 0);
-            //model.setScale(0.45, 0.45, 0.45);
-            model.drawFaces();
-        shader.end();
-        glDisable(GL_DEPTH_TEST);
-        //cam.end();
-    fbo.end();
+    
+    //glShadeModel(GL_SMOOTH);
+  
 }
 
 //--------------------------------------------------------------
@@ -62,49 +44,57 @@ void ThreeDShapeObject::renderTangibleShape(int w, int h) {
 //--------------------------------------------------------------
 
 void ThreeDShapeObject::renderTouchscreenGraphics(int w, int h) {
+    ofPushStyle();
+    ofBackground(0);
     
-    ofSetColor(255);
-    //ofRect(MARGIN_X, 0, TOUCHSCREEN_VISIBLE_SIZE_X, TOUCHSCREEN_SIZE_Y);
+    //GL stuff
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glViewport(0, 0, TOUCHSCREEN_VISIBLE_SIZE_X, TOUCHSCREEN_SIZE_Y);
-    
     glOrtho(0.0, TOUCHSCREEN_VISIBLE_SIZE_X, 0, TOUCHSCREEN_SIZE_Y, -500, 500);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glEnable(GL_DEPTH_TEST);
+    
     shader.begin();
         model.setPosition((1920 - 840) / 2, (1080)/2, -150);
-        //model.setRotation(1, 90, 1, 0, 0);
         model.setRotation(1, -1 * angle, axis.x, axis.y, axis.z);
         model.setScale(1, 1, 1);
         model.drawFaces();
     shader.end();
+    
     glDisable(GL_DEPTH_TEST);
+    ofPopStyle();
 }
 
 //--------------------------------------------------------------
 
 void ThreeDShapeObject::renderMarginGraphics(int x, int y)
 {
-    //ofSetColor(255);
-    //ofRect(0, 0, MARGIN_X, MARGIN_X);
     marginX = x;
     marginY = y;
     quat.getRotate(angle, axis);
     
+    ofPushStyle();
+    
+    //draw background
     ofSetColor(255);
-    //ofRect(x, y, MARGIN_X, MARGIN_X);
     ofRect(0, 0, MARGIN_X, MARGIN_X);
+    
+    //draw th 3D model's wireframe
     ofPushMatrix();
         ofTranslate(x + MARGIN_X/2,y + MARGIN_X/2);
         glEnable(GL_DEPTH_TEST);
         model.setPosition(0, 0, 0);
         model.setRotation(1, angle, axis.x, axis.y, axis.z);
         model.setScale(0.4, 0.4, 0.4);
+    
+        //draw wireframe in black
+        ofSetColor(0);
         model.drawWireframe();
         glDisable(GL_DEPTH_TEST);
     ofPopMatrix();
+    ofPopStyle();
 }
 
 //--------------------------------------------------------------
@@ -133,3 +123,12 @@ void ThreeDShapeObject::setMousePressedInfo(int x, int y)
 {
     oldMouse = ofVec2f(x,y); //prevents popping
 }
+
+//--------------------------------------------------------------
+
+void ThreeDShapeObject::setScale(float uniformScaleVal)
+{
+    scale = uniformScaleVal;
+}
+
+//--------------------------------------------------------------

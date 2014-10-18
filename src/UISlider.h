@@ -38,6 +38,7 @@ public:
     void setImageTrack(string imageName);
     void setImageHandleIdle(string imageName);
     void setImageHandleActive(string imageName);
+    void setInitialPos(float val); //should be between 0 and 1
     
     int getHandleX();
     int getHandleY();

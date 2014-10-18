@@ -101,6 +101,9 @@ void UISlider::setImageHandleIdle(string imageName) {
 void UISlider::setImageHandleActive(string imageName) {
     handleImageActive->loadImage(imageName);
 }
+void UISlider::setInitialPos(float val){
+    
+}
 
 
 int UISlider::getHandleX() {

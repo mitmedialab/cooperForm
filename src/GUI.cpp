@@ -91,11 +91,17 @@ void GUI::setupRightSidebar(UIHandler *uiHandler, const int rightSidebarWidth) {
     
     UITriggers::buttonTrigger(telepresenceModeButton);
 }
+
+//--------------------------------------------------------------
+
 void GUI::setupLeftSidebar(UIHandler *uiHandler, const int leftSidebarWidth) {
     setupInfoBar(uiHandler, leftSidebarWidth);
     setupTeleBar(uiHandler, leftSidebarWidth);
     setupThreeDBar(uiHandler, leftSidebarWidth);
 }
+
+//--------------------------------------------------------------
+
 void GUI::setupInfoBar(UIHandler *uiHandler, const int leftSidebarWidth) {
     // left sidebar stuff:
     // info screen
@@ -187,7 +193,7 @@ void GUI::setupInfoBar(UIHandler *uiHandler, const int leftSidebarWidth) {
     uiHandler->addUIGroup(infoScreenGroup, "info");
 }
 
-
+//--------------------------------------------------------------
 
 void GUI::setupTeleBar(UIHandler *uiHandler, const int leftSidebarWidth) {
     // telepresence stuff
@@ -211,7 +217,6 @@ void GUI::setupTeleBar(UIHandler *uiHandler, const int leftSidebarWidth) {
     
     telePush->setCaption("Cup your hand and push", 10, 300);
     
-    
     ofImage* teleScoopImage = new ofImage();
     teleScoopImage->loadImage("Teleoperation/assets/scoop.png");
     const int teleScoopY = teleBatY + 2*175;
@@ -219,14 +224,9 @@ void GUI::setupTeleBar(UIHandler *uiHandler, const int leftSidebarWidth) {
     
     teleScoop->setCaption("Start low and scoop it", 10, 300);
     
-    
     uiHandler->addImage(teleBat);
     uiHandler->addImage(telePush);
     uiHandler->addImage(teleScoop);
-    
-    
-    
-
     
     vector<UIElement*> telepresenceGroup = vector<UIElement*>();
     telepresenceGroup.push_back(teleBat);
@@ -235,30 +235,78 @@ void GUI::setupTeleBar(UIHandler *uiHandler, const int leftSidebarWidth) {
     uiHandler->addUIGroup(telepresenceGroup, "telepresence");
 }
 
+//--------------------------------------------------------------
 
 void GUI::setupThreeDBar(UIHandler* uiHandler, const int leftSidebarWidth)
 {
+    //BUTTONS
+    // UIButton name = UIButton("name", x,y, w,h)
+    const int modelSelectButtonWidth  = 142;
+    const int modelSelectButtonHeight = 70;
+    
+    const int modelSelectButtonX = 20;
+    const int modelSelectButtonY = 300;
+    const int spacer = 200;
+    
+    UIButton* modelSelectButtonLeft
+    = new UIButton("modelSelectLeft",
+                   modelSelectButtonX, modelSelectButtonY,
+                   modelSelectButtonWidth,modelSelectButtonHeight);
+    modelSelectButtonLeft->setImageIdle("3D Models/assets/larrow.png");
+    modelSelectButtonLeft->setImageActive("3D Models/assets/larrow.png");
+    modelSelectButtonLeft->setImageSelected("3D Models/assets/larrow.png");
+    
+    UIButton* modelSelectButtonRight
+    = new UIButton("modelSelectRight",
+                   modelSelectButtonX + spacer, modelSelectButtonY,
+                   modelSelectButtonWidth,modelSelectButtonHeight);
+    modelSelectButtonRight->setImageIdle("3D Models/assets/rarrow.png");
+    modelSelectButtonRight->setImageActive("3D Models/assets/rarrow.png");
+    modelSelectButtonRight->setImageSelected("3D Models/assets/rarrow.png");
+    
+    
+    /*
+    ofImage* modelSelectButtonLeftImg = new ofImage();
+    modelSelectButtonLeftImg->loadImage("3D Models/assets/larrow.png");
+    
+    ofImage* modelSelectButtonRightImg = new ofImage();
+    modelSelectButtonRightImg->loadImage("3D Models/assets/rarrow.png");
+    
+    const int selectButtonWidth = modelSelectButtonLeftImg->getWidth();
+    const int selectButtonHeight = modelSelectButtonLeftImg->getHeight();
+    const int selectButtonX = leftSidebarWidth/2 - selectButtonWidth/2;
+    const int selectButtonY = selectButtonX;
+    
+    UIImage *modelSelect = new UIImage(modelSelectButtonLeftImg, informLogoX, informLogoY)
+    */
+    
     // SLIDERS
     const int sliderWidth = 300;
     const int sliderX = MARGIN_X/2 - sliderWidth/2;
     const int sliderY = 1080 * 2/4;
-    const int spacer = 50;
     
     // name, bool horizontal, int trackX, int trackY, int trackLength, int handleWidth, int handleHeight
     //3D SLIDER
-    UISlider *sliderScale = new UISlider("sliderScale", true, sliderX, sliderY +  1 * spacer, sliderWidth, 46, 50);
+    UISlider *sliderScale = new UISlider("sliderScale", true, sliderX, sliderY, sliderWidth, 46, 50);
     sliderScale->setImageHandleActive("3D Models/assets/knob.png");
     sliderScale->setImageHandleIdle("3D Models/assets/knob.png");
     sliderScale->setImageTrack("3D Models/assets/slider.png");
+    sliderScale->setInitialPos(0.5);
     
+    
+    uiHandler->addButton(modelSelectButtonLeft);
+    uiHandler->addButton(modelSelectButtonRight);
     uiHandler->addSlider(sliderScale);
     
     vector<UIElement*> threeDGroup = vector<UIElement*>();
+    threeDGroup.push_back(modelSelectButtonLeft);
+    threeDGroup.push_back(modelSelectButtonRight);
     threeDGroup.push_back(sliderScale);
     
     uiHandler->addUIGroup(threeDGroup, "3D");
 }
 
+//--------------------------------------------------------------
 
 void GUI::setupUI(UIHandler* uiHandler) {
     const int leftSidebarWidth = 420;
@@ -278,7 +326,7 @@ void GUI::setupUI(UIHandler* uiHandler) {
     UIImage *centerDropShadow = new UIImage(centerDropShadowImg, dropShadowX, dropShadowY);
     
     uiHandler->addImage(centerDropShadow);
-
-    
-    
 }
+
+//--------------------------------------------------------------
+

@@ -102,7 +102,7 @@ void UISlider::setImageHandleActive(string imageName) {
     handleImageActive->loadImage(imageName);
 }
 void UISlider::setInitialPos(float val){
-    
+    handlePos = val;
 }
 
 
@@ -118,13 +118,13 @@ int UISlider::getHandleY() {
     else
         return (int)(trackY + trackLength * handlePos);
 }
-int UISlider::getVal() {
+int UISlider::getVal() { // get pixel values
     if (horizontal)
         return (int)(trackLength * handlePos);
     else //TODO
         return -1;
 }
-float UISlider::getVal(float min, float max) { //map value to range
+float UISlider::getVal(float min, float max) { // get mapped values
     if (horizontal)
         return ofMap((trackLength * handlePos), 0, trackLength - handleWidth, min, max);
     else //TODO

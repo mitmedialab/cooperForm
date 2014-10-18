@@ -59,7 +59,7 @@ void ThreeDShapeObject::renderTouchscreenGraphics(int w, int h) {
     shader.begin();
         model.setPosition((1920 - 840) / 2, (1080)/2, -150);
         model.setRotation(1, -1 * angle, axis.x, axis.y, axis.z);
-        model.setScale(1, 1, 1);
+        model.setScale(scale, scale, scale);
         model.drawFaces();
     shader.end();
     

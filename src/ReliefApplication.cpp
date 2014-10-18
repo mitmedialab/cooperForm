@@ -95,9 +95,8 @@ void ReliefApplication::update(){
     // send height map image to the tangible display
     mIOManager->update(pinHeightMapImageSmall);
     
-    //get SliderValue
-    //cout << uiHandler->getSlider("sliderScale")->getVal(0, 1) << endl;
-    
+    // trigger slider to init value
+    UITriggers::sliderTrigger(uiHandler->getSlider("sliderScale"));
 }
 
 //--------------------------------------------------------------

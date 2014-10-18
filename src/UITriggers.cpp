@@ -59,6 +59,14 @@ void UITriggers::buttonTrigger(UIButton *button) {
             UITriggers::lastModeSwitched = ofGetElapsedTimeMillis();
             reliefApplication->showInfo = false;
         }
+        else if (name == "modelSelectLeft")
+        {
+            cout << "modelSelectLeft" <<endl;
+        }
+        else if (name == "modelSelectRight")
+        {
+            cout << "modelSelectRight" <<endl;
+        }
     }
 }
 void UITriggers::buttonUnselect(UIButton *button) {
@@ -71,6 +79,10 @@ void UITriggers::buttonUnselect(UIButton *button) {
 }
 
 void UITriggers::sliderTrigger(UISlider *slider) {
+    string name = slider->getName();
+    if (name == "sliderScale") {
+        reliefApplication->threeDShapeObject->setScale(slider->getVal(0, 1));
+    }
 }
 
 // initialize relevant static variables

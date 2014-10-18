@@ -158,3 +158,11 @@ UIButton* UIHandler::getButton(string name) {
     }
     return NULL;
 }
+
+UISlider* UIHandler::getSlider(string name) {
+    for (UISlider *slider : sliders) {
+        if (slider->getName() == name)
+            return slider;
+    }
+    return NULL;
+}

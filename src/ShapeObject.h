@@ -33,7 +33,9 @@ public:
     
     // draw the graphics for the projector
     virtual void renderProjectorOverlay(int w, int h){};
-
+    
+    // draw the graphics for the left margin on the touch screen
+    virtual void renderMarginGraphics(int x, int y){};
     
     // mouse events from the touch screen
     virtual void mouseMoved(int x, int y){};

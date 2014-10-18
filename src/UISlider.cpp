@@ -115,6 +115,19 @@ int UISlider::getHandleY() {
     else
         return (int)(trackY + trackLength * handlePos);
 }
+int UISlider::getVal() {
+    if (horizontal)
+        return (int)(trackLength * handlePos);
+    else //TODO
+        return -1;
+}
+float UISlider::getVal(float min, float max) { //map value to range
+    if (horizontal)
+        return ofMap((trackLength * handlePos), 0, trackLength - handleWidth, min, max);
+    else //TODO
+        return -1;
+}
+
 bool UISlider::overHandle(int xPos, int yPos) {
     if (!enabled)
         return false;

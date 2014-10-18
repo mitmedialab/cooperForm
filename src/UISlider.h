@@ -41,6 +41,8 @@ public:
     
     int getHandleX();
     int getHandleY();
+    int getVal();
+    float getVal(float min, float max);
 
     // will tell you whether
     // an x,y coordinate is inside the button

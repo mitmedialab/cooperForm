@@ -43,6 +43,7 @@ void ReliefApplication::setup(){
 
     touchScreenDisplayImage.allocate(TOUCHSCREEN_VISIBLE_SIZE_X, TOUCHSCREEN_SIZE_Y, GL_RGBA);
     verticalDisplayImage.allocate(VERTICAL_DISPLAY_SIZE_X, VERTICAL_DISPLAY_SIZE_Y, GL_RGBA);
+    marginTouchDisplayImage.allocate(MARGIN_X, MARGIN_X, GL_RGBA);
 
     // setup camera interface
     cameraTracker.setup();
@@ -94,6 +95,10 @@ void ReliefApplication::update(){
     
     // send height map image to the tangible display
     mIOManager->update(pinHeightMapImageSmall);
+    
+    //get SliderValue
+    //cout << uiHandler->getSlider("sliderScale")->getVal(0, 1) << endl;
+    
 }
 
 //--------------------------------------------------------------
@@ -158,9 +163,13 @@ void ReliefApplication::draw(){
 
     
     // draw our frame buffers
-
     touchScreenDisplayImage.draw(MARGIN_X, 0);
     //touchScreenDisplayImage.draw(420, 0, 1920, 1080);
+    
+    // draw margin image
+    if (currentMode == "3D") {
+        currentShape->renderMarginGraphics(0, 0);
+    }
 
     // draw UI stuff
     uiHandler->draw();
@@ -227,15 +236,19 @@ void ReliefApplication::keyPressed(int key){
     {
         case '1':
             setMode("telepresence");
+            UITriggers::buttonTrigger(uiHandler->getButton("telepresence"));
             break;
         case '2':
             setMode("wavy");
+            UITriggers::buttonTrigger(uiHandler->getButton("wavy"));
             break;
         case '3':
             setMode("3D");
+            UITriggers::buttonTrigger(uiHandler->getButton("3D"));
             break;
         case '4':
             setMode("math");
+            UITriggers::buttonTrigger(uiHandler->getButton("math"));
             break;
     }
 }
@@ -253,11 +266,13 @@ void ReliefApplication::mouseMoved(int x, int y){
 //--------------------------------------------------------------
 void ReliefApplication::mouseDragged(int x, int y, int button){
     uiHandler->mouseDragged(x,y);
+    if(currentMode == "3D") threeDShapeObject->setMouseDragInfo(x, y, button);
 }
 
 //--------------------------------------------------------------
 void ReliefApplication::mousePressed(int x, int y, int button){
     uiHandler->mousePressed(x,y);
+    if(currentMode == "3D") threeDShapeObject->setMousePressedInfo(x, y);
 }
 
 //--------------------------------------------------------------

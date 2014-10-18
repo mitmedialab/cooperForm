@@ -118,16 +118,22 @@ void GUI::setupUI(UIHandler* uiHandler) {
     
     UIImage *tmgLogo = new UIImage(tmgLogImg, tmgLogoX, tmgLogoY);
     
-    // test slider
+    
+    
+    
+    // SLIDERS
     const int sliderWidth = 300;
     const int sliderX = sideBarLeftSize/2 - sliderWidth/2;
     const int sliderY = 1080 * 2/4;
-    // name, bool horizontal, int trackX, int trackY, int trackLength, int handleWidth, int handleHeight
-    UISlider *slider = new UISlider("slider", true, sliderX, sliderY, sliderWidth, 46, 50);
-    slider->setImageHandleActive("3D Models/assets/knob.png");
-    slider->setImageHandleIdle("3D Models/assets/knob.png");
-    slider->setImageTrack("3D Models/assets/slider.png");
+    const int spacer = 50;
     
+    // name, bool horizontal, int trackX, int trackY, int trackLength, int handleWidth, int handleHeight
+    //3D SLIDER
+    UISlider *sliderScale = new UISlider("sliderScale", true, sliderX, sliderY +  1 * spacer, sliderWidth, 46, 50);
+    sliderScale->setImageHandleActive("3D Models/assets/knob.png");
+    sliderScale->setImageHandleIdle("3D Models/assets/knob.png");
+    sliderScale->setImageTrack("3D Models/assets/slider.png");
+
     // telepresence stuff
     ofImage* teleBatImage = new ofImage();
     teleBatImage->loadImage("Teleoperation/assets/bat.png");
@@ -182,7 +188,9 @@ void GUI::setupUI(UIHandler* uiHandler) {
     uiHandler->addText(creatorText);
     uiHandler->addText(inFORMText);
     
-    //uiHandler->addSlider(slider);
+    uiHandler->addSlider(sliderScale);
+
+    
     
     vector<UIElement*> infoScreenGroup = vector<UIElement*>();
     infoScreenGroup.push_back(inFORMLogo);
@@ -196,6 +204,11 @@ void GUI::setupUI(UIHandler* uiHandler) {
     telepresenceGroup.push_back(telePush);
     telepresenceGroup.push_back(teleScoop);
     uiHandler->addUIGroup(telepresenceGroup, "telepresence");
+    
+    vector<UIElement*> threeDGroup = vector<UIElement*>();
+    threeDGroup.push_back(sliderScale);
+
+    uiHandler->addUIGroup(threeDGroup, "3D");
     
     
     // drop shadow for middle region

@@ -45,6 +45,7 @@ public:
     void select(UIButton *button);
     
     UIButton* getButton(string name);
+    UISlider* getSlider(string name);
 private:
     vector<UIButton*> buttons;
     vector<UISlider*> sliders;

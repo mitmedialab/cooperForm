@@ -5,6 +5,8 @@
 //--------------------------------------------------------------
 void ReliefApplication::setup(){
     ofSetFrameRate(30);
+    ofSetVerticalSync(true);
+  
     
     // set up OSCInterface
     // needs to be setup before UI
@@ -39,7 +41,7 @@ void ReliefApplication::setup(){
     pinHeightMapImageSmall.allocate(RELIEF_PHYSICAL_SIZE_X, RELIEF_PHYSICAL_SIZE_Y, GL_RGBA);
     pinHeightMapImageSmall.getTextureReference().setTextureMinMagFilter(GL_NEAREST, GL_NEAREST);
 
-    touchScreenDisplayImage.allocate(TOUCHSCREEN_SIZE_X, TOUCHSCREEN_SIZE_Y, GL_RGBA);
+    touchScreenDisplayImage.allocate(TOUCHSCREEN_VISIBLE_SIZE_X, TOUCHSCREEN_SIZE_Y, GL_RGBA);
     verticalDisplayImage.allocate(VERTICAL_DISPLAY_SIZE_X, VERTICAL_DISPLAY_SIZE_Y, GL_RGBA);
 
     // setup camera interface
@@ -60,6 +62,8 @@ void ReliefApplication::setup(){
     kinectShapeObject->setKinectTracker(&kinectTracker);
     wavyShapeObject   = new WavyShapeObject(24,24);
     wavyShapeObject->setKinectTracker(&kinectTracker);
+    
+    threeDShapeObject = new ThreeDShapeObject();
     
     ballMoverShapeObject = new MoveBallShapeObject();
     
@@ -135,7 +139,9 @@ void ReliefApplication::draw(){
     w = touchScreenDisplayImage.getWidth();
     h = touchScreenDisplayImage.getHeight();
     
-    currentShape->renderTangibleShape(w, h);
+    ofBackground(255); //refresh
+    //currentShape->renderTangibleShape(w, h);
+    currentShape->renderTouchScreenGraphics(w - 840, h);
     
     touchScreenDisplayImage.end();
  
@@ -153,8 +159,9 @@ void ReliefApplication::draw(){
     
     // draw our frame buffers
 
-    touchScreenDisplayImage.draw(420, 0, 1920 - 2*420, 1080);
-    
+    touchScreenDisplayImage.draw(MARGIN_X, 0);
+    //touchScreenDisplayImage.draw(420, 0, 1920, 1080);
+
     // draw UI stuff
     uiHandler->draw();
     
@@ -162,8 +169,10 @@ void ReliefApplication::draw(){
     // draw camera feeds
     w = 1920;
     h = 1080;
-    cameraTracker.drawCameraFeed(0, 0, 0, w, h);
+    //cameraTracker.drawCameraFeed(0, 0, 0, w, h);
 }
+
+//--------------------------------------------------------------
 
 void ReliefApplication::exit(){
     
@@ -174,12 +183,15 @@ void ReliefApplication::exit(){
     mIOManager->disconnectFromTableWithoutPinReset();
 }
 
+//--------------------------------------------------------------
 
 void ReliefApplication::setupUI() {
     uiHandler = new UIHandler();
     UITriggers::registerReliefApplication(this);
     GUI::setupUI(uiHandler);
 }
+
+//--------------------------------------------------------------
 
 // change the relief application mode
 
@@ -201,15 +213,31 @@ void ReliefApplication::setMode(string newMode) {
         currentShape = wavyShapeObject;
     }
     else if (currentMode == "3D") {
-        currentShape = ballMoverShapeObject;
-        ballMoverShapeObject->moveBallToCorner();
+        //currentShape = ballMoverShapeObject;
+        //ballMoverShapeObject->moveBallToCorner();
+        threeDShapeObject->reset();
+        currentShape = threeDShapeObject;
     }
 
 }
 
 //--------------------------------------------------------------
 void ReliefApplication::keyPressed(int key){
-
+    switch(key)
+    {
+        case '1':
+            setMode("telepresence");
+            break;
+        case '2':
+            setMode("wavy");
+            break;
+        case '3':
+            setMode("3D");
+            break;
+        case '4':
+            setMode("math");
+            break;
+    }
 }
 
 //--------------------------------------------------------------

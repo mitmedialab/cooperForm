@@ -79,6 +79,8 @@ void KinectTracker::update() {
         lastDepthThreshed.setFromPixels(depthThreshed.getPixels(), depthThreshed.getWidth(), depthThreshed.getHeight());
         // always update the depth image
         depthThreshed.setFromPixels(depthImgCropped.getPixels(), depthImgCropped.getWidth(), depthImgCropped.getHeight());
+        colorImgThreshed.setFromPixels(colorImgCropped.getPixels(), colorImgCropped.getWidth(), colorImgCropped.getHeight());
+        
         
         // subtract mask which is png alpha image called "mask.png"
         if(useMask) subtractMask();
@@ -179,14 +181,18 @@ void KinectTracker::calculateThresholdsAndModifyImages() {
 //    depthThreshed = depthImgCropped;
     // remap pixels so they range from 0-255 after thresholding
     ofPixelsRef depthPixels = depthThreshed.getPixelsRef();
+    ofPixelsRef colorPixels = colorImgThreshed.getPixelsRef();
     for (int x = 0; x < depthPixels.getWidth(); x++) {
         for (int y = 0; y < depthPixels.getHeight(); y++) {
             float shade = ofClamp((depthPixels.getColor(x,y).getBrightness() - mFarThreshold) * 255.f / (mNearThreshold - mFarThreshold), 0, 255);
 //            float shade = ofClamp((depthPixels.getColor(x,y).getBrightness() - mNearThreshold) * 255.f / (255.f - mNearThreshold), 0, 255);
             depthPixels.setColor(x,y, shade);
+            if (shade < 20)
+                colorPixels.setColor(x,y, 0);
         }
     }
     depthThreshed.flagImageChanged();
+    colorImgThreshed.flagImageChanged();
 }
 
 //--------------------------------------------------------------
@@ -199,6 +205,12 @@ void KinectTracker::calculateThresholdsAndModifyImages() {
 void KinectTracker::drawColorImage(int x, int y, int width, int height) {
     ofSetColor(255);
     colorImg.draw(x, y, width, height);
+}
+
+// color image
+void KinectTracker::drawColorThresholdImage(int x, int y, int width, int height) {
+    ofSetColor(255);
+    colorImgThreshed.draw(x, y, width, height);
 }
 
 // gray image with contour blobs drawn on top

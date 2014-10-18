@@ -29,9 +29,8 @@ public:
     // draw the graphics for the UI
     void renderTouchscreenGraphics(int w, int h);
     
-    // draw the graphics for the vertical back screen
-    void renderVerticalScreenGraphics(int w, int h);
-    
+    // draw the projector image
+    void renderProjectorOverlay(int w, int h);
     
     // mouse events from the touch screen
     virtual void mouseMoved(int x, int y);

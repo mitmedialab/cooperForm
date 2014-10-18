@@ -121,6 +121,10 @@ void WavyShapeObject::reset() {
 
 void WavyShapeObject::interpolateSurface() {
     //cout << "wave interpolating";
+    if (ofGetElapsedTimeMillis() - lastInterpolatedMS < 10)
+        return;
+    
+    lastInterpolatedMS = ofGetElapsedTimeMillis();
     
     waveScalar = ofLerp(waveScalar, destWaveScalar, ofClamp((ofGetElapsedTimeMillis() - waveScalarSetTime) / 1000.f, 0,1));
     
@@ -237,11 +241,16 @@ void WavyShapeObject::renderProjectorOverlay(int w, int h) {
     
     // interpolation should be done during height map drawing
     interpolateSurface();
-    ofFill();
-    //ofImage temp;
-    //temp.allocate(w, h, OF_IMAGE_GRAYSCALE);
-    //mImageWarper->warpIntoImage(surface, temp);
-    surface.draw(w, h);
+
+    surface.draw(0,0, w,h);
+}
+
+
+//--------------------------------------------------------------
+
+void WavyShapeObject::renderTouchscreenGraphics(int w, int h) {
+    interpolateSurface();
+    surface.draw(0,0, w,h);
 }
 
 //--------------------------------------------------------------
@@ -316,21 +325,6 @@ void WavyShapeObject::update() {
     //
     //    }
     //    surface.reloadTexture();
-}
-
-//--------------------------------------------------------------
-
-void WavyShapeObject::renderTouchScreenGraphics(int w, int h)
-{
-    //ofPushMatrix();
-    surface.draw(w, h);
-    //renderProjectorOverlay(w,h);
-    //mKinectTracker->drawDepthThreshedImage(0,0, ofGetWidth(), ofGetHeight());
-    
-    //ofTranslate(mImageWarper->getSrcPositions()[0].x, mImageWarper->getSrcPositions()[0].y);
-        
-    //ofPopMatrix();
-    //renderTangibleShape(w,h);
 }
 
 //--------------------------------------------------------------

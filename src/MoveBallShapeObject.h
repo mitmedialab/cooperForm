@@ -28,9 +28,6 @@ public:
     
     void renderTouchScreenGraphics(int w, int h);
     
-    
-    void renderVerticalScreenGraphics(int w, int h){};
-    
     void renderProjectorOverlay(int w, int h){};
     
     void mouseMoved(int x, int y){};

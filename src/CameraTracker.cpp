@@ -7,6 +7,7 @@
 //
 
 #include "CameraTracker.h"
+//#include "ofxVideoGrabberPtgrey.h"
 
 void CameraTracker::setup() {
     ofVideoGrabber grabber = ofVideoGrabber();
@@ -18,7 +19,7 @@ void CameraTracker::setup() {
     for(int i = 0; i < devices.size(); i++){
         cout << devices[i].id << ": " << devices[i].deviceName << endl;
         if( devices[i].bAvailable ){
-            ofVideoGrabber grabberForDevice = ofVideoGrabber();
+            ofVideoGrabber grabberForDevice;
             grabberForDevice.setDeviceID(devices[i].id);
             grabberForDevice.initGrabber(1024, 768);
             grabbers.push_back(grabberForDevice);
@@ -34,15 +35,9 @@ void CameraTracker::setup() {
 void CameraTracker::drawCameraFeed(int id, int x, int y, int w, int h) {
     ofVideoGrabber grabber = grabbers[id];
     
-    //cout << typeid(grabber.getGrabber()).name();
-
-    if (!grabber.isInitialized())
-        grabber.initGrabber(320,210);
-    
     grabber.update();
 
     grabber.draw(x, y, w, h);
-    
 }
 
 CameraTracker::~CameraTracker() {

@@ -12,6 +12,7 @@
 #include <iostream>
 #include "ofMain.h"
 
+
 class CameraTracker {
     
 public:
@@ -21,7 +22,6 @@ public:
     
 private:
     vector<ofVideoGrabber> grabbers;
-    
 };
 
 #endif /* defined(__cooperFORM__CameraTracker__) */

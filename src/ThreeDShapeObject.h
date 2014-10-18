@@ -21,7 +21,7 @@ public:
     void update();
     void renderProjectorOverlay(int w, int h);
     void renderTangibleShape(int w, int h);
-    void renderTouchScreenGraphics(int w, int h);
+    void renderTouchscreenGraphics(int w, int h);
     void renderMarginGraphics(int x, int y);
     
     void setMouseDragInfo(int x, int y, int button);
@@ -37,9 +37,7 @@ public:
     string get_shape_name() {return shape_name; };
     void setTableValuesForShape(ShapeIOManager *pIOManager) {};
     
-    
     ofImage bgImg;
-    
     ofShader shader;
     
     //arcball

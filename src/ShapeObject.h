@@ -26,10 +26,7 @@ public:
     virtual void renderTangibleShape(int w, int h){};
     
     // draw the graphics for the UI
-    virtual void renderTouchScreenGraphics(int w, int h){};
-    
-    // draw the graphics for the vertical back screen
-    virtual void renderVerticalScreenGraphics(int w, int h){};
+    virtual void renderTouchscreenGraphics(int w, int h){};
     
     // draw the graphics for the projector
     virtual void renderProjectorOverlay(int w, int h){};

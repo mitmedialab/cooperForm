@@ -10,7 +10,7 @@ void ReliefApplication::setup(){
     
     // set up OSCInterface
     // needs to be setup before UI
-    backDisplayComputer = new OSCInterface("localhost", 12345);
+    backDisplayComputer = new OSCInterface("169.254.113.42", 86753);
     
     // initialize the UI
     setupUI();
@@ -42,11 +42,10 @@ void ReliefApplication::setup(){
     pinHeightMapImageSmall.getTextureReference().setTextureMinMagFilter(GL_NEAREST, GL_NEAREST);
 
     touchScreenDisplayImage.allocate(TOUCHSCREEN_VISIBLE_SIZE_X, TOUCHSCREEN_SIZE_Y, GL_RGBA);
-    verticalDisplayImage.allocate(VERTICAL_DISPLAY_SIZE_X, VERTICAL_DISPLAY_SIZE_Y, GL_RGBA);
     marginTouchDisplayImage.allocate(MARGIN_X, MARGIN_X, GL_RGBA);
 
     // setup camera interface
-    cameraTracker.setup();
+    //cameraTracker.setup();
     
     
     // setup kinect if using
@@ -109,10 +108,12 @@ void ReliefApplication::draw(){
     
     // render the projector overlay image
     projectorOverlayImage.begin();
+    ofBackground(0);
     w = projectorOverlayImage.getWidth();
     h = projectorOverlayImage.getHeight();
     currentShape->renderProjectorOverlay(w, h);
     projectorOverlayImage.end();
+    
     
     // render the tangible display
     ofPushStyle();
@@ -125,20 +126,18 @@ void ReliefApplication::draw(){
     h = pinHeightMapImage.getHeight();
     
     ofPushMatrix();
-    
+    // do some transformations so the tangible display is at the right orientation
+    // (mirroring the user)
     ofRotate(90);
     ofTranslate(w, -h);
     currentShape->renderTangibleShape(-w, h);
     
     ofPopMatrix();
-    
     pinHeightMapImage.end();
-
     
     ofPopStyle();
     
-    
-    /* render the touch screen display */
+    // render the touch screen display
     touchScreenDisplayImage.begin();
     
     w = touchScreenDisplayImage.getWidth();
@@ -146,25 +145,13 @@ void ReliefApplication::draw(){
     
     ofBackground(255); //refresh
     //currentShape->renderTangibleShape(w, h);
-    currentShape->renderTouchScreenGraphics(w - 840, h);
-    
+    currentShape->renderTouchscreenGraphics(w, h);
     touchScreenDisplayImage.end();
- 
     
-    
-    // render the vertical back display
-    verticalDisplayImage.begin();
-    
-    w = verticalDisplayImage.getWidth();
-    h = verticalDisplayImage.getHeight();
-    currentShape->renderVerticalScreenGraphics(w, h);
-    
-    verticalDisplayImage.end();
-
     
     // draw our frame buffers
     touchScreenDisplayImage.draw(MARGIN_X, 0);
-    //touchScreenDisplayImage.draw(420, 0, 1920, 1080);
+    
     
     // draw margin image
     if (currentMode == "3D") {
@@ -174,11 +161,10 @@ void ReliefApplication::draw(){
     // draw UI stuff
     uiHandler->draw();
     
-    
-    // draw camera feeds
+    // draw the projector image
     w = 1920;
     h = 1080;
-    //cameraTracker.drawCameraFeed(0, 0, 0, w, h);
+    projectorOverlayImage.draw(w, 0, w, h);
 }
 
 //--------------------------------------------------------------
@@ -222,8 +208,6 @@ void ReliefApplication::setMode(string newMode) {
         currentShape = wavyShapeObject;
     }
     else if (currentMode == "3D") {
-        //currentShape = ballMoverShapeObject;
-        //ballMoverShapeObject->moveBallToCorner();
         threeDShapeObject->reset();
         currentShape = threeDShapeObject;
     }

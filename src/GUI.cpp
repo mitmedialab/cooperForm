@@ -9,15 +9,13 @@
 // Constructs the GUI
 
 #include "GUI.h"
-void GUI::setupUI(UIHandler* uiHandler) {
+void GUI::setupRightSidebar(UIHandler *uiHandler, const int rightSidebarWidth) {
     // Right sidebar stuff:
     
     const int modeButtonWidth  = 372;
     const int modeButtonHeight = 222;
     
-    const int sideBarRightSize = 420;
-    
-    const int modeButtonX = 1920 - sideBarRightSize + sideBarRightSize/2 - modeButtonWidth/2;
+    const int modeButtonX = 1920 - rightSidebarWidth + rightSidebarWidth/2 - modeButtonWidth/2;
     const int modeButtonVertSpaceBetween = 50;
     const int modeButtonsTotalHeight = 4 * modeButtonHeight + 3 * modeButtonVertSpaceBetween;
     const int modeButtonStartY = 1080 / 2 - modeButtonsTotalHeight / 2;
@@ -27,7 +25,7 @@ void GUI::setupUI(UIHandler* uiHandler) {
     
     const int dividerWidth = divider->getWidth();
     const int dividerHeight = divider->getHeight();
-    const int dividerX = 1920 - sideBarRightSize + sideBarRightSize/2 - dividerWidth/2;
+    const int dividerX = 1920 - rightSidebarWidth + rightSidebarWidth/2 - dividerWidth/2;
     
     
     // initialize the new buttons
@@ -91,21 +89,63 @@ void GUI::setupUI(UIHandler* uiHandler) {
     mainButtonGroup->push_back(mathModeButton);
     uiHandler->addButtonGroup(mainButtonGroup);
     
-    
-    
+    UITriggers::buttonTrigger(telepresenceModeButton);
+}
+void GUI::setupLeftSidebar(UIHandler *uiHandler, const int leftSidebarWidth) {
+    setupInfoBar(uiHandler, leftSidebarWidth);
+    setupTeleBar(uiHandler, leftSidebarWidth);
+    setupThreeDBar(uiHandler, leftSidebarWidth);
+}
+void GUI::setupInfoBar(UIHandler *uiHandler, const int leftSidebarWidth) {
     // left sidebar stuff:
+    // info screen
     // inFORM logo
-    const int sideBarLeftSize = 420;
     
     ofImage* inFORMLogoImg = new ofImage();
     inFORMLogoImg->loadImage("inform-logo.png");
     
     const int informLogoWidth = inFORMLogoImg->getWidth();
     const int informLogoHeight = inFORMLogoImg->getHeight();
-    const int informLogoX = sideBarLeftSize/2 - informLogoWidth/2;
+    const int informLogoX = leftSidebarWidth/2 - informLogoWidth/2;
     const int informLogoY = informLogoX;
     
     UIImage *inFORMLogo = new UIImage(inFORMLogoImg, informLogoX, informLogoY);
+    
+    
+    // creator text
+    const int creatorTextWidth = 270;
+    const int creatorTextX = leftSidebarWidth/2 - creatorTextWidth/2;
+    const int creatorTextY = informLogoY + informLogoHeight + 50;
+    const int creatorTextSize = 9;
+    const string creatorTextStr = "Daniel Leithinger, Sean Follmer, Alex Olwal, Akimitsu Hogge, Hiroshi Ishii";
+    
+    UIText* creatorText = new UIText(creatorTextStr, "creators", creatorTextSize, creatorTextX, creatorTextY);
+    creatorText->setAlignment("left");
+    creatorText->setWidth(creatorTextWidth);
+    creatorText->setColor(ofColor(175,175,175));
+    
+    // inFORM description
+    const int descTextWidth = 300;
+    const int descTextX = leftSidebarWidth/2 - descTextWidth/2;
+    const int descTextY = creatorTextY + creatorText->getHeight() + 50;
+    const int descTextSize = 10;
+    const string descTextStr = "The inFORM is a Dynamic Shape Display that can render 3D content physically, so users can interact with digital information in a tangible way while also interacting with the physical world around it.";
+    
+    UIText* inFORMText = new UIText(descTextStr, "inFORM description", descTextSize, descTextX, descTextY);
+    inFORMText->setAlignment("left");
+    inFORMText->setWidth(descTextWidth);
+    inFORMText->setColor(ofColor(45,45,45));
+    
+    // divider
+    ofImage* dividerImg = new ofImage();
+    dividerImg->loadImage("divider.png");
+    
+    const int dividerWidth = dividerImg->getWidth();
+    const int dividerHeight = dividerImg->getHeight();
+    const int dividerX = leftSidebarWidth/2 - dividerWidth/2;
+    const int dividerY = descTextY + inFORMText->getHeight() + 50;
+    
+    UIImage* divider = new UIImage("divider.png", dividerX, dividerY);
     
     // tmg logo
     ofImage* tmgLogImg = new ofImage();
@@ -113,34 +153,50 @@ void GUI::setupUI(UIHandler* uiHandler) {
     
     const int tmgLogoWidth = tmgLogImg->getWidth();
     const int tmgLogoHeight = tmgLogImg->getHeight();
-    const int tmgLogoX = sideBarLeftSize/2 - tmgLogoWidth/2;
-    const int tmgLogoY = 1080 - tmgLogoHeight - tmgLogoX;
+    const int tmgLogoX = leftSidebarWidth/2 - tmgLogoWidth/2;
+    const int tmgLogoY = dividerY + 50 + dividerHeight;
     
     UIImage *tmgLogo = new UIImage(tmgLogImg, tmgLogoX, tmgLogoY);
     
+    // tmg description
+    const int tmgTextWidth = 300;
+    const int tmgTextX = leftSidebarWidth/2 - descTextWidth/2;
+    const int tmgTextY = tmgLogoY + tmgLogoHeight + 50;
+    const int tmgTextSize = 10;
+    const string tmgTextStr = "The Tangible Media Group, led by Professor Hiroshi Ishii, seeks to seamlessly couple the dual world of bits and atoms by giving dynamic physical form to digital information and computation.";
+    UIText* tmgText = new UIText(tmgTextStr, "TMG description", tmgTextSize, tmgTextX, tmgTextY);
+    tmgText->setAlignment("left");
+    tmgText->setWidth(tmgTextWidth);
+    tmgText->setColor(ofColor(45,45,45));
+    
+    uiHandler->addImage(inFORMLogo);
+    uiHandler->addText(creatorText);
+    uiHandler->addText(inFORMText);
+    uiHandler->addImage(divider);
+    uiHandler->addImage(tmgLogo);
+    uiHandler->addText(tmgText);
     
     
-    
-    // SLIDERS
-    const int sliderWidth = 300;
-    const int sliderX = sideBarLeftSize/2 - sliderWidth/2;
-    const int sliderY = 1080 * 2/4;
-    const int spacer = 50;
-    
-    // name, bool horizontal, int trackX, int trackY, int trackLength, int handleWidth, int handleHeight
-    //3D SLIDER
-    UISlider *sliderScale = new UISlider("sliderScale", true, sliderX, sliderY +  1 * spacer, sliderWidth, 46, 50);
-    sliderScale->setImageHandleActive("3D Models/assets/knob.png");
-    sliderScale->setImageHandleIdle("3D Models/assets/knob.png");
-    sliderScale->setImageTrack("3D Models/assets/slider.png");
+    vector<UIElement*> infoScreenGroup = vector<UIElement*>();
+    infoScreenGroup.push_back(inFORMLogo);
+    infoScreenGroup.push_back(creatorText);
+    infoScreenGroup.push_back(inFORMText);
+    infoScreenGroup.push_back(divider);
+    infoScreenGroup.push_back(tmgLogo);
+    infoScreenGroup.push_back(tmgText);
+    uiHandler->addUIGroup(infoScreenGroup, "info");
+}
 
+
+
+void GUI::setupTeleBar(UIHandler *uiHandler, const int leftSidebarWidth) {
     // telepresence stuff
     ofImage* teleBatImage = new ofImage();
     teleBatImage->loadImage("Teleoperation/assets/bat.png");
     
     const int teleBatWidth = teleBatImage->getWidth();
-    const int teleBatX = sideBarLeftSize/2 - teleBatWidth/2;
-    const int teleBatY = informLogoY + informLogoHeight + 50;
+    const int teleBatX = leftSidebarWidth/2 - teleBatWidth/2;
+    const int teleBatY = 50;
     
     UIImage *teleBat = new UIImage(teleBatImage, teleBatX, teleBatY);
     
@@ -152,9 +208,9 @@ void GUI::setupUI(UIHandler* uiHandler) {
     teleBat->setCaption("Bat the ball left and right", 10, 300);
     
     UIImage *telePush = new UIImage(telePushImage, teleBatX, telePushY);
-
+    
     telePush->setCaption("Cup your hand and push", 10, 300);
-
+    
     
     ofImage* teleScoopImage = new ofImage();
     teleScoopImage->loadImage("Teleoperation/assets/scoop.png");
@@ -163,65 +219,66 @@ void GUI::setupUI(UIHandler* uiHandler) {
     
     teleScoop->setCaption("Start low and scoop it", 10, 300);
     
-    const int tmgTextWidth = 300;
-    const int tmgTextX = sideBarLeftSize/2 - tmgTextWidth/2;
-    const int tmgTextY = informLogoY + informLogoHeight + 50;
-    const int tmgTextSize = 10;
-
-    string creatorTextStr = "Daniel Leithinger, Sean Follmer, Alex Olwal, Akimitsu Hogge, Hiroshi Ishii";
-    UIText* creatorText = new UIText(creatorTextStr, "creators", 9, tmgTextX, tmgTextY);
-    creatorText->setAlignment("left");
-    creatorText->setWidth(tmgTextWidth);
-    creatorText->setColor(ofColor(175,175,175));
-    
-    string descText = "The inFORM is a Dynamic Shape Display that can render 3D content physically, so users can interact with digital information in a tangible way while also interacting with the physical world around it.";
-    UIText* inFORMText = new UIText(descText, "inFORM description", 10, tmgTextX, tmgTextY+100);
-    inFORMText->setAlignment("left");
-    inFORMText->setWidth(tmgTextWidth);
-    inFORMText->setColor(ofColor(45,45,45));
     
     uiHandler->addImage(teleBat);
     uiHandler->addImage(telePush);
     uiHandler->addImage(teleScoop);
-    uiHandler->addImage(inFORMLogo);
-    uiHandler->addImage(tmgLogo);
-    uiHandler->addText(creatorText);
-    uiHandler->addText(inFORMText);
     
-    uiHandler->addSlider(sliderScale);
+    
+    
 
-    
-    
-    vector<UIElement*> infoScreenGroup = vector<UIElement*>();
-    infoScreenGroup.push_back(inFORMLogo);
-    infoScreenGroup.push_back(creatorText);
-    infoScreenGroup.push_back(inFORMText);
-    infoScreenGroup.push_back(tmgLogo);
-    uiHandler->addUIGroup(infoScreenGroup, "info");
     
     vector<UIElement*> telepresenceGroup = vector<UIElement*>();
     telepresenceGroup.push_back(teleBat);
     telepresenceGroup.push_back(telePush);
     telepresenceGroup.push_back(teleScoop);
     uiHandler->addUIGroup(telepresenceGroup, "telepresence");
+}
+
+
+void GUI::setupThreeDBar(UIHandler* uiHandler, const int leftSidebarWidth)
+{
+    // SLIDERS
+    const int sliderWidth = 300;
+    const int sliderX = MARGIN_X/2 - sliderWidth/2;
+    const int sliderY = 1080 * 2/4;
+    const int spacer = 50;
+    
+    // name, bool horizontal, int trackX, int trackY, int trackLength, int handleWidth, int handleHeight
+    //3D SLIDER
+    UISlider *sliderScale = new UISlider("sliderScale", true, sliderX, sliderY +  1 * spacer, sliderWidth, 46, 50);
+    sliderScale->setImageHandleActive("3D Models/assets/knob.png");
+    sliderScale->setImageHandleIdle("3D Models/assets/knob.png");
+    sliderScale->setImageTrack("3D Models/assets/slider.png");
+    
+    uiHandler->addSlider(sliderScale);
     
     vector<UIElement*> threeDGroup = vector<UIElement*>();
     threeDGroup.push_back(sliderScale);
-
-    uiHandler->addUIGroup(threeDGroup, "3D");
     
+    uiHandler->addUIGroup(threeDGroup, "3D");
+}
+
+
+void GUI::setupUI(UIHandler* uiHandler) {
+    const int leftSidebarWidth = 420;
+    const int rightSidebarWidth = 420;
+    
+    setupRightSidebar(uiHandler, rightSidebarWidth);
+    
+    setupLeftSidebar(uiHandler, leftSidebarWidth);
     
     // drop shadow for middle region
     ofImage* centerDropShadowImg = new ofImage();
     centerDropShadowImg->loadImage("pin-shadow.png");
     
-    const int dropShadowX = sideBarLeftSize + 1;
+    const int dropShadowX = leftSidebarWidth + 1;
     const int dropShadowY = 1;
     
     UIImage *centerDropShadow = new UIImage(centerDropShadowImg, dropShadowX, dropShadowY);
     
     uiHandler->addImage(centerDropShadow);
+
     
     
-    UITriggers::buttonTrigger(telepresenceModeButton);
 }

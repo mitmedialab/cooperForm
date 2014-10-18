@@ -38,8 +38,6 @@ public:
     ofFbo            projectorOverlayImage;
     // image to be displayed on the touch screen
     ofFbo            touchScreenDisplayImage;
-    // image to be displayed on the vertical display
-    ofFbo            verticalDisplayImage;
     // image to be displayed on the left margin of the touch screen (only for 3D Mode)
     ofFbo            marginTouchDisplayImage;
 

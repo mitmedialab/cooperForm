@@ -44,7 +44,7 @@ void ReliefApplication::setup(){
     marginTouchDisplayImage.allocate(MARGIN_X, MARGIN_X, GL_RGBA);
 
     // setup camera interface
-    //cameraTracker.setup();
+    cameraTracker.setup();
     
     
     // setup kinect if using
@@ -150,6 +150,7 @@ void ReliefApplication::draw(){
     h = touchScreenDisplayImage.getHeight();
     
     ofBackground(255); //refresh
+                       //cameraTracker.drawCameraFeed(0, 0, 0, w, h);
     //currentShape->renderTangibleShape(w, h);
     currentShape->renderTouchscreenGraphics(w, h);
     touchScreenDisplayImage.end();
@@ -171,7 +172,8 @@ void ReliefApplication::draw(){
     // draw the projector image
     w = 1920;
     h = 1080;
-    projectorOverlayImage.draw(w, 0, w, h);
+    //cameraTracker.drawCameraFeed(0, w, 0, w, h);
+    //projectorOverlayImage.draw(w, 0, w, h);
 }
 
 //--------------------------------------------------------------

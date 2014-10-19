@@ -17,6 +17,8 @@ UISlider::UISlider(string name, bool horizontal, int trackX, int trackY, int tra
     
     this->trackX = trackX;
     this->trackY = trackY;
+    imageTrackX = trackX;
+    imageTrackY = trackY;
     
     handlePos = 0.0;
     
@@ -55,17 +57,16 @@ void UISlider::draw() {
     }
     
     if (trackImage->isAllocated()) {
-        int offsetX = 0;
-        int offsetY = 0;
+        int trackImageDrawX = imageTrackX;
+        int trackImageDrawY = imageTrackY;
+        
         if (horizontal) {
-            offsetX = trackImageOffsetSideways;
-            offsetY = trackImageOffset - trackImage->getHeight()/2;
+            trackImageDrawY += imageTrackOffset;
         }
         else {
-            offsetX = trackImageOffset - trackImage->getWidth()/2;
-            offsetY = trackImageOffsetSideways;
+            trackImageDrawX += imageTrackOffset;
         }
-        trackImage->draw(trackX + offsetX, trackY + offsetY);
+        trackImage->draw(trackImageDrawX, trackImageDrawY);
     }
     else {
         ofSetLineWidth(5);
@@ -106,6 +107,14 @@ void UISlider::hide() {
 
 void UISlider::setImageTrack(string imageName) {
     trackImage->loadImage(imageName);
+    if (horizontal) {
+        imageTrackX = trackX + trackLength/2 - trackImage->getWidth()/2 + handleWidth/2;
+        imageTrackY = trackY - trackImage->getHeight()/2;
+    }
+    else {
+        imageTrackX = trackX - trackImage->getWidth()/2;
+        imageTrackY = trackY + trackLength/2 - trackImage->getHeight()/2 + handleHeight/2;
+    }
 }
 void UISlider::setImageHandleIdle(string imageName) {
     handleImageIdle->loadImage(imageName);
@@ -114,14 +123,11 @@ void UISlider::setImageHandleActive(string imageName) {
     handleImageActive->loadImage(imageName);
 }
 void UISlider::setImageTrackOffset(int amount) {
-    trackImageOffset = amount;
-}
-void UISlider::setImageTrackOffsetSide(int amount) {
-    trackImageOffsetSideways = amount;
+    imageTrackOffset = amount;
 }
 
 void UISlider::setHandlePos(float val){
-    handlePos = ofClamp(val, 0,1);
+    handlePos = ofClamp(val, 0, 1);
 }
 void UISlider::setLockToPosThresh(float threshold) {
     lockToPosThreshold = threshold;
@@ -143,10 +149,10 @@ int UISlider::getHandleY() {
     else
         return (int)(trackY + trackLength * handlePos);
 }
-int UISlider::getVal() { // get pixel values
+double UISlider::getVal() { // get value (from 0 to 1)
     return handlePos;
 }
-float UISlider::getVal(float min, float max) { // get mapped values
+double UISlider::getVal(double min, double max) { // get mapped values
     return ofMap(getVal(), 0, 1, min, max);
 }
 
@@ -189,24 +195,23 @@ void UISlider::mouseDragged(int x, int y) {
         int newHandleX = x - mouseOffsetX;
         
         // constrain handle x within the track
-        newHandleX = ofClamp(newHandleX, trackX, trackX + trackLength - handleWidth);
+        newHandleX = ofClamp(newHandleX, trackX, trackX + trackLength - handleWidth/2);
         
-        handlePos = (double)(newHandleX - trackX) / trackLength;
+        handlePos = (double)(newHandleX - trackX) / (trackLength - handleWidth/2);
     }
     else { // vertical track
         int newHandleY = y - mouseOffsetY;
         
         // constrain handle y within the track
-        newHandleY = ofClamp(newHandleY, trackY, trackY + trackLength - handleHeight);
+        newHandleY = ofClamp(newHandleY, trackY, trackY + trackLength - handleHeight/2);
         
-        handlePos = (double)(newHandleY - trackY) / trackLength;
+        handlePos = (double)(newHandleY - trackY) / (trackLength - handleHeight/2);
     }
     
     for (float lockToPos : lockToPoses) {
         if (abs(handlePos - lockToPos) < lockToPosThreshold)
             handlePos = lockToPos;
     }
-    
     UITriggers::sliderTrigger(this);
 }
 

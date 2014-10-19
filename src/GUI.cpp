@@ -331,7 +331,7 @@ void GUI::setupThreeDBar(UIHandler* uiHandler, const int leftSidebarWidth)
     
     
     // SLIDERS
-    const int sliderWidth = 300 + 40;
+    const int sliderWidth = 280;
     const int sliderX = MARGIN_X/2 - sliderWidth/2;
     const int sliderY = 940;
     
@@ -342,10 +342,9 @@ void GUI::setupThreeDBar(UIHandler* uiHandler, const int leftSidebarWidth)
     sliderScale->setImageHandleIdle("3D Models/assets/knob.png");
     sliderScale->setImageTrack("3D Models/assets/slider.png");
     sliderScale->setImageTrackOffset(-10);
-    sliderScale->setImageTrackOffsetSide(20);
     sliderScale->setHandlePos(0.5);
     
-    sliderScale->setLockToPosThresh(0.01);
+    sliderScale->setLockToPosThresh(0.05);
     sliderScale->addLockToPos(0.5);
     sliderScale->addLockToPos(0);
     sliderScale->addLockToPos(1);

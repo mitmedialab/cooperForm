@@ -38,7 +38,17 @@ public:
     void setImageTrack(string imageName);
     void setImageHandleIdle(string imageName);
     void setImageHandleActive(string imageName);
-    void setInitialPos(float val); //should be between 0 and 1
+    void setImageTrackOffset(int amount);
+    void setImageTrackOffsetSide(int amount);
+    
+    void setHandlePos(float val); //should be between 0 and 1
+    
+    // closest handle will get to a "lock to pos" before getting snapped there
+    // threshold should be between 0 and 1
+    void setLockToPosThresh(float threshold);
+    // add a position along the track at which the handle will get snapped to when it's close
+    // between 0 and 1
+    void addLockToPos(float pos);
     
     int getHandleX();
     int getHandleY();
@@ -61,6 +71,8 @@ private:
     ofImage *trackImage;
     ofImage *handleImageIdle;
     ofImage *handleImageActive;
+    int trackImageOffset = 0;
+    int trackImageOffsetSideways = 0;
     
     bool enabled = true;
     
@@ -81,6 +93,9 @@ private:
     int mouseOffsetX, mouseOffsetY;
     
     bool visible = true;
+    
+    vector<float> lockToPoses;
+    float lockToPosThreshold = 0.1;
 };
 
 #endif /* defined(__cooperFORM__UISlider__) */

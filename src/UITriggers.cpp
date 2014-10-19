@@ -85,6 +85,7 @@ void UITriggers::sliderTrigger(UISlider *slider) {
     if (name == "sliderScale") {
         reliefApplication->threeDShapeObject->setScale(slider->getVal(0, 1));
     }
+    //cout << slider->getVal() << endl;
 }
 
 // initialize relevant static variables

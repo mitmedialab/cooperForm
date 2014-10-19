@@ -7,13 +7,12 @@ void ReliefApplication::setup(){
     ofSetFrameRate(30);
     ofSetVerticalSync(true);
   
+    // initialize the UI
+    setupUI();
     
     // set up OSCInterface
     // needs to be setup before UI
     backDisplayComputer = new OSCInterface("169.169.169.169", 86753);
-    
-    // initialize the UI
-    setupUI();
     
     // initialize communication with the pin display
 	mIOManager = new ShapeIOManager();
@@ -67,6 +66,7 @@ void ReliefApplication::setup(){
     
     ballMoverShapeObject = new MoveBallShapeObject();
     
+   
     
     // set our current shape object to a default shape object
     UITriggers::buttonTrigger(uiHandler->getButton("telepresence"));
@@ -161,7 +161,8 @@ void ReliefApplication::draw(){
     
     // draw margin image
     if (currentMode == "3D") {
-        currentShape->renderMarginGraphics(0, 0);
+        currentShape->renderMarginGraphics(0, 460);
+        uiHandler->getText("modelName")->setText(threeDShapeObject->getCurrentModelName());
     }
 
     // draw UI stuff

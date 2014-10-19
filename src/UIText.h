@@ -28,6 +28,7 @@ public:
     void setWidth(int width);
     void setAlignment(string alignment);
     void setColor(ofColor color);
+    void setText(string text);
     
     void enable() { };
     void disable() { };

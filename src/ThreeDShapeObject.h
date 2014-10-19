@@ -16,6 +16,12 @@
 
 class ThreeDShapeObject : public ShapeObject {
     
+    struct threeDModel
+    {
+        ofxAssimpModelLoader model;
+        string name;
+    };
+    
 public:
     ThreeDShapeObject();
     void update();
@@ -27,9 +33,14 @@ public:
     void setMouseDragInfo(int x, int y, int button);
     void setMousePressedInfo(int x, int y);
     void setScale(float uniformScaleVal);
+    
+    string getCurrentModelName();
+    
+    void changeModel(int idx);
+    void changeModel(string direction);
     void reset();
     
-    ofxAssimpModelLoader model;
+    vector<threeDModel*> models;
     ofCamera cam;
     ofLight	light;
     ofVboMesh vbo;
@@ -40,6 +51,7 @@ public:
     
     ofImage bgImg;
     ofShader shader;
+    
     
     //arcball
     ofQuaternion    quat;
@@ -53,8 +65,10 @@ public:
     
 private:
     string shape_name = "3D";
+    string currentModelName = "empty";
     float scale;
-
+    int numLoadedModels;
+    int idx;
 };
 
 #endif /* defined(__cooperFORM__ThreeDShapeObject__) */

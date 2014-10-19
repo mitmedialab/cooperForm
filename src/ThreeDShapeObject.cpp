@@ -11,14 +11,28 @@
 
 ThreeDShapeObject::ThreeDShapeObject() {
     
-    model.loadModel("models/beetle3.3ds");
+    dampen = 1.3;
+    idx = 0;
+    numLoadedModels = 3;
+    for (int i = 0; i < numLoadedModels; i++)
+    {
+        models.push_back(new threeDModel());
+    }
+    models.at(0)->model.loadModel("models/beetle3.3ds");
+    models.at(0)->name = "Car";
+    models.at(1)->model.loadModel("models/NewSquirrel.3ds");
+    models.at(1)->name = "Squirrel";
+    models.at(2)->model.loadModel("models/cube1.3ds");
+    models.at(2)->name = "Cube";
+    
+    //model.loadModel("models/beetle3.3ds");
     bgImg.loadImage("test.jpg");
     ofEnableBlendMode(OF_BLENDMODE_ALPHA);
     fbo.allocate(TOUCHSCREEN_VISIBLE_SIZE_X, TOUCHSCREEN_SIZE_Y, GL_RGBA);
     
     shader.load("shaders/heightMapShader.vert", "shaders/heightMapShader.frag");
-    dampen = 1.3;
-    
+ 
+    currentModelName = models.at(idx)->name;
 }
 
 //--------------------------------------------------------------
@@ -38,12 +52,6 @@ void ThreeDShapeObject::renderProjectorOverlay(int w, int h) {
 //--------------------------------------------------------------
 
 void ThreeDShapeObject::renderTangibleShape(int w, int h) {
-    
-}
-
-//--------------------------------------------------------------
-
-void ThreeDShapeObject::renderTouchscreenGraphics(int w, int h) {
     ofPushStyle();
     ofBackground(0);
     
@@ -51,20 +59,26 @@ void ThreeDShapeObject::renderTouchscreenGraphics(int w, int h) {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glViewport(0, 0, TOUCHSCREEN_VISIBLE_SIZE_X, TOUCHSCREEN_SIZE_Y);
-    glOrtho(0.0, TOUCHSCREEN_VISIBLE_SIZE_X, 0, TOUCHSCREEN_SIZE_Y, -500, 500);
+    glOrtho(0.0, TOUCHSCREEN_VISIBLE_SIZE_X, 0, TOUCHSCREEN_SIZE_Y, -1000, 500);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glEnable(GL_DEPTH_TEST);
     
     shader.begin();
-        model.setPosition((1920 - 840) / 2, (1080)/2, -150);
-        model.setRotation(1, -1 * angle, axis.x, axis.y, axis.z);
-        model.setScale(scale, scale, scale);
-        model.drawFaces();
+    models.at(idx)->model.setPosition((1920 - 840) / 2, (1080)/2, -150);
+    models.at(idx)->model.setRotation(1, -1 * angle, axis.x, axis.y, axis.z);
+    models.at(idx)->model.setScale(.5 + (.8 * scale), .5 + (.8 * scale), .5 + (.8 * scale));
+    models.at(idx)->model.drawFaces();
     shader.end();
     
     glDisable(GL_DEPTH_TEST);
     ofPopStyle();
+}
+
+//--------------------------------------------------------------
+
+void ThreeDShapeObject::renderTouchscreenGraphics(int w, int h) {
+    renderTangibleShape(w, h);
 }
 
 //--------------------------------------------------------------
@@ -85,16 +99,58 @@ void ThreeDShapeObject::renderMarginGraphics(int x, int y)
     ofPushMatrix();
         ofTranslate(x + MARGIN_X/2,y + MARGIN_X/2);
         glEnable(GL_DEPTH_TEST);
-        model.setPosition(0, 0, 0);
-        model.setRotation(1, angle, axis.x, axis.y, axis.z);
-        model.setScale(0.4, 0.4, 0.4);
+        models.at(idx)->model.setPosition(0, 0, 0);
+        models.at(idx)->model.setRotation(1, angle, axis.x, axis.y, axis.z);
+        models.at(idx)->model.setScale(0.2, 0.2, 0.2);
     
         //draw wireframe in black
+        ofSetColor(200);
+        //glPolygonMode( GL_FRONT, GL_LINE );
+        models.at(idx)->model.drawFaces();
+        models.at(idx)->model.setScale(0.201, 0.201, 0.201);
         ofSetColor(0);
-        model.drawWireframe();
+        models.at(idx)->model.drawWireframe();
         glDisable(GL_DEPTH_TEST);
     ofPopMatrix();
     ofPopStyle();
+}
+
+//--------------------------------------------------------------
+
+void ThreeDShapeObject::changeModel(int idx)
+{
+    if(idx > numLoadedModels)
+    {
+        cout << "can't change Model: only " << numLoadedModels << "are available" << endl;
+        return;
+    }
+    this->idx = idx;
+    currentModelName = models.at(idx)->name;
+}
+
+//--------------------------------------------------------------
+
+void ThreeDShapeObject::changeModel(string direction)
+{
+    if(direction != "left" && direction != "right")
+    {
+        cout << "changeModel command unknow" << endl;
+        return;
+    }
+    else if(direction == "left")
+    {
+        idx--;
+        if (idx < 0)
+            idx = numLoadedModels - 1;
+    }
+    else
+    {
+        idx++;
+        if (idx >= numLoadedModels) {
+            idx = 0;
+        }
+    }
+    currentModelName = models.at(idx)->name;
 }
 
 //--------------------------------------------------------------
@@ -132,3 +188,11 @@ void ThreeDShapeObject::setScale(float uniformScaleVal)
 }
 
 //--------------------------------------------------------------
+
+string ThreeDShapeObject::getCurrentModelName()
+{
+    return currentModelName;
+}
+
+//--------------------------------------------------------------
+

@@ -140,7 +140,6 @@ void ReliefApplication::draw(){
     
     ofPopMatrix();
     pinHeightMapImage.end();
-    
     ofPopStyle();
     
     // render the touch screen display

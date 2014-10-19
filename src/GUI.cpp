@@ -98,6 +98,7 @@ void GUI::setupLeftSidebar(UIHandler *uiHandler, const int leftSidebarWidth) {
     setupInfoBar(uiHandler, leftSidebarWidth);
     setupTeleBar(uiHandler, leftSidebarWidth);
     setupThreeDBar(uiHandler, leftSidebarWidth);
+    setupWaveBar(uiHandler, leftSidebarWidth);
 }
 
 //--------------------------------------------------------------
@@ -140,7 +141,7 @@ void GUI::setupInfoBar(UIHandler *uiHandler, const int leftSidebarWidth) {
     UIText* inFORMText = new UIText(descTextStr, "inFORM description", descTextSize, descTextX, descTextY);
     inFORMText->setAlignment("left");
     inFORMText->setWidth(descTextWidth);
-    inFORMText->setColor(ofColor(45,45,45));
+    inFORMText->setColor(ofColor(35,35,35));
     
     // divider
     ofImage* dividerImg = new ofImage();
@@ -151,7 +152,7 @@ void GUI::setupInfoBar(UIHandler *uiHandler, const int leftSidebarWidth) {
     const int dividerX = leftSidebarWidth/2 - dividerWidth/2;
     const int dividerY = descTextY + 210;
     
-    UIImage* divider = new UIImage("divider.png", dividerX, dividerY);
+    UIImage* divider = new UIImage(dividerImg, dividerX, dividerY);
     
     // tmg logo
     ofImage* tmgLogImg = new ofImage();
@@ -173,7 +174,7 @@ void GUI::setupInfoBar(UIHandler *uiHandler, const int leftSidebarWidth) {
     UIText* tmgText = new UIText(tmgTextStr, "TMG description", tmgTextSize, tmgTextX, tmgTextY);
     tmgText->setAlignment("left");
     tmgText->setWidth(tmgTextWidth);
-    tmgText->setColor(ofColor(45,45,45));
+    tmgText->setColor(ofColor(35,35,35));
     
     uiHandler->addImage(inFORMLogo);
     uiHandler->addText(creatorText);
@@ -196,43 +197,195 @@ void GUI::setupInfoBar(UIHandler *uiHandler, const int leftSidebarWidth) {
 //--------------------------------------------------------------
 
 void GUI::setupTeleBar(UIHandler *uiHandler, const int leftSidebarWidth) {
+    
+    // divider
+    ofImage* dividerImg = new ofImage();
+    dividerImg->loadImage("divider.png");
+    
+    const int dividerWidth = dividerImg->getWidth();
+    const int dividerHeight = dividerImg->getHeight();
+    const int dividerX = leftSidebarWidth/2 - dividerWidth/2;
+    
+    // headline text
+    const int textWidth = 300;
+    const int textX = leftSidebarWidth/2 - textWidth/2;
+    const int headlineY = 60;
+    const int descY = 105;
+    
+    const int headlineSize = 16;
+    const int textSize = 10;
+    
+    const string headlineStr = "Teleoperation Tips";
+    const string teleDescStr = "inFORM virtually mirrors your hands to directly control and play with the red ball. Here are some fun things to try out:";
+    
+    UIText* headline = new UIText(headlineStr, "tele headline", headlineSize, textX, headlineY);
+    headline->setWidth(textWidth);
+    headline->setColor(ofColor(35,35,35));
+    UIText* teleDesc =new UIText(teleDescStr, "tele description", textSize, textX, descY);
+    teleDesc->setWidth(textWidth);
+    teleDesc->setColor(ofColor(35,35,35));
+    
+    const int divider1Y = descY + 125;
+    UIImage* divider1 = new UIImage(dividerImg,
+                                    dividerX, divider1Y);
+    
     // telepresence stuff
     ofImage* teleBatImage = new ofImage();
     teleBatImage->loadImage("Teleoperation/assets/bat.png");
     
+    const int teleBatHeight = teleBatImage->getHeight();
     const int teleBatWidth = teleBatImage->getWidth();
     const int teleBatX = leftSidebarWidth/2 - teleBatWidth/2;
-    const int teleBatY = 50;
+    const int teleBatY = divider1Y + 25;
+    const int teleSpacing = 60;
+    const int captionTextHeight = 30;
     
     UIImage *teleBat = new UIImage(teleBatImage, teleBatX, teleBatY);
+    teleBat->setCaption("Bat the ball left and right", 10, 300);
+    teleBat->getCaption()->setColor(ofColor(35,35,35));
     
+    const int divider2Y = teleBatY + teleBatHeight + captionTextHeight + teleSpacing/2;
+    UIImage* divider2 = new UIImage(dividerImg,
+                                    dividerX, divider2Y);
     
-    const int telePushY = teleBatY + 175;
+    const int telePushY = teleBatY + teleBatHeight + captionTextHeight + teleSpacing;
     ofImage* telePushImage = new ofImage();
     telePushImage->loadImage("Teleoperation/assets/push.png");
     
-    teleBat->setCaption("Bat the ball left and right", 10, 300);
-    
     UIImage *telePush = new UIImage(telePushImage, teleBatX, telePushY);
-    
     telePush->setCaption("Cup your hand and push", 10, 300);
+    telePush->getCaption()->setColor(ofColor(35,35,35));
+    
+    const int divider3Y = telePushY + teleBatHeight + captionTextHeight + teleSpacing/2;
+    UIImage* divider3 = new UIImage(dividerImg,
+                                    dividerX, divider3Y);
     
     ofImage* teleScoopImage = new ofImage();
     teleScoopImage->loadImage("Teleoperation/assets/scoop.png");
-    const int teleScoopY = teleBatY + 2*175;
+    
+    const int teleScoopY = telePushY + teleBatHeight + captionTextHeight + teleSpacing;
     UIImage *teleScoop = new UIImage(teleScoopImage, teleBatX, teleScoopY);
-    
     teleScoop->setCaption("Start low and scoop it", 10, 300);
+    teleScoop->getCaption()->setColor(ofColor(35,35,35));
     
+    uiHandler->addText(headline);
+    uiHandler->addText(teleDesc);
+    uiHandler->addImage(divider1);
     uiHandler->addImage(teleBat);
+    uiHandler->addImage(divider2);
     uiHandler->addImage(telePush);
+    uiHandler->addImage(divider3);
     uiHandler->addImage(teleScoop);
     
+    
     vector<UIElement*> telepresenceGroup = vector<UIElement*>();
+    telepresenceGroup.push_back(headline);
+    telepresenceGroup.push_back(teleDesc);
+    telepresenceGroup.push_back(divider1);
     telepresenceGroup.push_back(teleBat);
+    telepresenceGroup.push_back(divider2);
     telepresenceGroup.push_back(telePush);
+    telepresenceGroup.push_back(divider3);
     telepresenceGroup.push_back(teleScoop);
     uiHandler->addUIGroup(telepresenceGroup, "telepresence");
+}
+
+//--------------------------------------------------------------
+
+void GUI::setupWaveBar(UIHandler *uiHandler, const int leftSidebarWidth) {
+    
+    // divider
+    ofImage* dividerImg = new ofImage();
+    dividerImg->loadImage("divider.png");
+    
+    const int dividerWidth = dividerImg->getWidth();
+    const int dividerHeight = dividerImg->getHeight();
+    const int dividerX = leftSidebarWidth/2 - dividerWidth/2;
+    
+    // headline text
+    const int textWidth = 300;
+    const int textX = leftSidebarWidth/2 - textWidth/2;
+    const int headlineY = 60;
+    const int descY = 105;
+    
+    const int headlineSize = 16;
+    const int textSize = 10;
+    
+    const string headlineStr = "Wave Tips";
+    const string waveDescStr = "Wave your hands over the table on the right to create various water ripples across the remote tabletop.";
+    
+    UIText* headline = new UIText(headlineStr, "wave headline", headlineSize, textX, headlineY);
+    headline->setWidth(textWidth);
+    headline->setColor(ofColor(35,35,35));
+    UIText* waveDesc =new UIText(waveDescStr, "wave description", textSize, textX, descY);
+    waveDesc->setWidth(textWidth);
+    waveDesc->setColor(ofColor(35,35,35));
+    
+    const int divider1Y = descY + 125;
+    UIImage* divider1 = new UIImage(dividerImg,
+                                    dividerX, divider1Y);
+    
+    
+    
+    // wavepresence stuff
+    ofImage* waveSideImage = new ofImage();
+    waveSideImage->loadImage("Wave/assets/side.png");
+    
+    const int waveSideHeight = waveSideImage->getHeight();
+    const int waveSideWidth = waveSideImage->getWidth();
+    const int waveSideX = leftSidebarWidth/2 - waveSideWidth/2;
+    const int waveSideY = divider1Y + 25;
+    const int waveSpacing = 60;
+    const int captionTextHeight = 30;
+    
+    UIImage *waveSide = new UIImage(waveSideImage, waveSideX, waveSideY);
+    waveSide->setCaption("Move your hand side to side", 10, 300);
+    waveSide->getCaption()->setColor(ofColor(35,35,35));
+    
+    const int divider2Y = waveSideY + waveSideHeight + captionTextHeight + waveSpacing/2;
+    UIImage* divider2 = new UIImage(dividerImg,
+                                    dividerX, divider2Y);
+    
+    const int waveVerticalY = waveSideY + waveSideHeight + captionTextHeight + waveSpacing;
+    ofImage* waveVerticalImage = new ofImage();
+    waveVerticalImage->loadImage("Wave/assets/height.png");
+    
+    UIImage *waveVertical = new UIImage(waveVerticalImage, waveSideX, waveVerticalY);
+    waveVertical->setCaption("Up & down for stronger waves", 10, 300);
+    waveVertical->getCaption()->setColor(ofColor(35,35,35));
+    
+    const int divider3Y = waveVerticalY + waveSideHeight + captionTextHeight + waveSpacing/2;
+    UIImage* divider3 = new UIImage(dividerImg,
+                                    dividerX, divider3Y);
+    
+    ofImage* waveBothImage = new ofImage();
+    waveBothImage->loadImage("Wave/assets/both.png");
+    
+    const int waveBothY = waveVerticalY + waveSideHeight + captionTextHeight + waveSpacing;
+    UIImage *waveBoth = new UIImage(waveBothImage, waveSideX, waveBothY);
+    waveBoth->setCaption("Try both hands at once", 10, 300);
+    waveBoth->getCaption()->setColor(ofColor(35,35,35));
+    
+    uiHandler->addText(headline);
+    uiHandler->addText(waveDesc);
+    uiHandler->addImage(divider1);
+    uiHandler->addImage(waveSide);
+    uiHandler->addImage(divider2);
+    uiHandler->addImage(waveVertical);
+    uiHandler->addImage(divider3);
+    uiHandler->addImage(waveBoth);
+    
+    
+    vector<UIElement*> wavepresenceGroup = vector<UIElement*>();
+    wavepresenceGroup.push_back(headline);
+    wavepresenceGroup.push_back(waveDesc);
+    wavepresenceGroup.push_back(divider1);
+    wavepresenceGroup.push_back(waveSide);
+    wavepresenceGroup.push_back(divider2);
+    wavepresenceGroup.push_back(waveVertical);
+    wavepresenceGroup.push_back(divider3);
+    wavepresenceGroup.push_back(waveBoth);
+    uiHandler->addUIGroup(wavepresenceGroup, "wavy");
 }
 
 //--------------------------------------------------------------
@@ -257,7 +410,7 @@ void GUI::setupThreeDBar(UIHandler* uiHandler, const int leftSidebarWidth)
     const string headlineStr = "3d Model Controls";
     const string textStr = "Use the touch screen controls located below to load a new 3d model, rotate it around, and/or scale it to different sizes.";
     const string caption1Str = "Select between 3d models";
-    const string caption2Str = "SlideFinger below to rotate";
+    const string caption2Str = "Slide Finger below to rotate";
     const string caption3Str = "Drag slider to resize model";
     //string modelNameStr = ((ReliefApplication*)ofGetAppPtr())->threeDShapeObject->getCurrentModelName(); // could be nicer
     const string modelNameStr = " "; //will be changed dynamically
@@ -271,22 +424,22 @@ void GUI::setupThreeDBar(UIHandler* uiHandler, const int leftSidebarWidth)
     
     headline->setAlignment("left");
     headline->setWidth(textWidth);
-    headline->setColor(ofColor(45,45,45));
+    headline->setColor(ofColor(35,35,35));
     text->setAlignment("left");
     text->setWidth(textWidth);
-    text->setColor(ofColor(45,45,45));
+    text->setColor(ofColor(35,35,35));
     caption1->setAlignment("left");
     caption1->setWidth(textWidth);
-    caption1->setColor(ofColor(45,45,45));
+    caption1->setColor(ofColor(35,35,35));
     caption2->setAlignment("left");
     caption2->setWidth(textWidth);
-    caption2->setColor(ofColor(45,45,45));
+    caption2->setColor(ofColor(35,35,35));
     caption3->setAlignment("left");
     caption3->setWidth(textWidth);
-    caption3->setColor(ofColor(45,45,45));
+    caption3->setColor(ofColor(35,35,35));
     modelName->setAlignment("center");
     modelName->setWidth(textWidth);
-    modelName->setColor(ofColor(45,45,45));
+    modelName->setColor(ofColor(35,35,35));
 
     
     // DIVIDERS

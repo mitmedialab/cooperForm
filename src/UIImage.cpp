@@ -24,7 +24,7 @@ void UIImage::draw() {
     if (visible) {
         image->draw(x,y, image->getWidth(), image->getHeight());
         if (hasCaption)
-            captionText.draw();
+            captionText->draw();
     }
 }
 string UIImage::getName() {
@@ -39,8 +39,12 @@ void UIImage::hide() {
 }
 
 void UIImage::setCaption(string text, int size, int width) {
-    captionText = UIText(text, text, size, x + image->getWidth()/2 - width/2, y + image->getHeight() + 20);
-    captionText.setWidth(width);
-    captionText.setAlignment("center");
+    captionText = new UIText(text, text, size, x + image->getWidth()/2 - width/2, y + image->getHeight() + 25);
+    captionText->setWidth(width);
+    captionText->setAlignment("center");
     hasCaption = true;
+}
+
+UIText* UIImage::getCaption() {
+    return captionText;
 }

@@ -30,10 +30,12 @@ public:
     void hide();
     
     void setCaption(string text, int size, int width);
+    
+    UIText* getCaption();
 private:
     string name;
     ofImage *image;
-    UIText captionText;
+    UIText *captionText;
     int x, y;
     bool visible = true;
     bool hasCaption = false;

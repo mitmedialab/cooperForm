@@ -61,10 +61,12 @@ void UITriggers::buttonTrigger(UIButton *button) {
         }
         else if (name == "modelSelectLeft")
         {
+            reliefApplication->threeDShapeObject->changeModel("left");
             cout << "modelSelectLeft" <<endl;
         }
         else if (name == "modelSelectRight")
         {
+            reliefApplication->threeDShapeObject->changeModel("right");
             cout << "modelSelectRight" <<endl;
         }
     }

@@ -239,14 +239,79 @@ void GUI::setupTeleBar(UIHandler *uiHandler, const int leftSidebarWidth) {
 
 void GUI::setupThreeDBar(UIHandler* uiHandler, const int leftSidebarWidth)
 {
+    //TEXT
+    const int textWidth = 300;
+    const int textX = 60;
+    const int textY = 105;
+    const int headlineY = 60;
+    const int captionX = 88;
+    const int caption1Y = 300;
+    const int caption2Y = 570;
+    const int caption3Y = 840;
+    const int modelNameY = 380;
+    
+    const int headlineSize = 16;
+    const int textSize = 10;
+    const int modelNameSize = 20;
+    
+    const string headlineStr = "3d Model Controls";
+    const string textStr = "Use the touch screen controls located below to load a new 3d model, rotate it around, and/or scale it to different sizes.";
+    const string caption1Str = "Select between 3d models";
+    const string caption2Str = "SlideFinger below to rotate";
+    const string caption3Str = "Drag slider to resize model";
+    //string modelNameStr = ((ReliefApplication*)ofGetAppPtr())->threeDShapeObject->getCurrentModelName(); // could be nicer
+    const string modelNameStr = " "; //will be changed dynamically
+    
+    UIText* text = new UIText(textStr, "3D description", textSize, textX, textY);
+    UIText* headline = new UIText(headlineStr, "3d headline", headlineSize, textX, headlineY);
+    UIText* caption1 = new UIText(caption1Str, "caption1", textSize, captionX, caption1Y);
+    UIText* caption2 = new UIText(caption2Str, "caption2", textSize, captionX, caption2Y);
+    UIText* caption3 = new UIText(caption3Str, "caption3", textSize, captionX, caption3Y);
+    UIText* modelName = new UIText(modelNameStr, "modelName", modelNameSize, textX, modelNameY);
+    
+    headline->setAlignment("left");
+    headline->setWidth(textWidth);
+    headline->setColor(ofColor(45,45,45));
+    text->setAlignment("left");
+    text->setWidth(textWidth);
+    text->setColor(ofColor(45,45,45));
+    caption1->setAlignment("left");
+    caption1->setWidth(textWidth);
+    caption1->setColor(ofColor(45,45,45));
+    caption2->setAlignment("left");
+    caption2->setWidth(textWidth);
+    caption2->setColor(ofColor(45,45,45));
+    caption3->setAlignment("left");
+    caption3->setWidth(textWidth);
+    caption3->setColor(ofColor(45,45,45));
+    modelName->setAlignment("center");
+    modelName->setWidth(textWidth);
+    modelName->setColor(ofColor(45,45,45));
+
+    
+    // DIVIDERS
+    ofImage* dividerImg = new ofImage();
+    dividerImg->loadImage("divider.png");
+    
+    const int dividerWidth = dividerImg->getWidth();
+    const int dividerHeight = dividerImg->getHeight();
+    const int dividerX = leftSidebarWidth/2 - dividerWidth/2;
+    const int dividerY = 270;
+    const int dividerSpacerY = 270;
+    
+    UIImage* divider1 = new UIImage(dividerImg, dividerX, dividerY);
+    UIImage* divider2 = new UIImage(dividerImg, dividerX, dividerY + 1 * dividerSpacerY);
+    UIImage* divider3 = new UIImage(dividerImg, dividerX, dividerY + 2 * dividerSpacerY);
+    
+    
     //BUTTONS
     // UIButton name = UIButton("name", x,y, w,h)
     const int modelSelectButtonWidth  = 142;
     const int modelSelectButtonHeight = 70;
     
-    const int modelSelectButtonX = 20;
-    const int modelSelectButtonY = 300;
-    const int spacer = 200;
+    const int modelSelectButtonX = 60;
+    const int modelSelectButtonY = 440;
+    const int spacer = 160;
     
     UIButton* modelSelectButtonLeft
     = new UIButton("modelSelectLeft",
@@ -265,25 +330,10 @@ void GUI::setupThreeDBar(UIHandler* uiHandler, const int leftSidebarWidth)
     modelSelectButtonRight->setImageSelected("3D Models/assets/rarrow.png");
     
     
-    /*
-    ofImage* modelSelectButtonLeftImg = new ofImage();
-    modelSelectButtonLeftImg->loadImage("3D Models/assets/larrow.png");
-    
-    ofImage* modelSelectButtonRightImg = new ofImage();
-    modelSelectButtonRightImg->loadImage("3D Models/assets/rarrow.png");
-    
-    const int selectButtonWidth = modelSelectButtonLeftImg->getWidth();
-    const int selectButtonHeight = modelSelectButtonLeftImg->getHeight();
-    const int selectButtonX = leftSidebarWidth/2 - selectButtonWidth/2;
-    const int selectButtonY = selectButtonX;
-    
-    UIImage *modelSelect = new UIImage(modelSelectButtonLeftImg, informLogoX, informLogoY)
-    */
-    
     // SLIDERS
     const int sliderWidth = 300;
-    const int sliderX = MARGIN_X/2 - sliderWidth/2;
-    const int sliderY = 1080 * 2/4;
+    const int sliderX = 60;
+    const int sliderY = 940;
     
     // name, bool horizontal, int trackX, int trackY, int trackLength, int handleWidth, int handleHeight
     //3D SLIDER
@@ -294,14 +344,33 @@ void GUI::setupThreeDBar(UIHandler* uiHandler, const int leftSidebarWidth)
     sliderScale->setInitialPos(0.5);
     
     
+    //SETUP
     uiHandler->addButton(modelSelectButtonLeft);
     uiHandler->addButton(modelSelectButtonRight);
     uiHandler->addSlider(sliderScale);
-    
+    uiHandler->addImage(divider1);
+    uiHandler->addImage(divider2);
+    uiHandler->addImage(divider3);
+    uiHandler->addText(headline);
+    uiHandler->addText(text);
+    uiHandler->addText(caption1);
+    uiHandler->addText(caption2);
+    uiHandler->addText(caption3);
+    uiHandler->addText(modelName);
+
     vector<UIElement*> threeDGroup = vector<UIElement*>();
     threeDGroup.push_back(modelSelectButtonLeft);
     threeDGroup.push_back(modelSelectButtonRight);
     threeDGroup.push_back(sliderScale);
+    threeDGroup.push_back(divider1);
+    threeDGroup.push_back(divider2);
+    threeDGroup.push_back(divider3);
+    threeDGroup.push_back(headline);
+    threeDGroup.push_back(text);
+    threeDGroup.push_back(caption1);
+    threeDGroup.push_back(caption2);
+    threeDGroup.push_back(caption3);
+    threeDGroup.push_back(modelName);
     
     uiHandler->addUIGroup(threeDGroup, "3D");
 }

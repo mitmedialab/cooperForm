@@ -166,3 +166,11 @@ UISlider* UIHandler::getSlider(string name) {
     }
     return NULL;
 }
+
+UIText* UIHandler::getText(string name) {
+    for (UIText *text : texts) {
+        if (text->getName() == name)
+            return text;
+    }
+    return NULL;
+}

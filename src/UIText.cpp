@@ -53,6 +53,10 @@ void UIText::setColor(ofColor color) {
     this->color = color;
 }
 
+void UIText::setText(string text) {
+   this->text = text;
+}
+
 void UIText::show() {
     visible = true;
 }

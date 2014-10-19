@@ -39,6 +39,8 @@ string UIButton::getName() {
 }
 
 void UIButton::draw() {
+    if (!visible)
+        return;
     
     if (buttonImageActive->isAllocated()) {
         if (isSelected())

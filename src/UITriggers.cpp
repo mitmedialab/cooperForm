@@ -53,8 +53,8 @@ void UITriggers::buttonTrigger(UIButton *button) {
             uiHandler->select(button);
             uiHandler->hideUIGroup("telepresence");
             uiHandler->hideUIGroup("wavy");
-            uiHandler->showUIGroup("3D");
-            uiHandler->hideUIGroup("math");
+            uiHandler->hideUIGroup("3D");
+            uiHandler->showUIGroup("math");
             uiHandler->hideUIGroup("info");
             UITriggers::lastModeSwitched = ofGetElapsedTimeMillis();
             reliefApplication->showInfo = false;

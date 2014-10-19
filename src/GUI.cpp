@@ -121,7 +121,7 @@ void GUI::setupInfoBar(UIHandler *uiHandler, const int leftSidebarWidth) {
     // creator text
     const int creatorTextWidth = 270;
     const int creatorTextX = leftSidebarWidth/2 - creatorTextWidth/2;
-    const int creatorTextY = informLogoY + informLogoHeight + 50;
+    const int creatorTextY = informLogoY + informLogoHeight + 25;
     const int creatorTextSize = 9;
     const string creatorTextStr = "Daniel Leithinger, Sean Follmer, Alex Olwal, Akimitsu Hogge, Hiroshi Ishii";
     
@@ -133,7 +133,7 @@ void GUI::setupInfoBar(UIHandler *uiHandler, const int leftSidebarWidth) {
     // inFORM description
     const int descTextWidth = 300;
     const int descTextX = leftSidebarWidth/2 - descTextWidth/2;
-    const int descTextY = creatorTextY + creatorText->getHeight() + 50;
+    const int descTextY = creatorTextY + 100;
     const int descTextSize = 10;
     const string descTextStr = "The inFORM is a Dynamic Shape Display that can render 3D content physically, so users can interact with digital information in a tangible way while also interacting with the physical world around it.";
     
@@ -149,7 +149,7 @@ void GUI::setupInfoBar(UIHandler *uiHandler, const int leftSidebarWidth) {
     const int dividerWidth = dividerImg->getWidth();
     const int dividerHeight = dividerImg->getHeight();
     const int dividerX = leftSidebarWidth/2 - dividerWidth/2;
-    const int dividerY = descTextY + inFORMText->getHeight() + 50;
+    const int dividerY = descTextY + 210;
     
     UIImage* divider = new UIImage("divider.png", dividerX, dividerY);
     

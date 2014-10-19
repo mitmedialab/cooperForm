@@ -10,7 +10,7 @@ void ReliefApplication::setup(){
     
     // set up OSCInterface
     // needs to be setup before UI
-    backDisplayComputer = new OSCInterface("169.254.113.42", 86753);
+    backDisplayComputer = new OSCInterface("169.169.169.169", 86753);
     
     // initialize the UI
     setupUI();
@@ -131,6 +131,13 @@ void ReliefApplication::draw(){
     ofTranslate(w, -h);
     currentShape->renderTangibleShape(-w, h);
     
+    if (ballMoverShapeObject->isBallInCorner()) {
+        ofSetColor(255);
+        ofCircle(10,10, 10,10);
+        ofSetColor(0);
+        ofCircle(10,10, 6,6);
+    }
+    
     ofPopMatrix();
     pinHeightMapImage.end();
     
@@ -209,6 +216,10 @@ void ReliefApplication::setMode(string newMode) {
     else if (currentMode == "3D") {
         threeDShapeObject->reset();
         currentShape = threeDShapeObject;
+    }
+    else if (currentMode == "math") {
+        currentShape = ballMoverShapeObject;
+        ballMoverShapeObject->moveBallToCorner();
     }
 
 }

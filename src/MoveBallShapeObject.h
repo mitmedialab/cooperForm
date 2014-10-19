@@ -26,7 +26,7 @@ public:
     void renderTangibleShape(int w, int h);
     
     
-    void renderTouchScreenGraphics(int w, int h);
+    void renderTouchscreenGraphics(int w, int h);
     
     void renderProjectorOverlay(int w, int h){};
     
@@ -36,14 +36,14 @@ public:
     void moveBallToCenter();
     void moveBallToCorner();
     
+    bool isBallInCorner();
 private:
     // buffer to modify
+    bool toCenter = false;
     ofFbo depthBuffer;
     long startAnimationTime;
-    long animationTime = 4500;
+    long animationTime = 4000;
     
-    // true if moving ball to center
-    // false if moving ball to corner
-    bool toCorner;
+    bool ballInCorner = false;
 };
 #endif /* defined(__cooperFORM__MoveBallShapeObject__) */

@@ -226,9 +226,10 @@ void ReliefApplication::setMode(string newMode) {
             ballMoverShapeObject->moveBallToCorner();
     }
     else if (currentMode == "math") {
-        //if (!ballMoverShapeObject->isBallInCorner())
-            //ballMoverShapeObject->moveBallToCorner();
         currentShape = mathShapeObject;
+        
+        if (!ballMoverShapeObject->isBallInCorner())
+            ballMoverShapeObject->moveBallToCorner();
     }
 
 }

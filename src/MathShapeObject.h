@@ -33,7 +33,6 @@ private:
     
     ofFbo touchscreenImage; //FBO where we render graphics for pins
     ofFbo pinHeightMapImage; //FBO where we render height map
-    ofFbo pinHeightMapImageSmall; //FBO to draw on inFORM
     ofFbo projectorImage; //FBO that will be displayed from the projector
 };
 

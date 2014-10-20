@@ -44,7 +44,6 @@ public:
     ofCamera cam;
     ofLight	light;
     ofVboMesh vbo;
-    ofFbo pinHeightMapImageSmall;
     ofFbo pinHeightMapImage;
     
     string get_shape_name() {return shape_name; };

@@ -11,9 +11,7 @@
 MathShapeObject::MathShapeObject() {
     touchscreenImage.allocate(TOUCHSCREEN_VISIBLE_SIZE_X, TOUCHSCREEN_SIZE_Y, GL_RGBA);
     pinHeightMapImage.allocate(TOUCHSCREEN_VISIBLE_SIZE_X, TOUCHSCREEN_SIZE_Y, GL_RGBA);
-    pinHeightMapImageSmall.allocate(RELIEF_PHYSICAL_SIZE_X, RELIEF_PHYSICAL_SIZE_Y, GL_RGBA);
     projectorImage.allocate(PROJECTOR_RAW_RESOLUTION_X, PROJECTOR_RAW_RESOLUTION_Y, GL_RGBA);
-    
 }
 
 //--------------------------------------------------------------
@@ -51,14 +49,6 @@ void MathShapeObject::update() {
     ofPopStyle();
     pinHeightMapImage.end();
     
-    pinHeightMapImageSmall.begin();
-    ofPushStyle();
-    ofBackground(0);
-    ofSetColor(255);
-    pinHeightMapImage.draw(0, 0, RELIEF_SIZE_X, RELIEF_SIZE_Y);
-    ofPopStyle();
-    pinHeightMapImageSmall.end();
-    
     projectorImage.begin();
     ofPushStyle();
     ofBackground(0,0,0);
@@ -83,7 +73,7 @@ void MathShapeObject::renderProjectorOverlay(int w, int h) {
 //--------------------------------------------------------------
 
 void MathShapeObject::renderTangibleShape(int w, int h) {
-
+    pinHeightMapImage.draw(0, 0, w, h);
 }
 
 //--------------------------------------------------------------
@@ -91,7 +81,6 @@ void MathShapeObject::renderTangibleShape(int w, int h) {
 void MathShapeObject::renderTouchscreenGraphics(int w, int h) {
     touchscreenImage.draw(0, 0);
     //pinHeightMapImage.draw(0, 0);
-    //pinHeightMapImageSmall.draw(0, 0);
     //projectorImage.draw(0, 0);
 }
 

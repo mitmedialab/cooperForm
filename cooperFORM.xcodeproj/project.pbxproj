@@ -32,8 +32,6 @@
 		44E451E819F46E5400448ECF /* ofxAnimatableFloat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44E451DE19F46E5400448ECF /* ofxAnimatableFloat.cpp */; };
 		44E451E919F46E5400448ECF /* ofxAnimatableOfColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44E451E019F46E5400448ECF /* ofxAnimatableOfColor.cpp */; };
 		44E451EA19F46E5400448ECF /* ofxAnimatableOfPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44E451E219F46E5400448ECF /* ofxAnimatableOfPoint.cpp */; };
-		44E451FA19F477C100448ECF /* ReadMe.md in Sources */ = {isa = PBXBuildFile; fileRef = 44E451F419F477C100448ECF /* ReadMe.md */; };
-		44E451FB19F477C100448ECF /* ofxTimeMeasurements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44E451F619F477C100448ECF /* ofxTimeMeasurements.cpp */; };
 		44E451FE19F478F900448ECF /* Function.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44E451FC19F478F900448ECF /* Function.cpp */; };
 		8A09A64419D221AE00118C9E /* UIHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A09A64219D221AE00118C9E /* UIHandler.cpp */; };
 		8A09A64719D221DD00118C9E /* UIButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A09A64519D221DD00118C9E /* UIButton.cpp */; };
@@ -70,6 +68,7 @@
 		8AC3492F19EF12C600845B01 /* ofxKinect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC3492519EF12C600845B01 /* ofxKinect.cpp */; };
 		8AEAD86B19C8AAB400D87C59 /* KinectShapeObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AEAD86919C8AAB400D87C59 /* KinectShapeObject.cpp */; };
 		8AEAD87219D0D3C600D87C59 /* CameraTracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AEAD87019D0D3C600D87C59 /* CameraTracker.cpp */; };
+		8AF5363119F5623F00068579 /* ofxTimeMeasurements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AF5362D19F5623F00068579 /* ofxTimeMeasurements.cpp */; };
 		8AFAA96619C8A67A00EC475F /* KinectTracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFAA96519C8A67A00EC475F /* KinectTracker.cpp */; };
 		8AFAA9E419C8A6B400EC475F /* ofxCvColorImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFAA9D219C8A6B400EC475F /* ofxCvColorImage.cpp */; };
 		8AFAA9E519C8A6B400EC475F /* ofxCvContourFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFAA9D519C8A6B400EC475F /* ofxCvContourFinder.cpp */; };
@@ -239,12 +238,6 @@
 		44E451E119F46E5400448ECF /* ofxAnimatableOfColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxAnimatableOfColor.h; sourceTree = "<group>"; };
 		44E451E219F46E5400448ECF /* ofxAnimatableOfPoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxAnimatableOfPoint.cpp; sourceTree = "<group>"; };
 		44E451E319F46E5400448ECF /* ofxAnimatableOfPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxAnimatableOfPoint.h; sourceTree = "<group>"; };
-		44E451F019F477C100448ECF /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
-		44E451F219F477C100448ECF /* tree.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tree.hh; sourceTree = "<group>"; };
-		44E451F319F477C100448ECF /* ofxaddons_thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ofxaddons_thumbnail.png; sourceTree = "<group>"; };
-		44E451F419F477C100448ECF /* ReadMe.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = ReadMe.md; sourceTree = "<group>"; };
-		44E451F619F477C100448ECF /* ofxTimeMeasurements.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTimeMeasurements.cpp; sourceTree = "<group>"; };
-		44E451F719F477C100448ECF /* ofxTimeMeasurements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTimeMeasurements.h; sourceTree = "<group>"; };
 		44E451FC19F478F900448ECF /* Function.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Function.cpp; sourceTree = "<group>"; };
 		44E451FD19F478F900448ECF /* Function.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Function.h; sourceTree = "<group>"; };
 		8A09A64219D221AE00118C9E /* UIHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIHandler.cpp; sourceTree = "<group>"; };
@@ -327,6 +320,12 @@
 		8AEAD86A19C8AAB400D87C59 /* KinectShapeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KinectShapeObject.h; sourceTree = "<group>"; };
 		8AEAD87019D0D3C600D87C59 /* CameraTracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraTracker.cpp; sourceTree = "<group>"; };
 		8AEAD87119D0D3C600D87C59 /* CameraTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraTracker.h; sourceTree = "<group>"; };
+		8AF5362719F5623F00068579 /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
+		8AF5362919F5623F00068579 /* tree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tree.h; sourceTree = "<group>"; };
+		8AF5362A19F5623F00068579 /* ofxaddons_thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ofxaddons_thumbnail.png; sourceTree = "<group>"; };
+		8AF5362B19F5623F00068579 /* ReadMe.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe.md; sourceTree = "<group>"; };
+		8AF5362D19F5623F00068579 /* ofxTimeMeasurements.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTimeMeasurements.cpp; sourceTree = "<group>"; };
+		8AF5362E19F5623F00068579 /* ofxTimeMeasurements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTimeMeasurements.h; sourceTree = "<group>"; };
 		8AFAA96219C8A62300EC475F /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		8AFAA96419C8A67A00EC475F /* KinectTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KinectTracker.h; sourceTree = "<group>"; };
 		8AFAA96519C8A67A00EC475F /* KinectTracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KinectTracker.cpp; sourceTree = "<group>"; };
@@ -818,36 +817,6 @@
 			path = src;
 			sourceTree = "<group>";
 		};
-		44E451EB19F477C100448ECF /* ofxTimeMeasurements */ = {
-			isa = PBXGroup;
-			children = (
-				44E451F019F477C100448ECF /* install.xml */,
-				44E451F119F477C100448ECF /* lib */,
-				44E451F319F477C100448ECF /* ofxaddons_thumbnail.png */,
-				44E451F419F477C100448ECF /* ReadMe.md */,
-				44E451F519F477C100448ECF /* src */,
-			);
-			name = ofxTimeMeasurements;
-			path = ../../../addons/ofxTimeMeasurements;
-			sourceTree = "<group>";
-		};
-		44E451F119F477C100448ECF /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				44E451F219F477C100448ECF /* tree.hh */,
-			);
-			path = lib;
-			sourceTree = "<group>";
-		};
-		44E451F519F477C100448ECF /* src */ = {
-			isa = PBXGroup;
-			children = (
-				44E451F619F477C100448ECF /* ofxTimeMeasurements.cpp */,
-				44E451F719F477C100448ECF /* ofxTimeMeasurements.h */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
 		8A09A64119D2218600118C9E /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
@@ -1122,6 +1091,44 @@
 				8AEAD87119D0D3C600D87C59 /* CameraTracker.h */,
 			);
 			name = CameraInterface;
+			sourceTree = "<group>";
+		};
+		8AF5362119F5623F00068579 /* ofxTimeMeasurements */ = {
+			isa = PBXGroup;
+			children = (
+				8AF5362219F5623F00068579 /* ofxTimeMeasurements */,
+			);
+			name = ofxTimeMeasurements;
+			path = ../../../addons/ofxTimeMeasurements;
+			sourceTree = "<group>";
+		};
+		8AF5362219F5623F00068579 /* ofxTimeMeasurements */ = {
+			isa = PBXGroup;
+			children = (
+				8AF5362719F5623F00068579 /* install.xml */,
+				8AF5362819F5623F00068579 /* lib */,
+				8AF5362A19F5623F00068579 /* ofxaddons_thumbnail.png */,
+				8AF5362B19F5623F00068579 /* ReadMe.md */,
+				8AF5362C19F5623F00068579 /* src */,
+			);
+			path = ofxTimeMeasurements;
+			sourceTree = "<group>";
+		};
+		8AF5362819F5623F00068579 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				8AF5362919F5623F00068579 /* tree.h */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		8AF5362C19F5623F00068579 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				8AF5362D19F5623F00068579 /* ofxTimeMeasurements.cpp */,
+				8AF5362E19F5623F00068579 /* ofxTimeMeasurements.h */,
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 		8AFAA95A19C89E8700EC475F /* TableCore */ = {
@@ -1419,7 +1426,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
-				44E451EB19F477C100448ECF /* ofxTimeMeasurements */,
+				8AF5362119F5623F00068579 /* ofxTimeMeasurements */,
 				44E451D319F46E5400448ECF /* ofxAnimatable */,
 				447293E219F1A17A007AF18D /* ofxAssimpModelLoader */,
 				447293D219F17C1B007AF18D /* ofx3DModelLoader */,
@@ -1656,11 +1663,10 @@
 				8AC348AA19EF0F1300845B01 /* NetworkingUtils.cpp in Sources */,
 				8A0B32DF19ED9333009196FE /* OSCInterface.cpp in Sources */,
 				8AC348AD19EF0F1300845B01 /* UdpSocketWin.cpp in Sources */,
+				8AF5363119F5623F00068579 /* ofxTimeMeasurements.cpp in Sources */,
 				8AFAA9E519C8A6B400EC475F /* ofxCvContourFinder.cpp in Sources */,
-				44E451FB19F477C100448ECF /* ofxTimeMeasurements.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ReliefApplication.cpp in Sources */,
 				44E451E919F46E5400448ECF /* ofxAnimatableOfColor.cpp in Sources */,
-				44E451FA19F477C100448ECF /* ReadMe.md in Sources */,
 				8AFAA9EA19C8A6B400EC475F /* ofxCvShortImage.cpp in Sources */,
 				44E451EA19F46E5400448ECF /* ofxAnimatableOfPoint.cpp in Sources */,
 				8AFAA9E819C8A6B400EC475F /* ofxCvHaarFinder.cpp in Sources */,

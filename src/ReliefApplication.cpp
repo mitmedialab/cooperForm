@@ -119,7 +119,7 @@ void ReliefApplication::update(){
 
 //--------------------------------------------------------------
 void ReliefApplication::draw(){
-    ofBackground(255);
+    ofBackground(0);
     
     int w,h;
     

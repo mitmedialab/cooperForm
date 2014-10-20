@@ -74,6 +74,9 @@ void KinectTracker::update() {
         // update from kinect
         updateImagesFromKinect();
         
+        depthImg.dilate_3x3();
+        depthImg.erode_3x3();
+        
         cropImages();
         
         lastDepthThreshed.setFromPixels(depthThreshed.getPixels(), depthThreshed.getWidth(), depthThreshed.getHeight());
@@ -185,10 +188,23 @@ void KinectTracker::calculateThresholdsAndModifyImages() {
     for (int x = 0; x < depthPixels.getWidth(); x++) {
         for (int y = 0; y < depthPixels.getHeight(); y++) {
             float shade = ofClamp((depthPixels.getColor(x,y).getBrightness() - mFarThreshold) * 255.f / (mNearThreshold - mFarThreshold), 0, 255);
-//            float shade = ofClamp((depthPixels.getColor(x,y).getBrightness() - mNearThreshold) * 255.f / (255.f - mNearThreshold), 0, 255);
+            
             depthPixels.setColor(x,y, shade);
-            if (shade < 20)
-                colorPixels.setColor(x,y, 0);
+        }
+    }
+    
+    for (int x = 1; x < depthPixels.getWidth()-1; x++) {
+        for (int y = 1; y < depthPixels.getHeight()-1; y++) {
+                if (depthPixels.getColor(x, y).getBrightness() < 40)
+                    colorPixels.setColor(x,y, 0);
+                if (depthPixels.getColor(x-1, y).getBrightness() < 20)
+                    colorPixels.setColor(x,y, 0);
+                if (depthPixels.getColor(x, y-1).getBrightness() < 20)
+                    colorPixels.setColor(x,y, 0);
+                if (depthPixels.getColor(x+1, y).getBrightness() < 20)
+                    colorPixels.setColor(x,y, 0);
+                if (depthPixels.getColor(x, y+1).getBrightness() < 20)
+                    colorPixels.setColor(x,y, 0);
         }
     }
     depthThreshed.flagImageChanged();

@@ -36,6 +36,7 @@ void ReliefApplication::setup(){
     projectorOverlayImage.allocate(1920, 1080, GL_RGB);
     
     pinHeightMapImage.allocate(RELIEF_PROJECTOR_SIZE_X, RELIEF_PROJECTOR_SIZE_Y, GL_RGB);
+    transitionImage.allocate(RELIEF_PROJECTOR_SIZE_X, RELIEF_PROJECTOR_SIZE_Y, GL_RGB);
     
     pinHeightMapImageSmall.allocate(RELIEF_PHYSICAL_SIZE_X, RELIEF_PHYSICAL_SIZE_Y, GL_RGBA);
     pinHeightMapImageSmall.getTextureReference().setTextureMinMagFilter(GL_NEAREST, GL_NEAREST);
@@ -50,11 +51,16 @@ void ReliefApplication::setup(){
     // setup kinect if using
     // @todo we only want to setup if connected
     // @note currently if you change the kinect setting you must restart
-    int kinectFarCutOffPlane = 208; // 225 // 0 = far, 255 = near
-    int kinectNearCutOffPlane = 228; // 235
-    int minContourSize = 10;
+    const int kinectFarCutOffPlane = 215; // 225 // 0 = far, 255 = near
+    const int kinectNearCutOffPlane = 225; // 235
+    const int minContourSize = 10;
     kinectTracker.setup(kinectNearCutOffPlane, kinectFarCutOffPlane, minContourSize);
-    kinectTracker.setCrop(320-120, 240-120, 240, 240);
+    const int kinectCropWidth  = 240;
+    const int kinectCropHeight = 240;
+    const int kinectCropX = 640 / 2 - kinectCropWidth/2; // centered crop x
+    const int kinectCropY = 480 / 2 - kinectCropHeight/2 - 40; // centered crop y offset
+    kinectTracker.setCrop(kinectCropX, kinectCropY, kinectCropWidth, kinectCropHeight);
+    
     
     // initialize our shape objects
     kinectShapeObject = new KinectShapeObject();
@@ -67,10 +73,15 @@ void ReliefApplication::setup(){
     
     ballMoverShapeObject = new MoveBallShapeObject();
     overlayShape = ballMoverShapeObject;
+    
+    transitionLengthMS = 500; // milliseconds of transition between shape objects
    
     
     // set our current shape object to a default shape object
     UITriggers::buttonTrigger(uiHandler->getButton("telepresence"));
+    
+    currentTransitionFromShape = currentShape;
+    currentTransitionToShape = currentShape;
 }
 
 //--------------------------------------------------------------
@@ -80,7 +91,12 @@ void ReliefApplication::update(){
     kinectTracker.update();
     
     // update the necessary shape objects
-    currentShape->update();
+    if (ofGetElapsedTimeMillis() - transitionStart > transitionLengthMS) {
+        currentTransitionFromShape->update();
+        currentTransitionToShape->update();
+    }
+    else
+        currentShape->update();
     overlayShape->update();
     
     
@@ -131,7 +147,28 @@ void ReliefApplication::draw(){
     // (mirroring the user)
     ofRotate(90);
     ofTranslate(w, -h);
-    currentShape->renderTangibleShape(-w, h);
+    long timeMS = ofGetElapsedTimeMillis();
+    if (timeMS - transitionStart < transitionLengthMS) {
+        
+        // draw semi transparent transitionImage
+        transitionImage.begin();
+        ofBackground(0);
+        currentTransitionFromShape->renderTangibleShape(w, h);
+        transitionImage.end();
+        
+        currentTransitionToShape->renderTangibleShape(-w, h);
+        
+        // overlay the transition image with transparency
+        ofPushStyle();
+        ofEnableAlphaBlending();
+        ofSetColor(255, 255 - 255 * (double)(timeMS - transitionStart) / transitionLengthMS);
+        transitionImage.draw(0,0, -w,h);
+        ofDisableAlphaBlending();
+        ofPopStyle();
+    }
+    else
+        currentShape->renderTangibleShape(-w, h);
+    
     overlayShape->renderTangibleShape(-w, h);
     
     ofPopMatrix();
@@ -145,14 +182,14 @@ void ReliefApplication::draw(){
     h = touchScreenDisplayImage.getHeight();
     
     ofBackground(255); //refresh
-                       //cameraTracker.drawCameraFeed(0, 0, 0, w, h);
+    cameraTracker.drawCameraFeed(0, -50, 0, w+100, h);
     //currentShape->renderTangibleShape(w, h);
-    currentShape->renderTouchscreenGraphics(w, h);
+    //currentShape->renderTouchscreenGraphics(w, h);
     touchScreenDisplayImage.end();
     
     
     // draw our frame buffers
-    touchScreenDisplayImage.draw(MARGIN_X, 0);
+    touchScreenDisplayImage.draw(MARGIN_X + w, 0, -w, h);
     
     
     // draw margin image
@@ -168,7 +205,7 @@ void ReliefApplication::draw(){
     w = 1920;
     h = 1080;
     //cameraTracker.drawCameraFeed(0, w, 0, w, h);
-    //projectorOverlayImage.draw(w, 0, w, h);
+    projectorOverlayImage.draw(w + 120, 0 + 120, w - 240, h - 240);
 }
 
 //--------------------------------------------------------------
@@ -206,27 +243,40 @@ void ReliefApplication::setMode(string newMode) {
         cout << "Invalid mode selected" << endl;
     
     if (currentMode == "telepresence") {
+        currentTransitionFromShape = currentShape;
         currentShape = kinectShapeObject;
+        currentTransitionToShape = currentShape;
+        transitionStart = ofGetElapsedTimeMillis();
         
         if (ballMoverShapeObject->isBallInCorner())
             ballMoverShapeObject->moveBallToCenter();
     }
     else if (currentMode == "wavy") {
         wavyShapeObject->reset();
+        currentTransitionFromShape = currentShape;
         currentShape = wavyShapeObject;
+        currentTransitionToShape = currentShape;
+        transitionStart = ofGetElapsedTimeMillis();
+        
         
         if (!ballMoverShapeObject->isBallInCorner())
             ballMoverShapeObject->moveBallToCorner();
     }
     else if (currentMode == "3D") {
         threeDShapeObject->reset();
+        currentTransitionFromShape = currentShape;
         currentShape = threeDShapeObject;
+        currentTransitionToShape = currentShape;
+        transitionStart = ofGetElapsedTimeMillis();
         
         if (!ballMoverShapeObject->isBallInCorner())
             ballMoverShapeObject->moveBallToCorner();
     }
     else if (currentMode == "math") {
+        currentTransitionFromShape = currentShape;
         currentShape = mathShapeObject;
+        currentTransitionToShape = currentShape;
+        transitionStart = ofGetElapsedTimeMillis();
         
         if (!ballMoverShapeObject->isBallInCorner())
             ballMoverShapeObject->moveBallToCorner();

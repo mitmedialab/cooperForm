@@ -153,9 +153,17 @@ void MoveBallShapeObject::renderTouchscreenGraphics(int w, int h) {
 
 void MoveBallShapeObject::moveBallToCorner() {
     startAnimationTime = ofGetElapsedTimeMillis();
+    ballInCorner = true;
     toCenter = false;
 }
 void MoveBallShapeObject::moveBallToCenter() {
+    if (!toCenter && ofGetElapsedTimeMillis() - startAnimationTime < toCornerAnimationTime) {
+        ballInCorner = false;
+        toCenter = true;
+        startAnimationTime = ofGetElapsedTimeMillis() - toCenterAnimationTime;
+        return;
+    }
+    
     startAnimationTime = ofGetElapsedTimeMillis();
     ballInCorner = false;
     toCenter = true;

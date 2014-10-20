@@ -42,9 +42,14 @@ public:
     ofFbo            touchScreenDisplayImage;
     // image to be displayed on the left margin of the touch screen (only for 3D Mode)
     ofFbo            marginTouchDisplayImage;
+    ofFbo            transitionImage;
 
     ShapeObject      * currentShape;
+    ShapeObject      * currentTransitionFromShape;
+    ShapeObject      * currentTransitionToShape;
     ShapeObject      * overlayShape;
+    long             transitionLengthMS;
+    long             transitionStart = 0;
     
     // our interface for the cameras
     CameraTracker    cameraTracker;

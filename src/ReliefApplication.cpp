@@ -119,7 +119,7 @@ void ReliefApplication::update(){
 
 //--------------------------------------------------------------
 void ReliefApplication::draw(){
-    ofBackground(0);
+    ofBackground(255);
     
     int w,h;
     
@@ -204,8 +204,12 @@ void ReliefApplication::draw(){
     // draw the projector image
     w = 1920;
     h = 1080;
+    ofPushStyle();
+    ofSetColor(0);
+    ofRect(w, 0, w, h);
+    ofPopStyle();
     //cameraTracker.drawCameraFeed(0, w, 0, w, h);
-    projectorOverlayImage.draw(w + 120, 0 + 120, w - 240, h - 240);
+    projectorOverlayImage.draw(w + 120 - 50, 0 + 120, w - 240, h - 240);
 }
 
 //--------------------------------------------------------------

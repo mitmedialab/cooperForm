@@ -44,14 +44,14 @@ void ReliefApplication::setup(){
     marginTouchDisplayImage.allocate(MARGIN_X, MARGIN_X, GL_RGBA);
 
     // setup camera interface
-    //cameraTracker.setup();
+    cameraTracker.setup();
     
     
     // setup kinect if using
     // @todo we only want to setup if connected
     // @note currently if you change the kinect setting you must restart
-    int kinectFarCutOffPlane = 210; // 225 // 0 = far, 255 = near
-    int kinectNearCutOffPlane = 235; // 235
+    int kinectFarCutOffPlane = 208; // 225 // 0 = far, 255 = near
+    int kinectNearCutOffPlane = 228; // 235
     int minContourSize = 10;
     kinectTracker.setup(kinectNearCutOffPlane, kinectFarCutOffPlane, minContourSize);
     kinectTracker.setCrop(320-120, 240-120, 240, 240);
@@ -66,7 +66,7 @@ void ReliefApplication::setup(){
     mathShapeObject = new MathShapeObject();
     
     ballMoverShapeObject = new MoveBallShapeObject();
-    
+    overlayShape = ballMoverShapeObject;
    
     
     // set our current shape object to a default shape object
@@ -79,8 +79,9 @@ void ReliefApplication::update(){
     // update the Kinect
     kinectTracker.update();
     
-    // update the shape object
+    // update the necessary shape objects
     currentShape->update();
+    overlayShape->update();
     
     
     // draw the big heightmap image into a small heightmap image and send it off to the table
@@ -131,17 +132,10 @@ void ReliefApplication::draw(){
     ofRotate(90);
     ofTranslate(w, -h);
     currentShape->renderTangibleShape(-w, h);
-    
-    if (ballMoverShapeObject->isBallInCorner()) {
-        ofSetColor(255);
-        ofCircle(10,10, 10,10);
-        ofSetColor(0);
-        ofCircle(10,10, 6,6);
-    }
+    overlayShape->renderTangibleShape(-w, h);
     
     ofPopMatrix();
     pinHeightMapImage.end();
-    
     ofPopStyle();
     
     // render the touch screen display
@@ -151,6 +145,7 @@ void ReliefApplication::draw(){
     h = touchScreenDisplayImage.getHeight();
     
     ofBackground(255); //refresh
+                       //cameraTracker.drawCameraFeed(0, 0, 0, w, h);
     //currentShape->renderTangibleShape(w, h);
     currentShape->renderTouchscreenGraphics(w, h);
     touchScreenDisplayImage.end();
@@ -172,7 +167,8 @@ void ReliefApplication::draw(){
     // draw the projector image
     w = 1920;
     h = 1080;
-    projectorOverlayImage.draw(w, 0, w, h);
+    //cameraTracker.drawCameraFeed(0, w, 0, w, h);
+    //projectorOverlayImage.draw(w, 0, w, h);
 }
 
 //--------------------------------------------------------------
@@ -209,19 +205,29 @@ void ReliefApplication::setMode(string newMode) {
     else
         cout << "Invalid mode selected" << endl;
     
-    if (currentMode == "telepresence")
+    if (currentMode == "telepresence") {
         currentShape = kinectShapeObject;
+        
+        if (ballMoverShapeObject->isBallInCorner())
+            ballMoverShapeObject->moveBallToCenter();
+    }
     else if (currentMode == "wavy") {
         wavyShapeObject->reset();
         currentShape = wavyShapeObject;
+        
+        if (!ballMoverShapeObject->isBallInCorner())
+            ballMoverShapeObject->moveBallToCorner();
     }
     else if (currentMode == "3D") {
         threeDShapeObject->reset();
         currentShape = threeDShapeObject;
+        
+        if (!ballMoverShapeObject->isBallInCorner())
+            ballMoverShapeObject->moveBallToCorner();
     }
     else if (currentMode == "math") {
-        //currentShape = ballMoverShapeObject;
-        //ballMoverShapeObject->moveBallToCorner();
+        //if (!ballMoverShapeObject->isBallInCorner())
+            //ballMoverShapeObject->moveBallToCorner();
         currentShape = mathShapeObject;
     }
 

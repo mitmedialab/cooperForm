@@ -21,6 +21,8 @@ private:
     static void setupLeftSidebar(UIHandler* uiHandler, const int leftSidebarWidth);
     static void setupInfoBar(UIHandler* uiHandler, const int leftSidebarWidth);
     static void setupTeleBar(UIHandler* uiHandler, const int leftSidebarWidth);
+    static void setupWaveBar(UIHandler* uiHandler, const int leftSidebarWidth);
+
     static void setupThreeDBar(UIHandler* uiHandler, const int leftSidebarWidth);
 };
 

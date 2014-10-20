@@ -39,10 +39,14 @@ public:
     bool isBallInCorner();
 private:
     // buffer to modify
-    bool toCenter = false;
+    bool toCenter = true;
     ofFbo depthBuffer;
     long startAnimationTime;
-    long animationTime = 4000;
+    long toCornerAnimationTime = 3000;
+    long toCenterAnimationTime = 1000;
+    
+    int cornerX = 20;
+    int cornerY = 100-20;
     
     bool ballInCorner = false;
 };

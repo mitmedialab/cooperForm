@@ -39,8 +39,6 @@ public:
     void setImageHandleIdle(string imageName);
     void setImageHandleActive(string imageName);
     void setImageTrackOffset(int amount);
-    void setImageTrackOffsetSide(int amount);
-    
     void setHandlePos(float val); //should be between 0 and 1
     
     // closest handle will get to a "lock to pos" before getting snapped there
@@ -52,8 +50,8 @@ public:
     
     int getHandleX();
     int getHandleY();
-    int getVal();
-    float getVal(float min, float max);
+    double getVal();
+    double getVal(double min, double max);
 
     // will tell you whether
     // an x,y coordinate is inside the button
@@ -71,12 +69,12 @@ private:
     ofImage *trackImage;
     ofImage *handleImageIdle;
     ofImage *handleImageActive;
-    int trackImageOffset = 0;
-    int trackImageOffsetSideways = 0;
     
     bool enabled = true;
     
     int trackX, trackY;
+    int imageTrackX, imageTrackY;
+    int imageTrackOffset = 0;
     
     // how far along the track the handle is
     // value is from 0 to 1

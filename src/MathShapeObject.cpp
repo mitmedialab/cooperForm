@@ -89,9 +89,9 @@ void MathShapeObject::renderTangibleShape(int w, int h) {
 //--------------------------------------------------------------
 
 void MathShapeObject::renderTouchscreenGraphics(int w, int h) {
-    //touchscreenImage.draw(0, 0);
+    touchscreenImage.draw(0, 0);
     //pinHeightMapImage.draw(0, 0);
-    pinHeightMapImageSmall.draw(0, 0);
+    //pinHeightMapImageSmall.draw(0, 0);
     //projectorImage.draw(0, 0);
 }
 

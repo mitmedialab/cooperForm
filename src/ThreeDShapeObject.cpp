@@ -41,10 +41,12 @@ ThreeDShapeObject::ThreeDShapeObject() {
 void ThreeDShapeObject::update() {
     
     pinHeightMapImage.begin();
+    ofPushMatrix();
     ofPushStyle();
     ofBackground(0);
     
     //GL stuff
+    glPushMatrix();
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glViewport(0, 0, TOUCHSCREEN_VISIBLE_SIZE_X, TOUCHSCREEN_SIZE_Y);
@@ -61,6 +63,7 @@ void ThreeDShapeObject::update() {
     shader.end();
     
     glDisable(GL_DEPTH_TEST);
+    glPopMatrix();
     ofPopStyle();
     pinHeightMapImage.end();
     
@@ -68,7 +71,6 @@ void ThreeDShapeObject::update() {
     pinHeightMapImageSmall.begin();
     pinHeightMapImage.draw(0, 0, RELIEF_PHYSICAL_SIZE_X, RELIEF_PHYSICAL_SIZE_Y);
     pinHeightMapImageSmall.end();
-  
 }
 
 //--------------------------------------------------------------

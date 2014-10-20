@@ -9,8 +9,10 @@
 #include "WavyShapeObject.h"
 #include "MoveBallShapeObject.h"
 #include "ThreeDShapeObject.h"
+#include "MathShapeObject.h"
 #include "KinectTracker.h"
 #include "OSCInterface.h"
+#include "Function.h"
 
 class ReliefApplication : public ofBaseApp {
 public:
@@ -51,6 +53,7 @@ public:
     WavyShapeObject     * wavyShapeObject;
     MoveBallShapeObject * ballMoverShapeObject;
     ThreeDShapeObject   * threeDShapeObject;
+    MathShapeObject     * mathShapeObject;
 
     // our interface for the Kinect
     KinectTracker    kinectTracker;

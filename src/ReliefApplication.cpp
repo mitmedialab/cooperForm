@@ -12,7 +12,7 @@ void ReliefApplication::setup(){
     
     // set up OSCInterface
     // needs to be setup before UI
-    backDisplayComputer = new OSCInterface("169.169.169.169", 86753);
+    //backDisplayComputer = new OSCInterface("169.169.169.169", 86753);
     
     // initialize communication with the pin display
 	mIOManager = new ShapeIOManager();
@@ -63,6 +63,7 @@ void ReliefApplication::setup(){
     wavyShapeObject->setKinectTracker(&kinectTracker);
     
     threeDShapeObject = new ThreeDShapeObject();
+    mathShapeObject = new MathShapeObject();
     
     ballMoverShapeObject = new MoveBallShapeObject();
     
@@ -203,7 +204,7 @@ void ReliefApplication::setMode(string newMode) {
     
     if (newMode == "telepresence" || newMode == "wavy" || newMode == "3D" || newMode == "math") {
         currentMode = newMode;
-        backDisplayComputer->sendModeChange(newMode);
+        //backDisplayComputer->sendModeChange(newMode);
     }
     else
         cout << "Invalid mode selected" << endl;
@@ -219,8 +220,9 @@ void ReliefApplication::setMode(string newMode) {
         currentShape = threeDShapeObject;
     }
     else if (currentMode == "math") {
-        currentShape = ballMoverShapeObject;
-        ballMoverShapeObject->moveBallToCorner();
+        //currentShape = ballMoverShapeObject;
+        //ballMoverShapeObject->moveBallToCorner();
+        currentShape = mathShapeObject;
     }
 
 }
@@ -250,7 +252,8 @@ void ReliefApplication::keyPressed(int key){
 
 //--------------------------------------------------------------
 void ReliefApplication::keyReleased(int key){
-
+    if(key == ' ')
+        if(currentMode == "math") mathShapeObject->nextFunction();
 }
 
 //--------------------------------------------------------------

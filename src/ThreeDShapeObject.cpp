@@ -28,7 +28,8 @@ ThreeDShapeObject::ThreeDShapeObject() {
     //model.loadModel("models/beetle3.3ds");
     bgImg.loadImage("test.jpg");
     ofEnableBlendMode(OF_BLENDMODE_ALPHA);
-    fbo.allocate(TOUCHSCREEN_VISIBLE_SIZE_X, TOUCHSCREEN_SIZE_Y, GL_RGBA);
+    pinHeightMapImageSmall.allocate(RELIEF_PHYSICAL_SIZE_X, RELIEF_PHYSICAL_SIZE_Y, GL_RGBA);
+    pinHeightMapImage.allocate(TOUCHSCREEN_VISIBLE_SIZE_X, TOUCHSCREEN_SIZE_Y, GL_RGBA);
     
     shader.load("shaders/heightMapShader.vert", "shaders/heightMapShader.frag");
  
@@ -39,19 +40,7 @@ ThreeDShapeObject::ThreeDShapeObject() {
 
 void ThreeDShapeObject::update() {
     
-    //glShadeModel(GL_SMOOTH);
-  
-}
-
-//--------------------------------------------------------------
-
-void ThreeDShapeObject::renderProjectorOverlay(int w, int h) {
-
-}
-
-//--------------------------------------------------------------
-
-void ThreeDShapeObject::renderTangibleShape(int w, int h) {
+    pinHeightMapImage.begin();
     ofPushStyle();
     ofBackground(0);
     
@@ -73,12 +62,31 @@ void ThreeDShapeObject::renderTangibleShape(int w, int h) {
     
     glDisable(GL_DEPTH_TEST);
     ofPopStyle();
+    pinHeightMapImage.end();
+    
+    
+    pinHeightMapImageSmall.begin();
+    pinHeightMapImage.draw(0, 0, RELIEF_PHYSICAL_SIZE_X, RELIEF_PHYSICAL_SIZE_Y);
+    pinHeightMapImageSmall.end();
+  
+}
+
+//--------------------------------------------------------------
+
+void ThreeDShapeObject::renderProjectorOverlay(int w, int h) {
+
+}
+
+//--------------------------------------------------------------
+
+void ThreeDShapeObject::renderTangibleShape(int w, int h) {
+    pinHeightMapImageSmall.draw(0, 0);
 }
 
 //--------------------------------------------------------------
 
 void ThreeDShapeObject::renderTouchscreenGraphics(int w, int h) {
-    renderTangibleShape(w, h);
+    pinHeightMapImage.draw(0, 0);
 }
 
 //--------------------------------------------------------------

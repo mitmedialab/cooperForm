@@ -8,7 +8,7 @@
 int main( ){
     ofAppGLFWWindow window;
     window.setMultiDisplayFullscreen(true);
-    ofSetupOpenGL(&window, 2*1920, 1080, OF_FULLSCREEN);
+    ofSetupOpenGL(&window, 2*1920, 1080, OF_WINDOW);
     //ofSetCurrentRenderer(ofGLProgrammableRenderer::TYPE);
     //ofSetupOpenGL(2*1920, 1080, OF_WINDOW);
 	

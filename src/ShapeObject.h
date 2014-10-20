@@ -37,6 +37,7 @@ public:
     // mouse events from the touch screen
     virtual void mouseMoved(int x, int y){};
     virtual void mousePressed(int x, int y, int button){};
+
 };
 
 #endif /* defined(__basicExample__ShapeObject__) */

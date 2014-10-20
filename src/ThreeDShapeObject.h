@@ -44,7 +44,8 @@ public:
     ofCamera cam;
     ofLight	light;
     ofVboMesh vbo;
-    ofFbo fbo;
+    ofFbo pinHeightMapImageSmall;
+    ofFbo pinHeightMapImage;
     
     string get_shape_name() {return shape_name; };
     void setTableValuesForShape(ShapeIOManager *pIOManager) {};

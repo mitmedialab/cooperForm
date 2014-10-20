@@ -26,6 +26,15 @@
 		4472941B19F1A17A007AF18D /* ofxAssimpMeshHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4472941219F1A17A007AF18D /* ofxAssimpMeshHelper.cpp */; };
 		4472941C19F1A17A007AF18D /* ofxAssimpModelLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4472941419F1A17A007AF18D /* ofxAssimpModelLoader.cpp */; };
 		4472941D19F1A17A007AF18D /* ofxAssimpTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4472941619F1A17A007AF18D /* ofxAssimpTexture.cpp */; };
+		44E451D019F46A8000448ECF /* MathShapeObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44E451CE19F46A8000448ECF /* MathShapeObject.cpp */; };
+		44E451E619F46E5400448ECF /* ReadMe.md in Sources */ = {isa = PBXBuildFile; fileRef = 44E451DA19F46E5400448ECF /* ReadMe.md */; };
+		44E451E719F46E5400448ECF /* ofxAnimatable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44E451DC19F46E5400448ECF /* ofxAnimatable.cpp */; };
+		44E451E819F46E5400448ECF /* ofxAnimatableFloat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44E451DE19F46E5400448ECF /* ofxAnimatableFloat.cpp */; };
+		44E451E919F46E5400448ECF /* ofxAnimatableOfColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44E451E019F46E5400448ECF /* ofxAnimatableOfColor.cpp */; };
+		44E451EA19F46E5400448ECF /* ofxAnimatableOfPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44E451E219F46E5400448ECF /* ofxAnimatableOfPoint.cpp */; };
+		44E451FA19F477C100448ECF /* ReadMe.md in Sources */ = {isa = PBXBuildFile; fileRef = 44E451F419F477C100448ECF /* ReadMe.md */; };
+		44E451FB19F477C100448ECF /* ofxTimeMeasurements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44E451F619F477C100448ECF /* ofxTimeMeasurements.cpp */; };
+		44E451FE19F478F900448ECF /* Function.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44E451FC19F478F900448ECF /* Function.cpp */; };
 		8A09A64419D221AE00118C9E /* UIHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A09A64219D221AE00118C9E /* UIHandler.cpp */; };
 		8A09A64719D221DD00118C9E /* UIButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A09A64519D221DD00118C9E /* UIButton.cpp */; };
 		8A09A64A19D3712B00118C9E /* UITriggers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A09A64819D3712B00118C9E /* UITriggers.cpp */; };
@@ -216,6 +225,28 @@
 		4472941619F1A17A007AF18D /* ofxAssimpTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxAssimpTexture.cpp; sourceTree = "<group>"; };
 		4472941719F1A17A007AF18D /* ofxAssimpTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxAssimpTexture.h; sourceTree = "<group>"; };
 		4472941819F1A17A007AF18D /* ofxAssimpUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxAssimpUtils.h; sourceTree = "<group>"; };
+		44A76F8C19F4A81D00FC91AD /* RenderObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderObject.h; sourceTree = "<group>"; };
+		44E451CE19F46A8000448ECF /* MathShapeObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MathShapeObject.cpp; sourceTree = "<group>"; };
+		44E451CF19F46A8000448ECF /* MathShapeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathShapeObject.h; sourceTree = "<group>"; };
+		44E451D819F46E5400448ECF /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
+		44E451D919F46E5400448ECF /* ofxaddons_thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ofxaddons_thumbnail.png; sourceTree = "<group>"; };
+		44E451DA19F46E5400448ECF /* ReadMe.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = ReadMe.md; sourceTree = "<group>"; };
+		44E451DC19F46E5400448ECF /* ofxAnimatable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxAnimatable.cpp; sourceTree = "<group>"; };
+		44E451DD19F46E5400448ECF /* ofxAnimatable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxAnimatable.h; sourceTree = "<group>"; };
+		44E451DE19F46E5400448ECF /* ofxAnimatableFloat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxAnimatableFloat.cpp; sourceTree = "<group>"; };
+		44E451DF19F46E5400448ECF /* ofxAnimatableFloat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxAnimatableFloat.h; sourceTree = "<group>"; };
+		44E451E019F46E5400448ECF /* ofxAnimatableOfColor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxAnimatableOfColor.cpp; sourceTree = "<group>"; };
+		44E451E119F46E5400448ECF /* ofxAnimatableOfColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxAnimatableOfColor.h; sourceTree = "<group>"; };
+		44E451E219F46E5400448ECF /* ofxAnimatableOfPoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxAnimatableOfPoint.cpp; sourceTree = "<group>"; };
+		44E451E319F46E5400448ECF /* ofxAnimatableOfPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxAnimatableOfPoint.h; sourceTree = "<group>"; };
+		44E451F019F477C100448ECF /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
+		44E451F219F477C100448ECF /* tree.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tree.hh; sourceTree = "<group>"; };
+		44E451F319F477C100448ECF /* ofxaddons_thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ofxaddons_thumbnail.png; sourceTree = "<group>"; };
+		44E451F419F477C100448ECF /* ReadMe.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = ReadMe.md; sourceTree = "<group>"; };
+		44E451F619F477C100448ECF /* ofxTimeMeasurements.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTimeMeasurements.cpp; sourceTree = "<group>"; };
+		44E451F719F477C100448ECF /* ofxTimeMeasurements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTimeMeasurements.h; sourceTree = "<group>"; };
+		44E451FC19F478F900448ECF /* Function.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Function.cpp; sourceTree = "<group>"; };
+		44E451FD19F478F900448ECF /* Function.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Function.h; sourceTree = "<group>"; };
 		8A09A64219D221AE00118C9E /* UIHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIHandler.cpp; sourceTree = "<group>"; };
 		8A09A64319D221AE00118C9E /* UIHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIHandler.h; sourceTree = "<group>"; };
 		8A09A64519D221DD00118C9E /* UIButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIButton.cpp; sourceTree = "<group>"; };
@@ -744,6 +775,75 @@
 				4472941619F1A17A007AF18D /* ofxAssimpTexture.cpp */,
 				4472941719F1A17A007AF18D /* ofxAssimpTexture.h */,
 				4472941819F1A17A007AF18D /* ofxAssimpUtils.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		44E451CD19F46A6600448ECF /* Math */ = {
+			isa = PBXGroup;
+			children = (
+				44E451CE19F46A8000448ECF /* MathShapeObject.cpp */,
+				44E451CF19F46A8000448ECF /* MathShapeObject.h */,
+				44E451FC19F478F900448ECF /* Function.cpp */,
+				44E451FD19F478F900448ECF /* Function.h */,
+				44A76F8C19F4A81D00FC91AD /* RenderObject.h */,
+			);
+			name = Math;
+			sourceTree = "<group>";
+		};
+		44E451D319F46E5400448ECF /* ofxAnimatable */ = {
+			isa = PBXGroup;
+			children = (
+				44E451D819F46E5400448ECF /* install.xml */,
+				44E451D919F46E5400448ECF /* ofxaddons_thumbnail.png */,
+				44E451DA19F46E5400448ECF /* ReadMe.md */,
+				44E451DB19F46E5400448ECF /* src */,
+			);
+			name = ofxAnimatable;
+			path = ../../../addons/ofxAnimatable;
+			sourceTree = "<group>";
+		};
+		44E451DB19F46E5400448ECF /* src */ = {
+			isa = PBXGroup;
+			children = (
+				44E451DC19F46E5400448ECF /* ofxAnimatable.cpp */,
+				44E451DD19F46E5400448ECF /* ofxAnimatable.h */,
+				44E451DE19F46E5400448ECF /* ofxAnimatableFloat.cpp */,
+				44E451DF19F46E5400448ECF /* ofxAnimatableFloat.h */,
+				44E451E019F46E5400448ECF /* ofxAnimatableOfColor.cpp */,
+				44E451E119F46E5400448ECF /* ofxAnimatableOfColor.h */,
+				44E451E219F46E5400448ECF /* ofxAnimatableOfPoint.cpp */,
+				44E451E319F46E5400448ECF /* ofxAnimatableOfPoint.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		44E451EB19F477C100448ECF /* ofxTimeMeasurements */ = {
+			isa = PBXGroup;
+			children = (
+				44E451F019F477C100448ECF /* install.xml */,
+				44E451F119F477C100448ECF /* lib */,
+				44E451F319F477C100448ECF /* ofxaddons_thumbnail.png */,
+				44E451F419F477C100448ECF /* ReadMe.md */,
+				44E451F519F477C100448ECF /* src */,
+			);
+			name = ofxTimeMeasurements;
+			path = ../../../addons/ofxTimeMeasurements;
+			sourceTree = "<group>";
+		};
+		44E451F119F477C100448ECF /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				44E451F219F477C100448ECF /* tree.hh */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		44E451F519F477C100448ECF /* src */ = {
+			isa = PBXGroup;
+			children = (
+				44E451F619F477C100448ECF /* ofxTimeMeasurements.cpp */,
+				44E451F719F477C100448ECF /* ofxTimeMeasurements.h */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -1306,6 +1406,7 @@
 		8AFAAA6319C8A8A700EC475F /* ShapeObjects */ = {
 			isa = PBXGroup;
 			children = (
+				44E451CD19F46A6600448ECF /* Math */,
 				4472935019F15B8E007AF18D /* 3D */,
 				8A0B32D319EC6B02009196FE /* Ball Mover */,
 				8A09A64F19D5F42400118C9E /* Waves */,
@@ -1318,6 +1419,8 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				44E451EB19F477C100448ECF /* ofxTimeMeasurements */,
+				44E451D319F46E5400448ECF /* ofxAnimatable */,
 				447293E219F1A17A007AF18D /* ofxAssimpModelLoader */,
 				447293D219F17C1B007AF18D /* ofx3DModelLoader */,
 				447292B319F15773007AF18D /* ofxFTGL */,
@@ -1506,6 +1609,7 @@
 				8A09A6E919D60FCD00118C9E /* ShapeSerial.cpp in Sources */,
 				447293DD19F17C1B007AF18D /* model3DS.cpp in Sources */,
 				8AC348B019EF0F1300845B01 /* OscReceivedElements.cpp in Sources */,
+				44E451FE19F478F900448ECF /* Function.cpp in Sources */,
 				8A09A64419D221AE00118C9E /* UIHandler.cpp in Sources */,
 				8AC348B119EF0F1300845B01 /* OscTypes.cpp in Sources */,
 				4472941A19F1A17A007AF18D /* ofxAssimpAnimation.cpp in Sources */,
@@ -1517,6 +1621,7 @@
 				8AC348AC19EF0F1300845B01 /* NetworkingUtilsWin.cpp in Sources */,
 				8AFAA9E719C8A6B400EC475F /* ofxCvGrayscaleImage.cpp in Sources */,
 				447293DF19F17C1B007AF18D /* ofx3dModelLoader.cpp in Sources */,
+				44E451D019F46A8000448ECF /* MathShapeObject.cpp in Sources */,
 				4472941B19F1A17A007AF18D /* ofxAssimpMeshHelper.cpp in Sources */,
 				8AC3492919EF12C600845B01 /* cameras.c in Sources */,
 				8AFAA96619C8A67A00EC475F /* KinectTracker.cpp in Sources */,
@@ -1529,6 +1634,7 @@
 				8AC348AF19EF0F1300845B01 /* OscPrintReceivedElements.cpp in Sources */,
 				8AFAA9E419C8A6B400EC475F /* ofxCvColorImage.cpp in Sources */,
 				8AC348B619EF0F1300845B01 /* ofxOscSender.cpp in Sources */,
+				44E451E819F46E5400448ECF /* ofxAnimatableFloat.cpp in Sources */,
 				8AC348B419EF0F1300845B01 /* ofxOscParameterSync.cpp in Sources */,
 				4472933F19F15774007AF18D /* ofxFTGLSimpleLayout.cpp in Sources */,
 				8AC348B319EF0F1300845B01 /* ofxOscMessage.cpp in Sources */,
@@ -1540,7 +1646,9 @@
 				4472941D19F1A17A007AF18D /* ofxAssimpTexture.cpp in Sources */,
 				8AC348B219EF0F1300845B01 /* ofxOscBundle.cpp in Sources */,
 				8AC3492A19EF12C600845B01 /* core.c in Sources */,
+				44E451E619F46E5400448ECF /* ReadMe.md in Sources */,
 				8AFAA9E619C8A6B400EC475F /* ofxCvFloatImage.cpp in Sources */,
+				44E451E719F46E5400448ECF /* ofxAnimatable.cpp in Sources */,
 				4472941C19F1A17A007AF18D /* ofxAssimpModelLoader.cpp in Sources */,
 				8AC3492C19EF12C600845B01 /* tilt.c in Sources */,
 				8AC348B519EF0F1300845B01 /* ofxOscReceiver.cpp in Sources */,
@@ -1549,8 +1657,12 @@
 				8A0B32DF19ED9333009196FE /* OSCInterface.cpp in Sources */,
 				8AC348AD19EF0F1300845B01 /* UdpSocketWin.cpp in Sources */,
 				8AFAA9E519C8A6B400EC475F /* ofxCvContourFinder.cpp in Sources */,
+				44E451FB19F477C100448ECF /* ofxTimeMeasurements.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ReliefApplication.cpp in Sources */,
+				44E451E919F46E5400448ECF /* ofxAnimatableOfColor.cpp in Sources */,
+				44E451FA19F477C100448ECF /* ReadMe.md in Sources */,
 				8AFAA9EA19C8A6B400EC475F /* ofxCvShortImage.cpp in Sources */,
+				44E451EA19F46E5400448ECF /* ofxAnimatableOfPoint.cpp in Sources */,
 				8AFAA9E819C8A6B400EC475F /* ofxCvHaarFinder.cpp in Sources */,
 				4472933D19F15774007AF18D /* README.md in Sources */,
 				4472933E19F15774007AF18D /* ofxFTGLFont.cpp in Sources */,

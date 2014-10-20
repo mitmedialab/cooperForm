@@ -42,7 +42,8 @@ public:
     ofFbo            marginTouchDisplayImage;
 
     ShapeObject      * currentShape;
-
+    ShapeObject      * overlayShape;
+    
     // our interface for the cameras
     CameraTracker    cameraTracker;
 

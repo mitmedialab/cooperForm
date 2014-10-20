@@ -14,21 +14,54 @@ MoveBallShapeObject::MoveBallShapeObject() {
 }
 
 void MoveBallShapeObject::update() {
-    if (ofGetElapsedTimeMillis() - startAnimationTime > animationTime) {
-        depthBuffer.begin();
-        ofBackground(0);
-        depthBuffer.end();
+    float maxHeightOfEdge = 215;
+    float minRadius = 6;
+    float time = 2;
+    if (toCenter)
+        time = (float)(ofGetElapsedTimeMillis() - startAnimationTime) / toCenterAnimationTime;
+    else
+        time = (float)(ofGetElapsedTimeMillis() - startAnimationTime) / toCornerAnimationTime;
+    
+    int w = depthBuffer.getWidth();
+    int h = depthBuffer.getHeight();
+    
+    if (time > 1) {
         if (!toCenter && !ballInCorner)
             ballInCorner = true;
+        
+        depthBuffer.begin();
+        if (!ballInCorner)
+            ofBackground(0,0);
+        else {
+            int x = cornerX;
+            int y = cornerY;
+            
+            depthBuffer.begin();
+            ofBackground(0,0);
+            ofSetColor(maxHeightOfEdge);
+            ofCircle(x, y, minRadius+8, minRadius+8);
+            
+            ofSetColor((maxHeightOfEdge*3)/4);
+            ofCircle(x, y, minRadius+6, minRadius+6);
+            
+            ofSetColor((maxHeightOfEdge*2)/4);
+            ofCircle(x, y, minRadius+4, minRadius+4);
+            
+            ofSetColor(maxHeightOfEdge/4);
+            ofCircle(x, y, minRadius+2, minRadius+2);
+            
+            ofSetColor(0);
+            ofCircle(x, y, minRadius, minRadius);
+            
+            depthBuffer.end();
+        }
+        depthBuffer.end();
         return;
     }
-    float maxHeightOfEdge = 200;
-    float minRadius = 5.5;
-    float time = (float)(ofGetElapsedTimeMillis() - startAnimationTime) / animationTime;
     
     float toCenterTimeFraction;
     if (toCenter) {
-        toCenterTimeFraction = 1;
+        toCenterTimeFraction = 0;
         time = 1.0 - time; // reverse time
     }
     else
@@ -37,7 +70,7 @@ void MoveBallShapeObject::update() {
     if (time < toCenterTimeFraction) {
         float toCenterTime = 1.0 - time / toCenterTimeFraction;
         float tScaled = (1.0 - cos(pi * toCenterTime)) / 2;
-        float baseRadius = minRadius + tScaled * depthBuffer.getWidth()*0.55;
+        float baseRadius = minRadius + tScaled * depthBuffer.getWidth()*0.3;
         
         int w = depthBuffer.getWidth();
         int h = depthBuffer.getHeight();
@@ -46,7 +79,7 @@ void MoveBallShapeObject::update() {
         int toY = h/2;
 
         depthBuffer.begin();
-        ofBackground(0,0,0);
+        ofBackground(0,0);
         ofPushStyle();
         
         ofSetColor(maxHeightOfEdge);
@@ -75,7 +108,7 @@ void MoveBallShapeObject::update() {
         float baseRadius = minRadius;
         
         depthBuffer.begin();
-        ofBackground(0,0,0);
+        ofBackground(0,0);
         ofPushStyle();
         
         int w = depthBuffer.getWidth();
@@ -84,11 +117,11 @@ void MoveBallShapeObject::update() {
         int fromX = w/2;
         int fromY = h/2;
         
-        int toX = w-15;
-        int toY = 15;
+        int toX = cornerX;
+        int toY = cornerY;
         
-        float x = fromX + (fromX - toX) * tScaled;
-        float y = fromY + (fromY - toY) * tScaled;
+        float x = fromX + (toX - fromX) * tScaled;
+        float y = fromY + (toY - fromY) * tScaled;
         
         ofSetColor(maxHeightOfEdge);
         ofCircle(x, y, baseRadius+8, baseRadius+8);

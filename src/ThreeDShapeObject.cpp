@@ -52,10 +52,12 @@ void ThreeDShapeObject::renderProjectorOverlay(int w, int h) {
 //--------------------------------------------------------------
 
 void ThreeDShapeObject::renderTangibleShape(int w, int h) {
+    ofPushMatrix();
     ofPushStyle();
     ofBackground(0);
     
     //GL stuff
+    glPushMatrix();
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glViewport(0, 0, TOUCHSCREEN_VISIBLE_SIZE_X, TOUCHSCREEN_SIZE_Y);
@@ -72,7 +74,9 @@ void ThreeDShapeObject::renderTangibleShape(int w, int h) {
     shader.end();
     
     glDisable(GL_DEPTH_TEST);
+    glPopMatrix();
     ofPopStyle();
+    ofPopMatrix();
 }
 
 //--------------------------------------------------------------

@@ -11,6 +11,7 @@
 
 ThreeDShapeObject::ThreeDShapeObject() {
     
+    maskThresh = 20;
     dampen = 1.3;
     idx = 0;
     numLoadedModels = 4;
@@ -35,6 +36,13 @@ ThreeDShapeObject::ThreeDShapeObject() {
     marginImage.allocate(MARGIN_X, MARGIN_X, GL_RGBA);
     projectorImage.allocate(TOUCHSCREEN_VISIBLE_SIZE_X, TOUCHSCREEN_SIZE_Y, GL_RGBA);
     
+    maskedResult.allocate(RELIEF_PROJECTOR_SIZE_X, RELIEF_PROJECTOR_SIZE_Y, OF_IMAGE_COLOR);
+    pinHeightMapImageSmall.allocate(RELIEF_PROJECTOR_SIZE_X, RELIEF_PROJECTOR_SIZE_Y, GL_RGBA);
+    projectorImageSmall.allocate(RELIEF_PROJECTOR_SIZE_X, RELIEF_PROJECTOR_SIZE_Y, GL_RGBA);
+    
+    pinHeightMapPixels.allocate(RELIEF_PROJECTOR_SIZE_X, RELIEF_PROJECTOR_SIZE_Y, OF_IMAGE_COLOR);
+    projectorMaskedPixels.allocate(RELIEF_PROJECTOR_SIZE_X, RELIEF_PROJECTOR_SIZE_Y, OF_IMAGE_COLOR);
+        
     shader.load("shaders/heightMapShader.vert", "shaders/heightMapShader.frag");
  
     currentModelName = models.at(idx)->name;
@@ -108,7 +116,7 @@ void ThreeDShapeObject::update() {
     projectorImage.begin();
     ofPushMatrix();
     ofPushStyle();
-    ofBackground(255);
+    ofBackground(0);
     
     //GL stuff
     glPushMatrix();
@@ -132,6 +140,37 @@ void ThreeDShapeObject::update() {
     ofPopStyle();
     projectorImage.end();
     
+    projectorImageSmall.begin();
+    projectorImage.draw(0, 0, RELIEF_PROJECTOR_SIZE_X, RELIEF_PROJECTOR_SIZE_Y);
+    projectorImageSmall.end();
+    
+    pinHeightMapImageSmall.begin();
+    pinHeightMapImage.draw(0, 0, RELIEF_PROJECTOR_SIZE_X, RELIEF_PROJECTOR_SIZE_Y);
+    pinHeightMapImageSmall.end();
+    
+    //MASK FOR PROJECTION IMAGE (so far very costly calculation)
+    pinHeightMapImageSmall.readToPixels(pinHeightMapPixels);
+    projectorImageSmall.readToPixels(projectorMaskedPixels);
+    
+    for (int i =0; i < RELIEF_PROJECTOR_SIZE_X; i++) {
+        for (int j = 0; j < RELIEF_PROJECTOR_SIZE_Y; j++) {
+    
+                c = pinHeightMapPixels.getColor(i, j);
+                p = projectorMaskedPixels.getColor(i, j);
+    
+                if(c.r == c.g && c.r == c.g)
+                {
+                    int greyVal = (c.r + c.g + c.b) / 3;
+                    if ((greyVal < maskThresh))
+                    {
+                        projectorMaskedPixels.setColor(i, j, ofColor(0)); // if grey is smaller than treshold draw a black pixel
+                    }
+                }
+            }
+        }
+    
+    maskedResult.setFromPixels(projectorMaskedPixels);
+    cout<<ofGetFrameRate()<< endl;
 }
 
 //--------------------------------------------------------------
@@ -150,7 +189,9 @@ void ThreeDShapeObject::renderTangibleShape(int w, int h) {
 
 void ThreeDShapeObject::renderTouchscreenGraphics(int w, int h) {
     pinHeightMapImage.draw(0, 0);
-    projectorImage.draw(0, 0, RELIEF_PROJECTOR_SIZE_X/ 2, RELIEF_PROJECTOR_SIZE_Y/2);
+    //projectorImage.draw(0, 0, RELIEF_PROJECTOR_SIZE_X/ 2, RELIEF_PROJECTOR_SIZE_Y/2);
+    //maskedProjectorImage.draw(0, 0, RELIEF_PROJECTOR_SIZE_X/ 2, RELIEF_PROJECTOR_SIZE_Y/2);
+    maskedResult.draw(0, 0, RELIEF_PROJECTOR_SIZE_X/ 2, RELIEF_PROJECTOR_SIZE_Y/2);
 }
 
 //--------------------------------------------------------------

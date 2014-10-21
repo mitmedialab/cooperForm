@@ -44,8 +44,17 @@ public:
     ofCamera cam;
     ofLight	light;
     ofFbo pinHeightMapImage;
+    ofFbo pinHeightMapImageSmall;
     ofFbo marginImage;
     ofFbo projectorImage;
+    ofFbo projectorImageSmall;
+    
+    ofPixels projectorMaskedPixels;
+    ofPixels pinHeightMapPixels;
+    ofColor c;
+    ofColor p;
+    
+    ofImage maskedResult;
     
     string get_shape_name() {return shape_name; };
     void setTableValuesForShape(ShapeIOManager *pIOManager) {};
@@ -70,6 +79,7 @@ private:
     float scale;
     int numLoadedModels;
     int idx;
+    int maskThresh;
 };
 
 #endif /* defined(__cooperFORM__ThreeDShapeObject__) */

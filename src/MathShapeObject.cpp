@@ -67,7 +67,10 @@ void MathShapeObject::update() {
 //--------------------------------------------------------------
 
 void MathShapeObject::renderProjectorOverlay(int w, int h) {
-
+    projectorImage.draw(273, 178, 1639, 1254); //TODO find proper x y vals
+                        //390,230, w, h);
+    cout << ofGetMouseX() << " " << ofGetMouseY() << endl;
+    
 }
 
 //--------------------------------------------------------------

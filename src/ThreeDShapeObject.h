@@ -20,6 +20,7 @@ class ThreeDShapeObject : public ShapeObject {
     {
         ofxAssimpModelLoader model;
         string name;
+        float z;
     };
     
 public:

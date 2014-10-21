@@ -7,7 +7,7 @@
 int main( ){
     ofAppGLFWWindow window;
     window.setMultiDisplayFullscreen(true);
-    ofSetupOpenGL(&window, 2*1920, 1080, OF_WINDOW);
+    ofSetupOpenGL(&window, 2*1920, 1080, OF_FULLSCREEN);
 	
     ReliefApplication *relief = new ReliefApplication();    
     

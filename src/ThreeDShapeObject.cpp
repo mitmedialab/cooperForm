@@ -22,12 +22,16 @@ ThreeDShapeObject::ThreeDShapeObject() {
     //models.at(0)->model.loadModel("models/beetle3.3ds");
     models.at(0)->model.loadModel("models/banana_01.3DS");
     models.at(0)->name = "Banana";
+    models.at(0)->z = -180;
     models.at(1)->model.loadModel("models/plane_04.3DS");
     models.at(1)->name = "Plane";
+    models.at(1)->z = 0;
     models.at(2)->model.loadModel("models/shark_01.3DS");
     models.at(2)->name = "Shark";
+    models.at(2)->z = -100;
     models.at(3)->model.loadModel("models/teddy_03.3DS");
     models.at(3)->name = "Teddy";
+    models.at(3)->z = -150;
     
     //model.loadModel("models/beetle3.3ds");
     bgImg.loadImage("test.jpg");
@@ -68,7 +72,7 @@ void ThreeDShapeObject::update() {
     glEnable(GL_DEPTH_TEST);
     
     shader.begin();
-    models.at(idx)->model.setPosition((1920 - 840) / 2, (1080)/2, -150);
+    models.at(idx)->model.setPosition((1920 - 840) / 2, (1080)/2, models.at(idx)->z);
     models.at(idx)->model.setRotation(1, angle, axis.x, axis.y, axis.z);
     models.at(idx)->model.setScale(.3 + (.5 * scale), .3 + (.5 * scale), .3 + (.5 * scale));
     models.at(idx)->model.drawFaces();
@@ -94,15 +98,15 @@ void ThreeDShapeObject::update() {
     glEnable(GL_DEPTH_TEST);
     models.at(idx)->model.setPosition( MARGIN_X/2, MARGIN_X/2, 0);
     models.at(idx)->model.setRotation(1, angle, axis.x, axis.y, axis.z);
-    //models.at(idx)->model.setScale(0.1, 0.1, 0.1);
-    models.at(idx)->model.setScale(0.2, 0.2, 0.2);
+    models.at(idx)->model.setScale(0.1, 0.1, 0.1);
+    //models.at(idx)->model.setScale(0.2, 0.2, 0.2);
     
     //draw wireframe in black
     ofSetColor(200);
     //glPolygonMode( GL_FRONT, GL_LINE );
     models.at(idx)->model.drawFaces();
-    //models.at(idx)->model.setScale(0.101, 0.101, 0.101);
-    models.at(idx)->model.setScale(0.201, 0.201, 0.201);
+    models.at(idx)->model.setScale(0.101, 0.101, 0.101);
+    //models.at(idx)->model.setScale(0.201, 0.201, 0.201);
     ofSetColor(0);
     models.at(idx)->model.drawWireframe();
     glDisable(GL_DEPTH_TEST);
@@ -177,6 +181,7 @@ void ThreeDShapeObject::update() {
 
 void ThreeDShapeObject::renderProjectorOverlay(int w, int h) {
     //TEXTURE RENDERING TODO
+    maskedResult.draw(310, RELIEF_PROJECTOR_SIZE_Y/2 - 10, RELIEF_PROJECTOR_SIZE_X, RELIEF_PROJECTOR_SIZE_Y); //TODO find proper x y vals
 }
 
 //--------------------------------------------------------------
@@ -191,7 +196,7 @@ void ThreeDShapeObject::renderTouchscreenGraphics(int w, int h) {
     pinHeightMapImage.draw(0, 0);
     //projectorImage.draw(0, 0, RELIEF_PROJECTOR_SIZE_X/ 2, RELIEF_PROJECTOR_SIZE_Y/2);
     //maskedProjectorImage.draw(0, 0, RELIEF_PROJECTOR_SIZE_X/ 2, RELIEF_PROJECTOR_SIZE_Y/2);
-    maskedResult.draw(0, 0, RELIEF_PROJECTOR_SIZE_X/ 2, RELIEF_PROJECTOR_SIZE_Y/2);
+    
 }
 
 //--------------------------------------------------------------

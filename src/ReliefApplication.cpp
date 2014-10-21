@@ -33,7 +33,7 @@ void ReliefApplication::setup(){
     mIOManager->set_max_speed(maxSpeed);
     
     // allocate all the necessary frame buffer objects
-    projectorOverlayImage.allocate(1920, 1080, GL_RGB);
+    projectorOverlayImage.allocate(PROJECTOR_SIZE_X, PROJECTOR_SIZE_Y, GL_RGB);
     
     pinHeightMapImage.allocate(RELIEF_PROJECTOR_SIZE_X, RELIEF_PROJECTOR_SIZE_Y, GL_RGB);
     transitionImage.allocate(RELIEF_PROJECTOR_SIZE_X, RELIEF_PROJECTOR_SIZE_Y, GL_RGB);
@@ -182,7 +182,7 @@ void ReliefApplication::draw(){
     h = touchScreenDisplayImage.getHeight();
     
     ofBackground(255); //refresh
-    cameraTracker.drawCameraFeed(0, -50, 0, w+100, h);
+    cameraTracker.drawCameraFeed(0, -280, 0, 1470, 1080);
     //currentShape->renderTangibleShape(w, h);
     //currentShape->renderTouchscreenGraphics(w, h);
     touchScreenDisplayImage.end();
@@ -202,14 +202,16 @@ void ReliefApplication::draw(){
     uiHandler->draw();
     
     // draw the projector image
-    w = 1920;
-    h = 1080;
+    
+    w = projectorOverlayImage.getWidth();
+    h = projectorOverlayImage.getHeight();
+    
     ofPushStyle();
     ofSetColor(0);
-    ofRect(w, 0, w, h);
+    ofRect(1920, 0, w, h);
     ofPopStyle();
     //cameraTracker.drawCameraFeed(0, w, 0, w, h);
-    projectorOverlayImage.draw(w + 120 - 50, 0 + 120, w - 240, h - 240);
+    projectorOverlayImage.draw(1920, 0, w, h);
 }
 
 //--------------------------------------------------------------

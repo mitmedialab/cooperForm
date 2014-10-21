@@ -22,12 +22,12 @@ ThreeDShapeObject::ThreeDShapeObject() {
     //models.at(0)->model.loadModel("models/beetle3.3ds");
     models.at(0)->model.loadModel("models/banana_01.3DS");
     models.at(0)->name = "Banana";
-    models.at(1)->model.loadModel("models/plane_01.3DS");
+    models.at(1)->model.loadModel("models/plane_04.3DS");
     models.at(1)->name = "Plane";
     models.at(2)->model.loadModel("models/shark_01.3DS");
     models.at(2)->name = "Shark";
-    models.at(3)->model.loadModel("models/teddy_01.3DS");
-    models.at(3)->name = "Shark";
+    models.at(3)->model.loadModel("models/teddy_03.3DS");
+    models.at(3)->name = "Teddy";
     
     //model.loadModel("models/beetle3.3ds");
     bgImg.loadImage("test.jpg");
@@ -170,7 +170,7 @@ void ThreeDShapeObject::update() {
         }
     
     maskedResult.setFromPixels(projectorMaskedPixels);
-    cout<<ofGetFrameRate()<< endl;
+    //cout<<ofGetFrameRate()<< endl;
 }
 
 //--------------------------------------------------------------

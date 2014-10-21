@@ -43,8 +43,9 @@ public:
     vector<threeDModel*> models;
     ofCamera cam;
     ofLight	light;
-    ofVboMesh vbo;
     ofFbo pinHeightMapImage;
+    ofFbo marginImage;
+    ofFbo projectorImage;
     
     string get_shape_name() {return shape_name; };
     void setTableValuesForShape(ShapeIOManager *pIOManager) {};

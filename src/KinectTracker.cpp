@@ -34,7 +34,6 @@ void KinectTracker::setup(int pNearThreshold, int pFarThreshold, int pContourMin
 //	grayThreshNear.allocate(kinect.width, kinect.height);
 //	grayThreshFar.allocate(kinect.width, kinect.height);
 	depthThreshed.allocate(kinect.width, kinect.height);
-    erodedDepthThreshed.allocate(kinect.width, kinect.height);
     lastDepthThreshed.allocate(kinect.width, kinect.height);
     depthThreshedDiff.allocate(kinect.width, kinect.height);
     recordingImage.allocate(kinect.width*2, kinect.height, OF_IMAGE_COLOR);
@@ -74,9 +73,6 @@ void KinectTracker::update() {
 		
         // update from kinect
         updateImagesFromKinect();
-        
-        depthImg.dilate_3x3();
-        depthImg.erode_3x3();
         
         cropImages();
         
@@ -185,37 +181,17 @@ void KinectTracker::calculateThresholdsAndModifyImages() {
 //    depthThreshed = depthImgCropped;
     // remap pixels so they range from 0-255 after thresholding
     ofPixelsRef depthPixels = depthThreshed.getPixelsRef();
-    
     ofPixelsRef colorPixels = colorImgThreshed.getPixelsRef();
     for (int x = 0; x < depthPixels.getWidth(); x++) {
         for (int y = 0; y < depthPixels.getHeight(); y++) {
             float shade = ofClamp((depthPixels.getColor(x,y).getBrightness() - mFarThreshold) * 255.f / (mNearThreshold - mFarThreshold), 0, 255);
-            
+//            float shade = ofClamp((depthPixels.getColor(x,y).getBrightness() - mNearThreshold) * 255.f / (255.f - mNearThreshold), 0, 255);
             depthPixels.setColor(x,y, shade);
+            if (shade < 20)
+                colorPixels.setColor(x,y, 0);
         }
     }
     depthThreshed.flagImageChanged();
-    
-    erodedDepthThreshed.setFromPixels(depthThreshed.getPixels(), depthThreshed.getWidth(), depthThreshed.getHeight());
-    erodedDepthThreshed.erode_3x3();
-    erodedDepthThreshed.erode_3x3();
-    
-    ofPixelsRef erodedDepthPixels = erodedDepthThreshed.getPixelsRef();
-    for (int x = 1; x < erodedDepthPixels.getWidth()-1; x++) {
-        for (int y = 1; y < erodedDepthPixels.getHeight()-1; y++) {
-                if (erodedDepthPixels.getColor(x, y).getBrightness() < 40)
-                    colorPixels.setColor(x,y, 0);
-                if (erodedDepthPixels.getColor(x-1, y).getBrightness() < 20)
-                    colorPixels.setColor(x,y, 0);
-                if (erodedDepthPixels.getColor(x, y-1).getBrightness() < 20)
-                    colorPixels.setColor(x,y, 0);
-                if (erodedDepthPixels.getColor(x+1, y).getBrightness() < 20)
-                    colorPixels.setColor(x,y, 0);
-                if (erodedDepthPixels.getColor(x, y+1).getBrightness() < 20)
-                    colorPixels.setColor(x,y, 0);
-        }
-    }
-    
     colorImgThreshed.flagImageChanged();
 }
 

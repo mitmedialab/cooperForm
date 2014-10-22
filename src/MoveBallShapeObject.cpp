@@ -14,8 +14,8 @@ MoveBallShapeObject::MoveBallShapeObject() {
 }
 
 void MoveBallShapeObject::update() {
-    float maxHeightOfEdge = 210;
-    float minRadius = 5;
+    float maxHeightOfEdge = 215;
+    float minRadius = 6;
     float time = 2;
     if (toCenter)
         time = (float)(ofGetElapsedTimeMillis() - startAnimationTime) / toCenterAnimationTime;
@@ -26,8 +26,6 @@ void MoveBallShapeObject::update() {
     int h = depthBuffer.getHeight();
     
     if (time > 1) {
-        maxHeightOfEdge = min(210 - (float)time*0.001, 255.0 * 3/4);
-        
         if (!toCenter && !ballInCorner)
             ballInCorner = true;
         
@@ -155,17 +153,9 @@ void MoveBallShapeObject::renderTouchscreenGraphics(int w, int h) {
 
 void MoveBallShapeObject::moveBallToCorner() {
     startAnimationTime = ofGetElapsedTimeMillis();
-    ballInCorner = true;
     toCenter = false;
 }
 void MoveBallShapeObject::moveBallToCenter() {
-    if (!toCenter && ofGetElapsedTimeMillis() - startAnimationTime < toCornerAnimationTime) {
-        ballInCorner = false;
-        toCenter = true;
-        startAnimationTime = ofGetElapsedTimeMillis() - toCenterAnimationTime;
-        return;
-    }
-    
     startAnimationTime = ofGetElapsedTimeMillis();
     ballInCorner = false;
     toCenter = true;

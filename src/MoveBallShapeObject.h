@@ -45,8 +45,8 @@ private:
     long toCornerAnimationTime = 3000;
     long toCenterAnimationTime = 1000;
     
-    int cornerX = 15;
-    int cornerY = 100-15;
+    int cornerX = 20;
+    int cornerY = 100-20;
     
     bool ballInCorner = false;
 };

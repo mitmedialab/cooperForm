@@ -14,6 +14,12 @@
 
 class MathShapeObject : public ShapeObject {
     
+ //   struct mathEquation
+  //  {
+   //     ofxAssimpModelLoader model;
+    //    string name;
+   // };
+    
 public:
     MathShapeObject();
     void update();
@@ -23,7 +29,18 @@ public:
     void keyReleased(int key);
     
     void nextFunction();
+    void chooseFunction(int func);
+    
+    
+    void modifyVal1Up();
+    void modifyVal1Down();
+    void modifyVal2Up();
+    void modifyVal2Down();
+    
     Function function;
+    
+    string getEqVal1();
+    string getEqVal2();
     
     string get_shape_name() {return shape_name; };
     //void setTableValuesForShape(ShapeIOManager *pIOManager);

@@ -25,6 +25,8 @@ void UIHandler::draw() {
         image->draw();
     for (UIText *text : texts)
         text->draw();
+    for (UINum *num : nums)
+        num->draw();
     
     ofSetColor(ofColor(255));
 }
@@ -47,6 +49,10 @@ void UIHandler::addImage(UIImage* image) {
 
 void UIHandler::addText(UIText* text) {
     texts.push_back(text);
+}
+
+void UIHandler::addNum(UINum* num) {
+    nums.push_back(num);
 }
 
 
@@ -171,6 +177,14 @@ UIText* UIHandler::getText(string name) {
     for (UIText *text : texts) {
         if (text->getName() == name)
             return text;
+    }
+    return NULL;
+}
+
+UINum* UIHandler::getNum(string name) {
+    for (UINum *num : nums) {
+        if (num->getName() == name)
+            return num;
     }
     return NULL;
 }

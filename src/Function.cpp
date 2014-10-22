@@ -19,7 +19,7 @@ Function::Function() {
             next[i][j] = 0;
         }
     
-    nextFunction(true);
+    nextFunction("next",0);
     anim.setDuration(0.0f);
     
     text.loadFont("frabk.ttf", 100);
@@ -121,12 +121,19 @@ void Function::update(float dt) {
 
 //--------------------------------------------------------------
 
-void Function::nextFunction(bool t) {
-    if(t){
+void Function::nextFunction(string t, int func) {
+    if(t == "next"){
         currFunc = (currFunc + 1) % 5;
-        eq_val2 = 1;
-        eq_val1 = 1;
+        eq_val2 = 10;
+        eq_val1 = 10;
+    } else if(t == "button"){
+        currFunc = func;
+        eq_val2 = 10;
+        eq_val1 = 10;
     }
+    
+    float eq_val1_f = eq_val1*0.1;
+    float eq_val2_f = eq_val2*0.1;
     
     for (int i = 0; i < RELIEF_SIZE_X; i++) {
         for (int j = 0; j < RELIEF_SIZE_Y; j++) {
@@ -136,11 +143,11 @@ void Function::nextFunction(bool t) {
             float x = ((float)i - (float)(RELIEF_SIZE_X-1) / 2.0f) / ((float)(RELIEF_SIZE_X-1) / 2.0f);
             float y = ((float)j - (float)(RELIEF_SIZE_Y-1) / 2.0f) / ((float)(RELIEF_SIZE_Y-1) / 2.0f);
             switch (currFunc) {
-                case 0: next[i][j] = (x*eq_val1) * (y*eq_val2); break;
-                case 1: next[i][j] = std::sqrt(abs(4.0f - 2.0f*(x*eq_val1)*(x*eq_val1) - 2.0f*(y*eq_val2)*(y*eq_val2))) - 1.0f; break;
-                case 2: next[i][j] = (x*eq_val1)*(x*eq_val1) - (y*eq_val2)*(y*eq_val2); break;
-                case 3: next[i][j] = std::cos(8.0f * ((x*eq_val1)*(x*eq_val1) + (y*eq_val2)*(y*eq_val2))) * std::exp(-(x*eq_val1)*(x*eq_val1) - (y*eq_val2)*(y*eq_val2)); break;
-                case 4: next[i][j] = ((x*eq_val1)*(y*eq_val2)*(y*eq_val2)*(y*eq_val2) - (y*eq_val2)*(x*eq_val1)*(x*eq_val1)*(x*eq_val1)) / 0.2f;
+                case 0: next[i][j] = (x*eq_val1_f) * (y*eq_val2_f); break;
+                case 1: next[i][j] = std::sqrt(abs(4.0f - 2.0f*(x*eq_val1_f)*(x*eq_val1_f) - 2.0f*(y*eq_val2_f)*(y*eq_val2_f))) - 1.0f; break;
+                case 2: next[i][j] = (x*eq_val1_f)*(x*eq_val1_f) - (y*eq_val2_f)*(y*eq_val2_f); break;
+                case 3: next[i][j] = std::cos(8.0f * ((x*eq_val1_f)*(x*eq_val1_f) + (y*eq_val2_f)*(y*eq_val2_f))) * std::exp(-(x*eq_val1_f)*(x*eq_val1_f) - (y*eq_val2_f)*(y*eq_val2_f)); break;
+                case 4: next[i][j] = ((x*eq_val1_f)*(y*eq_val2_f)*(y*eq_val2_f)*(y*eq_val2_f) - (y*eq_val2_f)*(x*eq_val1_f)*(x*eq_val1_f)*(x*eq_val1_f)) / 0.2f;
                 default:
                     break;
             }
@@ -221,17 +228,38 @@ void Function::drawEquation() {
 void Function::adjustVar(int num, int change){
     if(num == 1){
         if(change == 1){
-            eq_val1 += 0.1f;
+            eq_val1 += 1;
+            if(eq_val1>20){
+                eq_val1 = 20;
+            }
         } else {
-            eq_val1 -= 0.1f;
+            eq_val1 -= 1;
+            if(eq_val1<-20){
+                eq_val1 = -20;
+            }
         }
     } else if (num==2){
         if(change == 1){
-            eq_val2 += 0.1f;
+            eq_val2 += 1;
+            if(eq_val2>20){
+                eq_val2 = 20;
+            }
         } else {
-            eq_val2 -= 0.1f;
+            eq_val2 -= 1;
+            if(eq_val2<-20){
+                eq_val2 = -20;
+            }
         }
     }
+    nextFunction("modify", 0);
 }
 
 //--------------------------------------------------------------
+
+
+string Function::getEqVal1(){
+    return ofToString(eq_val1*0.1);
+}
+string Function::getEqVal2(){
+    return ofToString(eq_val2*0.1);
+}

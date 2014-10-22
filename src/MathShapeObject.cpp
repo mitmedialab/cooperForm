@@ -67,8 +67,7 @@ void MathShapeObject::update() {
 //--------------------------------------------------------------
 
 void MathShapeObject::renderProjectorOverlay(int w, int h) {
-    projectorImage.draw(273, 178, 1639, 1254); //TODO find proper x y vals
-    
+
 }
 
 //--------------------------------------------------------------
@@ -88,8 +87,38 @@ void MathShapeObject::renderTouchscreenGraphics(int w, int h) {
 //--------------------------------------------------------------
 
 void MathShapeObject::nextFunction() {
-    function.nextFunction(true);
+    function.nextFunction("next",0);
+}
+
+void MathShapeObject::chooseFunction(int func) {
+    function.nextFunction("button",func);
 }
 
 //--------------------------------------------------------------
+
+void MathShapeObject::modifyVal1Up() {
+    function.adjustVar(1,1);
+}
+
+void MathShapeObject::modifyVal1Down() {
+    function.adjustVar(1,-1);
+}
+
+void MathShapeObject::modifyVal2Up() {
+    function.adjustVar(2,1);
+}
+
+void MathShapeObject::modifyVal2Down() {
+    function.adjustVar(2,-1);
+}
+
+string MathShapeObject::getEqVal1(){
+    return function.getEqVal1();
+}
+
+string MathShapeObject::getEqVal2(){
+    return function.getEqVal2();
+}
+
+
 

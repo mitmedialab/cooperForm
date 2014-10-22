@@ -32,8 +32,7 @@ void KinectShapeObject::renderTangibleShape(int w, int h){
     mKinectHeightImage.draw(0,0, w, h);
 };
 void KinectShapeObject::renderProjectorOverlay(int w, int h){
-    //mOutputShapeImage.draw(0,0, w, h);
-    mOutputShapeImage.draw(275,180, 565, 565);
+    mOutputShapeImage.draw(0,0, w, h);
 };
 
 void KinectShapeObject::mouseMoved(int x, int y){

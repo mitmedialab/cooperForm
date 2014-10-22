@@ -69,6 +69,49 @@ void UITriggers::buttonTrigger(UIButton *button) {
             reliefApplication->threeDShapeObject->changeModel("right");
             cout << "modelSelectRight" <<endl;
         }
+        else if (name == "equationSelectButton1")
+        {
+            reliefApplication->mathShapeObject->chooseFunction(0);
+            uiHandler->select(button);
+
+        }
+        else if (name == "equationSelectButton2")
+        {
+            reliefApplication->mathShapeObject->chooseFunction(1);
+            uiHandler->select(button);
+        }
+        else if (name == "equationSelectButton3")
+        {
+            reliefApplication->mathShapeObject->chooseFunction(2);
+            uiHandler->select(button);
+        }
+        else if (name == "equationSelectButton4")
+        {
+            reliefApplication->mathShapeObject->chooseFunction(3);
+            uiHandler->select(button);
+        }
+        else if (name == "equationSelectButton5")
+        {
+            reliefApplication->mathShapeObject->chooseFunction(4);
+            uiHandler->select(button);
+        }
+        else if (name == "modifyVal1Up")
+        {
+            reliefApplication->mathShapeObject->modifyVal1Up();
+        }
+        else if (name == "modifyVal1Down")
+        {
+            reliefApplication->mathShapeObject->modifyVal1Down();
+        }
+        else if (name == "modifyVal2Up")
+        {
+            reliefApplication->mathShapeObject->modifyVal2Up();
+        }
+        else if (name == "modifyVal2Down")
+        {
+            reliefApplication->mathShapeObject->modifyVal2Down();
+        }
+        
     }
 }
 void UITriggers::buttonUnselect(UIButton *button) {
@@ -78,6 +121,7 @@ void UITriggers::buttonUnselect(UIButton *button) {
         uiHandler->hideUIGroup(name);
         uiHandler->showUIGroup("info");
     }
+    
 }
 
 void UITriggers::sliderTrigger(UISlider *slider) {

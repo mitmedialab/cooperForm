@@ -26,7 +26,6 @@ private:
 //	ofxCvGrayscaleImage     grayThreshFar; // the far thresholded image
     
     ofxCvGrayscaleImage     depthThreshed; // grayscale depth image
-    ofxCvGrayscaleImage     erodedDepthThreshed;
     ofxCvGrayscaleImage     lastDepthThreshed;
     ofxCvGrayscaleImage     depthThreshedDiff;
     

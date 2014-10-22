@@ -25,10 +25,10 @@ public:
     int extrusionAmount;
     //virtual void drawText();
     
-    void nextFunction(bool t);
+    void nextFunction(string t, int func);
     
-    float eq_val1;
-    float eq_val2;
+    string getEqVal1();
+    string getEqVal2();
     
     int ratio;
     
@@ -43,6 +43,9 @@ private:
     unsigned short currFunc;
     // vector<ofImage> images;
     ofxAnimatableFloat anim;
+    
+    int eq_val1;
+    int eq_val2;
     
     bool t;
 };

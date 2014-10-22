@@ -89,7 +89,7 @@ void GUI::setupRightSidebar(UIHandler *uiHandler, const int rightSidebarWidth) {
     mainButtonGroup->push_back(mathModeButton);
     uiHandler->addButtonGroup(mainButtonGroup);
     
-    UITriggers::buttonTrigger(telepresenceModeButton);
+    
 }
 
 //--------------------------------------------------------------
@@ -99,6 +99,7 @@ void GUI::setupLeftSidebar(UIHandler *uiHandler, const int leftSidebarWidth) {
     setupTeleBar(uiHandler, leftSidebarWidth);
     setupThreeDBar(uiHandler, leftSidebarWidth);
     setupWaveBar(uiHandler, leftSidebarWidth);
+    setupMathBar(uiHandler, leftSidebarWidth);
 }
 
 //--------------------------------------------------------------
@@ -531,6 +532,225 @@ void GUI::setupThreeDBar(UIHandler* uiHandler, const int leftSidebarWidth)
     threeDGroup.push_back(modelName);
     
     uiHandler->addUIGroup(threeDGroup, "3D");
+}
+
+void GUI::setupMathBar(UIHandler* uiHandler, const int leftSidebarWidth)
+{
+    //TEXT
+    const int textWidth = 300;
+    const int textX = 60;
+    const int textY = 105;
+    const int headlineY = 60;
+    const int captionX = 88;
+    const int caption1Y = 300;
+    const int caption2Y = 570;
+    const int modelNameY = 380;
+    
+    const int headlineSize = 16;
+    const int textSize = 10;
+    const int modelNameSize = 10;
+    
+    const string headlineStr = "Math Controls";
+    const string textStr = "Use the touch screen controls located below to load a new equation and/or to change the constants and coefficients.";
+    const string caption1Str = "Tap the buttons to change numbers";
+    const string caption2Str = "Choose  a new equation";
+    //string modelNameStr = ((ReliefApplication*)ofGetAppPtr())->threeDShapeObject->getCurrentModelName(); // could be nicer
+    const string eqVal1Str = "aa"; //will be changed dynamically
+    const string eqVal2Str = "aa"; //will be changed dynamically
+    
+    const ofImage eqImg; //will be changed dynamically
+
+    UIText* text = new UIText(textStr, "Math description", textSize, textX, textY);
+    UIText* headline = new UIText(headlineStr, "Math headline", headlineSize, textX, headlineY);
+    UIText* caption1 = new UIText(caption1Str, "caption1", textSize, captionX, caption1Y);
+    UIText* caption2 = new UIText(caption2Str, "caption2", textSize, captionX, caption2Y);
+    UINum* eqVal1 = new UINum(eqVal1Str, "eqVal1", modelNameSize, textX-20, modelNameY+50);
+    UINum* eqVal2 = new UINum(eqVal1Str, "eqVal2", modelNameSize, textX+50, modelNameY+50);
+    
+    headline->setAlignment("left");
+    headline->setWidth(textWidth);
+    headline->setColor(ofColor(35,35,35));
+    text->setAlignment("left");
+    text->setWidth(textWidth);
+    text->setColor(ofColor(35,35,35));
+    caption1->setAlignment("left");
+    caption1->setWidth(textWidth);
+    caption1->setColor(ofColor(35,35,35));
+    caption2->setAlignment("left");
+    caption2->setWidth(textWidth);
+    caption2->setColor(ofColor(35,35,35));
+    eqVal1->setAlignment("center");
+    eqVal1->setWidth(textWidth);
+    eqVal1->setColor(ofColor(230,0,0));
+    eqVal2->setAlignment("center");
+    eqVal2->setWidth(textWidth);
+    eqVal2->setColor(ofColor(230,0,0));
+    
+    
+    // DIVIDERS
+    ofImage* dividerImg = new ofImage();
+    dividerImg->loadImage("divider.png");
+  //  int val = function.eq_val1;
+    
+    const int dividerWidth = dividerImg->getWidth();
+    const int dividerHeight = dividerImg->getHeight();
+    const int dividerX = leftSidebarWidth/2 - dividerWidth/2;
+    const int dividerY = 270;
+    const int dividerSpacerY = 270;
+    
+    UIImage* divider1 = new UIImage(dividerImg, dividerX, dividerY);
+    UIImage* divider2 = new UIImage(dividerImg, dividerX, dividerY + 1 * dividerSpacerY);
+    
+    //MODIFY BUTTONS
+    // UIButton name = UIButton("name", x,y, w,h)
+    const int modifyButtonWidth  = 48;
+    const int modifyButtonHeight = 60;
+    
+    const int modifyButtonX = 153;
+    const int modifyButtonY = 335;
+    const int spacerX = 107;
+    const int spacerY = 118;
+    
+    
+    
+    UIButton* modifyVal1Up
+    = new UIButton("modifyVal1Up",
+                   modifyButtonX, modifyButtonY,
+                   modifyButtonWidth,modifyButtonHeight);
+    modifyVal1Up->setImageIdle("Math/assets/uarrow.png");
+    modifyVal1Up->setImageActive("Math/assets/uarrow.png");
+    modifyVal1Up->setImageSelected("Math/assets/uarrow.png");
+    
+    UIButton* modifyVal1Down
+    = new UIButton("modifyVal1Down",
+                   modifyButtonX, modifyButtonY+spacerY,
+                   modifyButtonWidth,modifyButtonHeight);
+    modifyVal1Down->setImageIdle("Math/assets/darrow.png");
+    modifyVal1Down->setImageActive("Math/assets/darrow.png");
+    modifyVal1Down->setImageSelected("Math/assets/darrow.png");
+    
+    UIButton* modifyVal2Up
+    = new UIButton("modifyVal2Up",
+                   modifyButtonX+spacerX, modifyButtonY,
+                   modifyButtonWidth,modifyButtonHeight);
+    modifyVal2Up->setImageIdle("Math/assets/uarrow.png");
+    modifyVal2Up->setImageActive("Math/assets/uarrow.png");
+    modifyVal2Up->setImageSelected("Math/assets/uarrow.png");
+    
+    UIButton* modifyVal2Down
+    = new UIButton("modifyVal2Down",
+                   modifyButtonX+spacerX, modifyButtonY + spacerY,
+                   modifyButtonWidth,modifyButtonHeight);
+    modifyVal2Down->setImageIdle("Math/assets/darrow.png");
+    modifyVal2Down->setImageActive("Math/assets/darrow.png");
+    modifyVal2Down->setImageSelected("Math/assets/darrow.png");
+    
+
+    
+    //EQUATION BUTTONS
+    // UIButton name = UIButton("name", x,y, w,h)
+    const int equationSelectButtonWidth  = 307;
+    const int equationSelectButtonHeight = 63;
+    
+    const int equationSelectButtonX = 60;
+    const int equationSelectButtonY = 610;
+    const int spacer = 90;
+     
+    
+    
+    UIButton* equationSelectButton1
+    = new UIButton("equationSelectButton1",
+                   equationSelectButtonX, equationSelectButtonY,
+                   equationSelectButtonWidth,equationSelectButtonHeight);
+    equationSelectButton1->setImageIdle("Math/assets/equation1.png");
+    equationSelectButton1->setImageActive("Math/assets/equation1-active.png");
+    equationSelectButton1->setImageSelected("Math/assets/equation1-selected.png");
+    
+    UIButton* equationSelectButton2
+    = new UIButton("equationSelectButton2",
+                   equationSelectButtonX, equationSelectButtonY+spacer,
+                   equationSelectButtonWidth,equationSelectButtonHeight);
+     equationSelectButton2->setImageIdle("Math/assets/equation2.png");
+     equationSelectButton2->setImageActive("Math/assets/equation2-active.png");
+     equationSelectButton2->setImageSelected("Math/assets/equation2-selected.png");
+     
+     UIButton* equationSelectButton3
+     = new UIButton("equationSelectButton3",
+     equationSelectButtonX, equationSelectButtonY + spacer*2,
+     equationSelectButtonWidth,equationSelectButtonHeight);
+     equationSelectButton3->setImageIdle("Math/assets/equation3.png");
+     equationSelectButton3->setImageActive("Math/assets/equation3-active.png");
+     equationSelectButton3->setImageSelected("Math/assets/equation3-selected.png");
+     
+     UIButton* equationSelectButton4
+     = new UIButton("equationSelectButton4",
+     equationSelectButtonX, equationSelectButtonY + spacer*3,
+     equationSelectButtonWidth,equationSelectButtonHeight);
+     equationSelectButton4->setImageIdle("Math/assets/equation4.png");
+     equationSelectButton4->setImageActive("Math/assets/equation4-active.png");
+     equationSelectButton4->setImageSelected("Math/assets/equation4-selected.png");
+     
+     UIButton* equationSelectButton5
+     = new UIButton("equationSelectButton5",
+     equationSelectButtonX, equationSelectButtonY + spacer*4,
+     equationSelectButtonWidth,equationSelectButtonHeight);
+     equationSelectButton5->setImageIdle("Math/assets/equation5.png");
+     equationSelectButton5->setImageActive("Math/assets/equation5-active.png");
+     equationSelectButton5->setImageSelected("Math/assets/equation5-selected.png");
+
+    
+    //SETUP
+    uiHandler->addButton(modifyVal1Up);
+    uiHandler->addButton(modifyVal1Down);
+    uiHandler->addButton(modifyVal2Up);
+    uiHandler->addButton(modifyVal2Down);
+    uiHandler->addButton(equationSelectButton1);
+    uiHandler->addButton(equationSelectButton2);
+    uiHandler->addButton(equationSelectButton3);
+    uiHandler->addButton(equationSelectButton4);
+    uiHandler->addButton(equationSelectButton5);
+    uiHandler->addImage(divider1);
+    uiHandler->addImage(divider2);
+    uiHandler->addText(headline);
+    uiHandler->addText(text);
+    uiHandler->addText(caption1);
+    uiHandler->addText(caption2);
+    uiHandler->addNum(eqVal1);
+    uiHandler->addNum(eqVal2);
+    
+    vector<UIElement*> mathGroup = vector<UIElement*>();
+    mathGroup.push_back(modifyVal1Up);
+    mathGroup.push_back(modifyVal1Down);
+    mathGroup.push_back(modifyVal2Up);
+    mathGroup.push_back(modifyVal2Down);
+    mathGroup.push_back(equationSelectButton1);
+    mathGroup.push_back(equationSelectButton2);
+    mathGroup.push_back(equationSelectButton3);
+    mathGroup.push_back(equationSelectButton4);
+    mathGroup.push_back(equationSelectButton5);
+    mathGroup.push_back(divider1);
+    mathGroup.push_back(divider2);
+    mathGroup.push_back(headline);
+    mathGroup.push_back(text);
+    mathGroup.push_back(caption1);
+    mathGroup.push_back(caption2);
+    mathGroup.push_back(eqVal1);
+    mathGroup.push_back(eqVal2);
+    
+    uiHandler->addUIGroup(mathGroup, "math");
+    
+    
+    
+    vector<UIButton*>* equationButtonGroup = new vector<UIButton*>();
+    equationButtonGroup->push_back(equationSelectButton1);
+    equationButtonGroup->push_back(equationSelectButton2);
+    equationButtonGroup->push_back(equationSelectButton3);
+    equationButtonGroup->push_back(equationSelectButton4);
+    equationButtonGroup->push_back(equationSelectButton5);
+    uiHandler->addButtonGroup(equationButtonGroup);
+    
+    UITriggers::buttonTrigger(equationSelectButton1);
+     
 }
 
 //--------------------------------------------------------------

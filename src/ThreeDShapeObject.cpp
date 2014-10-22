@@ -264,6 +264,14 @@ void ThreeDShapeObject::setMouseDragInfo(int x, int y, int button)
         quat *= yRot*xRot;
         oldMouse = mouse;
     }
+    else if(ofDist(x, y, TOUCHSCREEN_SIZE_X/2, TOUCHSCREEN_SIZE_Y/2) < 1080/2) //arcball in middle of touchscreen
+    {
+        ofVec2f mouse(x, y);
+        ofQuaternion yRot((x - oldMouse.x) * dampen, ofVec3f(0, -1, 0));
+        ofQuaternion xRot((y - oldMouse.y) * dampen, ofVec3f(1, 0, 0));
+        quat *= yRot*xRot;
+        oldMouse = mouse;
+    }
 }
 
 //--------------------------------------------------------------

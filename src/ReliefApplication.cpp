@@ -182,9 +182,9 @@ void ReliefApplication::draw(){
     h = touchScreenDisplayImage.getHeight();
     
     ofBackground(255); //refresh
-    cameraTracker.drawCameraFeed(0, -280, 0, 1470, 1080);
+    //cameraTracker.drawCameraFeed(0, -280, 0, 1470, 1080);
     //currentShape->renderTangibleShape(w, h);
-    //currentShape->renderTouchscreenGraphics(w, h);
+    currentShape->renderTouchscreenGraphics(w, h);
     touchScreenDisplayImage.end();
     
     
@@ -196,6 +196,13 @@ void ReliefApplication::draw(){
     if (currentMode == "3D") {
         currentShape->renderMarginGraphics(0, 460);
         uiHandler->getText("modelName")->setText(threeDShapeObject->getCurrentModelName());
+    }
+    
+    if (currentMode == "math") {
+        //cout<<mathShapeObject->getEqVal1()<<endl;
+        //cout<<uiHandler->getNum("eqVal1")->getName() <<endl;
+        uiHandler->getNum("eqVal1")->setNum(mathShapeObject->getEqVal1());
+        uiHandler->getNum("eqVal2")->setNum(mathShapeObject->getEqVal2());
     }
 
     // draw UI stuff
@@ -270,6 +277,7 @@ void ReliefApplication::setMode(string newMode) {
     }
     else if (currentMode == "3D") {
         threeDShapeObject->reset();
+        uiHandler->getSlider("sliderScale")->setHandlePos(0.5);
         currentTransitionFromShape = currentShape;
         currentShape = threeDShapeObject;
         currentTransitionToShape = currentShape;
@@ -279,6 +287,7 @@ void ReliefApplication::setMode(string newMode) {
             ballMoverShapeObject->moveBallToCorner();
     }
     else if (currentMode == "math") {
+        mathShapeObject->reset();
         currentTransitionFromShape = currentShape;
         currentShape = mathShapeObject;
         currentTransitionToShape = currentShape;

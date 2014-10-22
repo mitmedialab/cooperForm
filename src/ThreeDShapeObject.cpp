@@ -11,6 +11,7 @@
 
 ThreeDShapeObject::ThreeDShapeObject() {
     
+    angle = 0;
     maskThresh = 20;
     dampen = 1.3;
     idx = 0;
@@ -249,7 +250,9 @@ void ThreeDShapeObject::changeModel(string direction)
 //--------------------------------------------------------------
 
 void ThreeDShapeObject::reset() {
-    cout << "reset" << endl;
+    //cout << "reset" << endl;
+    angle = 0;
+    scale = 0.5;
 }
 
 //--------------------------------------------------------------

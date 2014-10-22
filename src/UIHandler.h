@@ -15,6 +15,7 @@
 #include "UIText.h"
 #include "UISlider.h"
 #include "UIImage.h"
+#include "UINum.h"
 #include "ofMain.h"
 
 class UIHandler {
@@ -32,6 +33,8 @@ public:
     
     void addText(UIText *text);
     
+    void addNum(UINum *num);
+    
     void addUIGroup(vector<UIElement*> uiGroup, string name);
     
     void showUIGroup(string groupName);
@@ -47,11 +50,13 @@ public:
     UIButton* getButton(string name);
     UISlider* getSlider(string name);
     UIText*   getText(string name);
+    UINum*    getNum(string name);
 private:
     vector<UIButton*> buttons;
     vector<UISlider*> sliders;
     vector<UIImage*> images;
     vector<UIText*> texts;
+    vector<UINum*> nums;
     
     // groups of button
     // for selection and unselection

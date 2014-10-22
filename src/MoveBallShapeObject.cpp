@@ -14,8 +14,8 @@ MoveBallShapeObject::MoveBallShapeObject() {
 }
 
 void MoveBallShapeObject::update() {
-    float maxHeightOfEdge = 215;
-    float minRadius = 6;
+    float maxHeightOfEdge = 210;
+    float minRadius = 5;
     float time = 2;
     if (toCenter)
         time = (float)(ofGetElapsedTimeMillis() - startAnimationTime) / toCenterAnimationTime;
@@ -26,6 +26,8 @@ void MoveBallShapeObject::update() {
     int h = depthBuffer.getHeight();
     
     if (time > 1) {
+        maxHeightOfEdge = min(210 - (float)time*0.001, 255.0 * 3/4);
+        
         if (!toCenter && !ballInCorner)
             ballInCorner = true;
         

@@ -253,6 +253,7 @@ void ThreeDShapeObject::reset() {
     //cout << "reset" << endl;
     angle = 0;
     scale = 0.5;
+    idx = 0;
 }
 
 //--------------------------------------------------------------

@@ -182,9 +182,9 @@ void ReliefApplication::draw(){
     h = touchScreenDisplayImage.getHeight();
     
     ofBackground(255); //refresh
-    //cameraTracker.drawCameraFeed(0, -280, 0, 1470, 1080);
+    cameraTracker.drawCameraFeed(0, -280, 0, 1470, 1080);
     //currentShape->renderTangibleShape(w, h);
-    currentShape->renderTouchscreenGraphics(w, h);
+    //currentShape->renderTouchscreenGraphics(w, h);
     touchScreenDisplayImage.end();
     
     

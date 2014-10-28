@@ -45,6 +45,7 @@
 		8A0B32D219E8701A009196FE /* GUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A0B32D019E8701A009196FE /* GUI.cpp */; };
 		8A0B32D619EC6B1C009196FE /* MoveBallShapeObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A0B32D419EC6B1C009196FE /* MoveBallShapeObject.cpp */; };
 		8A0B32DF19ED9333009196FE /* OSCInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A0B32DD19ED9333009196FE /* OSCInterface.cpp */; };
+		8A3F18F219F80F6D00CE9D4C /* UINum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A3F18F019F80F6D00CE9D4C /* UINum.cpp */; };
 		8AC348A919EF0F1300845B01 /* IpEndpointName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC3488319EF0F1300845B01 /* IpEndpointName.cpp */; };
 		8AC348AA19EF0F1300845B01 /* NetworkingUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC3488819EF0F1300845B01 /* NetworkingUtils.cpp */; };
 		8AC348AB19EF0F1300845B01 /* UdpSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC3488919EF0F1300845B01 /* UdpSocket.cpp */; };
@@ -265,6 +266,8 @@
 		8A0B32D519EC6B1C009196FE /* MoveBallShapeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoveBallShapeObject.h; sourceTree = "<group>"; };
 		8A0B32DD19ED9333009196FE /* OSCInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OSCInterface.cpp; sourceTree = "<group>"; };
 		8A0B32DE19ED9333009196FE /* OSCInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSCInterface.h; sourceTree = "<group>"; };
+		8A3F18F019F80F6D00CE9D4C /* UINum.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UINum.cpp; sourceTree = "<group>"; };
+		8A3F18F119F80F6D00CE9D4C /* UINum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINum.h; sourceTree = "<group>"; };
 		8AC3488319EF0F1300845B01 /* IpEndpointName.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IpEndpointName.cpp; sourceTree = "<group>"; };
 		8AC3488419EF0F1300845B01 /* IpEndpointName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpEndpointName.h; sourceTree = "<group>"; };
 		8AC3488519EF0F1300845B01 /* NetworkingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkingUtils.h; sourceTree = "<group>"; };
@@ -820,6 +823,8 @@
 		8A09A64119D2218600118C9E /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				8A3F18F019F80F6D00CE9D4C /* UINum.cpp */,
+				8A3F18F119F80F6D00CE9D4C /* UINum.h */,
 				8A09A64819D3712B00118C9E /* UITriggers.cpp */,
 				8A09A64919D3712B00118C9E /* UITriggers.h */,
 				8A09A64219D221AE00118C9E /* UIHandler.cpp */,
@@ -1621,6 +1626,7 @@
 				8AC348B119EF0F1300845B01 /* OscTypes.cpp in Sources */,
 				4472941A19F1A17A007AF18D /* ofxAssimpAnimation.cpp in Sources */,
 				8A0B32D219E8701A009196FE /* GUI.cpp in Sources */,
+				8A3F18F219F80F6D00CE9D4C /* UINum.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				8A09A65219D5F44000118C9E /* WavyShapeObject.cpp in Sources */,
 				8A09A64A19D3712B00118C9E /* UITriggers.cpp in Sources */,

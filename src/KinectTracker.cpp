@@ -8,6 +8,7 @@
 
 
 #include "KinectTracker.h"
+#include "Constants.h"
 
 void KinectTracker::setup(int pNearThreshold, int pFarThreshold, int pContourMinimumSize) {
 	
@@ -187,13 +188,27 @@ void KinectTracker::calculateThresholdsAndModifyImages() {
     ofPixelsRef depthPixels = depthThreshed.getPixelsRef();
     
     ofPixelsRef colorPixels = colorImgThreshed.getPixelsRef();
+    float minShade = 255;
+    float maxShade = 0;
     for (int x = 0; x < depthPixels.getWidth(); x++) {
         for (int y = 0; y < depthPixels.getHeight(); y++) {
             float shade = ofClamp((depthPixels.getColor(x,y).getBrightness() - mFarThreshold) * 255.f / (mNearThreshold - mFarThreshold), 0, 255);
-            
+            minShade = min(minShade, shade);
+            maxShade = max(maxShade, shade);
             depthPixels.setColor(x,y, shade);
         }
     }
+    if (maxShade - minShade > 5) {
+        // rescale between min and max shades
+        for (int x = 0; x < depthPixels.getWidth(); x++) {
+            for (int y = 0; y < depthPixels.getHeight(); y++) {
+                float shade = LOW_THRESHOLD + (depthPixels.getColor(x,y).getBrightness() - minShade) * (255.f - LOW_THRESHOLD) / (maxShade - minShade);
+
+                depthPixels.setColor(x,y, shade);
+            }
+        }
+    }
+    
     depthThreshed.flagImageChanged();
     
     erodedDepthThreshed.setFromPixels(depthThreshed.getPixels(), depthThreshed.getWidth(), depthThreshed.getHeight());

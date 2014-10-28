@@ -51,8 +51,8 @@ void ReliefApplication::setup(){
     // setup kinect if using
     // @todo we only want to setup if connected
     // @note currently if you change the kinect setting you must restart
-    const int kinectFarCutOffPlane = 210; // 225 // 0 = far, 255 = near
-    const int kinectNearCutOffPlane = 225; // 235
+    const int kinectFarCutOffPlane = 220; // 225 // 0 = far, 255 = near
+    const int kinectNearCutOffPlane = 245; // 235
     const int minContourSize = 10;
     kinectTracker.setup(kinectNearCutOffPlane, kinectFarCutOffPlane, minContourSize);
     const int kinectCropWidth  = 240;

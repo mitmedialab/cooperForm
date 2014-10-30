@@ -16,7 +16,7 @@
 // clips values
 // we get weird behavior when LOW_THRESHOLD is set to 0...
 #define LOW_THRESHOLD 60
-#define HIGH_THRESHOLD 245
+#define HIGH_THRESHOLD 255
 
 // surface "pixels"
 #define	RELIEF_PHYSICAL_SIZE_X	  24
@@ -34,8 +34,8 @@
 #define TOUCHSCREEN_SIZE_X      1920
 #define TOUCHSCREEN_SIZE_Y      1080
 
-#define PROJECTOR_SIZE_X      1024
-#define PROJECTOR_SIZE_Y      768
+#define PROJECTOR_SIZE_X      1920//1024
+#define PROJECTOR_SIZE_Y      1080//768
 
 #define MARGIN_X 420
 #define TOUCHSCREEN_VISIBLE_SIZE_X TOUCHSCREEN_SIZE_X - (2 * MARGIN_X)

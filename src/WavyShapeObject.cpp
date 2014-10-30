@@ -242,7 +242,8 @@ void WavyShapeObject::renderProjectorOverlay(int w, int h) {
     // interpolation should be done during height map drawing
     interpolateSurface();
 
-    surface.draw(273, 178, 562, 586); //0,0, w,h);
+    //surface.draw(273, 178, 562, 586); //0,0, w,h);
+    surface.draw(510, 242, 1065, 814); //0,0, w,h);
 }
 
 

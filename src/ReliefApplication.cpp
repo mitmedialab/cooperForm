@@ -52,7 +52,7 @@ void ReliefApplication::setup(){
     // @todo we only want to setup if connected
     // @note currently if you change the kinect setting you must restart
     const int kinectFarCutOffPlane = 220; // 225 // 0 = far, 255 = near
-    const int kinectNearCutOffPlane = 245; // 235
+    const int kinectNearCutOffPlane = 240; // 235
     const int minContourSize = 10;
     kinectTracker.setup(kinectNearCutOffPlane, kinectFarCutOffPlane, minContourSize);
     const int kinectCropWidth  = 240;
@@ -182,8 +182,9 @@ void ReliefApplication::draw(){
     h = touchScreenDisplayImage.getHeight();
     
     ofBackground(255); //refresh
-    cameraTracker.drawCameraFeed(0, -280, 0, 1470, 1080);
-    //currentShape->renderTangibleShape(w, h);
+    
+    //cameraTracker.drawCameraFeed(0, -280, 0, 1470, 1080);
+    currentShape->renderTangibleShape(w, h);
     //currentShape->renderTouchscreenGraphics(w, h);
     touchScreenDisplayImage.end();
     
@@ -215,7 +216,7 @@ void ReliefApplication::draw(){
     
     ofPushStyle();
     ofSetColor(0);
-    ofRect(1920, 0, w, h);
+    ofRect(1920, 0, 1920, 1080);
     ofPopStyle();
     //cameraTracker.drawCameraFeed(0, w, 0, w, h);
     projectorOverlayImage.draw(1920, 0, w, h);

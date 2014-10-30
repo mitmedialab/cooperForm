@@ -182,7 +182,10 @@ void ThreeDShapeObject::update() {
 
 void ThreeDShapeObject::renderProjectorOverlay(int w, int h) {
     //TEXTURE RENDERING TODO
-    maskedResult.draw(310, RELIEF_PROJECTOR_SIZE_Y/2 - 10, RELIEF_PROJECTOR_SIZE_X, RELIEF_PROJECTOR_SIZE_Y); //TODO find proper x y vals
+    //maskedResult.draw(310, RELIEF_PROJECTOR_SIZE_Y/2 - 10, RELIEF_PROJECTOR_SIZE_X, RELIEF_PROJECTOR_SIZE_Y); //TODO find proper x y vals
+    maskedResult.draw(510, 242, 1065, 814); //TODO find proper x y vals
+    
+    
 }
 
 //--------------------------------------------------------------

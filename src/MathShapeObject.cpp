@@ -68,7 +68,7 @@ void MathShapeObject::update() {
 
 void MathShapeObject::renderProjectorOverlay(int w, int h) {
     //projectorImage.draw(273, 178, 1639, 1254); //TODO find proper x y vals
-    projectorImage.draw(510, 242, 2131, 813);
+    projectorImage.draw(510, 242, 3151, 1778);
 }
 
 //--------------------------------------------------------------

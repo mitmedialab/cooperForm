@@ -12,7 +12,7 @@ void ReliefApplication::setup(){
     
     // set up OSCInterface
     // needs to be setup before UI
-    //backDisplayComputer = new OSCInterface("169.169.169.169", 86753);
+    backDisplayComputer = new OSCInterface("169.254.132.60", 4444);
     
     // initialize communication with the pin display
 	mIOManager = new ShapeIOManager();
@@ -183,8 +183,18 @@ void ReliefApplication::draw(){
     
     ofBackground(255); //refresh
     
-    //cameraTracker.drawCameraFeed(0, -280, 0, 1470, 1080);
-    currentShape->renderTangibleShape(w, h);
+    ofPushStyle();
+    //glEnable(GL_BLEND);
+    //glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
+    
+    //cout << "mouse " << ofGetMouseX()/4 << " " << ofGetMouseY()/4 << endl;
+    //ofSetColor(ofColor::fromHsb(ofGetMouseX()/4, ofGetMouseY()/4, 255)); // c is bright saturated cyan);
+    cameraTracker.drawCameraFeed(0, -194, -26, 1502, 1120);
+    //glDisable(GL_BLEND);
+    ofPopStyle();
+    
+    //cameraTracker.drawCameraFeed(0, 0, 0, w, h);
+    //currentShape->renderTangibleShape(w, h);
     //currentShape->renderTouchscreenGraphics(w, h);
     touchScreenDisplayImage.end();
     
@@ -251,7 +261,7 @@ void ReliefApplication::setMode(string newMode) {
     
     if (newMode == "telepresence" || newMode == "wavy" || newMode == "3D" || newMode == "math") {
         currentMode = newMode;
-        //backDisplayComputer->sendModeChange(newMode);
+        backDisplayComputer->sendModeChange(newMode);
     }
     else
         cout << "Invalid mode selected" << endl;

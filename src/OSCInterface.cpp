@@ -11,6 +11,7 @@ OSCInterface::OSCInterface(string host, int port) {
     this->host = host;
     this->port = port;
     sender.setup(host, port);
+    cout << "connected" << endl;
 }
 
 void OSCInterface::sendModeChange(string newMode) {

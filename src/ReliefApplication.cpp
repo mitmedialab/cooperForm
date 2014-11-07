@@ -12,7 +12,7 @@ void ReliefApplication::setup(){
     
     // set up OSCInterface
     // needs to be setup before UI
-    backDisplayComputer = new OSCInterface("169.254.132.60", 4444);
+    backDisplayComputer = new OSCInterface("168.176.175.2", 4444);
     
     // initialize communication with the pin display
 	mIOManager = new ShapeIOManager();

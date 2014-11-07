@@ -15,8 +15,14 @@ OSCInterface::OSCInterface(string host, int port) {
 }
 
 void OSCInterface::sendModeChange(string newMode) {
+    
     ofxOscMessage message;
     message.setAddress("/inform/mode");
     message.addStringArg(newMode);
-    sender.sendMessage(message);
+    try {
+        sender.sendMessage(message);
+    } catch (...) {
+        return;
+    }
+    
 }

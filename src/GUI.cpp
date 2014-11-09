@@ -550,23 +550,22 @@ void GUI::setupMathBar(UIHandler* uiHandler, const int leftSidebarWidth)
     
     const int headlineSize = 16;
     const int textSize = 10;
-    const int modelNameSize = 10;
+    const int modelNameSize = 18;
     
     const string headlineStr = "Math Controls";
     const string textStr = "Use the touch screen controls located below to load a new equation and/or to change the constants and coefficients.";
     const string caption1Str = "Tap the buttons to change coefficients --(W.I.P)--";
     const string caption2Str = "Choose  a new equation";
-    const string eqVal1Str = "aa"; //will be changed dynamically
-    const string eqVal2Str = "aa"; //will be changed dynamically
+    const string equationStr = ""; //will be changed dynamically
+    const string eqVal1Str = ""; //will be changed dynamically
+    const string eqVal2Str = ""; //will be changed dynamically
     
-    const ofImage eqImg; //will be changed dynamically
     
     UIText* text = new UIText(textStr, "Math description", textSize, textX, textY);
     UIText* headline = new UIText(headlineStr, "Math headline", headlineSize, textX, headlineY);
     UIText* caption1 = new UIText(caption1Str, "caption1", textSize, captionX, caption1Y);
     UIText* caption2 = new UIText(caption2Str, "caption2", textSize, captionX, caption2Y);
-    UINum* eqVal1 = new UINum(eqVal1Str, "eqVal1", modelNameSize, textX-20, modelNameY+50);
-    UINum* eqVal2 = new UINum(eqVal1Str, "eqVal2", modelNameSize, textX+50, modelNameY+50);
+
     
     headline->setAlignment("left");
     headline->setWidth(textWidth);
@@ -580,12 +579,6 @@ void GUI::setupMathBar(UIHandler* uiHandler, const int leftSidebarWidth)
     caption2->setAlignment("left");
     caption2->setWidth(textWidth);
     caption2->setColor(ofColor(35,35,35));
-    eqVal1->setAlignment("center");
-    eqVal1->setWidth(textWidth);
-    eqVal1->setColor(ofColor(230,0,0));
-    eqVal2->setAlignment("center");
-    eqVal2->setWidth(textWidth);
-    eqVal2->setColor(ofColor(230,0,0));
     
     
     // DIVIDERS
@@ -604,15 +597,12 @@ void GUI::setupMathBar(UIHandler* uiHandler, const int leftSidebarWidth)
     
     //MODIFY BUTTONS
     // UIButton name = UIButton("name", x,y, w,h)
-    const int modifyButtonWidth  = 48;
+    const int modifyButtonWidth  = 60;
     const int modifyButtonHeight = 60;
-    
-    const int modifyButtonX = 153;
-    const int modifyButtonY = 335;
-    const int spacerX = 107;
-    const int spacerY = 118;
-    
-    
+    const int spacerX = 300;
+    const int spacerY = 150;
+    const int modifyButtonX = TOUCHSCREEN_SIZE_X/2 - spacerX/2 - modifyButtonWidth;
+    const int modifyButtonY = 100;
     
     UIButton* modifyVal1Up
     = new UIButton("modifyVal1Up",
@@ -646,6 +636,23 @@ void GUI::setupMathBar(UIHandler* uiHandler, const int leftSidebarWidth)
     modifyVal2Down->setImageActive("Math/assets/darrow.png");
     modifyVal2Down->setImageSelected("Math/assets/darrow.png");
     
+    const int eqVal1X = modifyButtonX;
+    const int eqVal2X = modifyButtonX + spacerX;
+    const int eqValY  = modifyButtonY + modifyButtonHeight + spacerY/2 - 25;
+    UINum* eqVal1 = new UINum(eqVal1Str, "eqVal1", modelNameSize, eqVal1X, eqValY);
+    UINum* eqVal2 = new UINum(eqVal1Str, "eqVal2", modelNameSize, eqVal2X, eqValY);
+    eqVal1->setAlignment("center");
+    eqVal1->setWidth(modifyButtonWidth);
+    eqVal1->setColor(ofColor(230,0,0));
+    eqVal2->setAlignment("center");
+    eqVal2->setWidth(modifyButtonWidth);
+    eqVal2->setColor(ofColor(230,0,0));
+    
+    const int equationWidth = 800;
+    UIText* equation = new UIText(equationStr, "equation", modelNameSize, TOUCHSCREEN_SIZE_X/2 - equationWidth/2, eqValY);
+    equation->setAlignment("center");
+    equation->setWidth(equationWidth);
+    equation->setColor(ofColor(25,25,25));
     
     //EQUATION BUTTONS
     // UIButton name = UIButton("name", x,y, w,h)
@@ -715,6 +722,7 @@ void GUI::setupMathBar(UIHandler* uiHandler, const int leftSidebarWidth)
     uiHandler->addText(caption2);
     uiHandler->addNum(eqVal1);
     uiHandler->addNum(eqVal2);
+    uiHandler->addText(equation);
     
     vector<UIElement*> mathGroup = vector<UIElement*>();
     mathGroup.push_back(modifyVal1Up);
@@ -734,6 +742,7 @@ void GUI::setupMathBar(UIHandler* uiHandler, const int leftSidebarWidth)
     mathGroup.push_back(caption2);
     mathGroup.push_back(eqVal1);
     mathGroup.push_back(eqVal2);
+    mathGroup.push_back(equation);
     
     uiHandler->addUIGroup(mathGroup, "math");
     

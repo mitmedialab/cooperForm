@@ -11,6 +11,7 @@
 
 #include "ShapeObject.h"
 #include "KinectTracker.h"
+#include "CameraTracker.h"
 #include "ofxOpenCv.h"
 #include <iostream>
 
@@ -36,12 +37,18 @@ public:
     virtual void mouseMoved(int x, int y);
     virtual void mousePressed(int x, int y, int button);
     
-    void setKinectTracker(KinectTracker * pKinectTracker){mKinectTracker = pKinectTracker;};
+    void setKinectTracker(KinectTracker * pKinectTracker){
+        mKinectTracker = pKinectTracker;
+    };
     void setTableValuesForShape(ShapeIOManager *pIOManager);
 
+    void setCameraTracker(CameraTracker * cameraTracker){
+        this->cameraTracker = cameraTracker;
+    };
     
 private:
     KinectTracker * mKinectTracker;
+    CameraTracker * cameraTracker; // for touchscreen
     
     ofFbo mKinectHeightImage, mOutputShapeImage;
     

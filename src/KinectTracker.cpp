@@ -198,6 +198,9 @@ void KinectTracker::calculateThresholdsAndModifyImages() {
             depthPixels.setColor(x,y, shade);
         }
     }
+//    if (maxShade > 127 && maxShade-minShade > 2)
+//        minShade = maxShade - 2;
+    
     if (maxShade - minShade > 1) {
         // rescale between min and max shades
         for (int x = 0; x < depthPixels.getWidth(); x++) {
@@ -218,16 +221,8 @@ void KinectTracker::calculateThresholdsAndModifyImages() {
     ofPixelsRef erodedDepthPixels = erodedDepthThreshed.getPixelsRef();
     for (int x = 1; x < erodedDepthPixels.getWidth()-1; x++) {
         for (int y = 1; y < erodedDepthPixels.getHeight()-1; y++) {
-                if (erodedDepthPixels.getColor(x, y).getBrightness() < 90)
-                    colorPixels.setColor(x,y, 0);
-                if (erodedDepthPixels.getColor(x-1, y).getBrightness() < 70)
-                    colorPixels.setColor(x,y, 0);
-                if (erodedDepthPixels.getColor(x, y-1).getBrightness() < 70)
-                    colorPixels.setColor(x,y, 0);
-                if (erodedDepthPixels.getColor(x+1, y).getBrightness() < 70)
-                    colorPixels.setColor(x,y, 0);
-                if (erodedDepthPixels.getColor(x, y+1).getBrightness() < 70)
-                    colorPixels.setColor(x,y, 0);
+            if (erodedDepthPixels.getColor(x, y).getBrightness() < 90)
+                colorPixels.setColor(x,y, 0);
         }
     }
     

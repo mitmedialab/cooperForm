@@ -36,7 +36,7 @@ public:
     
     string getEqVal1();
     string getEqVal2();
-    
+    string getEq();
     string get_shape_name() {return shape_name; };
     //void setTableValuesForShape(ShapeIOManager *pIOManager);
     

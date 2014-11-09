@@ -59,6 +59,10 @@ void UINum::setNum(string text) {
     this->text = text;
 }
 
+void UINum::setX(float x) {
+    this->x = x;
+}
+
 void UINum::show() {
     visible = true;
 }

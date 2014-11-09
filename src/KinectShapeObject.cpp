@@ -26,7 +26,9 @@ void KinectShapeObject::update(){
 };
 
 void KinectShapeObject::renderTouchscreenGraphics(int w, int h){
-    mKinectHeightImage.draw(0,0, w, h);
+//    mKinectHeightImage.draw(0,0, w, h);
+    ofSetColor(255);
+    cameraTracker->drawCameraFeed(0, -194, -26, 1502, 1120);
 };
 void KinectShapeObject::renderTangibleShape(int w, int h){
     mKinectHeightImage.draw(0,0, w, h);
@@ -34,6 +36,7 @@ void KinectShapeObject::renderTangibleShape(int w, int h){
 void KinectShapeObject::renderProjectorOverlay(int w, int h){
     //mOutputShapeImage.draw(0,0, w, h);
     //mOutputShapeImage.draw(275,180, 565, 565);
+    ofSetColor(255);
     mOutputShapeImage.draw(510, 242, 1065, 814);
 };
 

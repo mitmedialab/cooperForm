@@ -29,6 +29,9 @@ public:
     void setAlignment(string alignment);
     void setColor(ofColor color);
     void setText(string text);
+    int getX();
+    
+    float getStrWidth(string text);
     
     void enable() { };
     void disable() { };

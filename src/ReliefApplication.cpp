@@ -51,8 +51,8 @@ void ReliefApplication::setup(){
     // setup kinect if using
     // @todo we only want to setup if connected
     // @note currently if you change the kinect setting you must restart
-    const int kinectFarCutOffPlane = 220; // 225 // 0 = far, 255 = near
-    const int kinectNearCutOffPlane = 240; // 235
+    const int kinectFarCutOffPlane = 218; // 225 // 0 = far, 255 = near
+    const int kinectNearCutOffPlane = 235; // 235
     const int minContourSize = 10;
     kinectTracker.setup(kinectNearCutOffPlane, kinectFarCutOffPlane, minContourSize);
     const int kinectCropWidth  = 240;
@@ -65,6 +65,7 @@ void ReliefApplication::setup(){
     // initialize our shape objects
     kinectShapeObject = new KinectShapeObject();
     kinectShapeObject->setKinectTracker(&kinectTracker);
+    kinectShapeObject->setCameraTracker(&cameraTracker);
     wavyShapeObject   = new WavyShapeObject(24,24);
     wavyShapeObject->setKinectTracker(&kinectTracker);
     
@@ -183,19 +184,19 @@ void ReliefApplication::draw(){
     
     ofBackground(255); //refresh
     
-    ofPushStyle();
+    //ofPushStyle();
     //glEnable(GL_BLEND);
     //glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
     
     //cout << "mouse " << ofGetMouseX()/4 << " " << ofGetMouseY()/4 << endl;
     //ofSetColor(ofColor::fromHsb(ofGetMouseX()/4, ofGetMouseY()/4, 255)); // c is bright saturated cyan);
-    cameraTracker.drawCameraFeed(0, -194, -26, 1502, 1120);
+    //cameraTracker.drawCameraFeed(0, -194, -26, 1502, 1120);
     //glDisable(GL_BLEND);
-    ofPopStyle();
+    //ofPopStyle();
     
     //cameraTracker.drawCameraFeed(0, 0, 0, w, h);
     //currentShape->renderTangibleShape(w, h);
-    //currentShape->renderTouchscreenGraphics(w, h);
+    currentShape->renderTouchscreenGraphics(w, h);
     touchScreenDisplayImage.end();
     
     
@@ -212,8 +213,33 @@ void ReliefApplication::draw(){
     if (currentMode == "math") {
         //cout<<mathShapeObject->getEqVal1()<<endl;
         //cout<<uiHandler->getNum("eqVal1")->getName() <<endl;
+        string equationStr = mathShapeObject->getEq();
+        UIText * equationText = uiHandler->getText("equation");
+        
+        int firstVar = equationStr.find_first_of('_');
+        int firstVarX = equationText->getStrWidth(equationStr.substr(0, firstVar));
+        equationStr = equationStr.replace(firstVar, 1, " ");
+        
+        int secondVar = equationStr.find_first_of('_');
+        int secondVarX = equationText->getStrWidth(equationStr.substr(0, secondVar));
+        equationStr = equationStr.replace(secondVar, 1, " ");
+        
+        while (equationStr.find('_') != std::string::npos) {
+            int var1 = equationStr.find_first_of('_');
+            equationStr = equationStr.replace(var1, 1, mathShapeObject->getEqVal1());
+            
+            int var2 = equationStr.find_first_of('_');
+            equationStr = equationStr.replace(var2, 1, mathShapeObject->getEqVal2());
+        }
+        int equationWidth = equationText->getStrWidth(equationStr);
+        uiHandler->getNum("eqVal1")->setX(firstVarX - equationWidth/2 + equationText->getX() - 30);
+        uiHandler->getNum("eqVal2")->setX(secondVarX - equationWidth/2 + equationText->getX() - 30);
+        
+        
+        equationText->setText(equationStr);
         uiHandler->getNum("eqVal1")->setNum(mathShapeObject->getEqVal1());
         uiHandler->getNum("eqVal2")->setNum(mathShapeObject->getEqVal2());
+        
     }
 
     // draw UI stuff

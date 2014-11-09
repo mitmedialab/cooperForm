@@ -279,3 +279,15 @@ string Function::getEqVal2(){
 }
 
 //--------------------------------------------------------------
+
+string Function::getEq(){
+    switch (currFunc) {
+        case 0: return "_x * _y";
+        case 1: return "sqrt(2 - (_x)^2 - (_y)^2)";
+        case 2: return "(_x)^2 - (_y)^2";
+        case 3: return "cos((_x)^2 + (_y)^2)*e^(-(_x)^2 - (_y)^2)";
+        case 4: return "_x * (_y)^3 - _y * (_x)^3";
+        default:
+            break;
+    }
+}

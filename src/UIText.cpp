@@ -57,6 +57,14 @@ void UIText::setText(string text) {
    this->text = text;
 }
 
+float UIText::getStrWidth(string text) {
+    return layout.getStringBoundingBox(text,0,0).getWidth();
+}
+
+int UIText::getX() {
+    return x;
+}
+
 void UIText::show() {
     visible = true;
 }

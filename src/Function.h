@@ -29,6 +29,7 @@ public:
     
     string getEqVal1();
     string getEqVal2();
+    string getEq();
     
     void setEqVal1(float val);
     void setEqVal2(float val);
@@ -49,6 +50,7 @@ private:
     
     int eq_val1;
     int eq_val2;
+    
     
     bool t;
 };

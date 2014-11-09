@@ -197,7 +197,7 @@ void ThreeDShapeObject::renderTangibleShape(int w, int h) {
 //--------------------------------------------------------------
 
 void ThreeDShapeObject::renderTouchscreenGraphics(int w, int h) {
-    pinHeightMapImage.draw(0, 0);
+    pinHeightMapImage.draw(0, 0, w, h);
     //projectorImage.draw(0, 0, RELIEF_PROJECTOR_SIZE_X/ 2, RELIEF_PROJECTOR_SIZE_Y/2);
     //maskedProjectorImage.draw(0, 0, RELIEF_PROJECTOR_SIZE_X/ 2, RELIEF_PROJECTOR_SIZE_Y/2);
     

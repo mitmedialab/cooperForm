@@ -33,11 +33,13 @@ void CameraTracker::setup() {
 }
 
 void CameraTracker::drawCameraFeed(int id, int x, int y, int w, int h) {
-    ofVideoGrabber grabber = grabbers[id];
-    
-    grabber.update();
+    if (grabbers.size() > id) {
+        ofVideoGrabber grabber = grabbers[id];
+        
+        grabber.update();
 
-    grabber.draw(x, y, w, h);
+        grabber.draw(x, y, w, h);
+    }
 }
 
 CameraTracker::~CameraTracker() {

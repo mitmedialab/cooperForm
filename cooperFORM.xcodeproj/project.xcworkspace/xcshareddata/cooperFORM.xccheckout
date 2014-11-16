@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>10255312-2B6D-4ECE-BA5E-59F1CE074D25</string>
+	<key>IDESourceControlProjectName</key>
+	<string>cooperFORM</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>5DD075E8-D3D4-48C2-BBA0-C7620E14C050</key>
+		<string>https://github.com/companje/ofxFTGL.git</string>
+		<key>C637963E-E235-4423-B6F6-68A3B9B8B5C6</key>
+		<string>https://github.com/impanel/cooperForm.git</string>
+		<key>E26A5BD4-5FE6-4B4B-BA3E-395762296D60</key>
+		<string>https://github.com/armadillu/ofxTimeMeasurements.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>cooperFORM.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>5DD075E8-D3D4-48C2-BBA0-C7620E14C050</key>
+		<string>../../../../../addons/ofxFTGL</string>
+		<key>C637963E-E235-4423-B6F6-68A3B9B8B5C6</key>
+		<string>../..</string>
+		<key>E26A5BD4-5FE6-4B4B-BA3E-395762296D60</key>
+		<string>../../../../../addons/ofxTimeMeasurements</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/impanel/cooperForm.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C637963E-E235-4423-B6F6-68A3B9B8B5C6</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C637963E-E235-4423-B6F6-68A3B9B8B5C6</string>
+			<key>IDESourceControlWCCName</key>
+			<string>cooperForm</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5DD075E8-D3D4-48C2-BBA0-C7620E14C050</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxFTGL</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E26A5BD4-5FE6-4B4B-BA3E-395762296D60</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxTimeMeasurements</string>
+		</dict>
+	</array>
+</dict>
+</plist>

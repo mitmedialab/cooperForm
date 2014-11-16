@@ -7,16 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4472933619F15774007AF18D /* libftgl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4472931719F15774007AF18D /* libftgl.a */; };
-		4472933719F15774007AF18D /* libftgl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4472931919F15774007AF18D /* libftgl.a */; };
-		4472933819F15774007AF18D /* libftgl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4472931C19F15774007AF18D /* libftgl.a */; };
-		4472933919F15774007AF18D /* ftgl_static.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4472931E19F15774007AF18D /* ftgl_static.lib */; };
-		4472933A19F15774007AF18D /* ftgl_static_D.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4472931F19F15774007AF18D /* ftgl_static_D.lib */; };
-		4472933B19F15774007AF18D /* ftgl_static.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4472932119F15774007AF18D /* ftgl_static.lib */; };
-		4472933C19F15774007AF18D /* ftgl_static_D.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4472932219F15774007AF18D /* ftgl_static_D.lib */; };
-		4472933D19F15774007AF18D /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 4472932319F15774007AF18D /* README.md */; };
-		4472933E19F15774007AF18D /* ofxFTGLFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4472932619F15774007AF18D /* ofxFTGLFont.cpp */; };
-		4472933F19F15774007AF18D /* ofxFTGLSimpleLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4472932819F15774007AF18D /* ofxFTGLSimpleLayout.cpp */; };
 		4472935319F15BA5007AF18D /* ThreeDShapeObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4472935119F15BA5007AF18D /* ThreeDShapeObject.cpp */; };
 		447293DD19F17C1B007AF18D /* model3DS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 447293D519F17C1B007AF18D /* model3DS.cpp */; };
 		447293DE19F17C1B007AF18D /* texture3DS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 447293D719F17C1B007AF18D /* texture3DS.cpp */; };
@@ -46,6 +36,16 @@
 		8A0B32D619EC6B1C009196FE /* MoveBallShapeObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A0B32D419EC6B1C009196FE /* MoveBallShapeObject.cpp */; };
 		8A0B32DF19ED9333009196FE /* OSCInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A0B32DD19ED9333009196FE /* OSCInterface.cpp */; };
 		8A3F18F219F80F6D00CE9D4C /* UINum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A3F18F019F80F6D00CE9D4C /* UINum.cpp */; };
+		8A411CA61A1272E000221D18 /* libftgl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A411C871A1272E000221D18 /* libftgl.a */; };
+		8A411CA71A1272E000221D18 /* libftgl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A411C891A1272E000221D18 /* libftgl.a */; };
+		8A411CA81A1272E000221D18 /* libftgl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A411C8C1A1272E000221D18 /* libftgl.a */; };
+		8A411CA91A1272E000221D18 /* ftgl_static.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A411C8E1A1272E000221D18 /* ftgl_static.lib */; };
+		8A411CAA1A1272E000221D18 /* ftgl_static_D.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A411C8F1A1272E000221D18 /* ftgl_static_D.lib */; };
+		8A411CAB1A1272E000221D18 /* ftgl_static.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A411C911A1272E000221D18 /* ftgl_static.lib */; };
+		8A411CAC1A1272E000221D18 /* ftgl_static_D.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A411C921A1272E000221D18 /* ftgl_static_D.lib */; };
+		8A411CAD1A1272E000221D18 /* ofxFTGLFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A411C961A1272E000221D18 /* ofxFTGLFont.cpp */; };
+		8A411CAE1A1272E000221D18 /* ofxFTGLSimpleLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A411C981A1272E000221D18 /* ofxFTGLSimpleLayout.cpp */; };
+		8A411CCA1A12733800221D18 /* ofxTimeMeasurements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A411CC61A12733800221D18 /* ofxTimeMeasurements.cpp */; };
 		8AC348A919EF0F1300845B01 /* IpEndpointName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC3488319EF0F1300845B01 /* IpEndpointName.cpp */; };
 		8AC348AA19EF0F1300845B01 /* NetworkingUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC3488819EF0F1300845B01 /* NetworkingUtils.cpp */; };
 		8AC348AB19EF0F1300845B01 /* UdpSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC3488919EF0F1300845B01 /* UdpSocket.cpp */; };
@@ -69,7 +69,6 @@
 		8AC3492F19EF12C600845B01 /* ofxKinect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC3492519EF12C600845B01 /* ofxKinect.cpp */; };
 		8AEAD86B19C8AAB400D87C59 /* KinectShapeObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AEAD86919C8AAB400D87C59 /* KinectShapeObject.cpp */; };
 		8AEAD87219D0D3C600D87C59 /* CameraTracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AEAD87019D0D3C600D87C59 /* CameraTracker.cpp */; };
-		8AF5363119F5623F00068579 /* ofxTimeMeasurements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AF5362D19F5623F00068579 /* ofxTimeMeasurements.cpp */; };
 		8AFAA96619C8A67A00EC475F /* KinectTracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFAA96519C8A67A00EC475F /* KinectTracker.cpp */; };
 		8AFAA9E419C8A6B400EC475F /* ofxCvColorImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFAA9D219C8A6B400EC475F /* ofxCvColorImage.cpp */; };
 		8AFAA9E519C8A6B400EC475F /* ofxCvContourFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFAA9D519C8A6B400EC475F /* ofxCvContourFinder.cpp */; };
@@ -131,43 +130,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		447292B419F15773007AF18D /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		447292FF19F15774007AF18D /* FTBBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTBBox.h; sourceTree = "<group>"; };
-		4472930019F15774007AF18D /* FTBitmapGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTBitmapGlyph.h; sourceTree = "<group>"; };
-		4472930119F15774007AF18D /* FTBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTBuffer.h; sourceTree = "<group>"; };
-		4472930219F15774007AF18D /* FTBufferFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTBufferFont.h; sourceTree = "<group>"; };
-		4472930319F15774007AF18D /* FTBufferGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTBufferGlyph.h; sourceTree = "<group>"; };
-		4472930419F15774007AF18D /* FTExtrdGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTExtrdGlyph.h; sourceTree = "<group>"; };
-		4472930519F15774007AF18D /* FTFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTFont.h; sourceTree = "<group>"; };
-		4472930619F15774007AF18D /* ftgl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ftgl.h; sourceTree = "<group>"; };
-		4472930719F15774007AF18D /* FTGLBitmapFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTGLBitmapFont.h; sourceTree = "<group>"; };
-		4472930819F15774007AF18D /* FTGLExtrdFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTGLExtrdFont.h; sourceTree = "<group>"; };
-		4472930919F15774007AF18D /* FTGLOutlineFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTGLOutlineFont.h; sourceTree = "<group>"; };
-		4472930A19F15774007AF18D /* FTGLPixmapFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTGLPixmapFont.h; sourceTree = "<group>"; };
-		4472930B19F15774007AF18D /* FTGLPolygonFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTGLPolygonFont.h; sourceTree = "<group>"; };
-		4472930C19F15774007AF18D /* FTGLTextureFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTGLTextureFont.h; sourceTree = "<group>"; };
-		4472930D19F15774007AF18D /* FTGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTGlyph.h; sourceTree = "<group>"; };
-		4472930E19F15774007AF18D /* FTLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTLayout.h; sourceTree = "<group>"; };
-		4472930F19F15774007AF18D /* FTOutlineGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTOutlineGlyph.h; sourceTree = "<group>"; };
-		4472931019F15774007AF18D /* FTPixmapGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPixmapGlyph.h; sourceTree = "<group>"; };
-		4472931119F15774007AF18D /* FTPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPoint.h; sourceTree = "<group>"; };
-		4472931219F15774007AF18D /* FTPolyGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPolyGlyph.h; sourceTree = "<group>"; };
-		4472931319F15774007AF18D /* FTSimpleLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTSimpleLayout.h; sourceTree = "<group>"; };
-		4472931419F15774007AF18D /* FTTextureGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTTextureGlyph.h; sourceTree = "<group>"; };
-		4472931719F15774007AF18D /* libftgl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libftgl.a; sourceTree = "<group>"; };
-		4472931919F15774007AF18D /* libftgl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libftgl.a; sourceTree = "<group>"; };
-		4472931B19F15774007AF18D /* buildFTGL.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = buildFTGL.sh; sourceTree = "<group>"; };
-		4472931C19F15774007AF18D /* libftgl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libftgl.a; sourceTree = "<group>"; };
-		4472931E19F15774007AF18D /* ftgl_static.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = ftgl_static.lib; sourceTree = "<group>"; };
-		4472931F19F15774007AF18D /* ftgl_static_D.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = ftgl_static_D.lib; sourceTree = "<group>"; };
-		4472932119F15774007AF18D /* ftgl_static.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = ftgl_static.lib; sourceTree = "<group>"; };
-		4472932219F15774007AF18D /* ftgl_static_D.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = ftgl_static_D.lib; sourceTree = "<group>"; };
-		4472932319F15774007AF18D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		4472932519F15774007AF18D /* ofxFTGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxFTGL.h; sourceTree = "<group>"; };
-		4472932619F15774007AF18D /* ofxFTGLFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxFTGLFont.cpp; sourceTree = "<group>"; };
-		4472932719F15774007AF18D /* ofxFTGLFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxFTGLFont.h; sourceTree = "<group>"; };
-		4472932819F15774007AF18D /* ofxFTGLSimpleLayout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxFTGLSimpleLayout.cpp; sourceTree = "<group>"; };
-		4472932919F15774007AF18D /* ofxFTGLSimpleLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxFTGLSimpleLayout.h; sourceTree = "<group>"; };
 		4472935119F15BA5007AF18D /* ThreeDShapeObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ThreeDShapeObject.cpp; sourceTree = "<group>"; };
 		4472935219F15BA5007AF18D /* ThreeDShapeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreeDShapeObject.h; sourceTree = "<group>"; };
 		447293D519F17C1B007AF18D /* model3DS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = model3DS.cpp; sourceTree = "<group>"; };
@@ -268,6 +230,49 @@
 		8A0B32DE19ED9333009196FE /* OSCInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSCInterface.h; sourceTree = "<group>"; };
 		8A3F18F019F80F6D00CE9D4C /* UINum.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UINum.cpp; sourceTree = "<group>"; };
 		8A3F18F119F80F6D00CE9D4C /* UINum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINum.h; sourceTree = "<group>"; };
+		8A411C241A1272E000221D18 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		8A411C6F1A1272E000221D18 /* FTBBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTBBox.h; sourceTree = "<group>"; };
+		8A411C701A1272E000221D18 /* FTBitmapGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTBitmapGlyph.h; sourceTree = "<group>"; };
+		8A411C711A1272E000221D18 /* FTBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTBuffer.h; sourceTree = "<group>"; };
+		8A411C721A1272E000221D18 /* FTBufferFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTBufferFont.h; sourceTree = "<group>"; };
+		8A411C731A1272E000221D18 /* FTBufferGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTBufferGlyph.h; sourceTree = "<group>"; };
+		8A411C741A1272E000221D18 /* FTExtrdGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTExtrdGlyph.h; sourceTree = "<group>"; };
+		8A411C751A1272E000221D18 /* FTFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTFont.h; sourceTree = "<group>"; };
+		8A411C761A1272E000221D18 /* ftgl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ftgl.h; sourceTree = "<group>"; };
+		8A411C771A1272E000221D18 /* FTGLBitmapFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTGLBitmapFont.h; sourceTree = "<group>"; };
+		8A411C781A1272E000221D18 /* FTGLExtrdFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTGLExtrdFont.h; sourceTree = "<group>"; };
+		8A411C791A1272E000221D18 /* FTGLOutlineFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTGLOutlineFont.h; sourceTree = "<group>"; };
+		8A411C7A1A1272E000221D18 /* FTGLPixmapFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTGLPixmapFont.h; sourceTree = "<group>"; };
+		8A411C7B1A1272E000221D18 /* FTGLPolygonFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTGLPolygonFont.h; sourceTree = "<group>"; };
+		8A411C7C1A1272E000221D18 /* FTGLTextureFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTGLTextureFont.h; sourceTree = "<group>"; };
+		8A411C7D1A1272E000221D18 /* FTGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTGlyph.h; sourceTree = "<group>"; };
+		8A411C7E1A1272E000221D18 /* FTLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTLayout.h; sourceTree = "<group>"; };
+		8A411C7F1A1272E000221D18 /* FTOutlineGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTOutlineGlyph.h; sourceTree = "<group>"; };
+		8A411C801A1272E000221D18 /* FTPixmapGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPixmapGlyph.h; sourceTree = "<group>"; };
+		8A411C811A1272E000221D18 /* FTPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPoint.h; sourceTree = "<group>"; };
+		8A411C821A1272E000221D18 /* FTPolyGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPolyGlyph.h; sourceTree = "<group>"; };
+		8A411C831A1272E000221D18 /* FTSimpleLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTSimpleLayout.h; sourceTree = "<group>"; };
+		8A411C841A1272E000221D18 /* FTTextureGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTTextureGlyph.h; sourceTree = "<group>"; };
+		8A411C871A1272E000221D18 /* libftgl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libftgl.a; sourceTree = "<group>"; };
+		8A411C891A1272E000221D18 /* libftgl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libftgl.a; sourceTree = "<group>"; };
+		8A411C8B1A1272E000221D18 /* buildFTGL.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = buildFTGL.sh; sourceTree = "<group>"; };
+		8A411C8C1A1272E000221D18 /* libftgl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libftgl.a; sourceTree = "<group>"; };
+		8A411C8E1A1272E000221D18 /* ftgl_static.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = ftgl_static.lib; sourceTree = "<group>"; };
+		8A411C8F1A1272E000221D18 /* ftgl_static_D.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = ftgl_static_D.lib; sourceTree = "<group>"; };
+		8A411C911A1272E000221D18 /* ftgl_static.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = ftgl_static.lib; sourceTree = "<group>"; };
+		8A411C921A1272E000221D18 /* ftgl_static_D.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = ftgl_static_D.lib; sourceTree = "<group>"; };
+		8A411C931A1272E000221D18 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		8A411C951A1272E000221D18 /* ofxFTGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxFTGL.h; sourceTree = "<group>"; };
+		8A411C961A1272E000221D18 /* ofxFTGLFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxFTGLFont.cpp; sourceTree = "<group>"; };
+		8A411C971A1272E000221D18 /* ofxFTGLFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxFTGLFont.h; sourceTree = "<group>"; };
+		8A411C981A1272E000221D18 /* ofxFTGLSimpleLayout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxFTGLSimpleLayout.cpp; sourceTree = "<group>"; };
+		8A411C991A1272E000221D18 /* ofxFTGLSimpleLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxFTGLSimpleLayout.h; sourceTree = "<group>"; };
+		8A411CC01A12733800221D18 /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
+		8A411CC21A12733800221D18 /* tree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tree.h; sourceTree = "<group>"; };
+		8A411CC31A12733800221D18 /* ofxaddons_thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ofxaddons_thumbnail.png; sourceTree = "<group>"; };
+		8A411CC41A12733800221D18 /* ReadMe.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe.md; sourceTree = "<group>"; };
+		8A411CC61A12733800221D18 /* ofxTimeMeasurements.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTimeMeasurements.cpp; sourceTree = "<group>"; };
+		8A411CC71A12733800221D18 /* ofxTimeMeasurements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTimeMeasurements.h; sourceTree = "<group>"; };
 		8AC3488319EF0F1300845B01 /* IpEndpointName.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IpEndpointName.cpp; sourceTree = "<group>"; };
 		8AC3488419EF0F1300845B01 /* IpEndpointName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpEndpointName.h; sourceTree = "<group>"; };
 		8AC3488519EF0F1300845B01 /* NetworkingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkingUtils.h; sourceTree = "<group>"; };
@@ -323,12 +328,6 @@
 		8AEAD86A19C8AAB400D87C59 /* KinectShapeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KinectShapeObject.h; sourceTree = "<group>"; };
 		8AEAD87019D0D3C600D87C59 /* CameraTracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraTracker.cpp; sourceTree = "<group>"; };
 		8AEAD87119D0D3C600D87C59 /* CameraTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraTracker.h; sourceTree = "<group>"; };
-		8AF5362719F5623F00068579 /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
-		8AF5362919F5623F00068579 /* tree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tree.h; sourceTree = "<group>"; };
-		8AF5362A19F5623F00068579 /* ofxaddons_thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ofxaddons_thumbnail.png; sourceTree = "<group>"; };
-		8AF5362B19F5623F00068579 /* ReadMe.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe.md; sourceTree = "<group>"; };
-		8AF5362D19F5623F00068579 /* ofxTimeMeasurements.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTimeMeasurements.cpp; sourceTree = "<group>"; };
-		8AF5362E19F5623F00068579 /* ofxTimeMeasurements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTimeMeasurements.h; sourceTree = "<group>"; };
 		8AFAA96219C8A62300EC475F /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		8AFAA96419C8A67A00EC475F /* KinectTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KinectTracker.h; sourceTree = "<group>"; };
 		8AFAA96519C8A67A00EC475F /* KinectTracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KinectTracker.cpp; sourceTree = "<group>"; };
@@ -468,167 +467,34 @@
 				E7E077E815D3B6510020DFD4 /* QTKit.framework in Frameworks */,
 				E4EB6799138ADC1D00A09F29 /* GLUT.framework in Frameworks */,
 				E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */,
-				4472933619F15774007AF18D /* libftgl.a in Frameworks */,
+				8A411CA81A1272E000221D18 /* libftgl.a in Frameworks */,
+				8A411CAB1A1272E000221D18 /* ftgl_static.lib in Frameworks */,
+				8A411CAA1A1272E000221D18 /* ftgl_static_D.lib in Frameworks */,
 				E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */,
 				E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */,
 				E45BE97D0E8CC7DD009D7055 /* AudioToolbox.framework in Frameworks */,
-				4472933819F15774007AF18D /* libftgl.a in Frameworks */,
-				4472933719F15774007AF18D /* libftgl.a in Frameworks */,
-				4472933A19F15774007AF18D /* ftgl_static_D.lib in Frameworks */,
-				4472933919F15774007AF18D /* ftgl_static.lib in Frameworks */,
+				8A411CA91A1272E000221D18 /* ftgl_static.lib in Frameworks */,
 				E45BE97E0E8CC7DD009D7055 /* Carbon.framework in Frameworks */,
+				8A411CA71A1272E000221D18 /* libftgl.a in Frameworks */,
+				8A411CA61A1272E000221D18 /* libftgl.a in Frameworks */,
 				E45BE97F0E8CC7DD009D7055 /* CoreAudio.framework in Frameworks */,
 				E45BE9800E8CC7DD009D7055 /* CoreFoundation.framework in Frameworks */,
 				E45BE9810E8CC7DD009D7055 /* CoreServices.framework in Frameworks */,
-				4472933B19F15774007AF18D /* ftgl_static.lib in Frameworks */,
 				E45BE9830E8CC7DD009D7055 /* OpenGL.framework in Frameworks */,
 				E45BE9840E8CC7DD009D7055 /* QuickTime.framework in Frameworks */,
 				8AC3492E19EF12C600845B01 /* usb-1.0.a in Frameworks */,
 				4472941919F1A17A007AF18D /* assimp.a in Frameworks */,
-				4472933C19F15774007AF18D /* ftgl_static_D.lib in Frameworks */,
 				E4C2424710CC5A17004149E2 /* AppKit.framework in Frameworks */,
 				E4C2424810CC5A17004149E2 /* Cocoa.framework in Frameworks */,
 				E4C2424910CC5A17004149E2 /* IOKit.framework in Frameworks */,
 				E7E077E515D3B63C0020DFD4 /* CoreVideo.framework in Frameworks */,
+				8A411CAC1A1272E000221D18 /* ftgl_static_D.lib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		447292B319F15773007AF18D /* ofxFTGL */ = {
-			isa = PBXGroup;
-			children = (
-				447292B419F15773007AF18D /* .gitignore */,
-				447292FB19F15774007AF18D /* libs */,
-				4472932319F15774007AF18D /* README.md */,
-				4472932419F15774007AF18D /* src */,
-			);
-			name = ofxFTGL;
-			path = ../../../addons/ofxFTGL;
-			sourceTree = "<group>";
-		};
-		447292FB19F15774007AF18D /* libs */ = {
-			isa = PBXGroup;
-			children = (
-				447292FC19F15774007AF18D /* FTGL */,
-			);
-			path = libs;
-			sourceTree = "<group>";
-		};
-		447292FC19F15774007AF18D /* FTGL */ = {
-			isa = PBXGroup;
-			children = (
-				447292FD19F15774007AF18D /* include */,
-				4472931519F15774007AF18D /* lib */,
-			);
-			path = FTGL;
-			sourceTree = "<group>";
-		};
-		447292FD19F15774007AF18D /* include */ = {
-			isa = PBXGroup;
-			children = (
-				447292FE19F15774007AF18D /* FTGL */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
-		447292FE19F15774007AF18D /* FTGL */ = {
-			isa = PBXGroup;
-			children = (
-				447292FF19F15774007AF18D /* FTBBox.h */,
-				4472930019F15774007AF18D /* FTBitmapGlyph.h */,
-				4472930119F15774007AF18D /* FTBuffer.h */,
-				4472930219F15774007AF18D /* FTBufferFont.h */,
-				4472930319F15774007AF18D /* FTBufferGlyph.h */,
-				4472930419F15774007AF18D /* FTExtrdGlyph.h */,
-				4472930519F15774007AF18D /* FTFont.h */,
-				4472930619F15774007AF18D /* ftgl.h */,
-				4472930719F15774007AF18D /* FTGLBitmapFont.h */,
-				4472930819F15774007AF18D /* FTGLExtrdFont.h */,
-				4472930919F15774007AF18D /* FTGLOutlineFont.h */,
-				4472930A19F15774007AF18D /* FTGLPixmapFont.h */,
-				4472930B19F15774007AF18D /* FTGLPolygonFont.h */,
-				4472930C19F15774007AF18D /* FTGLTextureFont.h */,
-				4472930D19F15774007AF18D /* FTGlyph.h */,
-				4472930E19F15774007AF18D /* FTLayout.h */,
-				4472930F19F15774007AF18D /* FTOutlineGlyph.h */,
-				4472931019F15774007AF18D /* FTPixmapGlyph.h */,
-				4472931119F15774007AF18D /* FTPoint.h */,
-				4472931219F15774007AF18D /* FTPolyGlyph.h */,
-				4472931319F15774007AF18D /* FTSimpleLayout.h */,
-				4472931419F15774007AF18D /* FTTextureGlyph.h */,
-			);
-			path = FTGL;
-			sourceTree = "<group>";
-		};
-		4472931519F15774007AF18D /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				4472931619F15774007AF18D /* linux */,
-				4472931819F15774007AF18D /* linux64 */,
-				4472931A19F15774007AF18D /* osx */,
-				4472931D19F15774007AF18D /* vs */,
-				4472932019F15774007AF18D /* vs64 */,
-			);
-			path = lib;
-			sourceTree = "<group>";
-		};
-		4472931619F15774007AF18D /* linux */ = {
-			isa = PBXGroup;
-			children = (
-				4472931719F15774007AF18D /* libftgl.a */,
-			);
-			path = linux;
-			sourceTree = "<group>";
-		};
-		4472931819F15774007AF18D /* linux64 */ = {
-			isa = PBXGroup;
-			children = (
-				4472931919F15774007AF18D /* libftgl.a */,
-			);
-			path = linux64;
-			sourceTree = "<group>";
-		};
-		4472931A19F15774007AF18D /* osx */ = {
-			isa = PBXGroup;
-			children = (
-				4472931B19F15774007AF18D /* buildFTGL.sh */,
-				4472931C19F15774007AF18D /* libftgl.a */,
-			);
-			path = osx;
-			sourceTree = "<group>";
-		};
-		4472931D19F15774007AF18D /* vs */ = {
-			isa = PBXGroup;
-			children = (
-				4472931E19F15774007AF18D /* ftgl_static.lib */,
-				4472931F19F15774007AF18D /* ftgl_static_D.lib */,
-			);
-			path = vs;
-			sourceTree = "<group>";
-		};
-		4472932019F15774007AF18D /* vs64 */ = {
-			isa = PBXGroup;
-			children = (
-				4472932119F15774007AF18D /* ftgl_static.lib */,
-				4472932219F15774007AF18D /* ftgl_static_D.lib */,
-			);
-			path = vs64;
-			sourceTree = "<group>";
-		};
-		4472932419F15774007AF18D /* src */ = {
-			isa = PBXGroup;
-			children = (
-				4472932519F15774007AF18D /* ofxFTGL.h */,
-				4472932619F15774007AF18D /* ofxFTGLFont.cpp */,
-				4472932719F15774007AF18D /* ofxFTGLFont.h */,
-				4472932819F15774007AF18D /* ofxFTGLSimpleLayout.cpp */,
-				4472932919F15774007AF18D /* ofxFTGLSimpleLayout.h */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
 		4472935019F15B8E007AF18D /* 3D */ = {
 			isa = PBXGroup;
 			children = (
@@ -858,6 +724,169 @@
 				8A0B32D519EC6B1C009196FE /* MoveBallShapeObject.h */,
 			);
 			name = "Ball Mover";
+			sourceTree = "<group>";
+		};
+		8A411C231A1272E000221D18 /* ofxFTGL */ = {
+			isa = PBXGroup;
+			children = (
+				8A411C241A1272E000221D18 /* .gitignore */,
+				8A411C6B1A1272E000221D18 /* libs */,
+				8A411C931A1272E000221D18 /* README.md */,
+				8A411C941A1272E000221D18 /* src */,
+			);
+			name = ofxFTGL;
+			path = ../../../addons/ofxFTGL;
+			sourceTree = "<group>";
+		};
+		8A411C6B1A1272E000221D18 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				8A411C6C1A1272E000221D18 /* FTGL */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		8A411C6C1A1272E000221D18 /* FTGL */ = {
+			isa = PBXGroup;
+			children = (
+				8A411C6D1A1272E000221D18 /* include */,
+				8A411C851A1272E000221D18 /* lib */,
+			);
+			path = FTGL;
+			sourceTree = "<group>";
+		};
+		8A411C6D1A1272E000221D18 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				8A411C6E1A1272E000221D18 /* FTGL */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		8A411C6E1A1272E000221D18 /* FTGL */ = {
+			isa = PBXGroup;
+			children = (
+				8A411C6F1A1272E000221D18 /* FTBBox.h */,
+				8A411C701A1272E000221D18 /* FTBitmapGlyph.h */,
+				8A411C711A1272E000221D18 /* FTBuffer.h */,
+				8A411C721A1272E000221D18 /* FTBufferFont.h */,
+				8A411C731A1272E000221D18 /* FTBufferGlyph.h */,
+				8A411C741A1272E000221D18 /* FTExtrdGlyph.h */,
+				8A411C751A1272E000221D18 /* FTFont.h */,
+				8A411C761A1272E000221D18 /* ftgl.h */,
+				8A411C771A1272E000221D18 /* FTGLBitmapFont.h */,
+				8A411C781A1272E000221D18 /* FTGLExtrdFont.h */,
+				8A411C791A1272E000221D18 /* FTGLOutlineFont.h */,
+				8A411C7A1A1272E000221D18 /* FTGLPixmapFont.h */,
+				8A411C7B1A1272E000221D18 /* FTGLPolygonFont.h */,
+				8A411C7C1A1272E000221D18 /* FTGLTextureFont.h */,
+				8A411C7D1A1272E000221D18 /* FTGlyph.h */,
+				8A411C7E1A1272E000221D18 /* FTLayout.h */,
+				8A411C7F1A1272E000221D18 /* FTOutlineGlyph.h */,
+				8A411C801A1272E000221D18 /* FTPixmapGlyph.h */,
+				8A411C811A1272E000221D18 /* FTPoint.h */,
+				8A411C821A1272E000221D18 /* FTPolyGlyph.h */,
+				8A411C831A1272E000221D18 /* FTSimpleLayout.h */,
+				8A411C841A1272E000221D18 /* FTTextureGlyph.h */,
+			);
+			path = FTGL;
+			sourceTree = "<group>";
+		};
+		8A411C851A1272E000221D18 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				8A411C861A1272E000221D18 /* linux */,
+				8A411C881A1272E000221D18 /* linux64 */,
+				8A411C8A1A1272E000221D18 /* osx */,
+				8A411C8D1A1272E000221D18 /* vs */,
+				8A411C901A1272E000221D18 /* vs64 */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		8A411C861A1272E000221D18 /* linux */ = {
+			isa = PBXGroup;
+			children = (
+				8A411C871A1272E000221D18 /* libftgl.a */,
+			);
+			path = linux;
+			sourceTree = "<group>";
+		};
+		8A411C881A1272E000221D18 /* linux64 */ = {
+			isa = PBXGroup;
+			children = (
+				8A411C891A1272E000221D18 /* libftgl.a */,
+			);
+			path = linux64;
+			sourceTree = "<group>";
+		};
+		8A411C8A1A1272E000221D18 /* osx */ = {
+			isa = PBXGroup;
+			children = (
+				8A411C8B1A1272E000221D18 /* buildFTGL.sh */,
+				8A411C8C1A1272E000221D18 /* libftgl.a */,
+			);
+			path = osx;
+			sourceTree = "<group>";
+		};
+		8A411C8D1A1272E000221D18 /* vs */ = {
+			isa = PBXGroup;
+			children = (
+				8A411C8E1A1272E000221D18 /* ftgl_static.lib */,
+				8A411C8F1A1272E000221D18 /* ftgl_static_D.lib */,
+			);
+			path = vs;
+			sourceTree = "<group>";
+		};
+		8A411C901A1272E000221D18 /* vs64 */ = {
+			isa = PBXGroup;
+			children = (
+				8A411C911A1272E000221D18 /* ftgl_static.lib */,
+				8A411C921A1272E000221D18 /* ftgl_static_D.lib */,
+			);
+			path = vs64;
+			sourceTree = "<group>";
+		};
+		8A411C941A1272E000221D18 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				8A411C951A1272E000221D18 /* ofxFTGL.h */,
+				8A411C961A1272E000221D18 /* ofxFTGLFont.cpp */,
+				8A411C971A1272E000221D18 /* ofxFTGLFont.h */,
+				8A411C981A1272E000221D18 /* ofxFTGLSimpleLayout.cpp */,
+				8A411C991A1272E000221D18 /* ofxFTGLSimpleLayout.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		8A411CBB1A12733800221D18 /* ofxTimeMeasurements */ = {
+			isa = PBXGroup;
+			children = (
+				8A411CC01A12733800221D18 /* install.xml */,
+				8A411CC11A12733800221D18 /* lib */,
+				8A411CC31A12733800221D18 /* ofxaddons_thumbnail.png */,
+				8A411CC41A12733800221D18 /* ReadMe.md */,
+				8A411CC51A12733800221D18 /* src */,
+			);
+			name = ofxTimeMeasurements;
+			path = ../../../addons/ofxTimeMeasurements;
+			sourceTree = "<group>";
+		};
+		8A411CC11A12733800221D18 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				8A411CC21A12733800221D18 /* tree.h */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		8A411CC51A12733800221D18 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				8A411CC61A12733800221D18 /* ofxTimeMeasurements.cpp */,
+				8A411CC71A12733800221D18 /* ofxTimeMeasurements.h */,
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 		8AC3487E19EF0F1300845B01 /* ofxOsc */ = {
@@ -1096,44 +1125,6 @@
 				8AEAD87119D0D3C600D87C59 /* CameraTracker.h */,
 			);
 			name = CameraInterface;
-			sourceTree = "<group>";
-		};
-		8AF5362119F5623F00068579 /* ofxTimeMeasurements */ = {
-			isa = PBXGroup;
-			children = (
-				8AF5362219F5623F00068579 /* ofxTimeMeasurements */,
-			);
-			name = ofxTimeMeasurements;
-			path = ../../../addons/ofxTimeMeasurements;
-			sourceTree = "<group>";
-		};
-		8AF5362219F5623F00068579 /* ofxTimeMeasurements */ = {
-			isa = PBXGroup;
-			children = (
-				8AF5362719F5623F00068579 /* install.xml */,
-				8AF5362819F5623F00068579 /* lib */,
-				8AF5362A19F5623F00068579 /* ofxaddons_thumbnail.png */,
-				8AF5362B19F5623F00068579 /* ReadMe.md */,
-				8AF5362C19F5623F00068579 /* src */,
-			);
-			path = ofxTimeMeasurements;
-			sourceTree = "<group>";
-		};
-		8AF5362819F5623F00068579 /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				8AF5362919F5623F00068579 /* tree.h */,
-			);
-			path = lib;
-			sourceTree = "<group>";
-		};
-		8AF5362C19F5623F00068579 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				8AF5362D19F5623F00068579 /* ofxTimeMeasurements.cpp */,
-				8AF5362E19F5623F00068579 /* ofxTimeMeasurements.h */,
-			);
-			path = src;
 			sourceTree = "<group>";
 		};
 		8AFAA95A19C89E8700EC475F /* TableCore */ = {
@@ -1431,11 +1422,11 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
-				8AF5362119F5623F00068579 /* ofxTimeMeasurements */,
+				8A411CBB1A12733800221D18 /* ofxTimeMeasurements */,
+				8A411C231A1272E000221D18 /* ofxFTGL */,
 				44E451D319F46E5400448ECF /* ofxAnimatable */,
 				447293E219F1A17A007AF18D /* ofxAssimpModelLoader */,
 				447293D219F17C1B007AF18D /* ofx3DModelLoader */,
-				447292B319F15773007AF18D /* ofxFTGL */,
 				8AC348B819EF12C500845B01 /* ofxKinect */,
 				8AC3487E19EF0F1300845B01 /* ofxOsc */,
 				8AFAA96719C8A6B400EC475F /* ofxOpenCv */,
@@ -1649,7 +1640,6 @@
 				8AC348B619EF0F1300845B01 /* ofxOscSender.cpp in Sources */,
 				44E451E819F46E5400448ECF /* ofxAnimatableFloat.cpp in Sources */,
 				8AC348B419EF0F1300845B01 /* ofxOscParameterSync.cpp in Sources */,
-				4472933F19F15774007AF18D /* ofxFTGLSimpleLayout.cpp in Sources */,
 				8AC348B319EF0F1300845B01 /* ofxOscMessage.cpp in Sources */,
 				8AC3492F19EF12C600845B01 /* ofxKinect.cpp in Sources */,
 				4472935319F15BA5007AF18D /* ThreeDShapeObject.cpp in Sources */,
@@ -1664,20 +1654,20 @@
 				44E451E719F46E5400448ECF /* ofxAnimatable.cpp in Sources */,
 				4472941C19F1A17A007AF18D /* ofxAssimpModelLoader.cpp in Sources */,
 				8AC3492C19EF12C600845B01 /* tilt.c in Sources */,
+				8A411CAE1A1272E000221D18 /* ofxFTGLSimpleLayout.cpp in Sources */,
 				8AC348B519EF0F1300845B01 /* ofxOscReceiver.cpp in Sources */,
 				8AC348AE19EF0F1300845B01 /* OscOutboundPacketStream.cpp in Sources */,
 				8AC348AA19EF0F1300845B01 /* NetworkingUtils.cpp in Sources */,
+				8A411CAD1A1272E000221D18 /* ofxFTGLFont.cpp in Sources */,
+				8A411CCA1A12733800221D18 /* ofxTimeMeasurements.cpp in Sources */,
 				8A0B32DF19ED9333009196FE /* OSCInterface.cpp in Sources */,
 				8AC348AD19EF0F1300845B01 /* UdpSocketWin.cpp in Sources */,
-				8AF5363119F5623F00068579 /* ofxTimeMeasurements.cpp in Sources */,
 				8AFAA9E519C8A6B400EC475F /* ofxCvContourFinder.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ReliefApplication.cpp in Sources */,
 				44E451E919F46E5400448ECF /* ofxAnimatableOfColor.cpp in Sources */,
 				8AFAA9EA19C8A6B400EC475F /* ofxCvShortImage.cpp in Sources */,
 				44E451EA19F46E5400448ECF /* ofxAnimatableOfPoint.cpp in Sources */,
 				8AFAA9E819C8A6B400EC475F /* ofxCvHaarFinder.cpp in Sources */,
-				4472933D19F15774007AF18D /* README.md in Sources */,
-				4472933E19F15774007AF18D /* ofxFTGLFont.cpp in Sources */,
 				8AC3492B19EF12C600845B01 /* registration.c in Sources */,
 				8AC348A919EF0F1300845B01 /* IpEndpointName.cpp in Sources */,
 				8AC3492D19EF12C600845B01 /* usb_libusb10.c in Sources */,

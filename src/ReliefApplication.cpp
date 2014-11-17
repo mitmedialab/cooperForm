@@ -70,6 +70,8 @@ void ReliefApplication::setup(){
     wavyShapeObject->setKinectTracker(&kinectTracker);
     
     threeDShapeObject = new ThreeDShapeObject();
+    cityShapeObject = new CityShapeObject();
+    
     mathShapeObject = new MathShapeObject();
     
     ballMoverShapeObject = new MoveBallShapeObject();
@@ -115,7 +117,7 @@ void ReliefApplication::update(){
     mIOManager->update(pinHeightMapImageSmall);
     
     // trigger slider to init value
-    UITriggers::sliderTrigger(uiHandler->getSlider("sliderScale"));
+    UITriggers::sliderTrigger(uiHandler->getSlider("sliderPosition"));
 }
 
 //--------------------------------------------------------------
@@ -167,8 +169,13 @@ void ReliefApplication::draw(){
         ofDisableAlphaBlending();
         ofPopStyle();
     }
-    else
+    else if (currentMode == "city") {
+        overlayShape->renderTangibleShape(w, h);
+        currentShape->renderTangibleShape(w, h);
+    } else {
+        overlayShape->renderTangibleShape(-w, h);
         currentShape->renderTangibleShape(-w, h);
+    }
     
     overlayShape->renderTangibleShape(-w, h);
     
@@ -197,19 +204,21 @@ void ReliefApplication::draw(){
     //cameraTracker.drawCameraFeed(0, 0, 0, w, h);
     //currentShape->renderTangibleShape(w, h);
     currentShape->renderTouchscreenGraphics(w, h);
+    
     touchScreenDisplayImage.end();
     
-    
     // draw our frame buffers
-    touchScreenDisplayImage.draw(MARGIN_X + w, 0, -w, h);
-    
-    
+    if (currentMode == "city") {
+        touchScreenDisplayImage.draw(MARGIN_X , 0, w, h);
+    } else {
+        touchScreenDisplayImage.draw(MARGIN_X + w, 0, -w, h);
+    }
+
     // draw margin image
     if (currentMode == "3D") {
         currentShape->renderMarginGraphics(0, 460);
         uiHandler->getText("modelName")->setText(threeDShapeObject->getCurrentModelName());
     }
-    
     if (currentMode == "math") {
         //cout<<mathShapeObject->getEqVal1()<<endl;
         //cout<<uiHandler->getNum("eqVal1")->getName() <<endl;
@@ -272,6 +281,48 @@ void ReliefApplication::draw(){
         uiHandler->getButton("modifyVal2Up")->setX(secondVarXOffsets[0].offsetX   + eqImageX);
         uiHandler->getButton("modifyVal2Down")->setX(secondVarXOffsets[0].offsetX + eqImageX);
     }
+    if (currentMode == "city") {
+        //cout<<mathShapeObject->getEqVal1()<<endl;
+        //cout<<uiHandler->getNum("eqVal1")->getName() <<endl;
+        float timeFloat = cityShapeObject->getMovPosition(); //0.0to1.0
+        int hour = floor(timeFloat*12);
+        int minute = int(ofMap(timeFloat*12 - hour,0,1.0,0,60));
+        string ampm;
+        
+        if (hour < 6 ){
+            ampm = "am";
+            hour += 6;
+        } else {
+            ampm = "pm";
+            hour -= 6;
+        }
+        
+        string timeStr;
+        string hour0;
+        string minute0;
+        if(hour < 10){
+            hour0 = "0";
+        }
+        if(minute<10) {
+            minute0 = "0";
+        }
+        timeStr += hour0 + ofToString(hour)+":"+ minute0 +ofToString(minute) + ampm;
+        
+        uiHandler->getText("time")->setText(timeStr);
+        uiHandler->getText("time")->setX(508+timeFloat*(905)-27);
+        
+        uiHandler->getImage("timeTip")->setX(508+timeFloat*(905) - 42);
+        
+        
+        cityShapeObject->sliderGrabbed = uiHandler->getSlider("sliderPosition")->isGrabbed();
+        if(cityShapeObject->sliderGrabbed == false){
+            int val = (int)(uiHandler->getSlider("sliderPosition")->getVal());//*1000);
+            uiHandler->getSlider("sliderPosition")->setHandlePos(cityShapeObject->getMovPosition());//((val + 1) % 1000)/1000.0);//
+            
+        }
+        cout <<uiHandler->getSlider("sliderPosition")->getVal() << endl;
+    }
+
 
     // draw UI stuff
     uiHandler->draw();
@@ -316,7 +367,7 @@ void ReliefApplication::setMode(string newMode) {
     if (newMode == currentMode)
         return;
     
-    if (newMode == "telepresence" || newMode == "wavy" || newMode == "3D" || newMode == "math") {
+    if (newMode == "telepresence" || newMode == "wavy" || newMode == "city" || newMode == "3D" || newMode == "math") {
         currentMode = newMode;
         backDisplayComputer->sendModeChange(newMode);
     }
@@ -354,6 +405,17 @@ void ReliefApplication::setMode(string newMode) {
         if (!ballMoverShapeObject->isBallInCorner())
             ballMoverShapeObject->moveBallToCorner();
     }
+    else if (currentMode == "city") {
+        cityShapeObject->reset();
+        //uiHandler->getSlider("sliderScale")->setHandlePos(0.5);
+        currentTransitionFromShape = currentShape;
+        currentShape = cityShapeObject;
+        currentTransitionToShape = currentShape;
+        transitionStart = ofGetElapsedTimeMillis();
+        
+        if (!ballMoverShapeObject->isBallInCorner())
+            ballMoverShapeObject->moveBallToCorner();
+    }
     else if (currentMode == "math") {
         mathShapeObject->reset();
         currentTransitionFromShape = currentShape;
@@ -380,8 +442,8 @@ void ReliefApplication::keyPressed(int key){
             UITriggers::buttonTrigger(uiHandler->getButton("wavy"));
             break;
         case '3':
-            setMode("3D");
-            UITriggers::buttonTrigger(uiHandler->getButton("3D"));
+            setMode("city");
+            UITriggers::buttonTrigger(uiHandler->getButton("city"));
             break;
         case '4':
             setMode("math");
@@ -405,17 +467,20 @@ void ReliefApplication::mouseMoved(int x, int y){
 void ReliefApplication::mouseDragged(int x, int y, int button){
     uiHandler->mouseDragged(x,y);
     if(currentMode == "3D") threeDShapeObject->setMouseDragInfo(x, y, button);
+    if(currentMode == "city") cityShapeObject->setMouseDragInfo(x, y, button);
 }
 
 //--------------------------------------------------------------
 void ReliefApplication::mousePressed(int x, int y, int button){
     uiHandler->mousePressed(x,y);
     if(currentMode == "3D") threeDShapeObject->setMousePressedInfo(x, y);
+    if(currentMode == "city") cityShapeObject->setMousePressedInfo(x, y);
 }
 
 //--------------------------------------------------------------
 void ReliefApplication::mouseReleased(int x, int y, int button){
     uiHandler->mouseReleased(x,y);
+    if(currentMode == "city") cityShapeObject->setMouseReleasedInfo();
 }
 
 //--------------------------------------------------------------

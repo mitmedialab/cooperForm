@@ -51,16 +51,24 @@ void GUI::setupRightSidebar(UIHandler *uiHandler, const int rightSidebarWidth) {
     UIImage* divider2 = new UIImage(divider,
                                     dividerX, modeButtonStartY + 2*modeButtonHeight + 1.5*modeButtonVertSpaceBetween - dividerHeight/2);
     
-    
-    UIButton* threeDModeButton
-    = new UIButton("3D",
+    UIButton* cityModeButton
+    = new UIButton("city",
                    modeButtonX, modeButtonStartY + 2*modeButtonVertSpaceBetween + 2*modeButtonHeight,
                    modeButtonWidth,modeButtonHeight);
-    threeDModeButton->setImageIdle("3dm.png");
-    threeDModeButton->setImageActive("3dm-active.png");
-    threeDModeButton->setImageSelected("3dm-selected.png");
+    cityModeButton->setImageIdle("city.png");
+    cityModeButton->setImageActive("city-active.png");
+    cityModeButton->setImageSelected("city-selected.png");
     UIImage* divider3 = new UIImage(divider,
                                     dividerX, modeButtonStartY + 3*modeButtonHeight + 2.5*modeButtonVertSpaceBetween - dividerHeight/2);
+//    UIButton* threeDModeButton
+//    = new UIButton("3D",
+//                   modeButtonX, modeButtonStartY + 2*modeButtonVertSpaceBetween + 2*modeButtonHeight,
+//                   modeButtonWidth,modeButtonHeight);
+//    threeDModeButton->setImageIdle("3dm.png");
+//    threeDModeButton->setImageActive("3dm-active.png");
+//    threeDModeButton->setImageSelected("3dm-selected.png");
+//    UIImage* divider3 = new UIImage(divider,
+//                                    dividerX, modeButtonStartY + 3*modeButtonHeight + 2.5*modeButtonVertSpaceBetween - dividerHeight/2);
     
     
     UIButton* mathModeButton
@@ -76,7 +84,7 @@ void GUI::setupRightSidebar(UIHandler *uiHandler, const int rightSidebarWidth) {
     uiHandler->addImage(divider1);
     uiHandler->addButton(wavyModeButton);
     uiHandler->addImage(divider2);
-    uiHandler->addButton(threeDModeButton);
+    uiHandler->addButton(cityModeButton);
     uiHandler->addImage(divider3);
     uiHandler->addButton(mathModeButton);
     
@@ -85,7 +93,7 @@ void GUI::setupRightSidebar(UIHandler *uiHandler, const int rightSidebarWidth) {
     vector<UIButton*>* mainButtonGroup = new vector<UIButton*>();
     mainButtonGroup->push_back(telepresenceModeButton);
     mainButtonGroup->push_back(wavyModeButton);
-    mainButtonGroup->push_back(threeDModeButton);
+    mainButtonGroup->push_back(cityModeButton);
     mainButtonGroup->push_back(mathModeButton);
     uiHandler->addButtonGroup(mainButtonGroup);
     
@@ -97,7 +105,8 @@ void GUI::setupRightSidebar(UIHandler *uiHandler, const int rightSidebarWidth) {
 void GUI::setupLeftSidebar(UIHandler *uiHandler, const int leftSidebarWidth) {
     setupInfoBar(uiHandler, leftSidebarWidth);
     setupTeleBar(uiHandler, leftSidebarWidth);
-    setupThreeDBar(uiHandler, leftSidebarWidth);
+    setupCityBar(uiHandler, leftSidebarWidth);
+    //setupThreeDBar(uiHandler, leftSidebarWidth);
     setupWaveBar(uiHandler, leftSidebarWidth);
     setupMathBar(uiHandler, leftSidebarWidth);
 }
@@ -387,6 +396,192 @@ void GUI::setupWaveBar(UIHandler *uiHandler, const int leftSidebarWidth) {
     wavepresenceGroup.push_back(divider3);
     wavepresenceGroup.push_back(waveBoth);
     uiHandler->addUIGroup(wavepresenceGroup, "wavy");
+}
+
+//--------------------------------------------------------------
+
+void GUI::setupCityBar(UIHandler* uiHandler, const int leftSidebarWidth)
+{
+    //TEXT
+    const int textWidth = 300;
+    const int textX = 60;
+    const int textY = 155;
+    const int headlineY = 60;
+    const int captionX = 88;
+    const int caption1Y = 483+10;
+    const int caption2Y = 577+10;
+    
+    const int headlineSize = 16;
+    const int textSize = 10;
+    
+    const string headlineStr = "City Scape Controls and Tips";
+    const string textStr = "Use the touch screen controls below and on the right to pan the map and change filters.";
+    const string caption1Str = "drag the loupe with your finger";
+    const string caption2Str = "Choose a filter to explore";
+    //string modelNameStr = ((ReliefApplication*)ofGetAppPtr())->threeDShapeObject->getCurrentModelName(); // could be nicer
+    const string timeStr = " "; //will be changed dynamically
+    const int timeX = 960;
+    
+    ofImage* timeT = new ofImage();
+    timeT->loadImage("City/assets/timetip.png");
+    
+    UIText* text = new UIText(textStr, "city description", textSize, textX, textY);
+    UIText* headline = new UIText(headlineStr, "city headline", headlineSize, textX, headlineY);
+    UIText* caption1 = new UIText(caption1Str, "caption1", textSize, captionX, caption1Y);
+    UIText* caption2 = new UIText(caption2Str, "caption2", textSize, captionX, caption2Y);
+    UIText* time = new UIText(timeStr, "time", 6, timeX-28, 938);
+    UIImage* timeTip = new UIImage(timeT, "timeTip", timeX-42, 920);
+    
+    headline->setAlignment("left");
+    headline->setWidth(textWidth);
+    headline->setColor(ofColor(35,35,35));
+    text->setAlignment("left");
+    text->setWidth(textWidth);
+    text->setColor(ofColor(35,35,35));
+    caption1->setAlignment("left");
+    caption1->setWidth(textWidth);
+    caption1->setColor(ofColor(35,35,35));
+    caption2->setAlignment("left");
+    caption2->setWidth(textWidth);
+    caption2->setColor(ofColor(35,35,35));
+    
+    time->setAlignment("center");
+    time->setWidth(50);
+    time->setColor(ofColor(35,35,35));
+    
+    
+    
+    
+    // DIVIDERS
+    ofImage* dividerImg = new ofImage();
+    dividerImg->loadImage("divider.png");
+    
+    const int dividerWidth = dividerImg->getWidth();
+    const int dividerHeight = dividerImg->getHeight();
+    const int dividerX = leftSidebarWidth/2 - dividerWidth/2;
+    const int dividerY = 270;
+    const int dividerSpacerY = 270;
+    
+    UIImage* divider1 = new UIImage(dividerImg, dividerX, 270);
+    UIImage* divider2 = new UIImage(dividerImg, dividerX, 540);
+    
+    
+    
+    //IMAGE
+    ofImage* dragImg = new ofImage();
+    dragImg->loadImage("City/assets/dragloupe.png");
+    
+    const int dragImgWidth = dragImg->getWidth();
+    const int dragImgHeight = dragImg->getHeight();
+    const int dragImgX = leftSidebarWidth/2 - dragImgWidth/2;
+    const int dragImgY = 300;
+    
+    UIImage *DragImg = new UIImage(dragImg, dragImgX, dragImgY);
+    
+    
+    //BUTTONS
+    // UIButton name = UIButton("name", x,y, w,h)
+    const int citySelectButtonWidth  = 307;
+    const int citySelectButtonHeight = 89;
+    
+    const int citySelectButtonX = 60;
+    const int citySelectButtonY = 625;
+    
+    const int spacer = 106;
+    
+    UIButton* citySelectButton1
+    = new UIButton("citySelectButton1",
+                   citySelectButtonX, citySelectButtonY,
+                   citySelectButtonWidth,citySelectButtonHeight);
+    citySelectButton1->setImageIdle("City/assets/shadow.png");
+    citySelectButton1->setImageActive("City/assets/shadow-active.png");
+    citySelectButton1->setImageSelected("City/assets/shadow-selected.png");
+    
+    UIButton* citySelectButton2
+    = new UIButton("citySelectButton2",
+                   citySelectButtonX, citySelectButtonY + spacer,
+                   citySelectButtonWidth,citySelectButtonHeight);
+    citySelectButton2->setImageIdle("City/assets/traffic.png");
+    citySelectButton2->setImageActive("City/assets/traffic-active.png");
+    citySelectButton2->setImageSelected("City/assets/traffic-selected.png");
+    
+    UIButton* citySelectButton3
+    = new UIButton("citySelectButton3",
+                   citySelectButtonX, citySelectButtonY + spacer*2,
+                   citySelectButtonWidth,citySelectButtonHeight);
+    citySelectButton3->setImageIdle("City/assets/energy.png");
+    citySelectButton3->setImageActive("City/assets/energy-active.png");
+    citySelectButton3->setImageSelected("City/assets/energy-selected.png");
+    
+    UIButton* citySelectButton4
+    = new UIButton("citySelectButton4",
+                   citySelectButtonX, citySelectButtonY + spacer*3,
+                   citySelectButtonWidth,citySelectButtonHeight);
+    citySelectButton4->setImageIdle("City/assets/population.png");
+    citySelectButton4->setImageActive("City/assets/population-active.png");
+    citySelectButton4->setImageSelected("City/assets/population-selected.png");
+    
+    
+    // SLIDERS
+    const int sliderWidth = 955-50;//1006;
+    const int sliderX = 960-sliderWidth/2-22;
+    const int sliderY = 985;
+    // name, bool horizontal, int trackX, int trackY, int trackLength, int handleWidth, int handleHeight
+    //3D SLIDER
+    UISlider *sliderScale = new UISlider("sliderPosition", true, sliderX, sliderY, sliderWidth, 46, 50);
+    sliderScale->setImageHandleActive("City/assets/cityknob.png");
+    sliderScale->setImageHandleIdle("City/assets/cityknob.png");
+    sliderScale->setImageTrack("City/assets/timeline.png");
+    sliderScale->setImageTrackOffset(-3);
+    sliderScale->setHandlePos(0.5);
+    
+    
+    
+    //SETUP
+    uiHandler->addButton(citySelectButton1);
+    uiHandler->addButton(citySelectButton2);
+    uiHandler->addButton(citySelectButton3);
+    uiHandler->addButton(citySelectButton4);
+    uiHandler->addSlider(sliderScale);
+    uiHandler->addImage(divider1);
+    uiHandler->addImage(divider2);
+    uiHandler->addImage(DragImg);
+    uiHandler->addText(headline);
+    uiHandler->addText(text);
+    uiHandler->addText(caption1);
+    uiHandler->addText(caption2);
+    uiHandler->addText(time);
+    uiHandler->addImage(timeTip);
+    
+    vector<UIElement*> cityGroup = vector<UIElement*>();
+    cityGroup.push_back(citySelectButton1);
+    cityGroup.push_back(citySelectButton2);
+    cityGroup.push_back(citySelectButton3);
+    cityGroup.push_back(citySelectButton4);
+    cityGroup.push_back(sliderScale);
+    cityGroup.push_back(divider1);
+    cityGroup.push_back(divider2);
+    cityGroup.push_back(DragImg);
+    cityGroup.push_back(headline);
+    cityGroup.push_back(text);
+    cityGroup.push_back(caption1);
+    cityGroup.push_back(caption2);
+    cityGroup.push_back(time);
+    cityGroup.push_back(timeTip);
+    
+    uiHandler->addUIGroup(cityGroup, "city");
+    
+    
+    // add these buttons to a group
+    // for the "select" and "unselect" functionality
+    vector<UIButton*>* citySelectButtonGroup = new vector<UIButton*>();
+    citySelectButtonGroup->push_back(citySelectButton1);
+    citySelectButtonGroup->push_back(citySelectButton2);
+    citySelectButtonGroup->push_back(citySelectButton3);
+    citySelectButtonGroup->push_back(citySelectButton4);
+    uiHandler->addButtonGroup(citySelectButtonGroup);
+    
+    UITriggers::buttonTrigger(citySelectButton1);
 }
 
 //--------------------------------------------------------------

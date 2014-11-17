@@ -46,6 +46,7 @@
 		8A411CAD1A1272E000221D18 /* ofxFTGLFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A411C961A1272E000221D18 /* ofxFTGLFont.cpp */; };
 		8A411CAE1A1272E000221D18 /* ofxFTGLSimpleLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A411C981A1272E000221D18 /* ofxFTGLSimpleLayout.cpp */; };
 		8A411CCA1A12733800221D18 /* ofxTimeMeasurements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A411CC61A12733800221D18 /* ofxTimeMeasurements.cpp */; };
+		8AC058971A1AAA9800EA3BE2 /* CityShapeObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC058951A1AAA9800EA3BE2 /* CityShapeObject.cpp */; };
 		8AC348A919EF0F1300845B01 /* IpEndpointName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC3488319EF0F1300845B01 /* IpEndpointName.cpp */; };
 		8AC348AA19EF0F1300845B01 /* NetworkingUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC3488819EF0F1300845B01 /* NetworkingUtils.cpp */; };
 		8AC348AB19EF0F1300845B01 /* UdpSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC3488919EF0F1300845B01 /* UdpSocket.cpp */; };
@@ -274,6 +275,8 @@
 		8A411CC61A12733800221D18 /* ofxTimeMeasurements.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTimeMeasurements.cpp; sourceTree = "<group>"; };
 		8A411CC71A12733800221D18 /* ofxTimeMeasurements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTimeMeasurements.h; sourceTree = "<group>"; };
 		8A411CCD1A196EDF00221D18 /* OffsetAndFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OffsetAndFont.h; sourceTree = "<group>"; };
+		8AC058951A1AAA9800EA3BE2 /* CityShapeObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CityShapeObject.cpp; sourceTree = "<group>"; };
+		8AC058961A1AAA9800EA3BE2 /* CityShapeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityShapeObject.h; sourceTree = "<group>"; };
 		8AC3488319EF0F1300845B01 /* IpEndpointName.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IpEndpointName.cpp; sourceTree = "<group>"; };
 		8AC3488419EF0F1300845B01 /* IpEndpointName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpEndpointName.h; sourceTree = "<group>"; };
 		8AC3488519EF0F1300845B01 /* NetworkingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkingUtils.h; sourceTree = "<group>"; };
@@ -891,6 +894,15 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		8AC058941A1AAA8A00EA3BE2 /* City */ = {
+			isa = PBXGroup;
+			children = (
+				8AC058951A1AAA9800EA3BE2 /* CityShapeObject.cpp */,
+				8AC058961A1AAA9800EA3BE2 /* CityShapeObject.h */,
+			);
+			name = City;
+			sourceTree = "<group>";
+		};
 		8AC3487E19EF0F1300845B01 /* ofxOsc */ = {
 			isa = PBXGroup;
 			children = (
@@ -1411,6 +1423,7 @@
 		8AFAAA6319C8A8A700EC475F /* ShapeObjects */ = {
 			isa = PBXGroup;
 			children = (
+				8AC058941A1AAA8A00EA3BE2 /* City */,
 				44E451CD19F46A6600448ECF /* Math */,
 				4472935019F15B8E007AF18D /* 3D */,
 				8A0B32D319EC6B02009196FE /* Ball Mover */,
@@ -1505,8 +1518,8 @@
 				E4B69E1F0A3A1BDC003C02F2 /* ReliefApplication.h */,
 				8A0B32D019E8701A009196FE /* GUI.cpp */,
 				8A0B32D119E8701A009196FE /* GUI.h */,
-				8AFAA95A19C89E8700EC475F /* TableCore */,
 				8AFAAA6319C8A8A700EC475F /* ShapeObjects */,
+				8AFAA95A19C89E8700EC475F /* TableCore */,
 				8A09A64119D2218600118C9E /* UserInterface */,
 				8AEAD86F19D0D37A00D87C59 /* CameraInterface */,
 				8AFAA96319C8A66800EC475F /* KinectInterface */,
@@ -1648,6 +1661,7 @@
 				8A09A70B19E6FBAD00118C9E /* UIText.cpp in Sources */,
 				8A09A64719D221DD00118C9E /* UIButton.cpp in Sources */,
 				447293DE19F17C1B007AF18D /* texture3DS.cpp in Sources */,
+				8AC058971A1AAA9800EA3BE2 /* CityShapeObject.cpp in Sources */,
 				4472941D19F1A17A007AF18D /* ofxAssimpTexture.cpp in Sources */,
 				8AC348B219EF0F1300845B01 /* ofxOscBundle.cpp in Sources */,
 				8AC3492A19EF12C600845B01 /* core.c in Sources */,

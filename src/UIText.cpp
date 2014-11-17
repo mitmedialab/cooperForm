@@ -61,6 +61,13 @@ float UIText::getStrWidth(string text) {
     return layout.getStringBoundingBox(text,0,0).getWidth();
 }
 
+void UIText::setX(int x) {
+    this->x = x;
+}
+void UIText::setY(int y) {
+    this->y = y;
+}
+
 int UIText::getX() {
     return x;
 }

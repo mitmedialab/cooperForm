@@ -9,6 +9,7 @@
 #include "WavyShapeObject.h"
 #include "MoveBallShapeObject.h"
 #include "ThreeDShapeObject.h"
+#include "CityShapeObject.h"
 #include "MathShapeObject.h"
 #include "KinectTracker.h"
 #include "OSCInterface.h"
@@ -59,6 +60,7 @@ public:
     WavyShapeObject     * wavyShapeObject;
     MoveBallShapeObject * ballMoverShapeObject;
     ThreeDShapeObject   * threeDShapeObject;
+    CityShapeObject     * cityShapeObject;
     MathShapeObject     * mathShapeObject;
 
     // our interface for the Kinect

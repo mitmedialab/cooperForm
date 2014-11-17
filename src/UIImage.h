@@ -17,6 +17,7 @@ class UIImage : public UIElement {
 public:
     UIImage(string imagePath, int x, int y);
     UIImage(ofImage *image, int x, int y);
+    UIImage(ofImage *image, string name, int x, int y);
     
     void draw();
     string getName();

@@ -19,6 +19,14 @@ UIImage::UIImage(ofImage *image, int x, int y) {
     this->x = x;
     this->y = y;
 }
+
+UIImage::UIImage(ofImage *image, string name, int x, int y) {
+    this->image = image;
+    this->name=name;
+    this->x = x;
+    this->y = y;
+}
+
 void UIImage::draw() {
     if (visible) {
         image->draw(x,y, image->getWidth(), image->getHeight());

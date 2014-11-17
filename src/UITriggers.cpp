@@ -21,6 +21,7 @@ void UITriggers::buttonTrigger(UIButton *button) {
             uiHandler->showUIGroup("telepresence");
             uiHandler->hideUIGroup("wavy");
             uiHandler->hideUIGroup("3D");
+            uiHandler->hideUIGroup("city");
             uiHandler->hideUIGroup("math");
             uiHandler->hideUIGroup("info");
             UITriggers::lastModeSwitched = ofGetElapsedTimeMillis();
@@ -32,6 +33,7 @@ void UITriggers::buttonTrigger(UIButton *button) {
             uiHandler->hideUIGroup("telepresence");
             uiHandler->showUIGroup("wavy");
             uiHandler->hideUIGroup("3D");
+            uiHandler->hideUIGroup("city");
             uiHandler->hideUIGroup("math");
             uiHandler->hideUIGroup("info");
             UITriggers::lastModeSwitched = ofGetElapsedTimeMillis();
@@ -43,6 +45,18 @@ void UITriggers::buttonTrigger(UIButton *button) {
             uiHandler->hideUIGroup("telepresence");
             uiHandler->hideUIGroup("wavy");
             uiHandler->showUIGroup("3D");
+            uiHandler->hideUIGroup("city");
+            uiHandler->hideUIGroup("math");
+            uiHandler->hideUIGroup("info");
+            UITriggers::lastModeSwitched = ofGetElapsedTimeMillis();
+            reliefApplication->showInfo = false;
+        }
+        else if (name == "city") {
+            reliefApplication->setMode("city");
+            uiHandler->select(button);
+            uiHandler->hideUIGroup("telepresence");
+            uiHandler->hideUIGroup("wavy");
+            uiHandler->showUIGroup("city");
             uiHandler->hideUIGroup("math");
             uiHandler->hideUIGroup("info");
             UITriggers::lastModeSwitched = ofGetElapsedTimeMillis();
@@ -54,6 +68,7 @@ void UITriggers::buttonTrigger(UIButton *button) {
             uiHandler->hideUIGroup("telepresence");
             uiHandler->hideUIGroup("wavy");
             uiHandler->hideUIGroup("3D");
+            uiHandler->hideUIGroup("city");
             uiHandler->showUIGroup("math");
             uiHandler->hideUIGroup("info");
             UITriggers::lastModeSwitched = ofGetElapsedTimeMillis();
@@ -111,11 +126,32 @@ void UITriggers::buttonTrigger(UIButton *button) {
         {
             reliefApplication->mathShapeObject->modifyVal2Down();
         }
+        else if (name == "citySelectButton1")
+        {
+            reliefApplication->cityShapeObject->chooseCity(0);
+            uiHandler->select(button);
+            
+        }
+        else if (name == "citySelectButton2")
+        {
+            reliefApplication->cityShapeObject->chooseCity(1);
+            uiHandler->select(button);
+        }
+        else if (name == "citySelectButton3")
+        {
+            reliefApplication->cityShapeObject->chooseCity(2);
+            uiHandler->select(button);
+        }
+        else if (name == "citySelectButton4")
+        {
+            reliefApplication->cityShapeObject->chooseCity(3);
+            uiHandler->select(button);
+        }
     }
 }
 void UITriggers::buttonUnselect(UIButton *button) {
     string name = button->getName();
-    if (name == "telepresence"  || name == "wavy" || name == "3D" || name == "math") {
+    if (name == "telepresence"  || name == "wavy" || name == "city" || name == "3D" || name == "math") {
         uiHandler->unselect(button);
         uiHandler->hideUIGroup(name);
         uiHandler->showUIGroup("info");
@@ -126,6 +162,9 @@ void UITriggers::sliderTrigger(UISlider *slider) {
     string name = slider->getName();
     if (name == "sliderScale") {
         reliefApplication->threeDShapeObject->setScale(slider->getVal());
+    }
+    if (name == "sliderPosition") {
+        reliefApplication->cityShapeObject->setMovPosition(slider->getVal());
     }
     
 }

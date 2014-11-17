@@ -256,7 +256,7 @@ void ReliefApplication::draw(){
             eqValSec1->setNum(mathShapeObject->getEqVal1());
             eqValSec2->setNum(mathShapeObject->getEqVal2());
             
-            if (eqVal1->showing()) {                
+            if (eqVal1->showing()) {
                 eqValSec1->show();
                 eqValSec2->show();
             }

@@ -541,10 +541,9 @@ void GUI::setupMathBar(UIHandler* uiHandler, const int leftSidebarWidth)
     //TEXT
     const int textWidth = 300;
     const int textX = 60;
-    const int textY = 105;
+    const int textY = 155;
     const int headlineY = 60;
     const int captionX = 88;
-    const int caption1Y = 300;
     const int caption2Y = 570;
     const int modelNameY = 380;
     
@@ -552,9 +551,8 @@ void GUI::setupMathBar(UIHandler* uiHandler, const int leftSidebarWidth)
     const int textSize = 10;
     const int modelNameSize = 26;
     
-    const string headlineStr = "Math Controls";
-    const string textStr = "Use the touch screen controls located below to load a new equation and/or to change the constants and coefficients.";
-    const string caption1Str = "Tap the buttons to change coefficients --(W.I.P)--";
+    const string headlineStr = "Math Controls and Tips";
+    const string textStr = "Use the touch screen controls below and on the right to load and modify new equations.";
     const string caption2Str = "Choose  a new equation";
     const string equationStr = ""; //will be changed dynamically
     const string eqVal1Str = ""; //will be changed dynamically
@@ -563,19 +561,15 @@ void GUI::setupMathBar(UIHandler* uiHandler, const int leftSidebarWidth)
     
     UIText* text = new UIText(textStr, "Math description", textSize, textX, textY);
     UIText* headline = new UIText(headlineStr, "Math headline", headlineSize, textX, headlineY);
-    UIText* caption1 = new UIText(caption1Str, "caption1", textSize, captionX, caption1Y);
     UIText* caption2 = new UIText(caption2Str, "caption2", textSize, captionX, caption2Y);
     
     
     headline->setAlignment("left");
-    headline->setWidth(textWidth);
+    headline->setWidth(textWidth-50);
     headline->setColor(ofColor(35,35,35));
     text->setAlignment("left");
     text->setWidth(textWidth);
     text->setColor(ofColor(35,35,35));
-    caption1->setAlignment("left");
-    caption1->setWidth(textWidth);
-    caption1->setColor(ofColor(35,35,35));
     caption2->setAlignment("left");
     caption2->setWidth(textWidth);
     caption2->setColor(ofColor(35,35,35));
@@ -589,15 +583,27 @@ void GUI::setupMathBar(UIHandler* uiHandler, const int leftSidebarWidth)
     const int dividerWidth = dividerImg->getWidth();
     const int dividerHeight = dividerImg->getHeight();
     const int dividerX = leftSidebarWidth/2 - dividerWidth/2;
-    const int dividerY = 270;
+    const int dividerY = 250;
     const int dividerSpacerY = 270;
     
     UIImage* divider1 = new UIImage(dividerImg, dividerX, dividerY);
     UIImage* divider2 = new UIImage(dividerImg, dividerX, dividerY + 1 * dividerSpacerY);
     
+    
+    ofImage* tapArrowsImage = new ofImage();
+    tapArrowsImage->loadImage("Math/assets/taparrows.png");
+    const int tapArrowsWidth = tapArrowsImage->getWidth();
+    const int tapArrowsX = leftSidebarWidth/2 - tapArrowsWidth/2;
+    const int tapArrowsY = dividerY + 25;
+    
+    UIImage *tapArrows = new UIImage(tapArrowsImage, tapArrowsX, tapArrowsY);
+    tapArrows->setCaption("Tapping the arrows on the right changes the numbers", 10, 300);
+    tapArrows->getCaption()->setColor(ofColor(35,35,35));
+
+    
     //MODIFY BUTTONS
     // UIButton name = UIButton("name", x,y, w,h)
-    const int modifyButtonWidth  = 60;
+    const int modifyButtonWidth  = 48;
     const int modifyButtonHeight = 60;
     const int spacerX = 300;
     const int spacerY = 150;
@@ -609,7 +615,7 @@ void GUI::setupMathBar(UIHandler* uiHandler, const int leftSidebarWidth)
                    modifyButtonX, modifyButtonY,
                    modifyButtonWidth,modifyButtonHeight);
     modifyVal1Up->setImageIdle("Math/assets/uarrow.png");
-    modifyVal1Up->setImageActive("Math/assets/uarrow.png");
+    modifyVal1Up->setImageActive("Math/assets/uarrow-selected.png");
     modifyVal1Up->setImageSelected("Math/assets/uarrow.png");
     
     UIButton* modifyVal1Down
@@ -617,7 +623,7 @@ void GUI::setupMathBar(UIHandler* uiHandler, const int leftSidebarWidth)
                    modifyButtonX, modifyButtonY+modifyButtonHeight+spacerY,
                    modifyButtonWidth,modifyButtonHeight);
     modifyVal1Down->setImageIdle("Math/assets/darrow.png");
-    modifyVal1Down->setImageActive("Math/assets/darrow.png");
+    modifyVal1Down->setImageActive("Math/assets/darrow-selected.png");
     modifyVal1Down->setImageSelected("Math/assets/darrow.png");
     
     UIButton* modifyVal2Up
@@ -625,7 +631,7 @@ void GUI::setupMathBar(UIHandler* uiHandler, const int leftSidebarWidth)
                    modifyButtonX+spacerX, modifyButtonY,
                    modifyButtonWidth,modifyButtonHeight);
     modifyVal2Up->setImageIdle("Math/assets/uarrow.png");
-    modifyVal2Up->setImageActive("Math/assets/uarrow.png");
+    modifyVal2Up->setImageActive("Math/assets/uarrow-selected.png");
     modifyVal2Up->setImageSelected("Math/assets/uarrow.png");
     
     UIButton* modifyVal2Down
@@ -633,7 +639,7 @@ void GUI::setupMathBar(UIHandler* uiHandler, const int leftSidebarWidth)
                    modifyButtonX+spacerX, modifyButtonY + modifyButtonHeight + spacerY,
                    modifyButtonWidth,modifyButtonHeight);
     modifyVal2Down->setImageIdle("Math/assets/darrow.png");
-    modifyVal2Down->setImageActive("Math/assets/darrow.png");
+    modifyVal2Down->setImageActive("Math/assets/darrow-selected.png");
     modifyVal2Down->setImageSelected("Math/assets/darrow.png");
     
     const int eqVal1X = modifyButtonX;
@@ -735,9 +741,9 @@ void GUI::setupMathBar(UIHandler* uiHandler, const int leftSidebarWidth)
     uiHandler->addButton(equationSelectButton5);
     uiHandler->addImage(divider1);
     uiHandler->addImage(divider2);
+    uiHandler->addImage(tapArrows);
     uiHandler->addText(headline);
     uiHandler->addText(text);
-    uiHandler->addText(caption1);
     uiHandler->addText(caption2);
     uiHandler->addImage(equation);
     uiHandler->addNum(eqVal1);
@@ -757,9 +763,9 @@ void GUI::setupMathBar(UIHandler* uiHandler, const int leftSidebarWidth)
     mathGroup.push_back(equationSelectButton5);
     mathGroup.push_back(divider1);
     mathGroup.push_back(divider2);
+    mathGroup.push_back(tapArrows);
     mathGroup.push_back(headline);
     mathGroup.push_back(text);
-    mathGroup.push_back(caption1);
     mathGroup.push_back(caption2);
     mathGroup.push_back(eqVal1);
     mathGroup.push_back(eqVal2);

@@ -11,6 +11,7 @@
 
 #include "ShapeObject.h"
 #include "Function.h"
+#include "OffsetAndFont.h"
 
 class MathShapeObject : public ShapeObject {
     
@@ -40,6 +41,10 @@ public:
     string get_shape_name() {return shape_name; };
     //void setTableValuesForShape(ShapeIOManager *pIOManager);
     
+    ofImage* getEqImage();
+    
+    vector<OffsetAndFont> getVal1XOffsets();
+    vector<OffsetAndFont> getVal2XOffsets();
 private:
     string shape_name = "math";
     

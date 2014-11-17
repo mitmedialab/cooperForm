@@ -51,6 +51,7 @@ public:
     UISlider* getSlider(string name);
     UIText*   getText(string name);
     UINum*    getNum(string name);
+    UIImage*  getImage(string name);
 private:
     vector<UIButton*> buttons;
     vector<UISlider*> sliders;

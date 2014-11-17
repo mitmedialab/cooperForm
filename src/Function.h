@@ -10,6 +10,8 @@
 #define __cooperFORM__Function__
 
 #include "RenderObject.h"
+#include "OffsetAndFont.h"
+#include "UIImage.h"
 
 class Function : public RenderObject {
 public:
@@ -39,18 +41,22 @@ public:
     ofTrueTypeFont text;
     ofCamera cam;
     ofEasyCam easycam;
-
+    
+    ofImage* getEqImage();
+    
+    vector<OffsetAndFont> getVal1XOffsets();
+    vector<OffsetAndFont> getVal2XOffsets();
 private:
     float prev[RELIEF_SIZE_X][RELIEF_SIZE_Y];
     float curr[RELIEF_SIZE_X][RELIEF_SIZE_Y];
     float next[RELIEF_SIZE_X][RELIEF_SIZE_Y];
     unsigned short currFunc;
-    // vector<ofImage> images;
+    
+    vector<ofImage *> images;
     ofxAnimatableFloat anim;
     
     int eq_val1;
     int eq_val2;
-    
     
     bool t;
 };

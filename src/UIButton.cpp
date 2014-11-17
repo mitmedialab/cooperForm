@@ -55,7 +55,7 @@ void UIButton::draw() {
         if (isSelected())
             ofSetColor(ofColor(0,255,0));
         else if (isPressed())
-        ofSetColor(ofColor(255,0,0));
+            ofSetColor(ofColor(255,0,0));
         else
             ofSetColor(ofColor(0,0,255));
         
@@ -85,6 +85,13 @@ void UIButton::setImageActive(string imageName) {
 }
 void UIButton::setImageSelected(string imageName) {
     buttonImageSelected->loadImage(imageName);
+}
+
+void UIButton::setX(int x) {
+    this->x = x;
+}
+void UIButton::setY(int y) {
+    this->y = y;
 }
 
 // given x and y coordinates

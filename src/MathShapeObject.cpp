@@ -44,7 +44,7 @@ void MathShapeObject::update() {
     ofRotate(67, 1,0,0);
     ofRotate(67, 0,0,1);
     
-//    cout << ofGetMouseX() << " " << ofGetMouseY() << endl;
+    //    cout << ofGetMouseX() << " " << ofGetMouseY() << endl;
     ofEnableLighting();
     ofLight point;
     ofSetColor(255);
@@ -56,15 +56,15 @@ void MathShapeObject::update() {
     
     ofBackground(255);
     ofSetColor(50);
-//    ofLine(-5,      -5,      -5,  2*60+5,-5,      -5);
-//    ofLine(2*60+5,-5,      -5,  2*60+5,2*60+5,-5);
-//    ofLine(2*60+5,2*60+5,-5,  -5,      2*60+5,-5);
-//    ofLine(-5,      2*60+5,-5,  -5,      -5,      -5);
-//    
-//    ofLine(-5,      -5,    55,  2*60+5,-5,    55);
-//    ofLine(2*60+5,-5,      55,  2*60+5,2*60+5,55);
-//    ofLine(2*60+5,2*60+5,  55,  -5,      2*60+5,55);
-//    ofLine(-5,      2*60+5,55,  -5,      -5,    55);
+    //    ofLine(-5,      -5,      -5,  2*60+5,-5,      -5);
+    //    ofLine(2*60+5,-5,      -5,  2*60+5,2*60+5,-5);
+    //    ofLine(2*60+5,2*60+5,-5,  -5,      2*60+5,-5);
+    //    ofLine(-5,      2*60+5,-5,  -5,      -5,      -5);
+    //
+    //    ofLine(-5,      -5,    55,  2*60+5,-5,    55);
+    //    ofLine(2*60+5,-5,      55,  2*60+5,2*60+5,55);
+    //    ofLine(2*60+5,2*60+5,  55,  -5,      2*60+5,55);
+    //    ofLine(-5,      2*60+5,55,  -5,      -5,    55);
     
     for (int x = 0; x < 60; x++) {
         for (int y = 0; y < 60; y++) {
@@ -83,8 +83,8 @@ void MathShapeObject::update() {
             }
             
             // draw boxes instead
-//            ofDrawBox(x*5- 12*5, y*5 - 12*5, height/2, // position
-//                      5,5,height); // size1
+            //            ofDrawBox(x*5- 12*5, y*5 - 12*5, height/2, // position
+            //                      5,5,height); // size1
         }
     }
     ofDisableLighting();
@@ -101,7 +101,7 @@ void MathShapeObject::update() {
     glOrtho(0.0, RELIEF_PROJECTOR_SIZE_X, 0, RELIEF_PROJECTOR_SIZE_Y, -500, 500);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-
+    
     ofSetColor(ofColor::white);
     function.drawGraphics(RELIEF_PROJECTOR_SIZE_X, RELIEF_PROJECTOR_SIZE_Y);
     ofPopStyle();
@@ -178,6 +178,12 @@ string MathShapeObject::getEq(){
 
 //--------------------------------------------------------------
 
+ofImage* MathShapeObject::getEqImage(){
+    return function.getEqImage();
+}
+
+//--------------------------------------------------------------
+
 string MathShapeObject::getEqVal1(){
     return function.getEqVal1();
 }
@@ -190,3 +196,12 @@ string MathShapeObject::getEqVal2(){
 
 //--------------------------------------------------------------
 
+vector<OffsetAndFont> MathShapeObject::getVal1XOffsets() {
+    return function.getVal1XOffsets();
+}
+
+//--------------------------------------------------------------
+
+vector<OffsetAndFont> MathShapeObject::getVal2XOffsets() {
+    return function.getVal2XOffsets();
+}

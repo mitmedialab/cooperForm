@@ -19,7 +19,6 @@ UIImage::UIImage(ofImage *image, int x, int y) {
     this->x = x;
     this->y = y;
 }
-
 void UIImage::draw() {
     if (visible) {
         image->draw(x,y, image->getWidth(), image->getHeight());
@@ -27,8 +26,25 @@ void UIImage::draw() {
             captionText->draw();
     }
 }
+void UIImage::setName(string name) {
+    this->name = name;
+}
 string UIImage::getName() {
     return name;
+}
+
+int UIImage::getX() {
+    return x;
+}
+int UIImage::getY() {
+    return y;
+}
+
+void UIImage::setX(int x) {
+    this->x = x;
+}
+void UIImage::setY(int y) {
+    this->y = y;
 }
 
 void UIImage::show() {
@@ -47,4 +63,8 @@ void UIImage::setCaption(string text, int size, int width) {
 
 UIText* UIImage::getCaption() {
     return captionText;
+}
+
+void UIImage::setImage(ofImage *image) {
+    this->image = image;
 }

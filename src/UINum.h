@@ -30,12 +30,16 @@ public:
     void setColor(ofColor color);
     void setNum(string text);
     void setX(float x);
+    void setY(float y);
+    void setSize(int size);
     
     void enable() { };
     void disable() { };
     
     void show();
     void hide();
+    
+    bool showing();
     
 private:
     string text;

@@ -32,6 +32,8 @@ public:
     void setImageActive(string imageName);
     void setImageSelected(string imageName);
     
+    void setX(int x);
+    void setY(int y);
     
     // will tell you whether
     // an x,y coordinate is inside the button
@@ -51,7 +53,7 @@ public:
     // whether or not mouse is pressed on this button
     bool isPressed();
     bool isSelected();
-  
+    
 private:
     string name;
     

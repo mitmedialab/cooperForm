@@ -20,6 +20,13 @@ public:
     
     void draw();
     string getName();
+    void setName(string name);
+    
+    int getX();
+    int getY();
+    
+    void setX(int x);
+    void setY(int y);
     
     // inherited from UIElement
     // does nothing since UIImage is not interactive
@@ -32,6 +39,8 @@ public:
     void setCaption(string text, int size, int width);
     
     UIText* getCaption();
+    
+    void setImage(ofImage* image);
 private:
     string name;
     ofImage *image;

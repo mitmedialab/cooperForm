@@ -189,3 +189,11 @@ UINum* UIHandler::getNum(string name) {
     }
     return NULL;
 }
+
+UIImage* UIHandler::getImage(string name) {
+    for (UIImage *image : images) {
+        if (image->getName() == name)
+            return image;
+    }
+    return NULL;
+}

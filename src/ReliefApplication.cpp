@@ -213,33 +213,64 @@ void ReliefApplication::draw(){
     if (currentMode == "math") {
         //cout<<mathShapeObject->getEqVal1()<<endl;
         //cout<<uiHandler->getNum("eqVal1")->getName() <<endl;
-        string equationStr = mathShapeObject->getEq();
-        UIText * equationText = uiHandler->getText("equation");
+        UIImage* equation = uiHandler->getImage("equation");
+        ofImage* eqImg = mathShapeObject->getEqImage();
         
-        int firstVar = equationStr.find_first_of('_');
-        int firstVarX = equationText->getStrWidth(equationStr.substr(0, firstVar));
-        equationStr = equationStr.replace(firstVar, 1, " ");
+        const int eqImageWidth = eqImg->getWidth();
+        const int eqImageX = TOUCHSCREEN_SIZE_X/2 - eqImageWidth/2;
+        const int eqNumY = equation->getY() + 60;
+        equation->setImage(eqImg);
+        equation->setX(eqImageX);
         
-        int secondVar = equationStr.find_first_of('_');
-        int secondVarX = equationText->getStrWidth(equationStr.substr(0, secondVar));
-        equationStr = equationStr.replace(secondVar, 1, " ");
+        vector<OffsetAndFont> firstVarXOffsets  = mathShapeObject->getVal1XOffsets();
+        vector<OffsetAndFont> secondVarXOffsets = mathShapeObject->getVal2XOffsets();
         
-        while (equationStr.find('_') != std::string::npos) {
-            int var1 = equationStr.find_first_of('_');
-            equationStr = equationStr.replace(var1, 1, mathShapeObject->getEqVal1());
+        UINum* eqVal1 = uiHandler->getNum("eqVal1");
+        UINum* eqVal2 = uiHandler->getNum("eqVal2");
+        
+        eqVal1->setX( firstVarXOffsets[0].offsetX + eqImageX);
+        eqVal2->setX(secondVarXOffsets[0].offsetX + eqImageX);
+        
+        eqVal1->setY( firstVarXOffsets[0].offsetY + eqNumY);
+        eqVal2->setY(secondVarXOffsets[0].offsetY + eqNumY);
+        
+        eqVal1->setSize( firstVarXOffsets[0].fontSizeOffset + 26);
+        eqVal2->setSize(secondVarXOffsets[0].fontSizeOffset + 26);
+        
+        eqVal1->setNum(mathShapeObject->getEqVal1());
+        eqVal2->setNum(mathShapeObject->getEqVal2());
+        
+        UINum* eqValSec1 = uiHandler->getNum("eqValSecond1");
+        UINum* eqValSec2 = uiHandler->getNum("eqValSecond2");
+        
+        if (firstVarXOffsets.size() > 1 && secondVarXOffsets.size() > 1) {
+            eqValSec1->setX( firstVarXOffsets[1].offsetX + eqImageX);
+            eqValSec2->setX(secondVarXOffsets[1].offsetX + eqImageX);
             
-            int var2 = equationStr.find_first_of('_');
-            equationStr = equationStr.replace(var2, 1, mathShapeObject->getEqVal2());
+            eqValSec1->setY( firstVarXOffsets[1].offsetY + eqNumY);
+            eqValSec2->setY(secondVarXOffsets[1].offsetY + eqNumY);
+            
+            eqValSec1->setSize( firstVarXOffsets[1].fontSizeOffset + 26);
+            eqValSec2->setSize(secondVarXOffsets[1].fontSizeOffset + 26);
+            
+            eqValSec1->setNum(mathShapeObject->getEqVal1());
+            eqValSec2->setNum(mathShapeObject->getEqVal2());
+            
+            if (eqVal1->showing()) {                
+                eqValSec1->show();
+                eqValSec2->show();
+            }
         }
-        int equationWidth = equationText->getStrWidth(equationStr);
-        uiHandler->getNum("eqVal1")->setX(firstVarX - equationWidth/2 + equationText->getX() - 30);
-        uiHandler->getNum("eqVal2")->setX(secondVarX - equationWidth/2 + equationText->getX() - 30);
+        else {
+            eqValSec1->hide();
+            eqValSec2->hide();
+        }
+            
         
-        
-        equationText->setText(equationStr);
-        uiHandler->getNum("eqVal1")->setNum(mathShapeObject->getEqVal1());
-        uiHandler->getNum("eqVal2")->setNum(mathShapeObject->getEqVal2());
-        
+        uiHandler->getButton("modifyVal1Up")->setX(firstVarXOffsets[0].offsetX    + eqImageX);
+        uiHandler->getButton("modifyVal1Down")->setX(firstVarXOffsets[0].offsetX  + eqImageX);
+        uiHandler->getButton("modifyVal2Up")->setX(secondVarXOffsets[0].offsetX   + eqImageX);
+        uiHandler->getButton("modifyVal2Down")->setX(secondVarXOffsets[0].offsetX + eqImageX);
     }
 
     // draw UI stuff
@@ -263,7 +294,7 @@ void ReliefApplication::draw(){
 void ReliefApplication::exit(){
     
     update();
-    draw();
+    //draw();
     
     //mIOManager->disconnectFromTable();
     mIOManager->disconnectFromTableWithoutPinReset();

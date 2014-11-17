@@ -273,6 +273,7 @@
 		8A411CC41A12733800221D18 /* ReadMe.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe.md; sourceTree = "<group>"; };
 		8A411CC61A12733800221D18 /* ofxTimeMeasurements.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTimeMeasurements.cpp; sourceTree = "<group>"; };
 		8A411CC71A12733800221D18 /* ofxTimeMeasurements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTimeMeasurements.h; sourceTree = "<group>"; };
+		8A411CCD1A196EDF00221D18 /* OffsetAndFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OffsetAndFont.h; sourceTree = "<group>"; };
 		8AC3488319EF0F1300845B01 /* IpEndpointName.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IpEndpointName.cpp; sourceTree = "<group>"; };
 		8AC3488419EF0F1300845B01 /* IpEndpointName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpEndpointName.h; sourceTree = "<group>"; };
 		8AC3488519EF0F1300845B01 /* NetworkingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkingUtils.h; sourceTree = "<group>"; };
@@ -655,6 +656,7 @@
 				44E451FC19F478F900448ECF /* Function.cpp */,
 				44E451FD19F478F900448ECF /* Function.h */,
 				44A76F8C19F4A81D00FC91AD /* RenderObject.h */,
+				8A411CCD1A196EDF00221D18 /* OffsetAndFont.h */,
 			);
 			name = Math;
 			sourceTree = "<group>";

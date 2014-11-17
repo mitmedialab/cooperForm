@@ -63,9 +63,27 @@ void UINum::setX(float x) {
     this->x = x;
 }
 
+void UINum::setY(float y) {
+    this->y = y;
+}
+
+void UINum::setSize(int size) {
+    //layout.setSize(size);
+    ofxFTGLTextAlignment align = layout.getAlignment();
+    float lineLength = layout.getLineLength();
+    layout.loadFont("Math/assets/ExcelsiorLTStd-Italic.otf", size);
+    layout.setAlignment(align);
+    layout.setLineSpacing(1.2);
+    layout.setLineLength(lineLength);
+}
+
 void UINum::show() {
     visible = true;
 }
 void UINum::hide() {
     visible = false;
+}
+
+bool UINum::showing() {
+    return visible;
 }

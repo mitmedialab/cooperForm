@@ -33,7 +33,7 @@ Function::Function() {
     for (int y = 0; y < width; y++){
         for (int x = 0; x<height; x++){
             mainMesh.addVertex(ofPoint(x*5,y*5,0));	// mesh index = x + y*width
-												// this replicates the pixel array within the camera bitmap...
+            // this replicates the pixel array within the camera bitmap...
             mainMesh.addColor(ofFloatColor(0,0,0));  // placeholder for colour data, we'll get this from the camera
         }
     }
@@ -65,6 +65,26 @@ Function::Function() {
     
     easycam.dolly(10000);
     
+    ofImage* equation1Img = new ofImage();
+    equation1Img->loadImage("Math/assets/eq/equation-01.png");
+    
+    ofImage* equation2Img = new ofImage();
+    equation2Img->loadImage("Math/assets/eq/equation-02.png");
+    
+    ofImage* equation3Img = new ofImage();
+    equation3Img->loadImage("Math/assets/eq/equation-03.png");
+    
+    ofImage* equation4Img = new ofImage();
+    equation4Img->loadImage("Math/assets/eq/equation-04.png");
+    
+    ofImage* equation5Img = new ofImage();
+    equation5Img->loadImage("Math/assets/eq/equation-05.png");
+    
+    images.push_back(equation1Img);
+    images.push_back(equation2Img);
+    images.push_back(equation3Img);
+    images.push_back(equation4Img);
+    images.push_back(equation5Img);
 }
 
 //--------------------------------------------------------------
@@ -124,16 +144,16 @@ void Function::update(float dt) {
 void Function::nextFunction(string t, int func) {
     if(t == "next"){
         currFunc = (currFunc + 1) % 5;
-        eq_val2 = 10;
-        eq_val1 = 10;
+        eq_val2 = 5;
+        eq_val1 = 5;
     } else if(t == "button"){
         currFunc = func;
-        eq_val2 = 10;
-        eq_val1 = 10;
+        eq_val2 = 5;
+        eq_val1 = 5;
     }
     
-    float eq_val1_f = eq_val1*0.1;
-    float eq_val2_f = eq_val2*0.1;
+    float eq_val1_f = eq_val1*0.2;
+    float eq_val2_f = eq_val2*0.2;
     
     for (int i = 0; i < RELIEF_SIZE_X; i++) {
         for (int j = 0; j < RELIEF_SIZE_Y; j++) {
@@ -229,25 +249,25 @@ void Function::adjustVar(int num, int change){
     if(num == 1){
         if(change == 1){
             eq_val1 += 1;
-            if(eq_val1>20){
-                eq_val1 = 20;
+            if(eq_val1>=10){
+                eq_val1 = 9;
             }
         } else {
             eq_val1 -= 1;
-            if(eq_val1<-20){
-                eq_val1 = -20;
+            if(eq_val1<=-10){
+                eq_val1 = -9;
             }
         }
     } else if (num==2){
         if(change == 1){
             eq_val2 += 1;
-            if(eq_val2>20){
-                eq_val2 = 20;
+            if(eq_val2>=10){
+                eq_val2 = 9;
             }
         } else {
             eq_val2 -= 1;
-            if(eq_val2<-20){
-                eq_val2 = -20;
+            if(eq_val2<=-10){
+                eq_val2 = -9;
             }
         }
     }
@@ -269,13 +289,13 @@ void Function::setEqVal2(float val) {
 //--------------------------------------------------------------
 
 string Function::getEqVal1(){
-    return ofToString(eq_val1*0.1);
+    return ofToString(eq_val1);
 }
 
 //--------------------------------------------------------------
 
 string Function::getEqVal2(){
-    return ofToString(eq_val2*0.1);
+    return ofToString(eq_val2);
 }
 
 //--------------------------------------------------------------
@@ -283,11 +303,117 @@ string Function::getEqVal2(){
 string Function::getEq(){
     switch (currFunc) {
         case 0: return "_x * _y";
-        case 1: return "sqrt(2 - (_x)^2 - (_y)^2)";
-        case 2: return "(_x)^2 - (_y)^2";
-        case 3: return "cos((_x)^2 + (_y)^2)*e^(-(_x)^2 - (_y)^2)";
-        case 4: return "_x * (_y)^3 - _y * (_x)^3";
+        case 1: return "√(2 - (_x)² - (_y)²)";
+        case 2: return "(_x)² - (_y)²";
+        case 3: return "cos((_x)² + (_y)²)*e^(-(_x)² - (_y)²)";
+        case 4: return "_x * (_y)³ - _y * (_x)³";
         default:
             break;
     }
+}
+
+//--------------------------------------------------------------
+vector<OffsetAndFont> Function::getVal1XOffsets() {
+    vector<OffsetAndFont> offsets;
+    OffsetAndFont off, off1, off2, off3, off3b, off4, off4b;
+    switch (currFunc) {
+        case 0:
+            off = OffsetAndFont();
+            off.offsetX = 350;
+            
+            offsets.push_back(off);
+            break;
+        case 1:
+            off1 = OffsetAndFont();
+            off1.offsetX = 400;
+            
+            offsets.push_back(off1);
+            break;
+        case 2:
+            off2 = OffsetAndFont();
+            off2.offsetX = 285;
+            
+            offsets.push_back(off2);
+            break;
+        case 3:
+            off3 = OffsetAndFont();
+            off3.offsetX = 125;
+            off3b = OffsetAndFont();
+            off3b.offsetX = 645;
+            off3b.offsetY = -20;
+            off3b.fontSizeOffset = -2;
+            
+            offsets.push_back(off3);
+            offsets.push_back(off3b);
+            break;
+        case 4:
+            off4 = OffsetAndFont();
+            off4.offsetX = 150;
+            off4b = OffsetAndFont();
+            off4b.offsetX = 525;
+            
+            offsets.push_back(off4);
+            offsets.push_back(off4b);
+            break;
+        default:
+            break;
+    }
+    return offsets;
+}
+
+//--------------------------------------------------------------
+
+vector<OffsetAndFont> Function::getVal2XOffsets() {
+    vector<OffsetAndFont> offsets;
+    OffsetAndFont off, off1, off2, off3, off3b, off4, off4b;
+    switch (currFunc) {
+        case 0:
+            off = OffsetAndFont();
+            off.offsetX = 485;
+            
+            offsets.push_back(off);
+            break;
+        case 1:
+            off1 = OffsetAndFont();
+            off1.offsetX = 640;
+            
+            offsets.push_back(off1);
+            break;
+        case 2:
+            off2 = OffsetAndFont();
+            off2.offsetX = 525;
+            
+            offsets.push_back(off2);
+            break;
+            break;
+        case 3:
+            off3 = OffsetAndFont();
+            off3.offsetX = 370;
+            off3b = OffsetAndFont();
+            off3b.offsetX = 815;
+            off3b.offsetY = -20;
+            off3b.fontSizeOffset = -2;
+            
+            offsets.push_back(off3);
+            offsets.push_back(off3b);
+            break;
+        case 4:
+            off4 = OffsetAndFont();
+            off4.offsetX = 290;
+            off4b = OffsetAndFont();
+            off4b.offsetX = 693;
+            
+            offsets.push_back(off4);
+            offsets.push_back(off4b);
+            break;
+        default:
+            break;
+    }
+    return offsets;
+}
+
+//--------------------------------------------------------------
+
+ofImage* Function::getEqImage() {
+    return images.at(currFunc);
 }

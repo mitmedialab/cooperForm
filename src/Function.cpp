@@ -152,8 +152,8 @@ void Function::nextFunction(string t, int func) {
         eq_val1 = 5;
     }
     
-    float eq_val1_f = eq_val1*0.2;
-    float eq_val2_f = eq_val2*0.2;
+    float eq_val1_f = eq_val1*0.15;
+    float eq_val2_f = eq_val2*0.15;
     
     for (int i = 0; i < RELIEF_SIZE_X; i++) {
         for (int j = 0; j < RELIEF_SIZE_Y; j++) {

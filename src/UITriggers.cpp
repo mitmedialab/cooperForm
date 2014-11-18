@@ -74,79 +74,79 @@ void UITriggers::buttonTrigger(UIButton *button) {
             UITriggers::lastModeSwitched = ofGetElapsedTimeMillis();
             reliefApplication->showInfo = false;
         }
-        else if (name == "modelSelectLeft")
-        {
-            reliefApplication->threeDShapeObject->changeModel("left");
-            cout << "modelSelectLeft" <<endl;
-        }
-        else if (name == "modelSelectRight")
-        {
-            reliefApplication->threeDShapeObject->changeModel("right");
-            cout << "modelSelectRight" <<endl;
-        }
-        else if (name == "equationSelectButton1")
-        {
-            reliefApplication->mathShapeObject->chooseFunction(0);
-            uiHandler->select(button);
-            
-        }
-        else if (name == "equationSelectButton2")
-        {
-            reliefApplication->mathShapeObject->chooseFunction(1);
-            uiHandler->select(button);
-        }
-        else if (name == "equationSelectButton3")
-        {
-            reliefApplication->mathShapeObject->chooseFunction(2);
-            uiHandler->select(button);
-        }
-        else if (name == "equationSelectButton4")
-        {
-            reliefApplication->mathShapeObject->chooseFunction(3);
-            uiHandler->select(button);
-        }
-        else if (name == "equationSelectButton5")
-        {
-            reliefApplication->mathShapeObject->chooseFunction(4);
-            uiHandler->select(button);
-        }
-        else if (name == "modifyVal1Up")
-        {
-            reliefApplication->mathShapeObject->modifyVal1Up();
-        }
-        else if (name == "modifyVal1Down")
-        {
-            reliefApplication->mathShapeObject->modifyVal1Down();
-        }
-        else if (name == "modifyVal2Up")
-        {
-            reliefApplication->mathShapeObject->modifyVal2Up();
-        }
-        else if (name == "modifyVal2Down")
-        {
-            reliefApplication->mathShapeObject->modifyVal2Down();
-        }
-        else if (name == "citySelectButton1")
-        {
-            reliefApplication->cityShapeObject->chooseCity(0);
-            uiHandler->select(button);
-            
-        }
-        else if (name == "citySelectButton2")
-        {
-            reliefApplication->cityShapeObject->chooseCity(1);
-            uiHandler->select(button);
-        }
-        else if (name == "citySelectButton3")
-        {
-            reliefApplication->cityShapeObject->chooseCity(2);
-            uiHandler->select(button);
-        }
-        else if (name == "citySelectButton4")
-        {
-            reliefApplication->cityShapeObject->chooseCity(3);
-            uiHandler->select(button);
-        }
+    }
+    if (name == "modelSelectLeft")
+    {
+        reliefApplication->threeDShapeObject->changeModel("left");
+        cout << "modelSelectLeft" <<endl;
+    }
+    else if (name == "modelSelectRight")
+    {
+        reliefApplication->threeDShapeObject->changeModel("right");
+        cout << "modelSelectRight" <<endl;
+    }
+    else if (name == "equationSelectButton1")
+    {
+        reliefApplication->mathShapeObject->chooseFunction(0);
+        uiHandler->select(button);
+        
+    }
+    else if (name == "equationSelectButton2")
+    {
+        reliefApplication->mathShapeObject->chooseFunction(1);
+        uiHandler->select(button);
+    }
+    else if (name == "equationSelectButton3")
+    {
+        reliefApplication->mathShapeObject->chooseFunction(2);
+        uiHandler->select(button);
+    }
+    else if (name == "equationSelectButton4")
+    {
+        reliefApplication->mathShapeObject->chooseFunction(3);
+        uiHandler->select(button);
+    }
+    else if (name == "equationSelectButton5")
+    {
+        reliefApplication->mathShapeObject->chooseFunction(4);
+        uiHandler->select(button);
+    }
+    else if (name == "modifyVal1Up")
+    {
+        reliefApplication->mathShapeObject->modifyVal1Up();
+    }
+    else if (name == "modifyVal1Down")
+    {
+        reliefApplication->mathShapeObject->modifyVal1Down();
+    }
+    else if (name == "modifyVal2Up")
+    {
+        reliefApplication->mathShapeObject->modifyVal2Up();
+    }
+    else if (name == "modifyVal2Down")
+    {
+        reliefApplication->mathShapeObject->modifyVal2Down();
+    }
+    else if (name == "citySelectButton1")
+    {
+        reliefApplication->cityShapeObject->chooseCity(0);
+        uiHandler->select(button);
+        
+    }
+    else if (name == "citySelectButton2")
+    {
+        reliefApplication->cityShapeObject->chooseCity(1);
+        uiHandler->select(button);
+    }
+    else if (name == "citySelectButton3")
+    {
+        reliefApplication->cityShapeObject->chooseCity(2);
+        uiHandler->select(button);
+    }
+    else if (name == "citySelectButton4")
+    {
+        reliefApplication->cityShapeObject->chooseCity(3);
+        uiHandler->select(button);
     }
 }
 void UITriggers::buttonUnselect(UIButton *button) {

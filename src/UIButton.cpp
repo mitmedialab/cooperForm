@@ -132,9 +132,6 @@ void UIButton::mouseLeft() {
     pressed = false;
 }
 void UIButton::select() {
-    if (!enabled)
-        return;
-    
     selected = true;
 }
 void UIButton::unselect() {

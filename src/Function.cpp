@@ -144,16 +144,16 @@ void Function::update(float dt) {
 void Function::nextFunction(string t, int func) {
     if(t == "next"){
         currFunc = (currFunc + 1) % 5;
-        eq_val2 = 5;
-        eq_val1 = 5;
+        eq_val2 = -6;
+        eq_val1 = 8;
     } else if(t == "button"){
         currFunc = func;
-        eq_val2 = 5;
-        eq_val1 = 5;
+        eq_val2 = -6;
+        eq_val1 = 8;
     }
     
-    float eq_val1_f = eq_val1*0.15;
-    float eq_val2_f = eq_val2*0.15;
+    float eq_val1_f = eq_val1*0.125;
+    float eq_val2_f = eq_val2*0.125;
     
     for (int i = 0; i < RELIEF_SIZE_X; i++) {
         for (int j = 0; j < RELIEF_SIZE_Y; j++) {
@@ -174,9 +174,10 @@ void Function::nextFunction(string t, int func) {
         }
     }
     
-    anim.setDuration(1.0f);
+    anim.setDuration(0.5f);
     anim.setCurve(EASE_IN_EASE_OUT);
     anim.animateFromTo(0.0f,1.0f);
+
 }
 
 //--------------------------------------------------------------

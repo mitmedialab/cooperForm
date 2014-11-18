@@ -166,8 +166,8 @@ void MathShapeObject::modifyVal2Down() {
 //--------------------------------------------------------------
 
 void MathShapeObject::reset() {
-    function.setEqVal1(1);
-    function.setEqVal2(1);
+//    function.setEqVal1(1);
+//    function.setEqVal2(1);
 }
 
 //--------------------------------------------------------------

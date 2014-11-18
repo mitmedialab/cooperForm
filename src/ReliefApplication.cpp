@@ -83,6 +83,12 @@ void ReliefApplication::setup(){
     // set our current shape object to a default shape object
     UITriggers::buttonTrigger(uiHandler->getButton("telepresence"));
     
+    // and default math equation
+    UITriggers::buttonTrigger(uiHandler->getButton("equationSelectButton1"));
+    
+    // and default city scape mode
+    UITriggers::buttonTrigger(uiHandler->getButton("citySelectButton1"));
+    
     currentTransitionFromShape = currentShape;
     currentTransitionToShape = currentShape;
 }
@@ -248,6 +254,7 @@ void ReliefApplication::draw(){
         
         eqVal1->setNum(mathShapeObject->getEqVal1());
         eqVal2->setNum(mathShapeObject->getEqVal2());
+        
         
         UINum* eqValSec1 = uiHandler->getNum("eqValSecond1");
         UINum* eqValSec2 = uiHandler->getNum("eqValSecond2");

@@ -55,8 +55,8 @@ private:
     vector<ofImage *> images;
     ofxAnimatableFloat anim;
     
-    int eq_val1;
-    int eq_val2;
+    int eq_val1 = 8;
+    int eq_val2 = -6;
     
     bool t;
 };

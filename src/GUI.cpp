@@ -581,7 +581,7 @@ void GUI::setupCityBar(UIHandler* uiHandler, const int leftSidebarWidth)
     citySelectButtonGroup->push_back(citySelectButton4);
     uiHandler->addButtonGroup(citySelectButtonGroup);
     
-    UITriggers::buttonTrigger(citySelectButton1);
+//    UITriggers::buttonTrigger(citySelectButton1);
 }
 
 //--------------------------------------------------------------
@@ -978,7 +978,7 @@ void GUI::setupMathBar(UIHandler* uiHandler, const int leftSidebarWidth)
     equationButtonGroup->push_back(equationSelectButton5);
     uiHandler->addButtonGroup(equationButtonGroup);
     
-    UITriggers::buttonTrigger(equationSelectButton1);
+//    UITriggers::buttonTrigger(equationSelectButton1);
 }
 
 //--------------------------------------------------------------

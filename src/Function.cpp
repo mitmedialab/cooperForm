@@ -319,27 +319,27 @@ vector<OffsetAndFont> Function::getVal1XOffsets() {
     switch (currFunc) {
         case 0:
             off = OffsetAndFont();
-            off.offsetX = 350;
+            off.offsetX = 118;
             
             offsets.push_back(off);
             break;
         case 1:
             off1 = OffsetAndFont();
-            off1.offsetX = 400;
+            off1.offsetX = 260;
             
             offsets.push_back(off1);
             break;
         case 2:
             off2 = OffsetAndFont();
-            off2.offsetX = 285;
+            off2.offsetX = 125;
             
             offsets.push_back(off2);
             break;
         case 3:
             off3 = OffsetAndFont();
-            off3.offsetX = 125;
+            off3.offsetX = 205;
             off3b = OffsetAndFont();
-            off3b.offsetX = 645;
+            off3b.offsetX = 627;
             off3b.offsetY = -20;
             off3b.fontSizeOffset = -2;
             
@@ -348,9 +348,9 @@ vector<OffsetAndFont> Function::getVal1XOffsets() {
             break;
         case 4:
             off4 = OffsetAndFont();
-            off4.offsetX = 150;
+            off4.offsetX = 120;
             off4b = OffsetAndFont();
-            off4b.offsetX = 525;
+            off4b.offsetX = 480;
             
             offsets.push_back(off4);
             offsets.push_back(off4b);
@@ -369,28 +369,28 @@ vector<OffsetAndFont> Function::getVal2XOffsets() {
     switch (currFunc) {
         case 0:
             off = OffsetAndFont();
-            off.offsetX = 485;
+            off.offsetX = 250;
             
             offsets.push_back(off);
             break;
         case 1:
             off1 = OffsetAndFont();
-            off1.offsetX = 640;
+            off1.offsetX = 490;
             
             offsets.push_back(off1);
             break;
         case 2:
             off2 = OffsetAndFont();
-            off2.offsetX = 525;
+            off2.offsetX = 350;
             
             offsets.push_back(off2);
             break;
             break;
         case 3:
             off3 = OffsetAndFont();
-            off3.offsetX = 370;
+            off3.offsetX = 405;
             off3b = OffsetAndFont();
-            off3b.offsetX = 815;
+            off3b.offsetX = 782;
             off3b.offsetY = -20;
             off3b.fontSizeOffset = -2;
             
@@ -399,9 +399,9 @@ vector<OffsetAndFont> Function::getVal2XOffsets() {
             break;
         case 4:
             off4 = OffsetAndFont();
-            off4.offsetX = 290;
+            off4.offsetX = 255;
             off4b = OffsetAndFont();
-            off4b.offsetX = 693;
+            off4b.offsetX = 638;
             
             offsets.push_back(off4);
             offsets.push_back(off4b);

@@ -197,7 +197,7 @@ void UISlider::mouseDragged(int x, int y) {
         // constrain handle x within the track
         newHandleX = ofClamp(newHandleX, trackX, trackX + trackLength - handleWidth/2);
         
-        handlePos = (double)(newHandleX - trackX) / (trackLength - handleWidth/2);
+        handlePos = (double)(newHandleX - trackX) / trackLength;
     }
     else { // vertical track
         int newHandleY = y - mouseOffsetY;
@@ -205,7 +205,7 @@ void UISlider::mouseDragged(int x, int y) {
         // constrain handle y within the track
         newHandleY = ofClamp(newHandleY, trackY, trackY + trackLength - handleHeight/2);
         
-        handlePos = (double)(newHandleY - trackY) / (trackLength - handleHeight/2);
+        handlePos = (double)(newHandleY - trackY) / trackLength;
     }
     
     for (float lockToPos : lockToPoses) {

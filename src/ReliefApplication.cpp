@@ -320,7 +320,7 @@ void ReliefApplication::draw(){
             uiHandler->getSlider("sliderPosition")->setHandlePos(cityShapeObject->getMovPosition());//((val + 1) % 1000)/1000.0);//
             
         }
-        cout <<uiHandler->getSlider("sliderPosition")->getVal() << endl;
+        // cout <<uiHandler->getSlider("sliderPosition")->getVal() << endl;
     }
 
 

@@ -7,6 +7,10 @@
 int main( ){
     ofAppGLFWWindow window;
     window.setMultiDisplayFullscreen(true);
+    
+//    // hide the cursor
+//    CGDisplayHideCursor(kCGDirectMainDisplay);
+    
     ofSetupOpenGL(&window, 2*1920, 1080, OF_FULLSCREEN);
 	
     ReliefApplication *relief = new ReliefApplication();    

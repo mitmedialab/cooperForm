@@ -100,9 +100,9 @@ void ReliefApplication::update(){
     kinectTracker.update();
     
     // switch to idle if no activity after 120 seconds on the depth camera
-    if (kinectTracker.timeSinceLastActive() > 120) {
+    if (kinectTracker.timeSinceLastActive() > 120 && currentMode != "idle") {
         // (should also check if we haven't already switched to an idle mode!)
-        
+        setMode("idle");
     }
     
     // update the necessary shape objects
@@ -112,6 +112,7 @@ void ReliefApplication::update(){
     }
     else
         currentShape->update();
+    
     overlayShape->update();
     
     
@@ -379,8 +380,24 @@ void ReliefApplication::setupUI() {
 void ReliefApplication::setMode(string newMode) {
     if (newMode == currentMode)
         return;
+
+    if (newMode == "idle") {
+        UITriggers::buttonTrigger(uiHandler->getButton("telepresence"));
+        UITriggers::setIdle();
+        currentMode = newMode;
+        backDisplayComputer->sendModeChange(newMode);
+        
+        currentTransitionFromShape = currentShape;
+        currentShape = kinectShapeObject;
+        currentTransitionToShape = currentShape;
+        transitionStart = ofGetElapsedTimeMillis();
+        
+        if (ballMoverShapeObject->isBallInCorner())
+            ballMoverShapeObject->moveBallToCenter();
+        return;
+    }
     
-    if (newMode == "telepresence" || newMode == "wavy" || newMode == "city" || newMode == "3D" || newMode == "math") {
+    if (newMode == "telepresence" || newMode == "wavy" || newMode == "city" || newMode == "3D" || newMode == "math" || newMode == "idle") {
         currentMode = newMode;
         backDisplayComputer->sendModeChange(newMode);
     }
@@ -461,6 +478,9 @@ void ReliefApplication::keyPressed(int key){
         case '4':
             setMode("math");
             UITriggers::buttonTrigger(uiHandler->getButton("math"));
+            break;
+        case '5':
+            setMode("idle");
             break;
     }
 }

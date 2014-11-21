@@ -152,10 +152,21 @@ void UITriggers::buttonTrigger(UIButton *button) {
 void UITriggers::buttonUnselect(UIButton *button) {
     string name = button->getName();
     if (name == "telepresence"  || name == "wavy" || name == "city" || name == "3D" || name == "math") {
-        uiHandler->unselect(button);
-        uiHandler->hideUIGroup(name);
-        uiHandler->showUIGroup("info");
+//      // disabled info screen
+//        uiHandler->unselect(button);
+//        uiHandler->hideUIGroup(name);
+//        uiHandler->showUIGroup("info");
     }
+}
+
+void UITriggers::setIdle() {
+    string currentMode = reliefApplication->currentMode;
+    cout << currentMode << endl;
+    UIButton *currentButton = uiHandler->getButton(currentMode);
+    uiHandler->unselect(currentButton);
+    
+    uiHandler->hideUIGroup(currentMode);
+    uiHandler->showUIGroup("info");
 }
 
 void UITriggers::sliderTrigger(UISlider *slider) {

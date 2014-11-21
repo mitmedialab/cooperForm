@@ -99,6 +99,12 @@ void ReliefApplication::update(){
     // update the Kinect
     kinectTracker.update();
     
+    // switch to idle if no activity after 120 seconds on the depth camera
+    if (kinectTracker.timeSinceLastActive() > 120) {
+        // (should also check if we haven't already switched to an idle mode!)
+        
+    }
+    
     // update the necessary shape objects
     if (ofGetElapsedTimeMillis() - transitionStart > transitionLengthMS) {
         currentTransitionFromShape->update();

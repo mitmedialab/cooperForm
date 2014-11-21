@@ -48,8 +48,6 @@ private:
     
 public:
     
-
-    
     int mNearThreshold; // the far threshold, closest possible value is 255, farthest possible value 0
 	int mFarThreshold; // the far threshold, closest possible value is 255, farthest possible value 0
     int mContourMinimumSize; // the minimum size of a contour in pixels
@@ -99,6 +97,11 @@ public:
     ofImage recordingImage, playingImage;
     ofImage imageLeft;
     ofImage imageRight;
+    
+    // return the time elapsed since last activity in the depth map
+    // in seconds
+    long lastActiveTime = 0;
+    double timeSinceLastActive();
 };
 
 

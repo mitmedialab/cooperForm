@@ -198,19 +198,23 @@ void KinectTracker::calculateThresholdsAndModifyImages() {
             depthPixels.setColor(x,y, shade);
         }
     }
-//    if (maxShade > 127 && maxShade-minShade > 2)
-//        minShade = maxShade - 2;
+    
+    int numActivePixels = 0;
     
     if (maxShade - minShade > 1) {
         // rescale between min and max shades
         for (int x = 0; x < depthPixels.getWidth(); x++) {
             for (int y = 0; y < depthPixels.getHeight(); y++) {
                 float shade = LOW_THRESHOLD + (depthPixels.getColor(x,y).getBrightness() - minShade) * (255.f - LOW_THRESHOLD) / (maxShade - minShade);
-
+                if (shade > LOW_THRESHOLD + 10)
+                    numActivePixels++;
                 depthPixels.setColor(x,y, shade);
             }
         }
     }
+    
+    if (numActivePixels > 5)
+        lastActiveTime = ofGetElapsedTimeMillis();
     
     depthThreshed.flagImageChanged();
     
@@ -358,4 +362,9 @@ void KinectTracker::setCrop(int x, int y, int width, int height) {
     depthThreshed.allocate(cropWidth, cropHeight);
     lastDepthThreshed.allocate(cropWidth, cropHeight);
     depthThreshedDiff.allocate(cropWidth, cropHeight);
+}
+
+
+double KinectTracker::timeSinceLastActive() {
+    return (ofGetElapsedTimeMillis() - lastActiveTime) / 1000.0;
 }

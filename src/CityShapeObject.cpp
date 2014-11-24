@@ -128,8 +128,8 @@ void CityShapeObject::renderTouchscreenGraphics(int w, int h) {
     
     
     
-    trimmedMov[0].draw(0,0);
-    trimmedMov[1].draw(rectLength,0);
+//    trimmedMov[0].draw(0,0);
+//    trimmedMov[1].draw(rectLength,0);
 }
 
 //--------------------------------------------------------------

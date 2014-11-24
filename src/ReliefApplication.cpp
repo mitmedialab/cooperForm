@@ -204,18 +204,6 @@ void ReliefApplication::draw(){
     
     ofBackground(255); //refresh
     
-    //ofPushStyle();
-    //glEnable(GL_BLEND);
-    //glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
-    
-    //cout << "mouse " << ofGetMouseX()/4 << " " << ofGetMouseY()/4 << endl;
-    //ofSetColor(ofColor::fromHsb(ofGetMouseX()/4, ofGetMouseY()/4, 255)); // c is bright saturated cyan);
-    //cameraTracker.drawCameraFeed(0, -194, -26, 1502, 1120);
-    //glDisable(GL_BLEND);
-    //ofPopStyle();
-    
-    //cameraTracker.drawCameraFeed(0, 0, 0, w, h);
-    //currentShape->renderTangibleShape(w, h);
     currentShape->renderTouchscreenGraphics(w, h);
     
     touchScreenDisplayImage.end();

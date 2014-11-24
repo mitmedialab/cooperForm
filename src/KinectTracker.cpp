@@ -193,22 +193,32 @@ void KinectTracker::calculateThresholdsAndModifyImages() {
     for (int x = 0; x < depthPixels.getWidth(); x++) {
         for (int y = 0; y < depthPixels.getHeight(); y++) {
             float shade = ofClamp((depthPixels.getColor(x,y).getBrightness() - mFarThreshold) * 255.f / (mNearThreshold - mFarThreshold), 0, 255);
-            minShade = min(minShade, shade);
+            if (shade > 1)
+                minShade = min(minShade, shade);
             maxShade = max(maxShade, shade);
             depthPixels.setColor(x,y, shade);
         }
     }
+    if (minShade > maxShade || minShade == 255)
+        minShade = 0;
     
     int numActivePixels = 0;
-    
+    cout << maxShade << " vs " << minShade << endl;
     if (maxShade - minShade > 1) {
         // rescale between min and max shades
         for (int x = 0; x < depthPixels.getWidth(); x++) {
             for (int y = 0; y < depthPixels.getHeight(); y++) {
-                float shade = LOW_THRESHOLD + (depthPixels.getColor(x,y).getBrightness() - minShade) * (255.f - LOW_THRESHOLD) / (maxShade - minShade);
-                if (shade > LOW_THRESHOLD + 10)
+                if (depthPixels.getColor(x,y).getBrightness() > 0) {
                     numActivePixels++;
-                depthPixels.setColor(x,y, shade);
+                    
+                    float shade = (depthPixels.getColor(x,y).getBrightness() - minShade) * 255.f / (maxShade - minShade);
+                    
+                    depthPixels.setColor(x,y, ofClamp(shade, 0, 255));
+                }
+//                float shade = (depthPixels.getColor(x,y).getBrightness() - minShade) * 255.f / (maxShade - minShade);
+//                if (shade > 30)
+//                    numActivePixels++;
+//                depthPixels.setColor(x,y, shade);
             }
         }
     }

@@ -1146,8 +1146,8 @@
 			children = (
 				8A09A6E419D60FCD00118C9E /* ShapeIOManager.cpp */,
 				8A09A6E519D60FCD00118C9E /* ShapeIOManager.h */,
-				8A09A6E619D60FCD00118C9E /* ShapeSerial.cpp */,
 				8A09A6E719D60FCD00118C9E /* ShapeSerial.h */,
+				8A09A6E619D60FCD00118C9E /* ShapeSerial.cpp */,
 			);
 			name = TableCore;
 			sourceTree = "<group>";

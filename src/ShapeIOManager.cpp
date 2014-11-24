@@ -123,12 +123,14 @@ void ShapeIOManager::resetPinsToValue(int value) {
 void ShapeIOManager::clipAllValuesToBeWithinRange() {
     for (int i = 0; i < RELIEF_SIZE_X; i ++) {
 		for (int j = 0; j < RELIEF_SIZE_Y; j ++) {
-			if (pinHeightToRelief[i][j] <= LOW_THRESHOLD) {
-				pinHeightToRelief[i][j] = (unsigned char) LOW_THRESHOLD;
-			}
-			else if (pinHeightToRelief[i][j] >= HIGH_THRESHOLD) {
-				pinHeightToRelief[i][j] = (unsigned char) HIGH_THRESHOLD;
-			}
+            // rescale the values rather than clip them
+            pinHeightToRelief[i][j] = (255 * (pinHeightToRelief[i][j] - LOW_THRESHOLD)) / (HIGH_THRESHOLD - LOW_THRESHOLD);
+//			if (pinHeightToRelief[i][j] <= LOW_THRESHOLD) {
+//				pinHeightToRelief[i][j] = (unsigned char) LOW_THRESHOLD;
+//			}
+//			else if (pinHeightToRelief[i][j] >= HIGH_THRESHOLD) {
+//				pinHeightToRelief[i][j] = (unsigned char) HIGH_THRESHOLD;
+//			}
 		}
     }
     

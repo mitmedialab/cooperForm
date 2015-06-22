@@ -17,6 +17,8 @@
 
 class TouchShapeObject : public ShapeObject {
     
+#define NUM_FILTER_FRAME 6
+    
 public:
     TouchShapeObject();
     void setup();
@@ -33,6 +35,10 @@ public:
     //void setTableValuesForShape(ShapeIOManager *pIOManager);
     unsigned char* getPixels();
     
+    int xCoordinateShift(int num);
+    
+    
+    
     string get_shape_name() {return shape_name; };
     string shape_name = "Touch";
     
@@ -45,6 +51,12 @@ private:
     ofImage pinHeightMapImage;
     
     unsigned char* allPixels;
+    int differenceHeight[RELIEF_SIZE_X][RELIEF_SIZE_Y];
+    int filterFrame = NUM_FILTER_FRAME;
+    
+    unsigned char allPixels_store[RELIEF_SIZE][NUM_FILTER_FRAME];
+    
+    Boolean isTouched[RELIEF_SIZE_X][RELIEF_SIZE_Y];
 };
 
 

@@ -5,6 +5,7 @@
 #include "ShapeIOManager.h"
 #include "ShapeObject.h"
 #include "CameraTracker.h"
+#include "TouchShapeObject.h"
 #include "KinectShapeObject.h"
 #include "WavyShapeObject.h"
 #include "MoveBallShapeObject.h"
@@ -52,8 +53,15 @@ public:
     long             transitionLengthMS;
     long             transitionStart = 0;
     
+
+    // 2d array that holds the pins' actual heights in the display
+    unsigned char pinHeightsFromDisplay[RELIEF_SIZE_X][RELIEF_SIZE_Y];
+
     // our interface for the cameras
     CameraTracker    cameraTracker;
+ 
+    // Shape objects
+    TouchShapeObject    * touchShapeObject;
 
     // Shape objects
     KinectShapeObject   * kinectShapeObject;

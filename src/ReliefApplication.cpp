@@ -64,6 +64,8 @@ void ReliefApplication::setup(){
     
     
     // initialize our shape objects
+    touchShapeObject = new TouchShapeObject();
+    touchShapeObject->setPinHeightsFromDisplayContainer(pinHeightsFromDisplay);
     kinectShapeObject = new KinectShapeObject();
     kinectShapeObject->setKinectTracker(&kinectTracker);
     kinectShapeObject->setCameraTracker(&cameraTracker);
@@ -96,6 +98,12 @@ void ReliefApplication::setup(){
 
 //--------------------------------------------------------------
 void ReliefApplication::update(){
+    // get the current pin heights in the display
+    for (int x = 0; x < RELIEF_SIZE_X; x++) {
+        for (int y = 0; y < RELIEF_SIZE_Y; y++) {
+            pinHeightsFromDisplay[x][y] = mIOManager->pinHeightFromRelief[x][y];
+        }
+    }
     
     // update the Kinect
     kinectTracker.update();
@@ -425,7 +433,7 @@ void ReliefApplication::setMode(string newMode) {
     
     mIOManager->set_max_speed(maxSpeed);
     
-    if (newMode == "telepresence" || newMode == "wavy" || newMode == "city" || newMode == "3D" || newMode == "math" || newMode == "idle") {
+    if (newMode == "telepresence" || newMode == "wavy" || newMode == "city" || newMode == "3D" || newMode == "math" || newMode == "replicator" || newMode == "idle") {
         currentMode = newMode;
         backDisplayComputer->sendModeChange(newMode);
     }
@@ -485,6 +493,15 @@ void ReliefApplication::setMode(string newMode) {
             ballMoverShapeObject->moveBallToCorner();
     }
 
+    else if (currentMode == "replicator") {
+        currentTransitionFromShape = currentShape;
+        currentShape = touchShapeObject;
+        currentTransitionToShape = currentShape;
+        transitionStart = ofGetElapsedTimeMillis();
+
+        if (!ballMoverShapeObject->isBallInCorner())
+            ballMoverShapeObject->moveBallToCorner();
+    }
 }
 
 //--------------------------------------------------------------
@@ -508,6 +525,9 @@ void ReliefApplication::keyPressed(int key){
             UITriggers::buttonTrigger(uiHandler->getButton("math"));
             break;
         case '5':
+            setMode("replicator");
+            break;
+        case '6':
             setMode("idle");
             break;
         case '0':

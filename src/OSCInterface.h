@@ -26,6 +26,7 @@ private:
     string host;
     int port;
     ofxOscSender sender;
+    bool connected;
 };
 
 #endif /* defined(__cooperFORM__OSCInterface__) */

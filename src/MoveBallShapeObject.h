@@ -42,11 +42,11 @@ private:
     bool toCenter = true;
     ofFbo depthBuffer;
     long startAnimationTime;
-    long toCornerAnimationTime = 3000;
-    long toCenterAnimationTime = 1000;
+    long toCornerAnimationTime = MOVE_BALL_TO_CORNER_SPEED;
+    long toCenterAnimationTime = MOVE_BALL_TO_CENTER_SPEED;
     
-    int cornerX = 15;
-    int cornerY = 100-15;
+    int cornerX = 10;
+    int cornerY = 100 - 10;
     
     bool ballInCorner = false;
 };

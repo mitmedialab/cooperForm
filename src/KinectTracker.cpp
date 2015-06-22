@@ -14,7 +14,7 @@ void KinectTracker::setup(int pNearThreshold, int pFarThreshold, int pContourMin
 	
     if(kinect.numAvailableDevices() > 0) {
         kinect.setRegistration(true); // enable depth->video image calibration
-        kinect.init();
+        kinect.init(false, true, true);
         kinect.open();
     }
     
@@ -28,6 +28,7 @@ void KinectTracker::setup(int pNearThreshold, int pFarThreshold, int pContourMin
 	
 	colorImg.allocate(kinect.width, kinect.height);
     depthImg.allocate(kinect.width, kinect.height);
+    activityDepthImg.allocate(kinect.width, kinect.height);
     
     colorImgCropped.allocate(kinect.width, kinect.height);
     depthImgCropped.allocate(kinect.width, kinect.height);
@@ -44,9 +45,8 @@ void KinectTracker::setup(int pNearThreshold, int pFarThreshold, int pContourMin
 	mNearThreshold = pNearThreshold;
 	mFarThreshold = pFarThreshold;
     mContourMinimumSize = pContourMinimumSize;
-
     
-    loadAlphaMaskAndPrepForCvProcessing();
+    //loadAlphaMaskAndPrepForCvProcessing();
     
     cropX = 0;
     cropY = 0;
@@ -68,6 +68,9 @@ void KinectTracker::setup(int pNearThreshold, int pFarThreshold, int pContourMin
 
 void KinectTracker::update() {
     
+    //if(kinect.numAvailableDevices() == 0)
+    //    return;
+    
     kinect.update();
 	
 	// there is a new frame and we are connected
@@ -75,6 +78,12 @@ void KinectTracker::update() {
 		
         // update from kinect
         updateImagesFromKinect();
+        
+        // activity tracking around the installation
+        // subtract mask which is png alpha image called "mask.png"
+        //if(useMask) subtractMask();\
+
+        trackActivityAroundTable();
         
         depthImg.dilate_3x3();
         depthImg.erode_3x3();
@@ -85,10 +94,6 @@ void KinectTracker::update() {
         // always update the depth image
         depthThreshed.setFromPixels(depthImgCropped.getPixels(), depthImgCropped.getWidth(), depthImgCropped.getHeight());
         colorImgThreshed.setFromPixels(colorImgCropped.getPixels(), colorImgCropped.getWidth(), colorImgCropped.getHeight());
-        
-        
-        // subtract mask which is png alpha image called "mask.png"
-        if(useMask) subtractMask();
                 
         // threshold calcutations convery depth map into black and white images
 		calculateThresholdsAndModifyImages();
@@ -104,10 +109,16 @@ void KinectTracker::update() {
 // we are using kinect
 void KinectTracker::updateImagesFromKinect() {
     colorImg.setFromPixels(kinect.getPixels(), kinect.width, kinect.height);
-    depthImg.setFromPixels(kinect.getDepthPixels(), kinect.width, kinect.height);
-    
     colorImg.mirror(true,true);
+    colorImg.flagImageChanged();
+    
+    depthImg.setFromPixels(kinect.getDepthPixels(), kinect.width, kinect.height);
     depthImg.mirror(true,true);
+    depthImg.flagImageChanged();
+    
+    activityDepthImg.setFromPixels(kinect.getDepthPixels(), kinect.width, kinect.height);
+    activityDepthImg.flagImageChanged();
+    
 }
 
 // used by the player class to set the current frame from now playing movie
@@ -138,11 +149,6 @@ void KinectTracker::cropImages() {
     depthImgCropped.setFromPixels(fullDepth.getPixels(), fullDepth.getWidth(), fullDepth.getHeight());
 }
 
-void KinectTracker::subtractMask() {
-    cvAnd(depthImg.getCvImage(), maskCv.getCvImage(), depthImg.getCvImage(), NULL);
-    //cvAnd(grayThreshNear.getCvImage(), grayThreshFar.getCvImage(), depthImg.getCvImage(), NULL);
-}
-
 // loads png mask and converts to cv grayscale which we need to cvAnd method
 void KinectTracker::loadAlphaMaskAndPrepForCvProcessing() {
     
@@ -159,83 +165,54 @@ void KinectTracker::loadAlphaMaskAndPrepForCvProcessing() {
     
 }
 
-void KinectTracker::calculateThresholdsAndModifyImages() {
-//    depthImg.erode_3x3();
-//    depthImg.dilate_3x3();
-    
-    // we do two thresholds - one for the far plane and one for the near plane
-    // we then do a cvAnd to get the pixels which are a union of the two thresholds
-//    grayThreshNear = depthImg;
-//    grayThreshFar = depthImg;
-//    grayThreshNear.threshold(mNearThreshold, true);
-//    grayThreshFar.threshold(mFarThreshold);
-//    cvAnd(grayThreshNear.getCvImage(), grayThreshFar.getCvImage(), depthImg.getCvImage(), NULL);
-    
-    // find depth map excluding thresholded data
-    // this causes the 10 finger effect and could be related to our discussion
-    // today about dynamic thresholding
-    //
-    // if we threshold with the near value, and the user moves the hand just past the near point
-    // and thus out of range
-    // their hand will be black (since black is used for out of range areas)
-    // however since their hands shadow is also black this will cause the 10 finger effect.
-    //
-    //cvAnd(grayThreshNear.getCvImage(), depthThreshed.getCvImage(), depthThreshed.getCvImage(), NULL);
-//    cvAnd(grayThreshFar.getCvImage(), depthThreshed.getCvImage(), depthThreshed.getCvImage(), NULL);
-    
-//    depthThreshed = depthImgCropped;
-    // remap pixels so they range from 0-255 after thresholding
-    ofPixelsRef depthPixels = depthThreshed.getPixelsRef();
-    
-    ofPixelsRef colorPixels = colorImgThreshed.getPixelsRef();
-    float minShade = 255;
-    float maxShade = 0;
-    for (int x = 0; x < depthPixels.getWidth(); x++) {
-        for (int y = 0; y < depthPixels.getHeight(); y++) {
-            float shade = ofClamp((depthPixels.getColor(x,y).getBrightness() - mFarThreshold) * 255.f / (mNearThreshold - mFarThreshold), 0, 255);
-            if (shade > 1)
-                minShade = min(minShade, shade);
-            maxShade = max(maxShade, shade);
-            depthPixels.setColor(x,y, shade);
-        }
-    }
-    if (minShade > maxShade || minShade == 255)
-        minShade = 0;
+void KinectTracker::trackActivityAroundTable() {
+    activityDepthImg.threshold(KINECT_FAR_CUTOFF_PLANE + KINECT_ACTIVITY_PLANE_DISTANCE);
+    //cvAnd(activityDepthImg.getCvImage(), maskCv.getCvImage(), activityDepthImg.getCvImage(), NULL);
+    activityDepthImg.flagImageChanged();
     
     int numActivePixels = 0;
-    cout << maxShade << " vs " << minShade << endl;
-    if (maxShade - minShade > 1) {
-        // rescale between min and max shades
-        for (int x = 0; x < depthPixels.getWidth(); x++) {
-            for (int y = 0; y < depthPixels.getHeight(); y++) {
-                if (depthPixels.getColor(x,y).getBrightness() > 0) {
-                    numActivePixels++;
-                    
-                    float shade = (depthPixels.getColor(x,y).getBrightness() - minShade) * 255.f / (maxShade - minShade);
-                    
-                    depthPixels.setColor(x,y, ofClamp(shade, 0, 255));
-                }
-//                float shade = (depthPixels.getColor(x,y).getBrightness() - minShade) * 255.f / (maxShade - minShade);
-//                if (shade > 30)
-//                    numActivePixels++;
-//                depthPixels.setColor(x,y, shade);
+    for (int x = KINECT_ACTIVITY_CROP_X; x < KINECT_ACTIVITY_CROP_X + KINECT_ACTIVITY_CROP_WIDTH; x++) {
+        for (int y = KINECT_ACTIVITY_CROP_Y; y < KINECT_ACTIVITY_CROP_Y + KINECT_ACTIVITY_CROP_HEIGHT; y++) {
+            if (activityDepthImg.getPixelsRef().getColor(x,y).getBrightness() > 0) {
+                numActivePixels++;
             }
         }
     }
     
-    if (numActivePixels > 5)
+    if (numActivePixels > KINECT_ACTIVITY_CROP_NUM_PIXELS || !enableTimeOut)
         lastActiveTime = ofGetElapsedTimeMillis();
+}
+
+void KinectTracker::calculateThresholdsAndModifyImages() {
+
+    ofPixelsRef depthPixels = depthThreshed.getPixelsRef();
+
+    for (int x = 0; x < depthPixels.getWidth(); x++) {
+        for (int y = 0; y < depthPixels.getHeight(); y++) {
+            float shade = ofClamp((depthPixels.getColor(x,y).getBrightness() - mFarThreshold) * 144.f / (mNearThreshold - mFarThreshold), 0, 144);
+
+            if (shade > 0) {
+                depthPixels.setColor(x,y, shade + DEPTH_HANDS_MINIMUM_HEIGHT);
+            }
+            else {
+                depthPixels.setColor(x,y, 0);
+            }
+        }
+    }
     
     depthThreshed.flagImageChanged();
     
     erodedDepthThreshed.setFromPixels(depthThreshed.getPixels(), depthThreshed.getWidth(), depthThreshed.getHeight());
-    erodedDepthThreshed.erode_3x3();
+    //erodedDepthThreshed.erode_3x3();
     erodedDepthThreshed.erode_3x3();
     
+    
+    // calculate the color image
+    ofPixelsRef colorPixels = colorImgThreshed.getPixelsRef();
     ofPixelsRef erodedDepthPixels = erodedDepthThreshed.getPixelsRef();
     for (int x = 1; x < erodedDepthPixels.getWidth()-1; x++) {
         for (int y = 1; y < erodedDepthPixels.getHeight()-1; y++) {
-            if (erodedDepthPixels.getColor(x, y).getBrightness() < 90)
+            if (erodedDepthPixels.getColor(x, y).getBrightness() <=0)
                 colorPixels.setColor(x,y, 0);
         }
     }
@@ -273,6 +250,16 @@ void KinectTracker::drawThresholdImage(int x, int y, int width, int height){
 void KinectTracker::drawDepthImage(int x, int y, int width, int height){
     ofSetColor(255);
     depthImg.draw(x, y, width, height);
+}
+
+void KinectTracker::drawActivityDepthImage(int x, int y, int width, int height) {
+    ofSetColor(255);
+    activityDepthImg.draw(x, y, width, height);
+    ofNoFill();
+    ofSetColor(255);
+    ofRect(KINECT_ACTIVITY_CROP_X, KINECT_ACTIVITY_CROP_Y,
+           KINECT_ACTIVITY_CROP_WIDTH, KINECT_ACTIVITY_CROP_HEIGHT);
+    ofFill();
 }
 
 // black and white image from within threshold range

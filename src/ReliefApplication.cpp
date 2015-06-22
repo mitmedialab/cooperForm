@@ -6,13 +6,15 @@
 void ReliefApplication::setup(){
     ofSetFrameRate(30);
     ofSetVerticalSync(true);
+    
+    CGDisplayHideCursor(NULL);
   
     // initialize the UI
     setupUI();
     
     // set up OSCInterface
     // needs to be setup before UI
-    backDisplayComputer = new OSCInterface("168.176.175.2", 4444);
+    backDisplayComputer = new OSCInterface(BACK_COMPUTER_IP, BACK_COMPUTER_PORT);
     
     // initialize communication with the pin display
 	mIOManager = new ShapeIOManager();
@@ -47,18 +49,17 @@ void ReliefApplication::setup(){
     // setup camera interface
     cameraTracker.setup();
     
-    
     // setup kinect if using
     // @todo we only want to setup if connected
     // @note currently if you change the kinect setting you must restart
-    const int kinectFarCutOffPlane = 218; // 225 // 0 = far, 255 = near
-    const int kinectNearCutOffPlane = 255; // 235
-    const int minContourSize = 10;
+    const int kinectFarCutOffPlane = KINECT_FAR_CUTOFF_PLANE; // 0 = far, 255 = near
+    const int kinectNearCutOffPlane = KINECT_NEAR_CUTOFF_PLANE; // 0 = far, 255 = near
+    const int minContourSize = KINECT_CONTOUR_SIZE;
     kinectTracker.setup(kinectNearCutOffPlane, kinectFarCutOffPlane, minContourSize);
-    const int kinectCropWidth  = 240;
-    const int kinectCropHeight = 240;
-    const int kinectCropX = 640 / 2 - kinectCropWidth/2; // centered crop x
-    const int kinectCropY = 480 / 2 - kinectCropHeight/2 - 40; // centered crop y offset
+    const int kinectCropWidth  = KINECT_CROP_WIDTH;
+    const int kinectCropHeight = KINECT_CROP_HEIGHT;
+    const int kinectCropX = KINECT_CROP_X;
+    const int kinectCropY = KINECT_CROP_Y;
     kinectTracker.setCrop(kinectCropX, kinectCropY, kinectCropWidth, kinectCropHeight);
     
     
@@ -99,10 +100,14 @@ void ReliefApplication::update(){
     // update the Kinect
     kinectTracker.update();
     
-    // switch to idle if no activity after 120 seconds on the depth camera
-    if (kinectTracker.timeSinceLastActive() > 120 && currentMode != "idle") {
-        // (should also check if we haven't already switched to an idle mode!)
+    // switch to idle if no activity after x seconds on the depth camera
+    if (kinectTracker.timeSinceLastActive() > KINECT_ACTIVITY_TIMEOUT_SEC && currentMode != "idle") {
         setMode("idle");
+        
+    }
+    else if (kinectTracker.timeSinceLastActive() <= KINECT_ACTIVITY_TIMEOUT_SEC && currentMode == "idle") {
+        setMode("telepresence");
+        UITriggers::buttonTrigger(uiHandler->getButton("telepresence"));
     }
     
     // update the necessary shape objects
@@ -130,7 +135,7 @@ void ReliefApplication::update(){
     mIOManager->update(pinHeightMapImageSmall);
     
     // trigger slider to init value
-    UITriggers::sliderTrigger(uiHandler->getSlider("sliderPosition"));
+    //UITriggers::sliderTrigger(uiHandler->getSlider("sliderPosition"));
 }
 
 //--------------------------------------------------------------
@@ -182,13 +187,13 @@ void ReliefApplication::draw(){
         ofDisableAlphaBlending();
         ofPopStyle();
     }
-    else if (currentMode == "city") {
-        overlayShape->renderTangibleShape(w, h);
-        currentShape->renderTangibleShape(w, h);
-    } else {
+    //else if (currentMode == "city") {
+    //    overlayShape->renderTangibleShape(w, h);
+    //    currentShape->renderTangibleShape(w, h);
+    //} else {
         overlayShape->renderTangibleShape(-w, h);
         currentShape->renderTangibleShape(-w, h);
-    }
+    //}
     
     overlayShape->renderTangibleShape(-w, h);
     
@@ -286,7 +291,10 @@ void ReliefApplication::draw(){
     if (currentMode == "city") {
         //cout<<mathShapeObject->getEqVal1()<<endl;
         //cout<<uiHandler->getNum("eqVal1")->getName() <<endl;
-        float timeFloat = cityShapeObject->getMovPosition(); //0.0to1.0
+        
+        
+        // uncomment the code below for the UI slider.
+        /*float timeFloat = cityShapeObject->getMovPosition(); //0.0to1.0
         int hour = floor(timeFloat*12);
         int minute = int(ofMap(timeFloat*12 - hour,0,1.0,0,60));
         string ampm;
@@ -318,10 +326,10 @@ void ReliefApplication::draw(){
         
         cityShapeObject->sliderGrabbed = uiHandler->getSlider("sliderPosition")->isGrabbed();
         if(cityShapeObject->sliderGrabbed == false){
-            int val = (int)(uiHandler->getSlider("sliderPosition")->getVal());//*1000);
+            int val = (int)(uiHandler->getSlider("sliderPosition")->getVal());
             uiHandler->getSlider("sliderPosition")->setHandlePos(cityShapeObject->getMovPosition());//((val + 1) % 1000)/1000.0);//
             
-        }
+        }*/
         // cout <<uiHandler->getSlider("sliderPosition")->getVal() << endl;
     }
 
@@ -340,6 +348,9 @@ void ReliefApplication::draw(){
     ofPopStyle();
     //cameraTracker.drawCameraFeed(0, w, 0, w, h);
     projectorOverlayImage.draw(1920, 0, w, h);
+    
+    //kinectTracker.drawActivityDepthImage(0, 0, 640, 480);
+    //drawDebugScreen();
 }
 
 //--------------------------------------------------------------
@@ -363,6 +374,32 @@ void ReliefApplication::setupUI() {
 
 //--------------------------------------------------------------
 
+void ReliefApplication::drawDebugScreen() {
+    
+    ofFill();
+    // draw the table depth map:
+    for (int x = 0; x < 24; x++){
+        for (int y = 0; y < 24; y++) {
+            int toHeight = mIOManager->pinHeightToRelief[x][y];
+            int fromHeight = mIOManager->pinHeightFromRelief[x][y];
+            int difference = mIOManager->pinDiscrepancy[x][y];
+            int enabledColor = (mIOManager->pinEnabled[x][y])? 0 : 255;
+            
+            ofSetColor(toHeight);
+            ofRect(x*5,y*5,5,5);
+            
+            ofSetColor(fromHeight);
+            ofRect(x*5+125,y*5,5,5);
+            
+            ofSetColor(difference);
+            ofRect(x*5+250,y*5,5,5);
+            
+            ofSetColor(enabledColor, 0, 0);
+            ofRect(x*5+375,y*5,5,5);
+        }
+    }
+}
+
 // change the relief application mode
 
 void ReliefApplication::setMode(string newMode) {
@@ -380,10 +417,14 @@ void ReliefApplication::setMode(string newMode) {
         currentTransitionToShape = currentShape;
         transitionStart = ofGetElapsedTimeMillis();
         
-        if (ballMoverShapeObject->isBallInCorner())
-            ballMoverShapeObject->moveBallToCenter();
+        //if (ballMoverShapeObject->isBallInCorner())
+        //    ballMoverShapeObject->moveBallToCenter();
+        
+        mIOManager->set_max_speed(0);
         return;
     }
+    
+    mIOManager->set_max_speed(maxSpeed);
     
     if (newMode == "telepresence" || newMode == "wavy" || newMode == "city" || newMode == "3D" || newMode == "math" || newMode == "idle") {
         currentMode = newMode;
@@ -409,8 +450,8 @@ void ReliefApplication::setMode(string newMode) {
         transitionStart = ofGetElapsedTimeMillis();
         
         
-        if (!ballMoverShapeObject->isBallInCorner())
-            ballMoverShapeObject->moveBallToCorner();
+        if (ballMoverShapeObject->isBallInCorner())
+            ballMoverShapeObject->moveBallToCenter();
     }
     else if (currentMode == "3D") {
         threeDShapeObject->reset();
@@ -469,6 +510,9 @@ void ReliefApplication::keyPressed(int key){
             break;
         case '5':
             setMode("idle");
+            break;
+        case '0':
+            mIOManager->set_max_speed(0);
             break;
     }
 }

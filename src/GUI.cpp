@@ -528,12 +528,12 @@ void GUI::setupCityBar(UIHandler* uiHandler, const int leftSidebarWidth)
     const int sliderY = 985;
     // name, bool horizontal, int trackX, int trackY, int trackLength, int handleWidth, int handleHeight
     //3D SLIDER
-    UISlider *sliderScale = new UISlider("sliderPosition", true, sliderX, sliderY, sliderWidth, 46, 50);
+    /*UISlider *sliderScale = new UISlider("sliderPosition", true, sliderX, sliderY, sliderWidth, 46, 50);
     sliderScale->setImageHandleActive("City/assets/cityknob.png");
     sliderScale->setImageHandleIdle("City/assets/cityknob.png");
     sliderScale->setImageTrack("City/assets/timeline.png");
     sliderScale->setImageTrackOffset(-3);
-    sliderScale->setHandlePos(0.5);
+    sliderScale->setHandlePos(0.5);*/
     
     
     
@@ -542,7 +542,7 @@ void GUI::setupCityBar(UIHandler* uiHandler, const int leftSidebarWidth)
     uiHandler->addButton(citySelectButton2);
     uiHandler->addButton(citySelectButton3);
     uiHandler->addButton(citySelectButton4);
-    uiHandler->addSlider(sliderScale);
+    //uiHandler->addSlider(sliderScale);
     uiHandler->addImage(divider1);
     uiHandler->addImage(divider2);
     uiHandler->addImage(DragImg);
@@ -558,7 +558,7 @@ void GUI::setupCityBar(UIHandler* uiHandler, const int leftSidebarWidth)
     cityGroup.push_back(citySelectButton2);
     cityGroup.push_back(citySelectButton3);
     cityGroup.push_back(citySelectButton4);
-    cityGroup.push_back(sliderScale);
+    //cityGroup.push_back(sliderScale);
     cityGroup.push_back(divider1);
     cityGroup.push_back(divider2);
     cityGroup.push_back(DragImg);
@@ -701,7 +701,7 @@ void GUI::setupThreeDBar(UIHandler* uiHandler, const int leftSidebarWidth)
     //SETUP
     uiHandler->addButton(modelSelectButtonLeft);
     uiHandler->addButton(modelSelectButtonRight);
-    uiHandler->addSlider(sliderScale);
+    //uiHandler->addSlider(sliderScale);
     uiHandler->addImage(divider1);
     uiHandler->addImage(divider2);
     uiHandler->addImage(divider3);
@@ -715,7 +715,7 @@ void GUI::setupThreeDBar(UIHandler* uiHandler, const int leftSidebarWidth)
     vector<UIElement*> threeDGroup = vector<UIElement*>();
     threeDGroup.push_back(modelSelectButtonLeft);
     threeDGroup.push_back(modelSelectButtonRight);
-    threeDGroup.push_back(sliderScale);
+    //threeDGroup.push_back(sliderScale);
     threeDGroup.push_back(divider1);
     threeDGroup.push_back(divider2);
     threeDGroup.push_back(divider3);

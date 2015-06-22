@@ -53,12 +53,18 @@ private:
     void clipAllValuesToBeWithinRange();
     void readPinHeightsFromBoards();
     void prepDepthDataForArduino();
+    void computePinDiscrepancy();
+    
+    // these arrays are utilized to store if pins are stuck, and if should be turned off or on
+    const int discrepancyThreshold = 100;
+    const int millisUntilPinOff = 1000;
+    const int millisUntilPinOn = 3000;
     
     void sendAllValuesToTable(); // called evey x seconds in update fn to fix "broken" pins
-    long resetInterval = PID_RESET_INTERVALL; // milliseconds to reset table
-    unsigned long long startTime = ofGetElapsedTimeMillis();
+    long resetInterval; // milliseconds to reset table
+    unsigned long long startTime;
 	
-    bool tableValuesHaveChanged = false;
+    bool tableValuesHaveChanged;
     
 public:
 
@@ -74,6 +80,10 @@ public:
     // the array that stores the pin display height values
     unsigned char pinHeightToRelief [RELIEF_SIZE_X][RELIEF_SIZE_Y];
     unsigned char pinHeightFromRelief [RELIEF_SIZE_X][RELIEF_SIZE_Y];
+    
+    int pinDiscrepancy[RELIEF_SIZE_X][RELIEF_SIZE_Y];
+    unsigned long long pinStuckSinceTime[RELIEF_SIZE_X][RELIEF_SIZE_Y];
+    bool pinEnabled[RELIEF_SIZE_X][RELIEF_SIZE_Y];
     
     ShapeIOManager();
     ~ShapeIOManager();

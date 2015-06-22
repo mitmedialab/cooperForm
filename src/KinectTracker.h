@@ -22,8 +22,9 @@ private:
 	
 	
 	ofxCvGrayscaleImage     depthImg; // grayscale depth image
-//    ofxCvGrayscaleImage     grayThreshNear; // the near thresholded image
-//	ofxCvGrayscaleImage     grayThreshFar; // the far thresholded image
+	ofxCvGrayscaleImage     activityDepthImg; // grayscale depth image to track activity level around the kiosk
+    ofxCvGrayscaleImage     grayThreshNear; // the near thresholded image
+	ofxCvGrayscaleImage     grayThreshFar; // the far thresholded image
     
     ofxCvGrayscaleImage     depthThreshed; // grayscale depth image
     ofxCvGrayscaleImage     erodedDepthThreshed;
@@ -35,7 +36,6 @@ private:
     
     ofxCvColorImage         colorImgCropped;
     ofxCvGrayscaleImage     depthImgCropped;
-    
 	
 	ofxCvContourFinder      contourFinder;
     
@@ -43,21 +43,24 @@ private:
     void flagImagesAsChanged();
     void cropImages();
     void calculateThresholdsAndModifyImages();
-    void subtractMask();
     void loadAlphaMaskAndPrepForCvProcessing();
     
+    void trackActivityAroundTable();
+    bool enableTimeOut = true;
+    
 public:
+    
     
     int mNearThreshold; // the far threshold, closest possible value is 255, farthest possible value 0
 	int mFarThreshold; // the far threshold, closest possible value is 255, farthest possible value 0
     int mContourMinimumSize; // the minimum size of a contour in pixels
-    bool useMask = false;
+    bool useMask = true;
     
     ofImage mask, colorMask;
     ofxCvColorImage maskColorCv;
     ofxCvGrayscaleImage maskCv;
     
-    void setup(int pNearThreshold = 230, int pFarThreshold = 70, int pContourMinimumSize = 20);
+    void setup(int pNearThreshold = 80, int pFarThreshold = 70, int pContourMinimumSize = 20);
     void update();
     void updateCurrentFrame(unsigned char * pixels, int w, int h);
     
@@ -65,6 +68,7 @@ public:
     void drawColorImage(int x, int y, int width, int height);
     void drawColorThresholdImage(int x, int y, int width, int height);
     void drawDepthImage(int x, int y, int width, int height);
+    void drawActivityDepthImage(int x, int y, int width, int height);
     
     void drawThresholdImage(int x, int y, int width, int height);
     

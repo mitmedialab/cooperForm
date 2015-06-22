@@ -251,7 +251,7 @@ void WavyShapeObject::renderProjectorOverlay(int w, int h) {
 
 void WavyShapeObject::renderTouchscreenGraphics(int w, int h) {
     interpolateSurface();
-    surface.draw(0,0, w,h);
+    surface.draw(w,0, -w,h);
 }
 
 //--------------------------------------------------------------

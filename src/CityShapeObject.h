@@ -13,6 +13,7 @@
 
 
 #include "ShapeObject.h"
+#include "ofxAnimatableOfPoint.h"
 
 class CityShapeObject : public ShapeObject {
     
@@ -37,7 +38,7 @@ public:
     int previousCity;
     
     
-    int posX, posY;
+    //int posX, posY;
     
     int rectLength;
     int length;
@@ -55,6 +56,7 @@ public:
     bool loupeDragged;
     bool sliderGrabbed;
     
+    ofxAnimatableOfPoint loupeTargetPostion;
     
     float time;
     
@@ -70,9 +72,14 @@ private:
     ofVideoPlayer cityMov[4][2];
     
     ofTexture trimmedMov[2];
+    
     ofImage realMap;
+    ofImage cityImages[4][2];
     
     unsigned char * trimMov;
+    
+    const int heightMapMovieSize = 300;
+    //const int imageSize = 2894;
     
 };
 

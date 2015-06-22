@@ -79,6 +79,7 @@ public:
     
     // initialize all the UI elements
     void setupUI();
+    void drawDebugScreen();
     
     void setMode(string newMode);
     

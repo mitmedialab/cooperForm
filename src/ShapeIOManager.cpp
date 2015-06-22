@@ -20,6 +20,22 @@
 ShapeIOManager::ShapeIOManager() {
     setBoardConfiguration();
     mUseSerial = false;
+    
+    resetInterval = PID_RESET_INTERVALL; // milliseconds to reset table
+    startTime = ofGetElapsedTimeMillis();
+	
+    tableValuesHaveChanged = false;
+    
+    // initialize table chart values
+    for (int x = 0; x < RELIEF_SIZE_X; x++) {
+        for (int y = 0; y < RELIEF_SIZE_Y; y++) {
+            pinHeightToRelief[x][y] = 0;
+            pinHeightFromRelief[x][y] = 0;
+            pinDiscrepancy[x][y] = 0;
+            pinStuckSinceTime[x][y] = startTime;
+            pinEnabled[x][y] = true;
+        }
+    }
 }
 
 //--------------------------------------------------------------
@@ -123,14 +139,15 @@ void ShapeIOManager::resetPinsToValue(int value) {
 void ShapeIOManager::clipAllValuesToBeWithinRange() {
     for (int i = 0; i < RELIEF_SIZE_X; i ++) {
 		for (int j = 0; j < RELIEF_SIZE_Y; j ++) {
-            // rescale the values rather than clip them
-            pinHeightToRelief[i][j] = (255 * (pinHeightToRelief[i][j] - LOW_THRESHOLD)) / (HIGH_THRESHOLD - LOW_THRESHOLD);
-//			if (pinHeightToRelief[i][j] <= LOW_THRESHOLD) {
-//				pinHeightToRelief[i][j] = (unsigned char) LOW_THRESHOLD;
-//			}
-//			else if (pinHeightToRelief[i][j] >= HIGH_THRESHOLD) {
-//				pinHeightToRelief[i][j] = (unsigned char) HIGH_THRESHOLD;
-//			}
+            // rescale the values rather than clip them > this is broken right now!
+            //pinHeightToRelief[i][j] = (255 * (pinHeightToRelief[i][j] - LOW_THRESHOLD)) / (HIGH_THRESHOLD - LOW_THRESHOLD);
+			
+            if (pinHeightToRelief[i][j] <= LOW_THRESHOLD) {
+				pinHeightToRelief[i][j] = (unsigned char) LOW_THRESHOLD;
+			}
+			else if (pinHeightToRelief[i][j] >= HIGH_THRESHOLD) {
+				pinHeightToRelief[i][j] = (unsigned char) HIGH_THRESHOLD;
+			}
 		}
     }
     
@@ -209,6 +226,8 @@ void ShapeIOManager::update(ofFbo buffer){
         }
     }
     
+    computePinDiscrepancy();
+    
     // send the height map to the hardware interface
     sendAndReceivePinHeight();
     
@@ -220,7 +239,7 @@ void ShapeIOManager::update(ofFbo buffer){
         if(tableValuesHaveChanged) {
             sendAllValuesToTable();
             tableValuesHaveChanged = false;
-            cout << "VALUES HAVE CHANGED, updating table" << endl;
+            //cout << "VALUES HAVE CHANGED, updating table" << endl;
         }
     }
 }
@@ -275,6 +294,49 @@ void ShapeIOManager::readPinHeightsFromBoards() {
             }
         }
     }
+}
+
+//
+void ShapeIOManager::computePinDiscrepancy(){
+    //int pinStuckSinceTime[RELIEF_SIZE_X][RELIEF_SIZE_Y];
+    //bool pinEnabled[RELIEF_SIZE_X][RELIEF_SIZE_Y];
+    //const int discrepancyThreshold = 20;
+    //const int millisUntilPinOff = 1000;
+    //const int millisUntilPinOn = 2000;
+    
+    unsigned long long timeStamp = ofGetElapsedTimeMillis();
+    
+    // draw the table depth map:
+    for (int x = 0; x < RELIEF_SIZE_X; x++){
+        for (int y = 0; y < RELIEF_SIZE_Y; y++) {
+            int toHeight = pinHeightToRelief[x][y];
+            int fromHeight = pinHeightFromRelief[x][y];
+            pinDiscrepancy[x][y] = abs(toHeight - fromHeight);
+            
+            if (pinEnabled[x][y]) { // check if the pin is enabled.
+                if(pinDiscrepancy[x][y] < discrepancyThreshold) { // if it is, check if it is reaching the target position
+                    pinStuckSinceTime[x][y] = timeStamp; // if it has reached within threshold, update the time stamp
+                }
+                else { // if it has not reached, check how long it's been stuck for
+                    if (timeStamp - pinStuckSinceTime[x][y] > millisUntilPinOff) {
+                        // check if it exceeds the threshold for how long a pin can be stuck
+                        pinEnabled[x][y] = false; // if so, disable the pin
+                        pinStuckSinceTime[x][y] = timeStamp; // and store when we disabled it
+                    }
+                }
+            }
+            else { // if the pin is disabled, check if we should enable it again
+                if (timeStamp - pinStuckSinceTime[x][y] > millisUntilPinOn) {
+                    pinEnabled[x][y] = true;
+                    pinStuckSinceTime[x][y] = timeStamp;
+                } else { // if the time limit has not been reached yet, just overwrite the target position
+                    pinHeightToRelief[x][y] = pinHeightFromRelief[x][y];
+                }
+            }
+        }
+    }
+    
+    
 }
 
 

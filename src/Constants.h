@@ -8,17 +8,49 @@
  */
 
 #ifndef _CONSTANTS
-#define _CONSTANTS	
+#define _CONSTANTS
+
+#define BACK_COMPUTER_IP "172.18.65.192"
+#define BACK_COMPUTER_PORT 4444
 
 #define	RELIEF_SIZE_X	  24
 #define	RELIEF_SIZE_Y	  24
 
 // clips values
-// we get weird behavior when LOW_THRESHOLD is set to 0...
-#define LOW_THRESHOLD 60
-#define HIGH_THRESHOLD 255
+#define LOW_THRESHOLD 57 // don't set too low, or the pins will bang into the table
+#define HIGH_THRESHOLD 244 // don't set above 245, as that is the address range!
 
-// surface "pixels"
+// KINECT THRESHOLDS
+#define KINECT_FAR_CUTOFF_PLANE 215 // 0 = far, 255 = near
+#define KINECT_NEAR_CUTOFF_PLANE 225 // 0 = far, 255 = near
+
+#define KINECT_ACTIVITY_PLANE_DISTANCE 3
+#define KINECT_ACTIVITY_CROP_X 100
+#define KINECT_ACTIVITY_CROP_WIDTH 400
+#define KINECT_ACTIVITY_CROP_Y 0
+#define KINECT_ACTIVITY_CROP_HEIGHT 480
+#define KINECT_ACTIVITY_CROP_NUM_PIXELS 200
+#define KINECT_ACTIVITY_TIMEOUT_SEC 15
+#define KINECT_CONTOUR_SIZE 50
+#define DEPTH_HANDS_MINIMUM_HEIGHT 80 // The minimum height that recognized hands will be set to. should be higher than. LOW_THRESHOLD
+
+#define KINECT_CROP_X 235
+#define KINECT_CROP_Y 198
+#define KINECT_CROP_WIDTH 200
+#define KINECT_CROP_HEIGHT 200
+
+#define MOVE_BALL_TO_CORNER_SPEED 5000
+#define MOVE_BALL_TO_CENTER_SPEED 1500
+
+
+// width of the left UI pane
+#define UI_LEFTPANE_WIDTH 420
+#define UI_CENTER_WIDTH 1080
+#define UI_CENTER_HEIGHT 1080
+
+#define LOUPE_SPEED_SCALE 0.01f
+
+// number of physical pins on the shape display
 #define	RELIEF_PHYSICAL_SIZE_X	  24
 #define	RELIEF_PHYSICAL_SIZE_Y	  24
 

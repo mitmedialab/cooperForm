@@ -20,15 +20,17 @@ class TouchShapeObject : public ShapeObject {
 public:
     TouchShapeObject();
     void setup();
+    void update();
     void update(float dt);
     void renderShape();
+    void renderTangibleShape(int w, int h);
     void renderGraphics(int x, int y, int w, int h);
     void drawGuiScreen(int x, int y, int w, int h);
     void setPinHeightsFromDisplayContainer(unsigned char pinHeightsContainer [RELIEF_SIZE_X][RELIEF_SIZE_Y]){
         pinHeightsFromDisplay = (unsigned char *) pinHeightsContainer;
     };
     //void setImageWarper(ImageWarper * pImageWarper) {mImageWarper = pImageWarper;};
-    void setTableValuesForShape(ShapeIOManager *pIOManager);
+    //void setTableValuesForShape(ShapeIOManager *pIOManager);
     unsigned char* getPixels();
     
     string get_shape_name() {return shape_name; };
@@ -36,9 +38,11 @@ public:
     
     
 private:
+    unsigned char cpHeight;
     unsigned char *pinHeightsFromDisplay;
    // ImageWarper * mImageWarper;
     ofxCvGrayscaleImage mOutputShapeImage, smallerImage;
+    ofImage pinHeightMapImage;
     
     unsigned char* allPixels;
 };

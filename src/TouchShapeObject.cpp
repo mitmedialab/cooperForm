@@ -36,11 +36,10 @@ void TouchShapeObject::update(float dt)
     int x = RELIEF_SIZE_X / 2;
     int y = RELIEF_SIZE_Y / 2;
     int lineSize = sizeof(char) * RELIEF_SIZE_Y;
-    unsigned char controlPinHeight = pinHeightsFromDisplay[x * lineSize + y];
+    unsigned char controlPinHeight = mPinHeightReceive[x * lineSize + y];
     cpHeight = controlPinHeight;
     cout << "height: "<< (int) controlPinHeight << endl;
 
-    /*
     // depress pin heights depending on their distance from the control pin
     for (int x = 0; x < RELIEF_PHYSICAL_SIZE_X; x++) {
         for(int y = 0; y < RELIEF_PHYSICAL_SIZE_Y; y++){
@@ -53,16 +52,6 @@ void TouchShapeObject::update(float dt)
 
     // but force the control pin back up
     allPixels[RELIEF_PHYSICAL_SIZE_X * RELIEF_PHYSICAL_SIZE_Y/2 + RELIEF_PHYSICAL_SIZE_X/2] = 230;
-     */
-
-    for (int x = 0; x < RELIEF_PHYSICAL_SIZE_X; x++) {
-        for(int y = 0; y < RELIEF_PHYSICAL_SIZE_Y; y++){
-            int distance = ofDist(RELIEF_PHYSICAL_SIZE_X/2, RELIEF_PHYSICAL_SIZE_Y/2, x, y);
-            distance = min(15, distance);
-            int outputHeight = ofMap(distance, 0, 15, (int) controlPinHeight, 230);
-            allPixels[RELIEF_PHYSICAL_SIZE_X * y + x] = (x + y) * 10 % 128;
-        }
-    }
 }
 
 //----------------------------------------------------

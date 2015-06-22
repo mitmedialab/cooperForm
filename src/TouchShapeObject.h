@@ -26,8 +26,8 @@ public:
     void renderTangibleShape(int w, int h);
     void renderGraphics(int x, int y, int w, int h);
     void drawGuiScreen(int x, int y, int w, int h);
-    void setPinHeightsFromDisplayContainer(unsigned char pinHeightsContainer [RELIEF_SIZE_X][RELIEF_SIZE_Y]){
-        pinHeightsFromDisplay = (unsigned char *) pinHeightsContainer;
+    void setPinHeight(unsigned char pinHeightReceive[RELIEF_SIZE_X][RELIEF_SIZE_Y]){
+        mPinHeightReceive = (unsigned char *) pinHeightReceive;
     };
     //void setImageWarper(ImageWarper * pImageWarper) {mImageWarper = pImageWarper;};
     //void setTableValuesForShape(ShapeIOManager *pIOManager);
@@ -39,7 +39,7 @@ public:
     
 private:
     unsigned char cpHeight;
-    unsigned char *pinHeightsFromDisplay;
+    unsigned char *mPinHeightReceive;
    // ImageWarper * mImageWarper;
     ofxCvGrayscaleImage mOutputShapeImage, smallerImage;
     ofImage pinHeightMapImage;

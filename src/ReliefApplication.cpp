@@ -65,7 +65,7 @@ void ReliefApplication::setup(){
     
     // initialize our shape objects
     touchShapeObject = new TouchShapeObject();
-    touchShapeObject->setPinHeightsFromDisplayContainer(pinHeightsFromDisplay);
+    touchShapeObject->setPinHeight(pinHeightsFromDisplay);
     kinectShapeObject = new KinectShapeObject();
     kinectShapeObject->setKinectTracker(&kinectTracker);
     kinectShapeObject->setCameraTracker(&cameraTracker);

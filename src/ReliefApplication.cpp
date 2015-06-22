@@ -104,8 +104,7 @@ void ReliefApplication::update(){
     if (kinectTracker.timeSinceLastActive() > KINECT_ACTIVITY_TIMEOUT_SEC && currentMode != "idle") {
         setMode("idle");
         
-    }
-    else if (kinectTracker.timeSinceLastActive() <= KINECT_ACTIVITY_TIMEOUT_SEC && currentMode == "idle") {
+    } else if (kinectTracker.timeSinceLastActive() <= KINECT_ACTIVITY_TIMEOUT_SEC && currentMode == "idle") {
         setMode("telepresence");
         UITriggers::buttonTrigger(uiHandler->getButton("telepresence"));
     }
@@ -114,9 +113,9 @@ void ReliefApplication::update(){
     if (ofGetElapsedTimeMillis() - transitionStart > transitionLengthMS) {
         currentTransitionFromShape->update();
         currentTransitionToShape->update();
-    }
-    else
+    } else {
         currentShape->update();
+    }
     
     overlayShape->update();
     

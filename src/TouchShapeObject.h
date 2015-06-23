@@ -35,7 +35,6 @@ public:
     //void setTableValuesForShape(ShapeIOManager *pIOManager);
     unsigned char* getPixels();
     
-    int xCoordinateShift(int num);
     
     
     

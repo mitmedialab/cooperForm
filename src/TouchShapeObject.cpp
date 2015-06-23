@@ -59,14 +59,13 @@ void TouchShapeObject::update(float dt)
     //check each pin's difference over time - if it's flat or not
     Boolean flat[RELIEF_SIZE_X][RELIEF_SIZE_Y];
     for(int i = 0; i< RELIEF_SIZE_X; i++){
-        int XShift =  xCoordinateShift(i);
 
         for(int j = 0; j< RELIEF_SIZE_Y; j++){
             
             int maxVal=0, minVal=255;
             for(int k =0; k < filterFrame; k++){
-                maxVal = MAX(maxVal,(int)allPixels_store[RELIEF_PHYSICAL_SIZE_X*j+XShift][k]);
-                minVal = MIN(minVal,(int)allPixels_store[RELIEF_PHYSICAL_SIZE_X*j+XShift][k]);
+                maxVal = MAX(maxVal,(int)allPixels_store[RELIEF_PHYSICAL_SIZE_X*j+i][k]);
+                minVal = MIN(minVal,(int)allPixels_store[RELIEF_PHYSICAL_SIZE_X*j+i][k]);
             }
             if (abs(maxVal - minVal) > 2) {
                 flat[i][j] = false;
@@ -83,9 +82,8 @@ void TouchShapeObject::update(float dt)
     
     for(int i = 0; i< RELIEF_SIZE_X; i++){
         for(int j = 0; j< RELIEF_SIZE_Y; j++){
-            int XShift =  xCoordinateShift(i);;
 
-            int output = int(allPixels[RELIEF_PHYSICAL_SIZE_X*j+XShift]);
+            int output = int(allPixels[RELIEF_PHYSICAL_SIZE_X*j+i]);
             int input = int(mPinHeightReceive[i * lineSize + j]);
             
             differenceHeight[i][j] =  output - input;
@@ -115,7 +113,7 @@ void TouchShapeObject::update(float dt)
     
     for(int i = 0; i< RELIEF_SIZE_X; i++){
         for(int j = 0; j< RELIEF_SIZE_Y; j++){
-                allPixels[RELIEF_PHYSICAL_SIZE_X* j+ xCoordinateShift(i)] = HIGH_THRESHOLD;
+                allPixels[RELIEF_PHYSICAL_SIZE_X* j+ i] = HIGH_THRESHOLD;
             
         }
     }
@@ -132,7 +130,7 @@ void TouchShapeObject::update(float dt)
                     if(d>rangeDef){ d = rangeDef; };
                     int dHeight = ofMap(d, 0, rangeDef, (int)h, HIGH_THRESHOLD);
                     dHeight = MAX(LOW_THRESHOLD, dHeight);
-                    allPixels[RELIEF_PHYSICAL_SIZE_X* jj+ xCoordinateShift(ii)] =  MIN(allPixels[RELIEF_PHYSICAL_SIZE_X* jj+ xCoordinateShift(ii)],dHeight);
+                    allPixels[RELIEF_PHYSICAL_SIZE_X* jj+ (ii)] =  MIN(allPixels[RELIEF_PHYSICAL_SIZE_X* jj+ (ii)],dHeight);
                     }
                 }
             }
@@ -145,9 +143,9 @@ void TouchShapeObject::update(float dt)
             if (isTouched[i][j]) {
                 unsigned char h = MAX(LOW_THRESHOLD,mPinHeightReceive[i * lineSize + j]);
                 h = MIN((int)h+35,HIGH_THRESHOLD);
-                allPixels[RELIEF_PHYSICAL_SIZE_X* j+ xCoordinateShift(i)] = HIGH_THRESHOLD; //(int)h;
+                allPixels[RELIEF_PHYSICAL_SIZE_X* j+ (i)] = HIGH_THRESHOLD; //(int)h;
                 for(int k = 0; k < filterFrame; k++){
-                    allPixels_store[RELIEF_PHYSICAL_SIZE_X* j+ xCoordinateShift(i)][k] = HIGH_THRESHOLD; //(int)h;
+                    allPixels_store[RELIEF_PHYSICAL_SIZE_X* j+ (i)][k] = HIGH_THRESHOLD; //(int)h;
                 }
             }
         }
@@ -220,19 +218,21 @@ void TouchShapeObject::renderGraphics(int x, int y, int w, int h)
 
 //----------------------------------------------------
 
+
 void TouchShapeObject::drawGuiScreen(int x, int y, int w, int h)
 {
+    
+    //Luke: todo: Must be drawn in CH viewport
+    //            Remove GUI Translation for islands (not relevant for code)
+    
     int pixelSize = 5;
     
     ofPushMatrix();
     ofTranslate(630, 0);
     ofFill();
     for(int i = 0; i< RELIEF_SIZE_X; i++){
-        if(i==16 || i == 32){
-            ofTranslate(5, 0);
-        }
         
-        int XShift = xCoordinateShift(i);
+        
         
         for(int j = 0; j< RELIEF_SIZE_Y; j++){
             int val = differenceHeight[i][j];
@@ -251,7 +251,7 @@ void TouchShapeObject::drawGuiScreen(int x, int y, int w, int h)
             }
             
             
-            int output = int(allPixels[RELIEF_PHYSICAL_SIZE_X*j+XShift]);
+            int output = int(allPixels[RELIEF_PHYSICAL_SIZE_X*j+i]);
             
             ofSetColor(0,0,ofMap(output, 0, 160, 0, 255));
             ofRect(i*pixelSize +270,j*pixelSize,pixelSize,pixelSize);
@@ -283,7 +283,7 @@ unsigned char* TouchShapeObject::getPixels()
 {
     return allPixels;
 }
-
+/*
 int TouchShapeObject::xCoordinateShift (int num){
     int val = num;
     if (num<16) {
@@ -295,3 +295,4 @@ int TouchShapeObject::xCoordinateShift (int num){
     }
     return val;
 }
+*/

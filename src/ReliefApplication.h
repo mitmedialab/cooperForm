@@ -20,7 +20,7 @@
 class ReliefApplication : public ofBaseApp {
 public:
     UIHandler       * uiHandler;
-    int rot;
+    int rot, wid, hei;
 
     // the table mode we're on
     // "telepresence", "wavy", "3D", and "math"

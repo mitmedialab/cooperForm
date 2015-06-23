@@ -174,7 +174,7 @@ void ReliefApplication::draw(){
     // do some transformations so the tangible display is at the right orientation
     // (mirroring the user)
     ofRotate(90 * (rot % 4));
-    //ofTranslate(w, -h);
+    ofTranslate(w * wid, h * hei);
 
     currentShape->renderTangibleShape(w, h);
 
@@ -185,6 +185,9 @@ void ReliefApplication::draw(){
     const int xOrigin = 1920;// - rightSidebarWidth + rightSidebarWidth/2 - modeButtonWidth/2;
     const int yOrigin = 1080;// / 2 - modeButtonsTotalHeight / 2;
     currentShape->renderTangibleShape(xOrigin, yOrigin);
+    ofDrawBitmapString((string) "rot: " + ofToString(rot), 50, 50);
+    ofDrawBitmapString((string) "wid: " + ofToString(wid), 50, 70);
+    ofDrawBitmapString((string) "hei: " + ofToString(hei), 50, 90);
 
 
     /*
@@ -422,11 +425,28 @@ void ReliefApplication::setMode(string newMode) {
 void ReliefApplication::keyPressed(int key){
     switch(key)
     {
-        case 'r':
+        case 'w':
+            rot--;
+            break;
+        case 'e':
             rot++;
             break;
+        case 'r':
+            wid--;
+            break;
         case 't':
+            wid++;
+            break;
+        case 'y':
+            hei--;
+            break;
+        case 'u':
+            hei++;
+            break;
+        case 'q':
             rot = 0;
+            hei = 0;
+            wid = 0;
         case 'a':
             if (moldShapeObject == currentShape) {
                 moldShapeObject->isRecording = true;

@@ -182,6 +182,10 @@ void ReliefApplication::draw(){
     pinHeightMapImage.end();
     ofPopStyle();
 
+    const int xOrigin = 1920;// - rightSidebarWidth + rightSidebarWidth/2 - modeButtonWidth/2;
+    const int yOrigin = 1080;// / 2 - modeButtonsTotalHeight / 2;
+    currentShape->renderTangibleShape(xOrigin, yOrigin);
+
 
     /*
     // render the touch screen display
@@ -203,74 +207,6 @@ void ReliefApplication::draw(){
         touchScreenDisplayImage.draw(MARGIN_X + w, 0, -w, h);
     } */
 
-    // draw margin image
-    if (currentMode == "3D") {
-        currentShape->renderMarginGraphics(0, 460);
-        uiHandler->getText("modelName")->setText(threeDShapeObject->getCurrentModelName());
-    }
-    if (currentMode == "math") {
-        //cout<<mathShapeObject->getEqVal1()<<endl;
-        //cout<<uiHandler->getNum("eqVal1")->getName() <<endl;
-        UIImage* equation = uiHandler->getImage("equation");
-        ofImage* eqImg = mathShapeObject->getEqImage();
-        
-        const int eqImageWidth = eqImg->getWidth();
-        const int eqImageX = TOUCHSCREEN_SIZE_X/2 - eqImageWidth/2;
-        const int eqNumY = equation->getY() + 60;
-        equation->setImage(eqImg);
-        equation->setX(eqImageX);
-        
-        vector<OffsetAndFont> firstVarXOffsets  = mathShapeObject->getVal1XOffsets();
-        vector<OffsetAndFont> secondVarXOffsets = mathShapeObject->getVal2XOffsets();
-        
-        UINum* eqVal1 = uiHandler->getNum("eqVal1");
-        UINum* eqVal2 = uiHandler->getNum("eqVal2");
-        
-        eqVal1->setX( firstVarXOffsets[0].offsetX + eqImageX);
-        eqVal2->setX(secondVarXOffsets[0].offsetX + eqImageX);
-        
-        eqVal1->setY( firstVarXOffsets[0].offsetY + eqNumY);
-        eqVal2->setY(secondVarXOffsets[0].offsetY + eqNumY);
-        
-        eqVal1->setSize( firstVarXOffsets[0].fontSizeOffset + 26);
-        eqVal2->setSize(secondVarXOffsets[0].fontSizeOffset + 26);
-        
-        eqVal1->setNum(mathShapeObject->getEqVal1());
-        eqVal2->setNum(mathShapeObject->getEqVal2());
-        
-        
-        UINum* eqValSec1 = uiHandler->getNum("eqValSecond1");
-        UINum* eqValSec2 = uiHandler->getNum("eqValSecond2");
-        
-        if (firstVarXOffsets.size() > 1 && secondVarXOffsets.size() > 1) {
-            eqValSec1->setX( firstVarXOffsets[1].offsetX + eqImageX);
-            eqValSec2->setX(secondVarXOffsets[1].offsetX + eqImageX);
-            
-            eqValSec1->setY( firstVarXOffsets[1].offsetY + eqNumY);
-            eqValSec2->setY(secondVarXOffsets[1].offsetY + eqNumY);
-            
-            eqValSec1->setSize( firstVarXOffsets[1].fontSizeOffset + 26);
-            eqValSec2->setSize(secondVarXOffsets[1].fontSizeOffset + 26);
-            
-            eqValSec1->setNum(mathShapeObject->getEqVal1());
-            eqValSec2->setNum(mathShapeObject->getEqVal2());
-            
-            if (eqVal1->showing()) {
-                eqValSec1->show();
-                eqValSec2->show();
-            }
-        }
-        else {
-            eqValSec1->hide();
-            eqValSec2->hide();
-        }
-            
-        
-        uiHandler->getButton("modifyVal1Up")->setX(firstVarXOffsets[0].offsetX    + eqImageX);
-        uiHandler->getButton("modifyVal1Down")->setX(firstVarXOffsets[0].offsetX  + eqImageX);
-        uiHandler->getButton("modifyVal2Up")->setX(secondVarXOffsets[0].offsetX   + eqImageX);
-        uiHandler->getButton("modifyVal2Down")->setX(secondVarXOffsets[0].offsetX + eqImageX);
-    }
     // uncomment the code below for the UI slider.
     /*
     if (currentMode == "city") {

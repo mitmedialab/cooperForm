@@ -199,11 +199,15 @@ void MoldShapeObject::renderShape()
 
 void MoldShapeObject::renderTangibleShape(int w, int h)
 {
+    int _min = LOW_THRESHOLD;
+    int _max = HIGH_THRESHOLD;
+    int _range = _max - _min;
     float xStep = (float) w / RELIEF_PHYSICAL_SIZE_X;
     float yStep = (float) h / RELIEF_PHYSICAL_SIZE_Y;
     for (int x = 0; x < RELIEF_PHYSICAL_SIZE_X; x++) {
         for (int y = 0; y < RELIEF_PHYSICAL_SIZE_Y; y++) {
-            ofSetColor(allPixels[RELIEF_PHYSICAL_SIZE_X * y + x]);
+            //ofSetColor(allPixels[RELIEF_PHYSICAL_SIZE_X * y + x]);
+            ofSetColor(_min + _range * y / RELIEF_PHYSICAL_SIZE_Y);
             ofRect(x * xStep, y * yStep, xStep, yStep);
         }
     }
@@ -277,6 +281,12 @@ void MoldShapeObject::drawGuiScreen(int x, int y, int w, int h)
 
 //----------------------------------------------------
 
+void MoldShapeObject::ignoreCurrentlyDisplacedPins() {
+    return;
+};
+
+//----------------------------------------------------
+
 void MoldShapeObject::setTableValuesForShape(ShapeIOManager *pIOManager)
 {
     if (false && isRecording) {
@@ -286,10 +296,10 @@ void MoldShapeObject::setTableValuesForShape(ShapeIOManager *pIOManager)
         pIOManager->set_max_i(25);
         pIOManager->set_deadzone(2);
     } else {
-        pIOManager->set_max_speed(200);
-        pIOManager->set_gain_p(1.5f);
-        pIOManager->set_gain_i(0.045f);
-        pIOManager->set_max_i(25);
+        pIOManager->set_max_speed(200/2);
+        pIOManager->set_gain_p(1.5f/2);
+        pIOManager->set_gain_i(0.045f/2);
+        pIOManager->set_max_i(25/2);
         pIOManager->set_deadzone(2);
     }
 };

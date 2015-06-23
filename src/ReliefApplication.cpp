@@ -517,7 +517,7 @@ void ReliefApplication::keyPressed(int key){
             break;
         case 'z':
             if (moldShapeObject == currentShape) {
-                moldShapeObject->isRecording = true;
+                moldShapeObject->ignoreCurrentlyDisplacedPins();
             }
             break;
         case '1':

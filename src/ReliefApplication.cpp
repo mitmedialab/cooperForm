@@ -173,7 +173,7 @@ void ReliefApplication::draw(){
     ofPushMatrix();
     // do some transformations so the tangible display is at the right orientation
     // (mirroring the user)
-    //ofRotate(90);
+    ofRotate(90 * (rot % 4));
     //ofTranslate(w, -h);
 
     currentShape->renderTangibleShape(w, h);
@@ -422,6 +422,11 @@ void ReliefApplication::setMode(string newMode) {
 void ReliefApplication::keyPressed(int key){
     switch(key)
     {
+        case 'r':
+            rot++;
+            break;
+        case 't':
+            rot = 0;
         case 'a':
             if (moldShapeObject == currentShape) {
                 moldShapeObject->isRecording = true;

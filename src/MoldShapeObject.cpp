@@ -186,66 +186,6 @@ void MoldShapeObject::update(float dt)
 
     // clear isRecording flag
     isRecording = false;
-
-    // exit from here... no need for the rest
-    return;
-
-    int rangeDef = 10; //range of deformation
-    for(int i = 0; i< RELIEF_SIZE_X; i++){
-        for(int j = 0; j< RELIEF_SIZE_Y; j++){
-            if (isTouched[i][j]) {
-                unsigned char h = MAX(LOW_THRESHOLD,mPinHeightReceive[i * lineSize + j]);
-                for (int ii = MAX(0,i - rangeDef); ii< MIN(RELIEF_SIZE_X,i+rangeDef); ii++) {
-                    for (int jj = MAX(0,j - rangeDef); jj< MIN(RELIEF_SIZE_Y,j+rangeDef); jj++) {
-                    int d = ofDist(i, j, ii, jj);
-                    if(d>rangeDef){ d = rangeDef; };
-                    int dHeight = ofMap(d, 0, rangeDef, (int)h, HIGH_THRESHOLD);
-                    dHeight = MAX(LOW_THRESHOLD, dHeight);
-                    allPixels[RELIEF_PHYSICAL_SIZE_X* jj+ xCoordinateShift(ii)] =  MIN(allPixels[RELIEF_PHYSICAL_SIZE_X* jj+ xCoordinateShift(ii)],dHeight);
-                    }
-                }
-            }
-            
-        }
-    }
-    
-    for(int i = 0; i< RELIEF_SIZE_X; i++){
-        for(int j = 0; j< RELIEF_SIZE_Y; j++){
-            if (isTouched[i][j]) {
-                unsigned char h = MAX(LOW_THRESHOLD,mPinHeightReceive[i * lineSize + j]);
-                h = MIN((int)h+35,HIGH_THRESHOLD);
-                allPixels[RELIEF_PHYSICAL_SIZE_X* j+ xCoordinateShift(i)] = HIGH_THRESHOLD; //(int)h;
-                for(int k = 0; k < filterFrame; k++){
-                    allPixels_store[RELIEF_PHYSICAL_SIZE_X* j+ xCoordinateShift(i)][k] = HIGH_THRESHOLD; //(int)h;
-                }
-            }
-        }
-    }
-    
-    
-    
-    //*** MODE: One Center Pin Input ***//
-//    int x = RELIEF_SIZE_X / 2;
-//    int y = RELIEF_SIZE_Y / 2;
-//    unsigned char h = MAX(LOW_THRESHOLD,mPinHeightReceive[x * lineSize + y]);
-//    
-//    int XShift = xCoordinateShift(x);
-//    
-//    for (int i = 0; i < RELIEF_PHYSICAL_SIZE_X; i++) {
-//        for(int j = 0; j < RELIEF_PHYSICAL_SIZE_Y; j++){
-//            
-//            int d = ofDist(XShift, y, i, j);
-//            if(d>15){ d = 15; };
-//            int dHeight = ofMap(d, 0, 15, (int)h, HIGH_THRESHOLD);
-//            dHeight = MAX(LOW_THRESHOLD, dHeight);
-//            allPixels[RELIEF_PHYSICAL_SIZE_X* j+ i] =  dHeight;
-//        }
-//    }
-//    
-//    allPixels[RELIEF_PHYSICAL_SIZE_X*y+XShift]=HIGH_THRESHOLD;
-    
-    
-    
 }
 
 //----------------------------------------------------
@@ -259,8 +199,6 @@ void MoldShapeObject::renderShape()
 
 void MoldShapeObject::renderTangibleShape(int w, int h)
 {
-    ofSetColor(HIGH_THRESHOLD / 2);
-    ofRect(0, 0, w, h);
     float xStep = (float) w / RELIEF_PHYSICAL_SIZE_X;
     float yStep = (float) h / RELIEF_PHYSICAL_SIZE_Y;
     for (int x = 0; x < RELIEF_PHYSICAL_SIZE_X; x++) {
@@ -366,6 +304,8 @@ unsigned char* MoldShapeObject::getPixels()
 }
 
 int MoldShapeObject::xCoordinateShift (int num){
+    return num;
+
     int val = num;
     if (num<16) {
         val =  PINBLOCK_0_X_OFFSET +num ;

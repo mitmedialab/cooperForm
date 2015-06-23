@@ -184,7 +184,7 @@ void ReliefApplication::draw(){
 
     const int xOrigin = 1920;// - rightSidebarWidth + rightSidebarWidth/2 - modeButtonWidth/2;
     const int yOrigin = 1080;// / 2 - modeButtonsTotalHeight / 2;
-    currentShape->renderTangibleShape(xOrigin, yOrigin);
+    moldShapeObject->drawGuiScreen(0, 0, xOrigin, yOrigin);
     ofDrawBitmapString((string) "rot: " + ofToString(rot), 50, 50);
     ofDrawBitmapString((string) "wid: " + ofToString(wid), 50, 70);
     ofDrawBitmapString((string) "hei: " + ofToString(hei), 50, 90);

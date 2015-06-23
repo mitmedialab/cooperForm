@@ -173,10 +173,10 @@ void ReliefApplication::draw(){
     ofPushMatrix();
     // do some transformations so the tangible display is at the right orientation
     // (mirroring the user)
-    ofRotate(90);
-    ofTranslate(w, -h);
+    //ofRotate(90);
+    //ofTranslate(w, -h);
 
-    currentShape->renderTangibleShape(-w, h);
+    currentShape->renderTangibleShape(w, h);
 
     ofPopMatrix();
     pinHeightMapImage.end();

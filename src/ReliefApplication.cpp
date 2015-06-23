@@ -7,8 +7,6 @@ void ReliefApplication::setup(){
     ofSetFrameRate(30);
     ofSetVerticalSync(true);
     
-    CGDisplayHideCursor(NULL);
-  
     // initialize the UI
     setupUI();
     
@@ -177,39 +175,15 @@ void ReliefApplication::draw(){
     // (mirroring the user)
     ofRotate(90);
     ofTranslate(w, -h);
-    long timeMS = ofGetElapsedTimeMillis();
-    if (timeMS - transitionStart < transitionLengthMS) {
-        
-        // draw semi transparent transitionImage
-        transitionImage.begin();
-        ofBackground(0);
-        currentTransitionFromShape->renderTangibleShape(w, h);
-        transitionImage.end();
-        
-        currentTransitionToShape->renderTangibleShape(-w, h);
-        
-        // overlay the transition image with transparency
-        ofPushStyle();
-        ofEnableAlphaBlending();
-        ofSetColor(255, 255 - 255 * (double)(timeMS - transitionStart) / transitionLengthMS);
-        transitionImage.draw(0,0, -w,h);
-        ofDisableAlphaBlending();
-        ofPopStyle();
-    }
-    //else if (currentMode == "city") {
-    //    overlayShape->renderTangibleShape(w, h);
-    //    currentShape->renderTangibleShape(w, h);
-    //} else {
-        overlayShape->renderTangibleShape(-w, h);
-        currentShape->renderTangibleShape(-w, h);
-    //}
-    
-    overlayShape->renderTangibleShape(-w, h);
-    
+
+    currentShape->renderTangibleShape(-w, h);
+
     ofPopMatrix();
     pinHeightMapImage.end();
     ofPopStyle();
-    
+
+
+    /*
     // render the touch screen display
     touchScreenDisplayImage.begin();
     
@@ -227,7 +201,7 @@ void ReliefApplication::draw(){
         touchScreenDisplayImage.draw(MARGIN_X , 0, w, h);
     } else {
         touchScreenDisplayImage.draw(MARGIN_X + w, 0, -w, h);
-    }
+    } */
 
     // draw margin image
     if (currentMode == "3D") {
@@ -297,13 +271,14 @@ void ReliefApplication::draw(){
         uiHandler->getButton("modifyVal2Up")->setX(secondVarXOffsets[0].offsetX   + eqImageX);
         uiHandler->getButton("modifyVal2Down")->setX(secondVarXOffsets[0].offsetX + eqImageX);
     }
+    // uncomment the code below for the UI slider.
+    /*
     if (currentMode == "city") {
         //cout<<mathShapeObject->getEqVal1()<<endl;
         //cout<<uiHandler->getNum("eqVal1")->getName() <<endl;
         
         
-        // uncomment the code below for the UI slider.
-        /*float timeFloat = cityShapeObject->getMovPosition(); //0.0to1.0
+        float timeFloat = cityShapeObject->getMovPosition(); //0.0to1.0
         int hour = floor(timeFloat*12);
         int minute = int(ofMap(timeFloat*12 - hour,0,1.0,0,60));
         string ampm;
@@ -338,13 +313,14 @@ void ReliefApplication::draw(){
             int val = (int)(uiHandler->getSlider("sliderPosition")->getVal());
             uiHandler->getSlider("sliderPosition")->setHandlePos(cityShapeObject->getMovPosition());//((val + 1) % 1000)/1000.0);//
             
-        }*/
+        }
         // cout <<uiHandler->getSlider("sliderPosition")->getVal() << endl;
-    }
+    }*/
 
 
+    
     // draw UI stuff
-    uiHandler->draw();
+    //uiHandler->draw();
     
     // draw the projector image
     

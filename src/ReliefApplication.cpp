@@ -64,6 +64,8 @@ void ReliefApplication::setup(){
     
     
     // initialize our shape objects
+    moldShapeObject = new MoldShapeObject();
+    moldShapeObject->setPinHeight(pinHeightsFromDisplay);
     touchShapeObject = new TouchShapeObject();
     touchShapeObject->setPinHeight(pinHeightsFromDisplay);
     kinectShapeObject = new KinectShapeObject();
@@ -495,7 +497,7 @@ void ReliefApplication::setMode(string newMode) {
 
     else if (currentMode == "replicator") {
         currentTransitionFromShape = currentShape;
-        currentShape = touchShapeObject;
+        currentShape = moldShapeObject;
         currentTransitionToShape = currentShape;
         transitionStart = ofGetElapsedTimeMillis();
 

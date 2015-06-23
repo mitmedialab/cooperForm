@@ -5,6 +5,7 @@
 #include "ShapeIOManager.h"
 #include "ShapeObject.h"
 #include "CameraTracker.h"
+#include "MoldShapeObject.h"
 #include "TouchShapeObject.h"
 #include "KinectShapeObject.h"
 #include "WavyShapeObject.h"
@@ -61,6 +62,7 @@ public:
     CameraTracker    cameraTracker;
  
     // Shape objects
+    MoldShapeObject     * moldShapeObject;
     TouchShapeObject    * touchShapeObject;
 
     // Shape objects

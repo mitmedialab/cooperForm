@@ -24,6 +24,7 @@
 		44E451EA19F46E5400448ECF /* ofxAnimatableOfPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44E451E219F46E5400448ECF /* ofxAnimatableOfPoint.cpp */; };
 		44E451FE19F478F900448ECF /* Function.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44E451FC19F478F900448ECF /* Function.cpp */; };
 		6572FC841B38993F001BBF38 /* TouchShapeObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6572FC821B38993F001BBF38 /* TouchShapeObject.cpp */; };
+		6572FC901B39B7B8001BBF38 /* MoldShapeObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6572FC8E1B39B7B7001BBF38 /* MoldShapeObject.cpp */; };
 		8A09A64419D221AE00118C9E /* UIHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A09A64219D221AE00118C9E /* UIHandler.cpp */; };
 		8A09A64719D221DD00118C9E /* UIButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A09A64519D221DD00118C9E /* UIButton.cpp */; };
 		8A09A64A19D3712B00118C9E /* UITriggers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A09A64819D3712B00118C9E /* UITriggers.cpp */; };
@@ -207,6 +208,8 @@
 		44E451FD19F478F900448ECF /* Function.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Function.h; sourceTree = "<group>"; };
 		6572FC821B38993F001BBF38 /* TouchShapeObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TouchShapeObject.cpp; sourceTree = "<group>"; };
 		6572FC831B38993F001BBF38 /* TouchShapeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchShapeObject.h; sourceTree = "<group>"; };
+		6572FC8E1B39B7B7001BBF38 /* MoldShapeObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MoldShapeObject.cpp; sourceTree = "<group>"; };
+		6572FC8F1B39B7B7001BBF38 /* MoldShapeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoldShapeObject.h; sourceTree = "<group>"; };
 		8A09A64219D221AE00118C9E /* UIHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIHandler.cpp; sourceTree = "<group>"; };
 		8A09A64319D221AE00118C9E /* UIHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIHandler.h; sourceTree = "<group>"; };
 		8A09A64519D221DD00118C9E /* UIButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIButton.cpp; sourceTree = "<group>"; };
@@ -701,6 +704,15 @@
 				6572FC831B38993F001BBF38 /* TouchShapeObject.h */,
 			);
 			name = Touch;
+			sourceTree = "<group>";
+		};
+		6572FC911B39B7BD001BBF38 /* Mold */ = {
+			isa = PBXGroup;
+			children = (
+				6572FC8E1B39B7B7001BBF38 /* MoldShapeObject.cpp */,
+				6572FC8F1B39B7B7001BBF38 /* MoldShapeObject.h */,
+			);
+			name = Mold;
 			sourceTree = "<group>";
 		};
 		8A09A64119D2218600118C9E /* UserInterface */ = {
@@ -1435,6 +1447,7 @@
 		8AFAAA6319C8A8A700EC475F /* ShapeObjects */ = {
 			isa = PBXGroup;
 			children = (
+				6572FC911B39B7BD001BBF38 /* Mold */,
 				6572FC851B389945001BBF38 /* Touch */,
 				8AC058941A1AAA8A00EA3BE2 /* City */,
 				44E451CD19F46A6600448ECF /* Math */,
@@ -1689,6 +1702,7 @@
 				8AC348AE19EF0F1300845B01 /* OscOutboundPacketStream.cpp in Sources */,
 				8AC348AA19EF0F1300845B01 /* NetworkingUtils.cpp in Sources */,
 				8A411CAD1A1272E000221D18 /* ofxFTGLFont.cpp in Sources */,
+				6572FC901B39B7B8001BBF38 /* MoldShapeObject.cpp in Sources */,
 				8A411CCA1A12733800221D18 /* ofxTimeMeasurements.cpp in Sources */,
 				8A0B32DF19ED9333009196FE /* OSCInterface.cpp in Sources */,
 				8AC348AD19EF0F1300845B01 /* UdpSocketWin.cpp in Sources */,

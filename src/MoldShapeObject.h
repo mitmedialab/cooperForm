@@ -57,7 +57,8 @@ public:
     unsigned char* getPixels();
     
     int xCoordinateShift(int num);
-    
+
+    string debugOutput = "";
 
     Boolean isRecording = false;
     

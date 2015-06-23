@@ -104,6 +104,7 @@ void MoldShapeObject::update(float dt)
     int minXTouched = RELIEF_SIZE_X;
     int minYTouched = RELIEF_SIZE_Y;
 
+    debugOutput = "";
     // determine if each pin were touched or not
     for(int i = 0; i< RELIEF_SIZE_X; i++){
         for(int j = 0; j< RELIEF_SIZE_Y; j++){
@@ -113,6 +114,7 @@ void MoldShapeObject::update(float dt)
                     someoneIsTouched = true;
                     minXTouched = min(minXTouched, i);
                     minYTouched = min(minYTouched, j);
+                    debugOutput += ofToString(i) + ", " + ofToString(j) + ": " + ofToString(differenceHeight[i][j]) + "\n";
                 } else {
                     isTouched[i][j] = false;
                 }

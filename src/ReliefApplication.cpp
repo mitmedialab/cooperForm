@@ -189,6 +189,8 @@ void ReliefApplication::draw(){
     ofDrawBitmapString((string) "wid: " + ofToString(wid), 50, 70);
     ofDrawBitmapString((string) "hei: " + ofToString(hei), 50, 90);
 
+    ofDrawBitmapString(moldShapeObject->debugOutput, 50, 150);
+
 
     /*
     // render the touch screen display

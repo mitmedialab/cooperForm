@@ -171,7 +171,8 @@ void ReliefApplication::draw(){
     
     w = pinHeightMapImage.getWidth();
     h = pinHeightMapImage.getHeight();
-    
+
+    /*
     ofPushMatrix();
     // do some transformations so the tangible display is at the right orientation
     // (mirroring the user)
@@ -208,6 +209,8 @@ void ReliefApplication::draw(){
     
     ofPopMatrix();
     pinHeightMapImage.end();
+     */
+    currentShape->renderTangibleShape(w, h);
     ofPopStyle();
     
     // render the touch screen display

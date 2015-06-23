@@ -135,7 +135,6 @@ void MoldShapeObject::update(float dt)
     if (someoneIsTouched) {
         // record new shape
         if (isRecording) {
-            cout << endl << "is recording" << endl << endl;
             int depression[MOLDED_SHAPE_DIM][MOLDED_SHAPE_DIM];
             for (int i = 0; i < MOLDED_SHAPE_DIM; i++) {
                 for (int j = 0; j < MOLDED_SHAPE_DIM; j++) {
@@ -277,6 +276,12 @@ void MoldShapeObject::drawGuiScreen(int x, int y, int w, int h)
     
     ofPopMatrix();
     
+}
+
+//----------------------------------------------------
+
+void MoldShapeObject::renderTouchscreenGraphics(int w, int h) {
+    drawGuiScreen(0, 0, w, h);
 }
 
 //----------------------------------------------------

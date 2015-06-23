@@ -49,6 +49,7 @@ public:
     void renderTangibleShape(int w, int h);
     void renderGraphics(int x, int y, int w, int h);
     void drawGuiScreen(int x, int y, int w, int h);
+    void renderTouchscreenGraphics(int w, int h);
     void setPinHeight(unsigned char pinHeightReceive[RELIEF_SIZE_X][RELIEF_SIZE_Y]){
         mPinHeightReceive = (unsigned char *) pinHeightReceive;
     };
@@ -56,7 +57,7 @@ public:
     //void setImageWarper(ImageWarper * pImageWarper) {mImageWarper = pImageWarper;};
     void setTableValuesForShape(ShapeIOManager *pIOManager);
     unsigned char* getPixels();
-    
+
     int xCoordinateShift(int num);
     
 

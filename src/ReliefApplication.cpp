@@ -510,6 +510,11 @@ void ReliefApplication::setMode(string newMode) {
 void ReliefApplication::keyPressed(int key){
     switch(key)
     {
+        case 'a':
+            if (moldShapeObject == currentShape) {
+                moldShapeObject->isRecording = true;
+            }
+            break;
         case '1':
             setMode("telepresence");
             UITriggers::buttonTrigger(uiHandler->getButton("telepresence"));

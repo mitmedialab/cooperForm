@@ -94,9 +94,7 @@ void MoldShapeObject::update(float dt)
             int output = int(allPixels[RELIEF_PHYSICAL_SIZE_X*j+XShift]);
             int input = int(mPinHeightReceive[i * lineSize + j]);
             
-            differenceHeight[i][j] =  output - input;
-
-            
+            isTouched[RELIEF_SIZE_X - j][RELIEF_SIZE_Y - i] = output - input;
         }
     }
 

@@ -135,6 +135,7 @@ void MoldShapeObject::update(float dt)
     if (someoneIsTouched) {
         // record new shape
         if (isRecording) {
+            cout << endl << "is recording" << endl << endl;
             int depression[MOLDED_SHAPE_DIM][MOLDED_SHAPE_DIM];
             for (int i = 0; i < MOLDED_SHAPE_DIM; i++) {
                 for (int j = 0; j < MOLDED_SHAPE_DIM; j++) {
@@ -258,12 +259,14 @@ void MoldShapeObject::renderShape()
 
 void MoldShapeObject::renderTangibleShape(int w, int h)
 {
-    float inverseW = (float) 1 / w;
-    float inverseH = (float) 1 / h;
+    ofSetColor(HIGH_THRESHOLD / 2);
+    ofRect(0, 0, w, h);
+    float xStep = (float) w / RELIEF_PHYSICAL_SIZE_X;
+    float yStep = (float) h / RELIEF_PHYSICAL_SIZE_Y;
     for (int x = 0; x < RELIEF_PHYSICAL_SIZE_X; x++) {
         for (int y = 0; y < RELIEF_PHYSICAL_SIZE_Y; y++) {
             ofSetColor(allPixels[RELIEF_PHYSICAL_SIZE_X * y + x]);
-            ofRect(x * inverseW, y * inverseH, inverseW, inverseH);
+            ofRect(x * xStep, y * yStep, xStep, yStep);
         }
     }
 }
